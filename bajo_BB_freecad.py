@@ -35,6 +35,7 @@ TOP_FRONT_H = 100.0
 TOP_SUPPORT_D = 200.0
 SLIDE_CLR = 12.5
 DRAWER_DEPTH = 500.0
+OPEN_DRAWER_OFFSET = 120.0  # para visualizacion 3D
 
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
@@ -307,6 +308,13 @@ def main():
         parts,
         "BB19",
     )
+
+    # Visual: dejar un cajon apenas abierto (fila media izquierda).
+    for obj in doc.Objects:
+        if obj.Name == "BB10_Frente_Mid_Izq" or obj.Name.startswith(
+            "BB16_Caja_Mid_Izq_"
+        ):
+            obj.Placement.Base.y -= OPEN_DRAWER_OFFSET
 
     doc.recompute()
 
