@@ -41,6 +41,7 @@ DRAWER_DEPTH = 500.0
 CENTER_GAP = 2.0
 OUTER_OVERLAY_L = TH / 2.0
 SEAM_INSET_R = 1.0  # deja 2 mm de luz total con BB (1 + 1)
+ROW_GAP = 2.0
 
 # Cotas en Z
 Z_BOTTOM = TOE_H
@@ -64,8 +65,11 @@ TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 # Puertas inferiores (2 hojas)
 LOWER_OPEN_Z0 = Z_BOTTOM_TOP
 LOWER_OPEN_Z1 = Z_TOPROW_SHELF
-LOWER_DOOR_H = (LOWER_OPEN_Z1 - LOWER_OPEN_Z0) + TH  # solape 9/9
-LOWER_DOOR_Z = LOWER_OPEN_Z0 - TH / 2.0
+# Para continuidad de grilla con BB:
+# - borde inferior puerta a Z_BOTTOM (80)
+# - borde superior puerta a Z_TOPROW_SHELF - ROW_GAP (750)
+LOWER_DOOR_Z = Z_BOTTOM
+LOWER_DOOR_H = (Z_TOPROW_SHELF - ROW_GAP) - LOWER_DOOR_Z
 DOOR_W = TOP_FRONT_W
 DOOR_X_L = OUTER_OVERLAY_L
 DOOR_X_R = DOOR_X_L + DOOR_W + CENTER_GAP

@@ -28,7 +28,7 @@ except Exception:
 # Parametros principales (mm)
 TH = 18.0
 BACK_TH = 3.0
-WIDTH_INT = 720.0
+WIDTH_INT = 636.0
 DEPTH = 600.0
 HEIGHT_TOTAL = 2300.0
 LEG_H = 80.0
@@ -65,8 +65,8 @@ Z_MICRO_SHELF_BOTTOM = Z_MICRO_BASE - TH
 Z_MICRO_TOP_FASCIA_BOTTOM = Z_MICRO_TOP - FASCIA_H
 
 # Regrueso vertical frontal para apoyo de frente de horno/micro
-LISTON_W = 60.0
-LISTON_D = TH
+LISTON_W = TH
+LISTON_D = 60.0
 LISTON_Z0 = Z_OVEN_BASE
 LISTON_H = OVEN_OPENING_VISIBLE_H
 
@@ -81,14 +81,14 @@ TOP_CLEAR_H = Z_TOP_PANEL - Z_MICRO_TOP
 # Puertas centradas sobre cantos de 18 mm:
 # solape 9 mm por lado (TH/2) en ancho y alto.
 DOOR_OVERLAP = TH / 2.0
-DOOR_W = W - TH  # 756 - 18 = 738
+DOOR_W = W - TH  # 672 - 18 = 654
 DOOR_X = DOOR_OVERLAP
 
-# H10: solape vertical explicito de 9 mm sobre H12 (faja inferior de horno).
-# Cara inferior de H12 = Z_OVEN_FASCIA_BOTTOM.
+# H10 ajustado a grilla de bajos (sin solape vertical):
+# arranca en Z_BOTTOM_PANEL y termina en la cara inferior de H12.
 LOWER_OPEN_Z0 = Z_BOTTOM_PANEL + TH
-LOWER_DOOR_Z = LOWER_OPEN_Z0 - DOOR_OVERLAP
-LOWER_DOOR_TOP = Z_OVEN_FASCIA_BOTTOM + DOOR_OVERLAP
+LOWER_DOOR_Z = Z_BOTTOM_PANEL
+LOWER_DOOR_TOP = Z_OVEN_FASCIA_BOTTOM
 LOWER_DOOR_H = LOWER_DOOR_TOP - LOWER_DOOR_Z
 
 UPPER_OPEN_Z0 = Z_MICRO_TOP + TH
