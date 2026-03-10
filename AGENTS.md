@@ -12,6 +12,15 @@ Este repositorio se usa para desarrollar muebles de cocina parametrizados y obte
 - Unidades en milímetros.
 - Espesor por defecto: melamina `18 mm`.
 
+## Axiomas de Diseño Vigentes
+- Altura final de mesada: `900 mm`.
+- Cota base de alacena derecha (AB/AC): `1500 mm`.
+- Coronación superior de todos los módulos altos en `2300 mm`.
+- El nivel del piso de horno debe coincidir con el borde inferior de la fila de cajones chicos.
+- El tope del hueco microondas debe coincidir con el nivel superior de `AC`.
+- `AA` con frentes verticales y listón fijo inferior de `90 mm`.
+- `BA` con solo 2 frentes grandes inferiores de ancho completo (más fila superior chica, con 1 frente falso bajo anafe).
+
 ## Archivos clave
 - `columna_horno_micro_freecad.py`: script paramétrico FreeCAD.
 - `columna_horno_micro_bom.csv`: lista de piezas actual.

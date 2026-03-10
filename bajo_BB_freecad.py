@@ -31,16 +31,22 @@ DEPTH = 600.0
 CAB_H = 870.0
 TOE_H = 80.0
 
-TOP_FRONT_H = 100.0
+TOP_FRONT_H = 130.0
 TOP_SUPPORT_D = 200.0
 SLIDE_CLR = 12.5
 DRAWER_DEPTH = 500.0
-OPEN_DRAWER_OFFSET = 120.0  # para visualizacion 3D
+OPEN_DRAWER_OFFSET = 0.0  # frente enrasado para verificar grilla
+GOLA_H = 25.0
+GOLA_D = 20.0
+LEG_W = 40.0
+LEG_D = 40.0
+LEG_INSET = 30.0
 
 # Luces/frentes para continuidad visual con BA
 CENTER_GAP = 2.0
 SEAM_INSET_L = 1.0  # deja 2 mm de luz total con BA (1 + 1)
 OUTER_OVERLAY_R = TH / 2.0
+ROW_GAP = 2.0
 
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
@@ -157,6 +163,17 @@ def main():
 
     add_box(doc, "BB3_Piso_Pasante", 0, 0, Z_BOTTOM, WIDTH, DEPTH, TH)
     parts.append(("BB3", "Casco", "Piso_Pasante", 1, WIDTH, DEPTH, TH, "Canto frente"))
+
+    # Patas 80 mm
+    leg_pos = [
+        (LEG_INSET, LEG_INSET),
+        (WIDTH - LEG_INSET - LEG_W, LEG_INSET),
+        (LEG_INSET, DEPTH - LEG_INSET - LEG_D),
+        (WIDTH - LEG_INSET - LEG_W, DEPTH - LEG_INSET - LEG_D),
+    ]
+    for i, (lx, ly) in enumerate(leg_pos, start=1):
+        add_box(doc, f"BB3L_Pata_{i}", lx, ly, 0.0, LEG_W, LEG_D, TOE_H)
+    parts.append(("BB3L", "Herraje", "Pata_80", 4, LEG_W, LEG_D, TOE_H, "PVC/Aluminio"))
 
     add_box(
         doc, "BB4_Fondo_3mm", TH, DEPTH - BACK_TH, Z_BOTTOM_TOP, W_INT, BACK_TH, SIDE_H
@@ -312,6 +329,26 @@ def main():
         LOW_BOX_H,
         parts,
         "BB19",
+    )
+
+    # Perfiles gola
+    add_box(
+        doc,
+        "BB20_Gola_C_Superior",
+        0,
+        -GOLA_D,
+        ROW1_Z - ROW_GAP,
+        WIDTH,
+        GOLA_D,
+        GOLA_H,
+    )
+    parts.append(
+        ("BB20", "Herraje", "Gola_C_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+    )
+
+    add_box(doc, "BB21_Gola_J_Media", 0, -GOLA_D, ROW2_Z, WIDTH, GOLA_D, GOLA_H)
+    parts.append(
+        ("BB21", "Herraje", "Gola_J_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
     )
 
     # Visual: dejar un cajon apenas abierto (fila media izquierda).

@@ -35,13 +35,15 @@ WIDTH = 1208.0
 DEPTH = 320.0
 
 # AC (cajon paraiso inferior)
-AC_H = 265.0
+AC_H = 309.0
 AC_SIDE_H = AC_H - 2 * TH_AC
 AC_INT_W = WIDTH - 2 * TH_AC
 
 # AB (alacena superior blanca)
-AB_H = 415.0
+AB_H = 491.0
 AB_SIDE_H = AB_H - 2 * TH
+GOLA_J_H = 25.0
+GOLA_J_D = 20.0
 
 # AB: 3 puertas iguales, equidistantes
 CENTER_GAP = 2.0
@@ -58,6 +60,7 @@ DOOR2_X = DOOR1_X + DOOR_W + CENTER_GAP
 DOOR3_X = DOOR2_X + DOOR_W + CENTER_GAP
 DOOR_Y = -TH
 DOOR_Z = AC_H + OUTER_OVERLAY
+GOLA_Z = AC_H
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -179,6 +182,12 @@ def main():
 
     add_box(doc, "AB8_Puerta_3", DOOR3_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
     parts.append(("AB8", "Frente", "AB_Puerta_3", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
+
+    # Perfil gola J inferior (debajo de puertas)
+    add_box(doc, "AB9_Gola_J_Inferior", 0, -GOLA_J_D, GOLA_Z, WIDTH, GOLA_J_D, GOLA_J_H)
+    parts.append(
+        ("AB9", "Herraje", "Gola_J_Inferior", 1, WIDTH, GOLA_J_H, GOLA_J_D, "Aluminio")
+    )
 
     doc.recompute()
 

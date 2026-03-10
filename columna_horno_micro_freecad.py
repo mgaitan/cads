@@ -33,14 +33,19 @@ DEPTH = 600.0
 HEIGHT_TOTAL = 2300.0
 LEG_H = 80.0
 
-OVEN_Z_START = 800.0
+OVEN_Z_START = 740.0
 OVEN_OPENING_VISIBLE_H = 599.0
 OVEN_OPENING_W = 600.0
 
-MICRO_OPENING_H = 436.0
+MICRO_OPENING_H = 420.0
 MICRO_SHIFT_UP = 0.0
 FASCIA_H = 50.0  # altura de cada faja frontal
 OVEN_EXTRA_INTERNAL_H = FASCIA_H  # juego interno oculto por faja central
+GOLA_H = 25.0
+GOLA_D = 20.0
+LEG_W = 40.0
+LEG_D = 40.0
+LEG_INSET = 30.0
 
 W = WIDTH_INT + 2 * TH
 CARCASS_H = HEIGHT_TOTAL - LEG_H - 2 * TH
@@ -114,7 +119,7 @@ def main():
 
     parts = []
 
-    # Codigos de despiece: H1..H16
+    # Codigos de despiece: H1..H18
     # Laterales
     add_part(doc, "H1_Lateral_Izq", 0, 0, Z_SIDE_START, TH, DEPTH, CARCASS_H)
     parts.append(
@@ -148,6 +153,17 @@ def main():
     # Esto permite atornillar desde abajo/arriba y ocultar fijaciones.
     add_part(doc, "H3_Piso_Casco", 0, 0, Z_BOTTOM_PANEL, W, DEPTH, TH)
     parts.append(("H3", "Horizontal", "Piso_Casco", 1, W, DEPTH, TH, "Canto frente"))
+
+    # Patas 80 mm
+    legs = [
+        (LEG_INSET, LEG_INSET),
+        (W - LEG_INSET - LEG_W, LEG_INSET),
+        (LEG_INSET, DEPTH - LEG_INSET - LEG_D),
+        (W - LEG_INSET - LEG_W, DEPTH - LEG_INSET - LEG_D),
+    ]
+    for i, (lx, ly) in enumerate(legs, start=1):
+        add_part(doc, f"H3L_Pata_{i}", lx, ly, 0.0, LEG_W, LEG_D, LEG_H)
+    parts.append(("H3L", "Herraje", "Pata_80", 4, LEG_W, LEG_D, LEG_H, "PVC/Aluminio"))
 
     add_part(doc, "H4_Tapa_Casco", 0, 0, Z_TOP_PANEL, W, DEPTH, TH)
     parts.append(("H4", "Horizontal", "Tapa_Casco", 1, W, DEPTH, TH, "Canto frente"))
@@ -354,6 +370,34 @@ def main():
             "Cantos vistos",
         )
     )
+
+    # Perfil gola C de continuidad con bajo mesada (sobre puerta inferior)
+    add_part(
+        doc,
+        "H17_Gola_C_Continuidad",
+        0,
+        -GOLA_D,
+        Z_OVEN_FASCIA_BOTTOM,
+        W,
+        GOLA_D,
+        GOLA_H,
+    )
+    parts.append(
+        ("H17", "Herraje", "Gola_C_Continuidad", 1, W, GOLA_H, GOLA_D, "Aluminio")
+    )
+
+    # Perfil gola J bajo puerta superior
+    add_part(
+        doc,
+        "H18_Gola_J_Sup",
+        0,
+        -GOLA_D,
+        UPPER_DOOR_Z,
+        W,
+        GOLA_D,
+        GOLA_H,
+    )
+    parts.append(("H18", "Herraje", "Gola_J_Sup", 1, W, GOLA_H, GOLA_D, "Aluminio"))
 
     # Puertas (referencia de frente aplicado)
     add_part(

@@ -32,10 +32,15 @@ CAB_H = 870.0
 TOE_H = 80.0
 COUNTER_TH = 30.0
 
-TOP_FRONT_H = 100.0
+TOP_FRONT_H = 130.0
 TOP_SUPPORT_D = 200.0
 SLIDE_CLR = 12.5
 DRAWER_DEPTH = 500.0
+GOLA_H = 25.0
+GOLA_D = 20.0
+LEG_W = 40.0
+LEG_D = 40.0
+LEG_INSET = 30.0
 
 # Luces/frentes para continuidad visual con BB
 CENTER_GAP = 2.0
@@ -51,7 +56,7 @@ Z_TOP_SUPPORT = Z_TOP - TH
 SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
 
 # Plataforma separadora top row
-Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH  # top de placa en linea de 770
+Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH
 
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
@@ -62,20 +67,16 @@ TOP_BAY_W = (W_INT - TH) / 2.0
 TOP_FRONT_W = (WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R - CENTER_GAP) / 2.0
 TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 
-# Puertas inferiores (2 hojas)
-LOWER_OPEN_Z0 = Z_BOTTOM_TOP
-LOWER_OPEN_Z1 = Z_TOPROW_SHELF
-# Para continuidad de grilla con BB:
-# - borde inferior puerta a Z_BOTTOM (80)
-# - borde superior puerta a Z_TOPROW_SHELF - ROW_GAP (750)
-LOWER_DOOR_Z = Z_BOTTOM
-LOWER_DOOR_H = (Z_TOPROW_SHELF - ROW_GAP) - LOWER_DOOR_Z
-DOOR_W = TOP_FRONT_W
-DOOR_X_L = OUTER_OVERLAY_L
-DOOR_X_R = DOOR_X_L + DOOR_W + CENTER_GAP
+# Filas inferiores (2 frentes grandes de todo el ancho, continuidad con BB)
+TOTAL_FACE_H = Z_TOP_SUPPORT - Z_BOTTOM
+MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 4.0) / 2.0
+ROW3_Z = Z_BOTTOM
+ROW2_Z = ROW3_Z + MID_BOT_H + 2.0
+ROW1_Z = ROW2_Z + MID_BOT_H + 2.0
 
 # Estante interior BA (mitad del hueco inferior)
-LOWER_SHELF_Z = LOWER_OPEN_Z0 + (LOWER_OPEN_Z1 - LOWER_OPEN_Z0 - TH) / 2.0
+LOWER_SHELF_Z = Z_BOTTOM_TOP + (ROW2_Z - Z_BOTTOM_TOP - TH) / 2.0
+MID_LINE_Z = ROW2_Z
 
 # Cajon superior izquierdo (caja)
 TOP_BOX_H = 80.0
@@ -173,6 +174,17 @@ def main():
 
     add_box(doc, "BA3_Piso_Pasante", 0, 0, Z_BOTTOM, WIDTH, DEPTH, TH)
     parts.append(("BA3", "Casco", "Piso_Pasante", 1, WIDTH, DEPTH, TH, "Canto frente"))
+
+    # Patas 80 mm
+    leg_pos = [
+        (LEG_INSET, LEG_INSET),
+        (WIDTH - LEG_INSET - LEG_W, LEG_INSET),
+        (LEG_INSET, DEPTH - LEG_INSET - LEG_D),
+        (WIDTH - LEG_INSET - LEG_W, DEPTH - LEG_INSET - LEG_D),
+    ]
+    for i, (lx, ly) in enumerate(leg_pos, start=1):
+        add_box(doc, f"BA3L_Pata_{i}", lx, ly, 0.0, LEG_W, LEG_D, TOE_H)
+    parts.append(("BA3L", "Herraje", "Pata_80", 4, LEG_W, LEG_D, TOE_H, "PVC/Aluminio"))
 
     # Fondo 3 mm (oculto)
     add_box(
@@ -301,19 +313,51 @@ def main():
         )
     )
 
-    # Puertas inferiores
+    # Dos frentes grandes de ancho completo (medio e inferior)
     add_box(
-        doc, "BA12_Puerta_Izq", DOOR_X_L, -TH, LOWER_DOOR_Z, DOOR_W, TH, LOWER_DOOR_H
+        doc,
+        "BA12_Frente_Mid",
+        OUTER_OVERLAY_L,
+        -TH,
+        ROW2_Z,
+        WIDTH - TH,
+        TH,
+        MID_BOT_H,
     )
     parts.append(
-        ("BA12", "Frente", "Puerta_Izq", 1, DOOR_W, LOWER_DOOR_H, TH, "4 cantos")
+        (
+            "BA12",
+            "Frente",
+            "Frente_Mid_Ancho_Completo",
+            1,
+            WIDTH - TH,
+            MID_BOT_H,
+            TH,
+            "4 cantos",
+        )
     )
 
     add_box(
-        doc, "BA13_Puerta_Der", DOOR_X_R, -TH, LOWER_DOOR_Z, DOOR_W, TH, LOWER_DOOR_H
+        doc,
+        "BA13_Frente_Bot",
+        OUTER_OVERLAY_L,
+        -TH,
+        ROW3_Z,
+        WIDTH - TH,
+        TH,
+        MID_BOT_H,
     )
     parts.append(
-        ("BA13", "Frente", "Puerta_Der", 1, DOOR_W, LOWER_DOOR_H, TH, "4 cantos")
+        (
+            "BA13",
+            "Frente",
+            "Frente_Bot_Ancho_Completo",
+            1,
+            WIDTH - TH,
+            MID_BOT_H,
+            TH,
+            "4 cantos",
+        )
     )
 
     # Caja de cajon superior izquierdo (telescopica)
@@ -328,6 +372,26 @@ def main():
         TOP_BOX_H,
         parts,
         "BA14",
+    )
+
+    # Perfiles gola
+    add_box(
+        doc,
+        "BA15_Gola_C_Superior",
+        0,
+        -GOLA_D,
+        ROW1_Z - ROW_GAP,
+        WIDTH,
+        GOLA_D,
+        GOLA_H,
+    )
+    parts.append(
+        ("BA15", "Herraje", "Gola_C_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+    )
+
+    add_box(doc, "BA16_Gola_J_Media", 0, -GOLA_D, MID_LINE_Z, WIDTH, GOLA_D, GOLA_H)
+    parts.append(
+        ("BA16", "Herraje", "Gola_J_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
     )
 
     doc.recompute()

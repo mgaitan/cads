@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Genera alacena superior A (AA) en FreeCAD.
-
-Uso:
-  freecad -c alacena_AA_freecad.py
-
-Salida:
-  - alacena_AA.FCStd
-  - alacena_AA.step
-  - alacena_AA_bom.csv
-"""
+"""Genera alacena superior A (AA) en FreeCAD."""
 
 import csv
 import os
@@ -25,41 +16,42 @@ try:
 except Exception:
     Gui = None
 
-# Parametros principales (mm)
 TH = 18.0
 BACK_TH = 3.0
 WIDTH = 1050.0
 DEPTH = 320.0
-HEIGHT = 680.0  # Colgado a 1620 mm para llegar a techo 2300 mm.
+HEIGHT = 710.0
 
-DOOR_GAP_CENTER = 2.0
-DOOR_OVERLAP = TH / 2.0
 DUCT_D = 160.0
 DUCT_R = DUCT_D / 2.0
 DUCT_REAR_CLR = 20.0
 
+CONN_D = 35.0
+CONN_R = CONN_D / 2.0
+CONN_SPACING = 80.0
+
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
 SIDE_H = HEIGHT - 2 * TH
-MID_TH = TH
-BAY_W = (W_INT - MID_TH) / 2.0
 
-# Posiciones Z
 Z_BOTTOM = 0.0
 Z_TOP = HEIGHT - TH
 Z_INNER0 = TH
 
-# Centro de ducto en el modulo derecho
-DUCT_CX = TH + BAY_W + MID_TH + BAY_W / 2.0
-DUCT_CY = D_INT - DUCT_REAR_CLR - DUCT_R
+# Lado izquierdo (calefon) y derecho (extractor)
+X_LEFT_ZONE = TH + W_INT * 0.25
+X_RIGHT_ZONE = TH + W_INT * 0.75
+Y_DUCT_TOP = D_INT - DUCT_REAR_CLR - DUCT_R
+Y_DUCT_FLOOR = 90.0
+Y_CONN = 55.0
 
-# Puertas
-DOOR_H = HEIGHT - TH  # solape 9 mm arriba/abajo
-DOOR_W = (WIDTH - TH - DOOR_GAP_CENTER) / 2.0  # con luz central 2 mm
-LEFT_DOOR_X = DOOR_OVERLAP
-RIGHT_DOOR_X = LEFT_DOOR_X + DOOR_W + DOOR_GAP_CENTER
-DOOR_Z = DOOR_OVERLAP
-DOOR_Y = -TH
+# Dos frentes verticales
+FRONT_H = HEIGHT - TH
+FRONT_W = (WIDTH - TH - 2.0) / 2.0
+LEFT_FRONT_X = TH / 2.0
+RIGHT_FRONT_X = LEFT_FRONT_X + FRONT_W + 2.0
+FRONT_Y = -TH
+FRONT_Z = TH / 2.0
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -69,12 +61,13 @@ def add_box(doc, name, x, y, z, dx, dy, dz):
     return obj
 
 
-def add_box_with_round_hole(doc, name, x, y, z, dx, dy, dz, cx, cy, r):
-    box = Part.makeBox(dx, dy, dz, App.Vector(x, y, z))
-    cyl = Part.makeCylinder(
-        r, dz + 2.0, App.Vector(cx, cy, z - 1.0), App.Vector(0, 0, 1)
-    )
-    shape = box.cut(cyl)
+def add_box_with_round_holes(doc, name, x, y, z, dx, dy, dz, holes):
+    shape = Part.makeBox(dx, dy, dz, App.Vector(x, y, z))
+    for cx, cy, r in holes:
+        cyl = Part.makeCylinder(
+            r, dz + 2.0, App.Vector(cx, cy, z - 1.0), App.Vector(0, 0, 1)
+        )
+        shape = shape.cut(cyl)
 
     obj = doc.addObject("Part::Feature", name)
     obj.Shape = shape
@@ -88,7 +81,6 @@ def main():
     doc = App.newDocument("AlacenaAA")
     parts = []
 
-    # Casco con piso/techo pasantes
     add_box(doc, "AA1_Lateral_Izq", 0, 0, Z_INNER0, TH, DEPTH, SIDE_H)
     parts.append(
         ("AA1", "Lateral", "Lateral_Izq", 1, SIDE_H, DEPTH, TH, "Canto frente")
@@ -99,51 +91,30 @@ def main():
         ("AA2", "Lateral", "Lateral_Der", 1, SIDE_H, DEPTH, TH, "Canto frente")
     )
 
-    # Piso y techo con calado ducto 160 mm
-    add_box_with_round_hole(
-        doc,
-        "AA3_Piso_Casco",
-        0,
-        0,
-        Z_BOTTOM,
-        WIDTH,
-        DEPTH,
-        TH,
-        DUCT_CX,
-        DUCT_CY,
-        DUCT_R,
+    # Piso: 3 pasantes 35 (calefon) + 1 pasante 160 (extractor der)
+    floor_holes = [
+        (X_RIGHT_ZONE, Y_DUCT_FLOOR, DUCT_R),
+        (X_LEFT_ZONE - CONN_SPACING, Y_CONN, CONN_R),
+        (X_LEFT_ZONE, Y_CONN, CONN_R),
+        (X_LEFT_ZONE + CONN_SPACING, Y_CONN, CONN_R),
+    ]
+    add_box_with_round_holes(
+        doc, "AA3_Piso_Casco", 0, 0, Z_BOTTOM, WIDTH, DEPTH, TH, floor_holes
     )
     parts.append(
-        (
-            "AA3",
-            "Horizontal",
-            "Piso_Casco_Calado160",
-            1,
-            WIDTH,
-            DEPTH,
-            TH,
-            "Canto frente",
-        )
+        ("AA3", "Horizontal", "Piso_Casco_Calados", 1, WIDTH, DEPTH, TH, "Canto frente")
     )
 
-    add_box_with_round_hole(
-        doc,
-        "AA4_Tapa_Casco",
-        0,
-        0,
-        Z_TOP,
-        WIDTH,
-        DEPTH,
-        TH,
-        DUCT_CX,
-        DUCT_CY,
-        DUCT_R,
+    # Techo: solo pasante 160 derecho
+    top_holes = [(X_RIGHT_ZONE, Y_DUCT_TOP, DUCT_R)]
+    add_box_with_round_holes(
+        doc, "AA4_Tapa_Casco", 0, 0, Z_TOP, WIDTH, DEPTH, TH, top_holes
     )
     parts.append(
         (
             "AA4",
             "Horizontal",
-            "Tapa_Casco_Calado160",
+            "Tapa_Casco_Calado_Der160",
             1,
             WIDTH,
             DEPTH,
@@ -152,52 +123,33 @@ def main():
         )
     )
 
-    # Divisor vertical central
-    add_box(doc, "AA5_Divisor_Central", TH + BAY_W, 0, Z_INNER0, MID_TH, D_INT, SIDE_H)
-    parts.append(
-        ("AA5", "Vertical", "Divisor_Central", 1, SIDE_H, D_INT, TH, "Canto frente")
-    )
+    add_box(doc, "AA5_Travesano_Sup", TH, 0, Z_TOP - 60.0, W_INT, TH, 60.0)
+    parts.append(("AA5", "Interior", "Travesano_Sup", 1, W_INT, 60.0, TH, "Sin canto"))
 
-    # Estante solo lado derecho, a media altura, con calado 160
-    estante_z = Z_INNER0 + (SIDE_H - TH) / 2.0
-    add_box_with_round_hole(
-        doc,
-        "AA6_Estante_Der_Calado160",
-        TH + BAY_W + MID_TH,
-        0,
-        estante_z,
-        BAY_W,
-        D_INT,
-        TH,
-        DUCT_CX,
-        DUCT_CY,
-        DUCT_R,
-    )
-    parts.append(
-        (
-            "AA6",
-            "Horizontal",
-            "Estante_Derecho_Calado160",
-            1,
-            BAY_W,
-            D_INT,
-            TH,
-            "Canto frente",
-        )
-    )
+    add_box(doc, "AA6_Travesano_Inf", TH, 0, Z_INNER0, W_INT, TH, 60.0)
+    parts.append(("AA6", "Interior", "Travesano_Inf", 1, W_INT, 60.0, TH, "Sin canto"))
 
-    # Fondo 3 mm (oculto para capturas)
     add_box(doc, "AA7_Fondo_3mm", TH, D_INT, Z_INNER0, W_INT, BACK_TH, SIDE_H)
     parts.append(("AA7", "Fondo", "Fondo_3mm", 1, W_INT, SIDE_H, BACK_TH, "Sin canto"))
 
-    # Dos puertas iguales
-    add_box(doc, "AA8_Puerta_Izq", LEFT_DOOR_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
+    # Frentes verticales
+    add_box(doc, "AA8_Frente_Izq", LEFT_FRONT_X, FRONT_Y, FRONT_Z, FRONT_W, TH, FRONT_H)
     parts.append(
-        ("AA8", "Frente", "Puerta_Izquierda", 1, DOOR_W, DOOR_H, TH, "4 cantos")
+        ("AA8", "Frente", "Frente_Izquierdo", 1, FRONT_W, FRONT_H, TH, "4 cantos")
     )
 
-    add_box(doc, "AA9_Puerta_Der", RIGHT_DOOR_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
-    parts.append(("AA9", "Frente", "Puerta_Derecha", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
+    add_box(
+        doc, "AA9_Frente_Der", RIGHT_FRONT_X, FRONT_Y, FRONT_Z, FRONT_W, TH, FRONT_H
+    )
+    parts.append(
+        ("AA9", "Frente", "Frente_Derecho", 1, FRONT_W, FRONT_H, TH, "4 cantos")
+    )
+
+    # Liston fijo 90 mm para completar visual hacia linea AC (se monta por debajo del piso)
+    add_box(doc, "AA10_Liston_Fijo_90", TH / 2.0, FRONT_Y, -90.0, WIDTH - TH, TH, 90.0)
+    parts.append(
+        ("AA10", "Frente", "Liston_Fijo_90", 1, WIDTH - TH, 90.0, TH, "4 cantos")
+    )
 
     doc.recompute()
 
@@ -240,16 +192,6 @@ def main():
     print("-", fcstd_path)
     print("-", step_path)
     print("-", bom_path)
-    print("\nResumen de cotas clave (mm):")
-    print(f"- Ancho exterior: {WIDTH}")
-    print(f"- Profundidad exterior: {DEPTH}")
-    print(f"- Alto mueble: {HEIGHT}")
-    print(f"- Ancho util por lado: {BAY_W}")
-    print(f"- Puertas (cada una): {DOOR_W} x {DOOR_H}")
-    print(
-        f"- Calado ducto: diametro {DUCT_D}, lado derecho, centro X={DUCT_CX}, Y={DUCT_CY} (20 mm desde fondo)"
-    )
-    print("- Altura recomendada de colocacion: base a 1650 mm (mesada 900, techo 2300)")
 
 
 if __name__ == "__main__":
