@@ -21,10 +21,15 @@ BACK_TH = 3.0
 WIDTH = 903.0
 DEPTH = 320.0
 HEIGHT = 710.0
+EXTRACTOR_W = 590.0
+EXTRACTOR_D = 470.0
+EXTRACTOR_H = 90.0
 
 DUCT_D = 160.0
 DUCT_R = DUCT_D / 2.0
 DUCT_REAR_CLR = 20.0
+GOLA_J_H = 25.0
+GOLA_J_D = 20.0
 
 CONN_D = 35.0
 CONN_R = CONN_D / 2.0
@@ -38,12 +43,13 @@ Z_BOTTOM = 0.0
 Z_TOP = HEIGHT - TH
 Z_INNER0 = TH
 
-# Lado izquierdo (calefon) y derecho (extractor)
+# Lado izquierdo (calefon) y eje extractor/anafe a derecha
 X_LEFT_ZONE = TH + W_INT * 0.25
-X_RIGHT_ZONE = TH + W_INT * 0.75
+# El extractor va alineado al borde derecho de AA en ensamble; su centro define el eje.
+X_RIGHT_ZONE = WIDTH - EXTRACTOR_W / 2.0
 Y_DUCT_TOP = D_INT - DUCT_REAR_CLR - DUCT_R
-Y_DUCT_FLOOR = 90.0
-Y_CONN = 55.0
+Y_DUCT_FLOOR = Y_DUCT_TOP
+Y_CONN = D_INT - 55.0
 
 # Dos frentes verticales
 FRONT_H = HEIGHT - TH
@@ -68,6 +74,25 @@ def add_box_with_round_holes(doc, name, x, y, z, dx, dy, dz, holes):
             r, dz + 2.0, App.Vector(cx, cy, z - 1.0), App.Vector(0, 0, 1)
         )
         shape = shape.cut(cyl)
+
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = shape
+    return obj
+
+
+def add_extractor(doc, name, x, y, z, w, d, h, bevel_d=120.0, bevel_h=40.0):
+    body = Part.makeBox(w, d, h, App.Vector(x, y, z))
+    tri = Part.makePolygon(
+        [
+            App.Vector(x, y, z),
+            App.Vector(x, y + bevel_d, z),
+            App.Vector(x, y, z + bevel_h),
+            App.Vector(x, y, z),
+        ]
+    )
+    tri_face = Part.Face(tri)
+    tri_prism = tri_face.extrude(App.Vector(w, 0, 0))
+    shape = body.cut(tri_prism)
 
     obj = doc.addObject("Part::Feature", name)
     obj.Shape = shape
@@ -105,8 +130,9 @@ def main():
         ("AA3", "Horizontal", "Piso_Casco_Calados", 1, WIDTH, DEPTH, TH, "Canto frente")
     )
 
-    # Techo: solo pasante 160 derecho
-    top_holes = [(X_RIGHT_ZONE, Y_DUCT_TOP, DUCT_R)]
+    # Techo: pasante izq alineado con agujero central de piso (calefon),
+    # y pasante der alineado con extractor/anafe.
+    top_holes = [(X_LEFT_ZONE, Y_DUCT_TOP, DUCT_R), (X_RIGHT_ZONE, Y_DUCT_TOP, DUCT_R)]
     add_box_with_round_holes(
         doc, "AA4_Tapa_Casco", 0, 0, Z_TOP, WIDTH, DEPTH, TH, top_holes
     )
@@ -114,7 +140,7 @@ def main():
         (
             "AA4",
             "Horizontal",
-            "Tapa_Casco_Calado_Der160",
+            "Tapa_Casco_Calados_IzqDer160",
             1,
             WIDTH,
             DEPTH,
@@ -145,10 +171,45 @@ def main():
         ("AA9", "Frente", "Frente_Derecho", 1, FRONT_W, FRONT_H, TH, "4 cantos")
     )
 
+    # Perfil gola J bajo puertas (tirador inferior continuo)
+    add_box(
+        doc, "AA12_Gola_J_Inferior", 0, -GOLA_J_D, Z_BOTTOM, WIDTH, GOLA_J_D, GOLA_J_H
+    )
+    parts.append(
+        ("AA12", "Herraje", "Gola_J_Inferior", 1, WIDTH, GOLA_J_H, GOLA_J_D, "Aluminio")
+    )
+
     # Liston fijo 90 mm para completar visual hacia linea AC (se monta por debajo del piso)
     add_box(doc, "AA10_Liston_Fijo_90", TH / 2.0, FRONT_Y, -90.0, WIDTH - TH, TH, 90.0)
     parts.append(
         ("AA10", "Frente", "Liston_Fijo_90", 1, WIDTH - TH, 90.0, TH, "4 cantos")
+    )
+
+    # Extractor de referencia (solo visual en este modulo)
+    ex_x = X_RIGHT_ZONE - EXTRACTOR_W / 2.0
+    ex_y = DEPTH - EXTRACTOR_D
+    ex_z = -EXTRACTOR_H
+    add_extractor(
+        doc,
+        "AA11_Extractor_Ref",
+        ex_x,
+        ex_y,
+        ex_z,
+        EXTRACTOR_W,
+        EXTRACTOR_D,
+        EXTRACTOR_H,
+    )
+    parts.append(
+        (
+            "AA11",
+            "Referencia",
+            "Extractor_590x470x90",
+            1,
+            EXTRACTOR_W,
+            EXTRACTOR_D,
+            EXTRACTOR_H,
+            "No fabricar",
+        )
     )
 
     doc.recompute()

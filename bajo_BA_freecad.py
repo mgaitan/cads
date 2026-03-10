@@ -62,10 +62,14 @@ Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
 
-# Dos bay para frentes superiores (izq cajon funcional, der frente falso)
-TOP_MID_X = TH + (W_INT - TH) / 2.0
-TOP_BAY_W = (W_INT - TH) / 2.0
-TOP_FRONT_W = (WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R - CENTER_GAP) / 2.0
+# Unico frente falso superior bajo anafe.
+# Se iguala al ancho de columna de cajones de BB para continuidad.
+BB_WIDTH = 1355.0
+BB_SEAM_INSET_L = GRID_GAP / 2.0
+BB_OUTER_OVERLAY_R = TH / 2.0
+BB_CENTER_GAP = GRID_GAP
+TOP_FALSE_W = (BB_WIDTH - BB_SEAM_INSET_L - BB_OUTER_OVERLAY_R - BB_CENTER_GAP) / 2.0
+TOP_FALSE_X = WIDTH - SEAM_INSET_R - TOP_FALSE_W
 TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 
 # Filas inferiores (2 frentes grandes de todo el ancho, continuidad con BB)
@@ -79,13 +83,6 @@ ROW1_Z = ROW2_Z + MID_BOT_H + ROW_GAP
 # Estante interior BA (mitad del hueco inferior)
 LOWER_SHELF_Z = Z_BOTTOM_TOP + (ROW2_Z - Z_BOTTOM_TOP - TH) / 2.0
 MID_LINE_Z = ROW2_Z
-
-# Cajon superior izquierdo (caja)
-TOP_BOX_H = 80.0
-TOP_DRAWER_OUT_W = TOP_BAY_W - 2 * SLIDE_CLR
-TOP_DRAWER_X = TH + SLIDE_CLR
-TOP_DRAWER_Y = TH
-TOP_DRAWER_Z = Z_TOPROW_SHELF + TH
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -238,77 +235,30 @@ def main():
         ("BA7", "Casco", "Repisa_Separadora", 1, W_INT, DEPTH, TH, "Canto frente")
     )
 
-    # Particion solo en top row para separar cajon funcional y frente falso
-    add_box(
-        doc,
-        "BA8_Particion_TopRow",
-        TOP_MID_X,
-        TH,
-        Z_TOPROW_SHELF + TH,
-        TH,
-        D_INT - TH,
-        TOP_FRONT_H - TH,
-    )
-    parts.append(
-        (
-            "BA8",
-            "Casco",
-            "Particion_TopRow",
-            1,
-            TOP_FRONT_H - TH,
-            D_INT - TH,
-            TH,
-            "Sin canto",
-        )
-    )
-
     # Estante interior inferior (todo el ancho)
-    add_box(doc, "BA9_Estante_Inferior", TH, 0, LOWER_SHELF_Z, W_INT, DEPTH, TH)
+    add_box(doc, "BA8_Estante_Inferior", TH, 0, LOWER_SHELF_Z, W_INT, DEPTH, TH)
     parts.append(
-        ("BA9", "Interior", "Estante_Inferior", 1, W_INT, DEPTH, TH, "Canto frente")
+        ("BA8", "Interior", "Estante_Inferior", 1, W_INT, DEPTH, TH, "Canto frente")
     )
 
-    # Frentes superiores (izq cajon funcional, der falso bajo anafe)
+    # Unico frente superior falso bajo anafe
     add_box(
         doc,
-        "BA10_Frente_Cajon_Sup_Izq",
-        OUTER_OVERLAY_L,
+        "BA9_Frente_Falso_Sup",
+        TOP_FALSE_X,
         -TH,
         TOP_FRONT_Z,
-        TOP_FRONT_W,
+        TOP_FALSE_W,
         TH,
         TOP_FRONT_H,
     )
     parts.append(
         (
-            "BA10",
+            "BA9",
             "Frente",
-            "Frente_Cajon_Sup_Izq",
+            "Frente_Falso_Sup",
             1,
-            TOP_FRONT_W,
-            TOP_FRONT_H,
-            TH,
-            "4 cantos",
-        )
-    )
-
-    add_box(
-        doc,
-        "BA11_Frente_Falso_Sup_Der",
-        OUTER_OVERLAY_L + TOP_FRONT_W + CENTER_GAP,
-        -TH,
-        TOP_FRONT_Z,
-        TOP_FRONT_W,
-        TH,
-        TOP_FRONT_H,
-    )
-    parts.append(
-        (
-            "BA11",
-            "Frente",
-            "Frente_Falso_Sup_Der",
-            1,
-            TOP_FRONT_W,
+            TOP_FALSE_W,
             TOP_FRONT_H,
             TH,
             "4 cantos",
@@ -318,7 +268,7 @@ def main():
     # Dos frentes grandes de ancho completo (medio e inferior)
     add_box(
         doc,
-        "BA12_Frente_Mid",
+        "BA10_Frente_Mid",
         OUTER_OVERLAY_L,
         -TH,
         ROW2_Z,
@@ -328,7 +278,7 @@ def main():
     )
     parts.append(
         (
-            "BA12",
+            "BA10",
             "Frente",
             "Frente_Mid_Ancho_Completo",
             1,
@@ -341,7 +291,7 @@ def main():
 
     add_box(
         doc,
-        "BA13_Frente_Bot",
+        "BA11_Frente_Bot",
         OUTER_OVERLAY_L,
         -TH,
         ROW3_Z,
@@ -351,7 +301,7 @@ def main():
     )
     parts.append(
         (
-            "BA13",
+            "BA11",
             "Frente",
             "Frente_Bot_Ancho_Completo",
             1,
@@ -362,24 +312,10 @@ def main():
         )
     )
 
-    # Caja de cajon superior izquierdo (telescopica)
-    add_drawer(
-        doc,
-        "BA14_Caja_Cajon_Sup_Izq",
-        TOP_DRAWER_X,
-        TOP_DRAWER_Y,
-        TOP_DRAWER_Z,
-        TOP_DRAWER_OUT_W,
-        DRAWER_DEPTH,
-        TOP_BOX_H,
-        parts,
-        "BA14",
-    )
-
     # Perfiles gola
     add_box(
         doc,
-        "BA15_Gola_C_Superior",
+        "BA12_Gola_C_Superior",
         0,
         -GOLA_D,
         ROW1_Z - ROW_GAP,
@@ -388,12 +324,12 @@ def main():
         GOLA_H,
     )
     parts.append(
-        ("BA15", "Herraje", "Gola_C_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("BA12", "Herraje", "Gola_C_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
     )
 
-    add_box(doc, "BA16_Gola_J_Media", 0, -GOLA_D, MID_LINE_Z, WIDTH, GOLA_D, GOLA_H)
+    add_box(doc, "BA13_Gola_J_Media", 0, -GOLA_D, MID_LINE_Z, WIDTH, GOLA_D, GOLA_H)
     parts.append(
-        ("BA16", "Herraje", "Gola_J_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("BA13", "Herraje", "Gola_J_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
     )
 
     doc.recompute()

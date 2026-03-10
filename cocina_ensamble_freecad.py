@@ -67,13 +67,7 @@ def main():
     z_abac = 1500.0
     z_aa = 1590.0
 
-    # Extractor bajo alacena AA (lado derecho)
-    ex_w = 590.0
-    ex_d = 470.0
-    ex_h = 90.0
-    ex_x = x_ba + 903.0 - ex_w
-    ex_y = 600.0 - ex_d
-    ex_z = z_aa - ex_h
+    # Extractor: ya esta incluido como referencia en el modulo AA.
 
     doc = App.newDocument("CocinaEnsamble")
 
@@ -110,8 +104,6 @@ def main():
             z_abac,
         )
     )
-
-    objs.append(add_extractor(doc, "EX_Extractor", ex_x, ex_y, ex_z, ex_w, ex_d, ex_h))
 
     objs.append(add_step(doc, "M_Mesada", os.path.join(here, "mesada.step"), 0, 0, 0))
 

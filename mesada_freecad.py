@@ -23,7 +23,7 @@ Y_FRONT = -48.0  # supera 30 mm el frente de cajones (frente a y=-18)
 # Hueco anafe (con margen)
 CUT_W = 600.0
 CUT_D = 555.0
-CUT_CENTER_X = 668.0  # alineado al eje de ducto/extractor en AA
+CUT_CENTER_X = 608.0  # alineado al eje de ducto/extractor en AA
 # Mantener anafe hacia el fondo en la zona util del mueble (0..600 en Y).
 CUT_CENTER_Y = 300.0
 
