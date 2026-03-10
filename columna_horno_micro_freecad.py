@@ -24,41 +24,61 @@ HEIGHT_TOTAL = 2300.0
 LEG_H = 80.0
 
 OVEN_Z_START = 800.0
-OVEN_OPENING_VISIBLE_H = 600.0
-OVEN_EXTRA_INTERNAL_H = 30.0  # juego interno oculto por regrueso frontal
+OVEN_OPENING_VISIBLE_H = 599.0
 OVEN_OPENING_W = 600.0
 
 MICRO_OPENING_H = 400.0
-SEPARATOR_FRONT_H = 30.0  # faja frontal visible entre horno y micro
+FASCIA_H = 50.0  # altura de cada faja frontal
+OVEN_EXTRA_INTERNAL_H = FASCIA_H  # juego interno oculto por faja central
 
 W = WIDTH_INT + 2 * TH
-CARCASS_H = HEIGHT_TOTAL - LEG_H
+CARCASS_H = HEIGHT_TOTAL - LEG_H - 2 * TH
 X_INT0 = TH
 X_INT1 = X_INT0 + WIDTH_INT
+INNER_DEPTH = DEPTH - TH
 
 # Cotas derivadas en Z (desde piso)
 Z_BOTTOM_PANEL = LEG_H
 Z_TOP_PANEL = HEIGHT_TOTAL - TH
+Z_SIDE_START = Z_BOTTOM_PANEL + TH
 
 Z_OVEN_BASE = OVEN_Z_START
 Z_OVEN_VISIBLE_TOP = Z_OVEN_BASE + OVEN_OPENING_VISIBLE_H
 Z_OVEN_INTERNAL_TOP = Z_OVEN_VISIBLE_TOP + OVEN_EXTRA_INTERNAL_H
+Z_OVEN_FASCIA_BOTTOM = Z_OVEN_BASE - FASCIA_H
+Z_OVEN_SHELF_BOTTOM = Z_OVEN_BASE - TH
 
 Z_MICRO_BASE = Z_OVEN_INTERNAL_TOP
 Z_MICRO_TOP = Z_MICRO_BASE + MICRO_OPENING_H
+Z_MICRO_SHELF_BOTTOM = Z_MICRO_BASE - TH
+Z_MICRO_TOP_FASCIA_BOTTOM = Z_MICRO_TOP - FASCIA_H
 
 # Compartimento inferior (bajo horno)
-LOWER_CLEAR_H = Z_OVEN_BASE - Z_BOTTOM_PANEL
+LOWER_CLEAR_H = Z_OVEN_FASCIA_BOTTOM - Z_BOTTOM_PANEL
 LOWER_MID_SHELF_Z = Z_BOTTOM_PANEL + (LOWER_CLEAR_H - TH) / 2.0
 
 # Compartimento superior (sobre micro)
 TOP_CLEAR_H = Z_TOP_PANEL - Z_MICRO_TOP
 
 # Puertas (frente aplicado, holgura 2 mm perimetral)
-DOOR_GAP = 2.0
-DOOR_W = W - 2 * DOOR_GAP
-LOWER_DOOR_H = (Z_OVEN_BASE - Z_BOTTOM_PANEL) - 2 * DOOR_GAP
-UPPER_DOOR_H = (HEIGHT_TOTAL - Z_MICRO_TOP) - 2 * DOOR_GAP
+# Puertas centradas sobre cantos de 18 mm:
+# solape 9 mm por lado (TH/2) en ancho y alto.
+DOOR_OVERLAP = TH / 2.0
+DOOR_W = W - TH  # 636 - 18 = 618
+DOOR_X = DOOR_OVERLAP
+
+# H10: solape vertical explicito de 9 mm sobre H12 (faja inferior de horno).
+# Cara inferior de H12 = Z_OVEN_FASCIA_BOTTOM.
+LOWER_OPEN_Z0 = Z_BOTTOM_PANEL + TH
+LOWER_DOOR_Z = LOWER_OPEN_Z0 - DOOR_OVERLAP
+LOWER_DOOR_TOP = Z_OVEN_FASCIA_BOTTOM + DOOR_OVERLAP
+LOWER_DOOR_H = LOWER_DOOR_TOP - LOWER_DOOR_Z
+
+UPPER_OPEN_Z0 = Z_MICRO_TOP + TH
+UPPER_OPEN_Z1 = Z_TOP_PANEL
+UPPER_DOOR_H = (UPPER_OPEN_Z1 - UPPER_OPEN_Z0) + TH
+UPPER_DOOR_Z = UPPER_OPEN_Z0 - DOOR_OVERLAP
+
 DOOR_DEPTH = TH
 
 
@@ -77,9 +97,9 @@ def main():
 
     parts = []
 
-    # Codigos de despiece: H1..H11
+    # Codigos de despiece: H1..H13
     # Laterales
-    add_part(doc, "H1_Lateral_Izq", 0, 0, LEG_H, TH, DEPTH, CARCASS_H)
+    add_part(doc, "H1_Lateral_Izq", 0, 0, Z_SIDE_START, TH, DEPTH, CARCASS_H)
     parts.append(
         (
             "H1",
@@ -93,7 +113,7 @@ def main():
         )
     )
 
-    add_part(doc, "H2_Lateral_Der", W - TH, 0, LEG_H, TH, DEPTH, CARCASS_H)
+    add_part(doc, "H2_Lateral_Der", W - TH, 0, Z_SIDE_START, TH, DEPTH, CARCASS_H)
     parts.append(
         (
             "H2",
@@ -116,14 +136,50 @@ def main():
     parts.append(("H4", "Horizontal", "Tapa_Casco", 1, W, DEPTH, TH, "Canto frente"))
 
     # Divisiones horizontales
-    add_part(doc, "H5_Piso_Horno", X_INT0, 0, Z_OVEN_BASE, WIDTH_INT, DEPTH, TH)
+    add_part(
+        doc,
+        "H5_Piso_Horno",
+        X_INT0,
+        TH,
+        Z_OVEN_SHELF_BOTTOM,
+        WIDTH_INT,
+        INNER_DEPTH,
+        TH,
+    )
     parts.append(
-        ("H5", "Horizontal", "Piso_Horno", 1, WIDTH_INT, DEPTH, TH, "Canto frente")
+        (
+            "H5",
+            "Horizontal",
+            "Piso_Horno",
+            1,
+            WIDTH_INT,
+            INNER_DEPTH,
+            TH,
+            "Canto frente",
+        )
     )
 
-    add_part(doc, "H6_Piso_Micro", X_INT0, 0, Z_MICRO_BASE, WIDTH_INT, DEPTH, TH)
+    add_part(
+        doc,
+        "H6_Piso_Micro",
+        X_INT0,
+        TH,
+        Z_MICRO_SHELF_BOTTOM,
+        WIDTH_INT,
+        INNER_DEPTH,
+        TH,
+    )
     parts.append(
-        ("H6", "Horizontal", "Piso_Micro", 1, WIDTH_INT, DEPTH, TH, "Canto frente")
+        (
+            "H6",
+            "Horizontal",
+            "Piso_Micro",
+            1,
+            WIDTH_INT,
+            INNER_DEPTH,
+            TH,
+            "Canto frente",
+        )
     )
 
     add_part(doc, "H7_Tapa_Micro", X_INT0, 0, Z_MICRO_TOP, WIDTH_INT, DEPTH, TH)
@@ -151,22 +207,70 @@ def main():
     # Regrueso/faja frontal entre horno y micro (tapa el juego superior del horno)
     add_part(
         doc,
-        "H9_Faja_Frontal_30",
+        "H9_Faja_Frontal_50",
         X_INT0,
         0,
         Z_OVEN_VISIBLE_TOP,
         WIDTH_INT,
         TH,
-        SEPARATOR_FRONT_H,
+        FASCIA_H,
     )
     parts.append(
         (
             "H9",
             "Frente",
-            "Faja_Frontal_30",
+            "Faja_Frontal_50",
             1,
             WIDTH_INT,
-            SEPARATOR_FRONT_H,
+            FASCIA_H,
+            TH,
+            "Cantos vistos",
+        )
+    )
+
+    # Faja frontal inferior del horno (reduce alto visible de la puerta inferior)
+    add_part(
+        doc,
+        "H12_Faja_Frontal_Inferior_50",
+        X_INT0,
+        0,
+        Z_OVEN_FASCIA_BOTTOM,
+        WIDTH_INT,
+        TH,
+        FASCIA_H,
+    )
+    parts.append(
+        (
+            "H12",
+            "Frente",
+            "Faja_Frontal_Inferior_50",
+            1,
+            WIDTH_INT,
+            FASCIA_H,
+            TH,
+            "Cantos vistos",
+        )
+    )
+
+    # Faja frontal superior del micro (techo del hueco micro)
+    add_part(
+        doc,
+        "H13_Faja_Frontal_Superior_Micro_50",
+        X_INT0,
+        0,
+        Z_MICRO_TOP_FASCIA_BOTTOM,
+        WIDTH_INT,
+        TH,
+        FASCIA_H,
+    )
+    parts.append(
+        (
+            "H13",
+            "Frente",
+            "Faja_Frontal_Superior_Micro_50",
+            1,
+            WIDTH_INT,
+            FASCIA_H,
             TH,
             "Cantos vistos",
         )
@@ -176,9 +280,9 @@ def main():
     add_part(
         doc,
         "H10_Puerta_Inferior",
-        DOOR_GAP,
+        DOOR_X,
         -DOOR_DEPTH,
-        Z_BOTTOM_PANEL + DOOR_GAP,
+        LOWER_DOOR_Z,
         DOOR_W,
         DOOR_DEPTH,
         LOWER_DOOR_H,
@@ -190,9 +294,9 @@ def main():
     add_part(
         doc,
         "H11_Puerta_Superior",
-        DOOR_GAP,
+        DOOR_X,
         -DOOR_DEPTH,
-        Z_MICRO_TOP + DOOR_GAP,
+        UPPER_DOOR_Z,
         DOOR_W,
         DOOR_DEPTH,
         UPPER_DOOR_H,
@@ -247,7 +351,7 @@ def main():
     print(
         f"- Hueco micro: {OVEN_OPENING_W} x {MICRO_OPENING_H}, inicia en Z={Z_MICRO_BASE}"
     )
-    print(f"- Faja frontal entre huecos: {SEPARATOR_FRONT_H}")
+    print(f"- Faja frontal entre huecos: {FASCIA_H}")
     print(f"- Compartimento superior util: {TOP_CLEAR_H}")
 
 

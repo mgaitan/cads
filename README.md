@@ -29,12 +29,27 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 - `H6` piso micro
 - `H7` tapa micro
 - `H8` estante inferior
-- `H9` faja frontal 30 mm
+- `H9` faja frontal central 50 mm
 - `H10` puerta inferior
 - `H11` puerta superior
+- `H12` faja frontal inferior 50 mm
+- `H13` faja frontal superior micro 50 mm
 
 ## Regenerar modelo por CLI
 ```bash
 cd /home/tin/lab/diseños_CAD
 printf "exec(open('columna_horno_micro_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c
 ```
+
+## Makefile
+```bash
+cd /home/tin/lab/diseños_CAD
+make model
+make screenshots
+```
+
+`make screenshots` genera:
+- `screenshots/horno_iso.png`
+- `screenshots/horno_front.png`
+- `screenshots/horno_left.png`
+- `screenshots/horno_top.png`
