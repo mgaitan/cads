@@ -26,7 +26,7 @@ TH = 18.0
 BACK_TH = 3.0
 DRAWER_BOTTOM_TH = 6.0
 
-WIDTH = 1050.0
+WIDTH = 903.0
 DEPTH = 600.0
 CAB_H = 870.0
 TOE_H = 80.0
@@ -320,7 +320,7 @@ def main():
         OUTER_OVERLAY_L,
         -TH,
         ROW2_Z,
-        WIDTH - TH,
+        WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R,
         TH,
         MID_BOT_H,
     )
@@ -343,7 +343,7 @@ def main():
         OUTER_OVERLAY_L,
         -TH,
         ROW3_Z,
-        WIDTH - TH,
+        WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R,
         TH,
         MID_BOT_H,
     )

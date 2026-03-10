@@ -18,7 +18,7 @@ except Exception:
 
 TH = 18.0
 BACK_TH = 3.0
-WIDTH = 1050.0
+WIDTH = 903.0
 DEPTH = 320.0
 HEIGHT = 710.0
 

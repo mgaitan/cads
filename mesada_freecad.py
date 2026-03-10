@@ -14,7 +14,7 @@ import FreeCAD as App
 import Part
 
 # Parametros (mm)
-WIDTH = 2258.0  # BA + BB (1050 + 1208)
+WIDTH = 2258.0  # BA + BB (903 + 1355)
 DEPTH = 648.0  # 600 de modulo + 18 de frente + 30 de vuelo extra
 THICK = 30.0
 Z_BASE = 870.0  # sobre cascos de bajo mesada
@@ -23,7 +23,7 @@ Y_FRONT = -48.0  # supera 30 mm el frente de cajones (frente a y=-18)
 # Hueco anafe (con margen)
 CUT_W = 600.0
 CUT_D = 555.0
-CUT_CENTER_X = 783.0  # alineado al eje ducto en AA/BA
+CUT_CENTER_X = 668.0  # alineado al eje de ducto/extractor en AA
 # Mantener anafe hacia el fondo en la zona util del mueble (0..600 en Y).
 CUT_CENTER_Y = 300.0
 

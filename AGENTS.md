@@ -16,10 +16,15 @@ Este repositorio se usa para desarrollar muebles de cocina parametrizados y obte
 - Altura final de mesada: `900 mm`.
 - Cota base de alacena derecha (AB/AC): `1500 mm`.
 - Coronación superior de todos los módulos altos en `2300 mm`.
-- El nivel del piso de horno debe coincidir con el borde inferior de la fila de cajones chicos.
+- La continuidad principal de alineación frontal se toma por las líneas de gola.
+- La altura de `H10` debe acompañar visualmente `BB` (frente medio + frente inferior + gola central).
 - El tope del hueco microondas debe coincidir con el nivel superior de `AC`.
 - `AA` con frentes verticales y listón fijo inferior de `90 mm`.
 - `BA` con solo 2 frentes grandes inferiores de ancho completo (más fila superior chica, con 1 frente falso bajo anafe).
+- Reparto de anchos con simetría visual:
+  - Total libre sin `H`: `2258 mm`
+  - `AA = BA = 903 mm` (2/5)
+  - `AB/AC = BB = 1355 mm` (3/5)
 
 ## Archivos clave
 - `columna_horno_micro_freecad.py`: script paramétrico FreeCAD.
