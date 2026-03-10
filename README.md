@@ -45,11 +45,30 @@ printf "exec(open('columna_horno_micro_freecad.py').read())\nimport sys\nsys.exi
 ```bash
 cd /home/tin/lab/diseños_CAD
 make model
-make screenshots
+make screenshots-gui
+make manual-h
 ```
 
-`make screenshots` genera:
-- `screenshots/horno_iso.png`
-- `screenshots/horno_front.png`
-- `screenshots/horno_left.png`
-- `screenshots/horno_top.png`
+Macro GUI:
+- `make screenshots-gui` muestra la ruta de macro a ejecutar.
+- `export_screenshots_gui_macro.py` exporta `iso` (vista actual) y estándar:
+  `front`, `rear`, `left`, `right`, `top`, `bottom`.
+
+## Manual constructivo por mueble (PDF)
+Se usa configuracion por mueble en `manuals/muebles/*.toml`.
+
+Para el mueble H:
+```bash
+make manual-h
+```
+
+Salidas:
+- `manuals/out/H_manual.md`
+- `manuals/out/H_manual.html`
+- `manuals/out/H_manual.pdf`
+
+Contenido del manual:
+- Vista isometrica + 6 vistas ortogonales
+- Tabla de cortes (desde BOM CSV)
+- Instrucciones de ensamblado (desde markdown)
+- Terminacion del mueble (por ejemplo: melamina blanca, simil paraiso)

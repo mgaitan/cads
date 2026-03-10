@@ -1,8 +1,8 @@
 SHELL := /bin/bash
 
-.PHONY: all model screenshots clean-screens help
+.PHONY: all model screenshots-gui manual-h manuales clean-screens clean-manuales help
 
-all: model screenshots
+all: model
 
 model:
 	@set +e; \
@@ -14,22 +14,27 @@ model:
 	fi; \
 	exit $$status
 
-screenshots:
-	@mkdir -p screenshots
-	@set +e; \
-	printf "exec(open('export_screenshots_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c; \
-	status=$$?; \
-	if [[ -s screenshots/horno_iso.png && -s screenshots/horno_front.png && -s screenshots/horno_left.png && -s screenshots/horno_top.png ]]; then \
-		echo "screenshots: OK (FreeCAD puede crashear al salir, pero los PNG se generaron)"; \
-		exit 0; \
-	fi; \
-	exit $$status
+screenshots-gui:
+	@echo "Abrir FreeCAD GUI con columna_horno_micro.FCStd y ejecutar macro:"
+	@echo "  /home/tin/lab/diseños_CAD/export_screenshots_gui_macro.py"
+	@echo "La macro exporta: iso (vista actual), front, rear, left, right, top, bottom."
+
+manual-h:
+	python3 manuals/generate_manual.py manuals/muebles/H.toml
+
+manuales: manual-h
 
 clean-screens:
 	rm -f screenshots/*.png
 
+clean-manuales:
+	rm -f manuals/out/*.md manuals/out/*.html manuals/out/*.pdf
+
 help:
 	@echo "Targets:"
-	@echo "  make model         Regenera FCStd/STEP/BOM"
-	@echo "  make screenshots   Exporta 4 vistas PNG (iso/front/left/top)"
-	@echo "  make clean-screens Elimina PNG generados"
+	@echo "  make model            Regenera FCStd/STEP/BOM"
+	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
+	@echo "  make manual-h         Genera manual H (MD + HTML + PDF si hay engine/fallback)"
+	@echo "  make manuales         Genera todos los manuales (por ahora H)"
+	@echo "  make clean-screens    Elimina PNG generados"
+	@echo "  make clean-manuales   Elimina manuales generados (MD/HTML/PDF)"

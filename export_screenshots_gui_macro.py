@@ -3,7 +3,7 @@
 
 Exporta:
 - la vista actual como `horno_iso.png` (dejala manualmente como quieras),
-- y luego `front`, `left`, `top`.
+- vistas estandar via comandos Std_View*: front/rear/left/right/top/bottom.
 """
 
 import os
@@ -11,7 +11,7 @@ import os
 import FreeCAD as App
 import FreeCADGui as Gui
 
-OUT_DIR = "./screenshots"
+OUT_DIR = "/home/tin/lab/diseños_CAD/screenshots"
 WIDTH = 1920
 HEIGHT = 1080
 BG = "White"
@@ -22,6 +22,13 @@ def save(view, name):
     view.fitAll()
     view.saveImage(path, WIDTH, HEIGHT, BG)
     print("saved", path)
+
+
+def set_std_view(command_name):
+    # Usa los mismos comandos que la barra de vistas de FreeCAD.
+    Gui.runCommand(command_name, 0)
+    Gui.SendMsgToActiveView("ViewFit")
+    Gui.updateGui()
 
 
 def main():
@@ -64,15 +71,18 @@ def main():
     # 1) iso = vista actual (ajustada por vos)
     save(view, "horno_iso.png")
 
-    # 2) vistas ortogonales
-    view.viewFront()
-    save(view, "horno_front.png")
-
-    view.viewLeft()
-    save(view, "horno_left.png")
-
-    view.viewTop()
-    save(view, "horno_top.png")
+    # 2) vistas estandar (mismo mecanismo que toolbar)
+    std_views = [
+        ("Std_ViewFront", "horno_front.png"),
+        ("Std_ViewRear", "horno_rear.png"),
+        ("Std_ViewLeft", "horno_left.png"),
+        ("Std_ViewRight", "horno_right.png"),
+        ("Std_ViewTop", "horno_top.png"),
+        ("Std_ViewBottom", "horno_bottom.png"),
+    ]
+    for cmd, filename in std_views:
+        set_std_view(cmd)
+        save(view, filename)
 
 
 main()
