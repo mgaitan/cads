@@ -1,11 +1,11 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos
-BB1,Casco,Lateral_Izq,1,772.0,600.0,18.0,Canto frente
-BB2,Casco,Lateral_Der,1,772.0,600.0,18.0,Canto frente
+BB1,Casco,Lateral_Izq,1,754.0,600.0,18.0,Canto frente
+BB2,Casco,Lateral_Der,1,754.0,600.0,18.0,Canto frente
 BB3,Casco,Piso_Pasante,1,1244.0,600.0,18.0,Canto frente
-BB4,Casco,Fondo_3mm,1,1208.0,772.0,3.0,Sin canto
+BB4,Casco,Fondo_3mm,1,1208.0,754.0,3.0,Sin canto
 BB5,Casco,Soporte_Sup_Frente,1,1244.0,200.0,18.0,Canto frente
 BB6,Casco,Soporte_Sup_Fondo,1,1244.0,200.0,18.0,Sin canto
-BB7,Interior,Divisor_Central,1,772.0,579.0,18.0,Sin canto
+BB7,Interior,Divisor_Central,1,754.0,579.0,18.0,Sin canto
 BB8,Frente,Frente_Top,2,612.0,100.0,18.0,4 cantos
 BB10,Frente,Frente_Mid,2,612.0,334.0,18.0,4 cantos
 BB12,Frente,Frente_Bot,2,612.0,334.0,18.0,4 cantos

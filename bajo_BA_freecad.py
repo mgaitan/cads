@@ -42,7 +42,7 @@ Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
-SIDE_H = Z_TOP - Z_BOTTOM_TOP
+SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
 
 # Plataforma separadora top row
 Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH  # top de placa en linea de 770

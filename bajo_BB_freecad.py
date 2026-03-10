@@ -40,7 +40,7 @@ Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
-SIDE_H = Z_TOP - Z_BOTTOM_TOP
+SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
 
 # Fajas/frentes (3 filas: 100 + 2 iguales), apoyando en canto inferior del soporte superior
 TOTAL_FACE_H = Z_TOP_SUPPORT - Z_BOTTOM

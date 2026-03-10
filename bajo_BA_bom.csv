@@ -1,8 +1,8 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos
-BA1,Casco,Lateral_Izq,1,772.0,600.0,18.0,Canto frente
-BA2,Casco,Lateral_Der,1,772.0,600.0,18.0,Canto frente
+BA1,Casco,Lateral_Izq,1,754.0,600.0,18.0,Canto frente
+BA2,Casco,Lateral_Der,1,754.0,600.0,18.0,Canto frente
 BA3,Casco,Piso_Pasante,1,1050.0,600.0,18.0,Canto frente
-BA4,Casco,Fondo_3mm,1,1014.0,772.0,3.0,Sin canto
+BA4,Casco,Fondo_3mm,1,1014.0,754.0,3.0,Sin canto
 BA5,Casco,Soporte_Sup_Frente,1,1050.0,200.0,18.0,Canto frente
 BA6,Casco,Soporte_Sup_Fondo,1,1050.0,200.0,18.0,Sin canto
 BA7,Casco,Repisa_Separadora,1,1014.0,600.0,18.0,Canto frente
