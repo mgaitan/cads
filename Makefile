@@ -5,7 +5,14 @@ SHELL := /bin/bash
 all: model screenshots
 
 model:
-	printf "exec(open('columna_horno_micro_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c
+	@set +e; \
+	printf "exec(open('columna_horno_micro_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c; \
+	status=$$?; \
+	if [[ -s columna_horno_micro.FCStd && -s columna_horno_micro.step && -s columna_horno_micro_bom.csv ]]; then \
+		echo "model: OK (FreeCAD puede crashear al salir, pero los archivos se generaron)"; \
+		exit 0; \
+	fi; \
+	exit $$status
 
 screenshots:
 	@mkdir -p screenshots

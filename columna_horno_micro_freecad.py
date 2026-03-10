@@ -16,6 +16,15 @@ import os
 import FreeCAD as App
 import Part
 
+GUI_AVAILABLE = False
+try:
+    import FreeCADGui as Gui
+
+    Gui.showMainWindow()
+    GUI_AVAILABLE = True
+except Exception:
+    Gui = None
+
 # Parametros principales (mm)
 TH = 18.0
 WIDTH_INT = 600.0
@@ -306,6 +315,17 @@ def main():
     )
 
     doc.recompute()
+
+    # En algunos entornos, los objetos quedan ocultos al guardar desde CLI.
+    # Si hay GUI, forzamos visibilidad para que se persista en GuiDocument.xml.
+    if GUI_AVAILABLE:
+        for obj in doc.Objects:
+            vo = getattr(obj, "ViewObject", None)
+            if vo is not None:
+                try:
+                    vo.Visibility = True
+                except Exception:
+                    pass
 
     # Exportes
     fcstd_path = os.path.join(here, "columna_horno_micro.FCStd")
