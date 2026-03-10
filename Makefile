@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: all model model-h model-aa model-ab screenshots-gui manual-h manuales clean-screens clean-manuales help
+.PHONY: all model model-h model-aa model-ab screenshots-gui manual-h manual-aa manual-ab manuales clean-screens clean-manuales help
 
 all: model
 
@@ -44,7 +44,13 @@ screenshots-gui:
 manual-h:
 	python3 manuals/generate_manual.py manuals/muebles/H.toml
 
-manuales: manual-h
+manual-aa:
+	python3 manuals/generate_manual.py manuals/muebles/AA.toml
+
+manual-ab:
+	python3 manuals/generate_manual.py manuals/muebles/AB.toml
+
+manuales: manual-h manual-aa manual-ab
 
 clean-screens:
 	rm -f screenshots/*.png
@@ -60,6 +66,8 @@ help:
 	@echo "  make model-ab         Regenera solo alacena AB (A2+A3)"
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
 	@echo "  make manual-h         Genera manual H (MD + HTML + PDF si hay engine/fallback)"
-	@echo "  make manuales         Genera todos los manuales (por ahora H)"
+	@echo "  make manual-aa        Genera manual AA (alacena izquierda)"
+	@echo "  make manual-ab        Genera manual AB+AC (conjunto derecho)"
+	@echo "  make manuales         Genera todos los manuales (H + AA + AB)"
 	@echo "  make clean-screens    Elimina PNG generados"
 	@echo "  make clean-manuales   Elimina manuales generados (MD/HTML/PDF)"

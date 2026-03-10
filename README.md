@@ -5,6 +5,7 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 ## Estado actual
 - Módulo implementado: columna de horno + microondas (`mueble H`).
 - Módulo implementado: alacena superior izquierda (`mueble AA`).
+- Módulo implementado: conjunto derecho (`muebles AB + AC` en un mismo modelo).
 - Modelo principal: `columna_horno_micro.FCStd`
 - Intercambio CAD: `columna_horno_micro.step`
 - Despiece: `columna_horno_micro_bom.csv`
@@ -15,6 +16,11 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 - Despiece: `alacena_AA_bom.csv`
 - Script generador: `alacena_AA_freecad.py`
 - Instrucciones: `alacena_AA_instrucciones.md`
+- Modelo conjunto derecho: `alacena_AB.FCStd`
+- Intercambio CAD: `alacena_AB.step`
+- Despiece: `alacena_AB_bom.csv`
+- Script generador: `alacena_AB_freecad.py`
+- Instrucciones: `alacena_AB_instrucciones.md`
 - Referencias visuales: carpeta `renders/`
 
 ## Parámetros base del mueble H
@@ -64,8 +70,12 @@ printf "exec(open('columna_horno_micro_freecad.py').read())\nimport sys\nsys.exi
 cd /home/tin/lab/diseños_CAD
 make model
 make model-aa
+make model-ab
 make screenshots-gui
 make manual-h
+make manual-aa
+make manual-ab
+make manuales
 ```
 
 Macro GUI:
@@ -76,15 +86,21 @@ Macro GUI:
 ## Manual constructivo por mueble (PDF)
 Se usa configuracion por mueble en `manuals/muebles/*.toml`.
 
-Para el mueble H:
+Para generar todos:
 ```bash
-make manual-h
+make manuales
 ```
 
 Salidas:
 - `manuals/out/H_manual.md`
 - `manuals/out/H_manual.html`
 - `manuals/out/H_manual.pdf`
+- `manuals/out/AA_manual.md`
+- `manuals/out/AA_manual.html`
+- `manuals/out/AA_manual.pdf`
+- `manuals/out/AB_manual.md`
+- `manuals/out/AB_manual.html`
+- `manuals/out/AB_manual.pdf`
 
 Contenido del manual:
 - Vista isometrica + 6 vistas ortogonales

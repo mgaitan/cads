@@ -1,0 +1,21 @@
+id = "AB+AC"
+nombre = "Conjunto Derecho: Alacena AB + Cajon AC"
+terminacion = "AB: melamina blanca / AC: melamina paraiso"
+espesor_mm = 18
+bom_csv = "alacena_AB_bom.csv"
+screenshots_dir = "screenshots"
+instrucciones_md = "alacena_AB_instrucciones.md"
+
+[salidas]
+md = "manuals/out/AB_manual.md"
+html = "manuals/out/AB_manual.html"
+pdf = "manuals/out/AB_manual.pdf"
+
+[vistas]
+iso = "ab_iso.png"
+front = "ab_front.png"
+rear = "ab_rear.png"
+left = "ab_left.png"
+right = "ab_right.png"
+top = "ab_top.png"
+bottom = "ab_bottom.png"

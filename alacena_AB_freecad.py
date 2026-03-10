@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera conjunto derecho de alacena: A2 + A3 (AB) en FreeCAD.
+"""Genera conjunto derecho de alacena: AB + AC en FreeCAD.
 
 Uso:
   freecad -c alacena_AB_freecad.py
@@ -26,36 +26,36 @@ except Exception:
     Gui = None
 
 TH = 18.0
+TH_AC = 25.4
 BACK_TH = 3.0
 
 # Ancho restante total: 2930 - 636 - 1050 = 1244
 WIDTH = 1244.0
 DEPTH = 320.0
 
-# A3 (cajon paraiso inferior)
-A3_H = 300.0
-A3_SIDE_H = A3_H - 2 * TH
+# AC (cajon paraiso inferior)
+AC_H = 300.0
+AC_SIDE_H = AC_H - 2 * TH_AC
 
-# A2 (alacena superior blanca)
-A2_H = 350.0
-A2_SIDE_H = A2_H - 2 * TH
+# AB (alacena superior blanca)
+AB_H = 350.0
+AB_SIDE_H = AB_H - 2 * TH
 
-# A2: 3 puertas iguales, equidistantes
+# AB: 3 puertas iguales, equidistantes
 CENTER_GAP = 2.0
 OUTER_OVERLAY = TH / 2.0  # 9 mm
 
-A2_INT_W = WIDTH - 2 * TH
-A2_INT_H = A2_SIDE_H
-A2_INT_D = DEPTH - BACK_TH
+AB_INT_W = WIDTH - 2 * TH
+AB_INT_H = AB_SIDE_H
+AB_INT_D = DEPTH - BACK_TH
 
-# Puertas A2 (3 iguales)
-DOOR_H = A2_H - TH
+DOOR_H = AB_H - TH
 DOOR_W = (WIDTH - 2 * OUTER_OVERLAY - 2 * CENTER_GAP) / 3.0
 DOOR1_X = OUTER_OVERLAY
 DOOR2_X = DOOR1_X + DOOR_W + CENTER_GAP
 DOOR3_X = DOOR2_X + DOOR_W + CENTER_GAP
 DOOR_Y = -TH
-DOOR_Z = A3_H + OUTER_OVERLAY
+DOOR_Z = AC_H + OUTER_OVERLAY
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -72,66 +72,46 @@ def main():
     doc = App.newDocument("AlacenaAB")
     parts = []
 
-    # --- A3: cajon inferior (melamina paraiso 18 mm) ---
-    # Piso/techo pasantes; laterales entre ambos.
-    add_box(doc, "AB1_A3_Lateral_Izq", 0, 0, TH, TH, DEPTH, A3_SIDE_H)
-    parts.append(
-        ("AB1", "A3_Paraiso", "A3_Lateral_Izq", 1, A3_SIDE_H, DEPTH, TH, "Canto frente")
-    )
+    # --- AC: cajon inferior (melamina paraiso 25.4 mm) ---
+    add_box(doc, "AC1_Lateral_Izq", 0, 0, TH_AC, TH_AC, DEPTH, AC_SIDE_H)
+    parts.append(("AC1", "AC_Paraiso", "AC_Lateral_Izq", 1, AC_SIDE_H, DEPTH, TH_AC, "Canto frente"))
 
-    add_box(doc, "AB2_A3_Lateral_Der", WIDTH - TH, 0, TH, TH, DEPTH, A3_SIDE_H)
-    parts.append(
-        ("AB2", "A3_Paraiso", "A3_Lateral_Der", 1, A3_SIDE_H, DEPTH, TH, "Canto frente")
-    )
+    add_box(doc, "AC2_Lateral_Der", WIDTH - TH_AC, 0, TH_AC, TH_AC, DEPTH, AC_SIDE_H)
+    parts.append(("AC2", "AC_Paraiso", "AC_Lateral_Der", 1, AC_SIDE_H, DEPTH, TH_AC, "Canto frente"))
 
-    add_box(doc, "AB3_A3_Piso", 0, 0, 0, WIDTH, DEPTH, TH)
-    parts.append(("AB3", "A3_Paraiso", "A3_Piso", 1, WIDTH, DEPTH, TH, "Canto frente"))
+    add_box(doc, "AC3_Piso", 0, 0, 0, WIDTH, DEPTH, TH_AC)
+    parts.append(("AC3", "AC_Paraiso", "AC_Piso", 1, WIDTH, DEPTH, TH_AC, "Canto frente"))
 
-    add_box(doc, "AB4_A3_Tapa", 0, 0, A3_H - TH, WIDTH, DEPTH, TH)
-    parts.append(("AB4", "A3_Paraiso", "A3_Tapa", 1, WIDTH, DEPTH, TH, "Canto frente"))
+    add_box(doc, "AC4_Tapa", 0, 0, AC_H - TH_AC, WIDTH, DEPTH, TH_AC)
+    parts.append(("AC4", "AC_Paraiso", "AC_Tapa", 1, WIDTH, DEPTH, TH_AC, "Canto frente"))
 
-    # --- A2: alacena superior (sin estantes) ---
-    z2 = A3_H
+    # --- AB: alacena superior (sin estantes, sin divisores internos) ---
+    z_ab = AC_H
 
-    add_box(doc, "AB5_A2_Lateral_Izq", 0, 0, z2 + TH, TH, DEPTH, A2_SIDE_H)
-    parts.append(
-        ("AB5", "A2_Blanco", "A2_Lateral_Izq", 1, A2_SIDE_H, DEPTH, TH, "Canto frente")
-    )
+    add_box(doc, "AB1_Lateral_Izq", 0, 0, z_ab + TH, TH, DEPTH, AB_SIDE_H)
+    parts.append(("AB1", "AB_Blanco", "AB_Lateral_Izq", 1, AB_SIDE_H, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "AB6_A2_Lateral_Der", WIDTH - TH, 0, z2 + TH, TH, DEPTH, A2_SIDE_H)
-    parts.append(
-        ("AB6", "A2_Blanco", "A2_Lateral_Der", 1, A2_SIDE_H, DEPTH, TH, "Canto frente")
-    )
+    add_box(doc, "AB2_Lateral_Der", WIDTH - TH, 0, z_ab + TH, TH, DEPTH, AB_SIDE_H)
+    parts.append(("AB2", "AB_Blanco", "AB_Lateral_Der", 1, AB_SIDE_H, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "AB7_A2_Piso", 0, 0, z2, WIDTH, DEPTH, TH)
-    parts.append(("AB7", "A2_Blanco", "A2_Piso", 1, WIDTH, DEPTH, TH, "Canto frente"))
+    add_box(doc, "AB3_Piso", 0, 0, z_ab, WIDTH, DEPTH, TH)
+    parts.append(("AB3", "AB_Blanco", "AB_Piso", 1, WIDTH, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "AB8_A2_Tapa", 0, 0, z2 + A2_H - TH, WIDTH, DEPTH, TH)
-    parts.append(("AB8", "A2_Blanco", "A2_Tapa", 1, WIDTH, DEPTH, TH, "Canto frente"))
+    add_box(doc, "AB4_Tapa", 0, 0, z_ab + AB_H - TH, WIDTH, DEPTH, TH)
+    parts.append(("AB4", "AB_Blanco", "AB_Tapa", 1, WIDTH, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "AB9_A2_Fondo_3mm", TH, A2_INT_D, z2 + TH, A2_INT_W, BACK_TH, A2_INT_H)
-    parts.append(
-        (
-            "AB9",
-            "A2_Blanco",
-            "A2_Fondo_3mm",
-            1,
-            A2_INT_W,
-            A2_INT_H,
-            BACK_TH,
-            "Sin canto",
-        )
-    )
+    add_box(doc, "AB5_Fondo_3mm", TH, AB_INT_D, z_ab + TH, AB_INT_W, BACK_TH, AB_INT_H)
+    parts.append(("AB5", "AB_Blanco", "AB_Fondo_3mm", 1, AB_INT_W, AB_INT_H, BACK_TH, "Sin canto"))
 
-    # Puertas A2 (3 iguales)
-    add_box(doc, "AB10_A2_Puerta_1", DOOR1_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
-    parts.append(("AB10", "Frente", "A2_Puerta_1", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
+    # Puertas AB (3 iguales)
+    add_box(doc, "AB6_Puerta_1", DOOR1_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
+    parts.append(("AB6", "Frente", "AB_Puerta_1", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
 
-    add_box(doc, "AB11_A2_Puerta_2", DOOR2_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
-    parts.append(("AB11", "Frente", "A2_Puerta_2", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
+    add_box(doc, "AB7_Puerta_2", DOOR2_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
+    parts.append(("AB7", "Frente", "AB_Puerta_2", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
 
-    add_box(doc, "AB12_A2_Puerta_3", DOOR3_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
-    parts.append(("AB12", "Frente", "A2_Puerta_3", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
+    add_box(doc, "AB8_Puerta_3", DOOR3_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
+    parts.append(("AB8", "Frente", "AB_Puerta_3", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
 
     doc.recompute()
 
@@ -175,13 +155,12 @@ def main():
     print("-", step_path)
     print("-", bom_path)
     print("\nResumen de cotas clave (mm):")
-    print(f"- Ancho exterior total AB: {WIDTH}")
+    print(f"- Ancho exterior total AB+AC: {WIDTH}")
     print(f"- Profundidad exterior: {DEPTH}")
-    print(f"- A3 (paraiso) alto: {A3_H}")
-    print(f"- A2 (blanco) alto: {A2_H}")
-    print(f"- Altura total AB: {A3_H + A2_H}")
-    print(f"- A2 puertas (3 iguales): {DOOR_W} x {DOOR_H}")
-    print("- Referencia de montaje: piso A3 coincide con piso de A1")
+    print(f"- AC (paraiso) alto: {AC_H}")
+    print(f"- AB (blanco) alto: {AB_H}")
+    print(f"- Altura total AB+AC: {AC_H + AB_H}")
+    print(f"- AB puertas (3 iguales): {DOOR_W} x {DOOR_H}")
 
 
 if __name__ == "__main__":

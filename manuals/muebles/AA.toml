@@ -1,0 +1,21 @@
+id = "AA"
+nombre = "Alacena A (Superior Izquierda)"
+terminacion = "Melamina blanca"
+espesor_mm = 18
+bom_csv = "alacena_AA_bom.csv"
+screenshots_dir = "screenshots"
+instrucciones_md = "alacena_AA_instrucciones.md"
+
+[salidas]
+md = "manuals/out/AA_manual.md"
+html = "manuals/out/AA_manual.html"
+pdf = "manuals/out/AA_manual.pdf"
+
+[vistas]
+iso = "aa_iso.png"
+front = "aa_front.png"
+rear = "aa_rear.png"
+left = "aa_left.png"
+right = "aa_right.png"
+top = "aa_top.png"
+bottom = "aa_bottom.png"
