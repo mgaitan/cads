@@ -3,6 +3,7 @@ AC1,AC_Paraiso,AC_Lateral_Izq,1,249.2,320.0,25.4,Canto frente
 AC2,AC_Paraiso,AC_Lateral_Der,1,249.2,320.0,25.4,Canto frente
 AC3,AC_Paraiso,AC_Piso,1,1244.0,320.0,25.4,Canto frente
 AC4,AC_Paraiso,AC_Tapa,1,1244.0,320.0,25.4,Canto frente
+AC5,AC_Paraiso,AC_Fondo_18mm,1,1193.2,249.2,18.0,Sin canto
 AB1,AB_Blanco,AB_Lateral_Izq,1,314.0,320.0,18.0,Canto frente
 AB2,AB_Blanco,AB_Lateral_Der,1,314.0,320.0,18.0,Canto frente
 AB3,AB_Blanco,AB_Piso,1,1244.0,320.0,18.0,Canto frente

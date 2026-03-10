@@ -1,0 +1,368 @@
+#!/usr/bin/env python3
+"""Genera bajo mesada BA en FreeCAD.
+
+Salida:
+  - bajo_BA.FCStd
+  - bajo_BA.step
+  - bajo_BA_bom.csv
+"""
+
+import csv
+import os
+
+import FreeCAD as App
+import Part
+
+GUI_AVAILABLE = False
+try:
+    import FreeCADGui as Gui
+
+    Gui.showMainWindow()
+    GUI_AVAILABLE = True
+except Exception:
+    Gui = None
+
+TH = 18.0
+BACK_TH = 3.0
+DRAWER_BOTTOM_TH = 6.0
+
+WIDTH = 1050.0
+DEPTH = 600.0
+CAB_H = 870.0
+TOE_H = 80.0
+COUNTER_TH = 30.0
+
+TOP_FRONT_H = 100.0
+TOP_SUPPORT_D = 200.0
+SLIDE_CLR = 12.5
+DRAWER_DEPTH = 500.0
+
+# Cotas en Z
+Z_BOTTOM = TOE_H
+Z_BOTTOM_TOP = Z_BOTTOM + TH
+Z_TOP = CAB_H
+Z_TOP_SUPPORT = Z_TOP - TH
+SIDE_H = Z_TOP - Z_BOTTOM_TOP
+
+# Plataforma separadora top row
+Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH  # top de placa en linea de 770
+
+W_INT = WIDTH - 2 * TH
+D_INT = DEPTH - BACK_TH
+
+# Dos bay para frentes superiores (izq cajon funcional, der frente falso)
+TOP_MID_X = TH + (W_INT - TH) / 2.0
+TOP_BAY_W = (W_INT - TH) / 2.0
+TOP_FRONT_W = (WIDTH - TH - 2.0) / 2.0
+TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
+
+# Puertas inferiores (2 hojas)
+LOWER_OPEN_Z0 = Z_BOTTOM_TOP
+LOWER_OPEN_Z1 = Z_TOPROW_SHELF
+LOWER_DOOR_H = (LOWER_OPEN_Z1 - LOWER_OPEN_Z0) + TH  # solape 9/9
+LOWER_DOOR_Z = LOWER_OPEN_Z0 - TH / 2.0
+DOOR_W = TOP_FRONT_W
+DOOR_X_L = TH / 2.0
+DOOR_X_R = DOOR_X_L + DOOR_W + 2.0
+
+# Estante interior BA (mitad del hueco inferior)
+LOWER_SHELF_Z = LOWER_OPEN_Z0 + (LOWER_OPEN_Z1 - LOWER_OPEN_Z0 - TH) / 2.0
+
+# Cajon superior izquierdo (caja)
+TOP_BOX_H = 80.0
+TOP_DRAWER_OUT_W = TOP_BAY_W - 2 * SLIDE_CLR
+TOP_DRAWER_X = TH + SLIDE_CLR
+TOP_DRAWER_Y = TH
+TOP_DRAWER_Z = Z_TOPROW_SHELF + TH
+
+
+def add_box(doc, name, x, y, z, dx, dy, dz):
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = Part.makeBox(dx, dy, dz)
+    obj.Placement.Base = App.Vector(x, y, z)
+    return obj
+
+
+def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
+    side_t = TH
+    front_back_w = outer_w - 2 * side_t
+
+    add_box(doc, f"{prefix}_Lateral_Izq", x, y, z, side_t, depth, box_h)
+    add_box(
+        doc, f"{prefix}_Lateral_Der", x + outer_w - side_t, y, z, side_t, depth, box_h
+    )
+    add_box(doc, f"{prefix}_Frente_Caja", x + side_t, y, z, front_back_w, side_t, box_h)
+    add_box(
+        doc,
+        f"{prefix}_Trasera_Caja",
+        x + side_t,
+        y + depth - side_t,
+        z,
+        front_back_w,
+        side_t,
+        box_h,
+    )
+    add_box(
+        doc,
+        f"{prefix}_Fondo_6mm",
+        x + side_t,
+        y + side_t,
+        z,
+        front_back_w,
+        depth - 2 * side_t,
+        DRAWER_BOTTOM_TH,
+    )
+
+    parts.extend(
+        [
+            (
+                f"{code_base}a",
+                "Cajon",
+                f"{prefix}_Lateral",
+                2,
+                depth,
+                box_h,
+                side_t,
+                "Sin canto",
+            ),
+            (
+                f"{code_base}b",
+                "Cajon",
+                f"{prefix}_Frente_Trasera",
+                2,
+                front_back_w,
+                box_h,
+                side_t,
+                "Sin canto",
+            ),
+            (
+                f"{code_base}c",
+                "Cajon",
+                f"{prefix}_Fondo_6mm",
+                1,
+                front_back_w,
+                depth - 2 * side_t,
+                DRAWER_BOTTOM_TH,
+                "Sin canto",
+            ),
+        ]
+    )
+
+
+def main():
+    script_path = globals().get("__file__")
+    here = os.path.dirname(os.path.abspath(script_path)) if script_path else os.getcwd()
+    doc = App.newDocument("BajoBA")
+    parts = []
+
+    # Casco
+    add_box(doc, "BA1_Lateral_Izq", 0, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
+    parts.append(("BA1", "Casco", "Lateral_Izq", 1, SIDE_H, DEPTH, TH, "Canto frente"))
+
+    add_box(doc, "BA2_Lateral_Der", WIDTH - TH, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
+    parts.append(("BA2", "Casco", "Lateral_Der", 1, SIDE_H, DEPTH, TH, "Canto frente"))
+
+    add_box(doc, "BA3_Piso_Pasante", 0, 0, Z_BOTTOM, WIDTH, DEPTH, TH)
+    parts.append(("BA3", "Casco", "Piso_Pasante", 1, WIDTH, DEPTH, TH, "Canto frente"))
+
+    # Fondo 3 mm (oculto)
+    add_box(
+        doc, "BA4_Fondo_3mm", TH, DEPTH - BACK_TH, Z_BOTTOM_TOP, W_INT, BACK_TH, SIDE_H
+    )
+    parts.append(("BA4", "Casco", "Fondo_3mm", 1, W_INT, SIDE_H, BACK_TH, "Sin canto"))
+
+    # Soportes superiores (frente y fondo, 200 mm profundidad)
+    add_box(
+        doc,
+        "BA5_Soporte_Superior_Frente",
+        0,
+        0,
+        Z_TOP_SUPPORT,
+        WIDTH,
+        TOP_SUPPORT_D,
+        TH,
+    )
+    parts.append(
+        (
+            "BA5",
+            "Casco",
+            "Soporte_Sup_Frente",
+            1,
+            WIDTH,
+            TOP_SUPPORT_D,
+            TH,
+            "Canto frente",
+        )
+    )
+
+    add_box(
+        doc,
+        "BA6_Soporte_Superior_Fondo",
+        0,
+        DEPTH - TOP_SUPPORT_D,
+        Z_TOP_SUPPORT,
+        WIDTH,
+        TOP_SUPPORT_D,
+        TH,
+    )
+    parts.append(
+        ("BA6", "Casco", "Soporte_Sup_Fondo", 1, WIDTH, TOP_SUPPORT_D, TH, "Sin canto")
+    )
+
+    # Repisa separadora de fila superior
+    add_box(doc, "BA7_Repisa_Separadora", TH, 0, Z_TOPROW_SHELF, W_INT, DEPTH, TH)
+    parts.append(
+        ("BA7", "Casco", "Repisa_Separadora", 1, W_INT, DEPTH, TH, "Canto frente")
+    )
+
+    # Particion solo en top row para separar cajon funcional y frente falso
+    add_box(
+        doc,
+        "BA8_Particion_TopRow",
+        TOP_MID_X,
+        TH,
+        Z_TOPROW_SHELF + TH,
+        TH,
+        D_INT - TH,
+        TOP_FRONT_H - TH,
+    )
+    parts.append(
+        (
+            "BA8",
+            "Casco",
+            "Particion_TopRow",
+            1,
+            TOP_FRONT_H - TH,
+            D_INT - TH,
+            TH,
+            "Sin canto",
+        )
+    )
+
+    # Estante interior inferior (todo el ancho)
+    add_box(doc, "BA9_Estante_Inferior", TH, 0, LOWER_SHELF_Z, W_INT, DEPTH, TH)
+    parts.append(
+        ("BA9", "Interior", "Estante_Inferior", 1, W_INT, DEPTH, TH, "Canto frente")
+    )
+
+    # Frentes superiores (izq cajon funcional, der falso bajo anafe)
+    add_box(
+        doc,
+        "BA10_Frente_Cajon_Sup_Izq",
+        TH / 2.0,
+        -TH,
+        TOP_FRONT_Z,
+        TOP_FRONT_W,
+        TH,
+        TOP_FRONT_H,
+    )
+    parts.append(
+        (
+            "BA10",
+            "Frente",
+            "Frente_Cajon_Sup_Izq",
+            1,
+            TOP_FRONT_W,
+            TOP_FRONT_H,
+            TH,
+            "4 cantos",
+        )
+    )
+
+    add_box(
+        doc,
+        "BA11_Frente_Falso_Sup_Der",
+        TH / 2.0 + TOP_FRONT_W + 2.0,
+        -TH,
+        TOP_FRONT_Z,
+        TOP_FRONT_W,
+        TH,
+        TOP_FRONT_H,
+    )
+    parts.append(
+        (
+            "BA11",
+            "Frente",
+            "Frente_Falso_Sup_Der",
+            1,
+            TOP_FRONT_W,
+            TOP_FRONT_H,
+            TH,
+            "4 cantos",
+        )
+    )
+
+    # Puertas inferiores
+    add_box(
+        doc, "BA12_Puerta_Izq", DOOR_X_L, -TH, LOWER_DOOR_Z, DOOR_W, TH, LOWER_DOOR_H
+    )
+    parts.append(
+        ("BA12", "Frente", "Puerta_Izq", 1, DOOR_W, LOWER_DOOR_H, TH, "4 cantos")
+    )
+
+    add_box(
+        doc, "BA13_Puerta_Der", DOOR_X_R, -TH, LOWER_DOOR_Z, DOOR_W, TH, LOWER_DOOR_H
+    )
+    parts.append(
+        ("BA13", "Frente", "Puerta_Der", 1, DOOR_W, LOWER_DOOR_H, TH, "4 cantos")
+    )
+
+    # Caja de cajon superior izquierdo (telescopica)
+    add_drawer(
+        doc,
+        "BA14_Caja_Cajon_Sup_Izq",
+        TOP_DRAWER_X,
+        TOP_DRAWER_Y,
+        TOP_DRAWER_Z,
+        TOP_DRAWER_OUT_W,
+        DRAWER_DEPTH,
+        TOP_BOX_H,
+        parts,
+        "BA14",
+    )
+
+    doc.recompute()
+
+    if GUI_AVAILABLE:
+        for obj in doc.Objects:
+            vo = getattr(obj, "ViewObject", None)
+            if vo is not None:
+                try:
+                    vo.Visibility = True
+                    if "Fondo_3mm" in obj.Name:
+                        vo.Visibility = False
+                except Exception:
+                    pass
+
+    fcstd = os.path.join(here, "bajo_BA.FCStd")
+    step = os.path.join(here, "bajo_BA.step")
+    bom = os.path.join(here, "bajo_BA_bom.csv")
+
+    doc.saveAs(fcstd)
+    Part.export([o for o in doc.Objects if hasattr(o, "Shape")], step)
+
+    with open(bom, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(
+            [
+                "codigo",
+                "categoria",
+                "pieza",
+                "cantidad",
+                "largo_mm",
+                "ancho_mm",
+                "espesor_mm",
+                "cantos",
+            ]
+        )
+        for r in parts:
+            w.writerow(r)
+
+    print("Modelo generado:")
+    print("-", fcstd)
+    print("-", step)
+    print("-", bom)
+
+
+if __name__ == "__main__":
+    main()

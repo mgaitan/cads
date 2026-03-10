@@ -15,6 +15,7 @@
 - AC es un cajon completo de melamina paraiso 25.4 mm
 - Piso y tapa pasantes (laterales entre ambos)
 - Incluye piso y tapa
+- Fondo AC en paraiso 18 mm
 - El piso de AC coincide en altura con el piso de A1 al montar en cocina
 
 ## Configuracion AB
@@ -28,6 +29,7 @@
 - AC2: AC lateral der
 - AC3: AC piso
 - AC4: AC tapa
+- AC5: AC fondo 18 mm
 - AB1: AB lateral izq
 - AB2: AB lateral der
 - AB3: AB piso

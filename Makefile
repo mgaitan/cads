@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 
-.PHONY: all model model-h model-aa model-ab screenshots-gui manual-h manual-aa manual-ab manuales clean-screens clean-manuales help
+.PHONY: all model model-h model-aa model-ab model-ba model-bb model-mesada screenshots-gui manual-h manual-aa manual-ab manuales clean-screens clean-manuales help
 
 all: model
 
-model: model-h model-aa model-ab
+model: model-h model-aa model-ab model-ba model-bb model-mesada
 
 model-h:
 	@set +e; \
@@ -36,6 +36,36 @@ model-ab:
 	fi; \
 	exit $$status
 
+model-ba:
+	@set +e; \
+	printf "exec(open('bajo_BA_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c; \
+	status=$$?; \
+	if [[ -s bajo_BA.FCStd && -s bajo_BA.step && -s bajo_BA_bom.csv ]]; then \
+		echo "model-ba: OK (FreeCAD puede crashear al salir, pero los archivos se generaron)"; \
+		exit 0; \
+	fi; \
+	exit $$status
+
+model-bb:
+	@set +e; \
+	printf "exec(open('bajo_BB_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c; \
+	status=$$?; \
+	if [[ -s bajo_BB.FCStd && -s bajo_BB.step && -s bajo_BB_bom.csv ]]; then \
+		echo "model-bb: OK (FreeCAD puede crashear al salir, pero los archivos se generaron)"; \
+		exit 0; \
+	fi; \
+	exit $$status
+
+model-mesada:
+	@set +e; \
+	printf "exec(open('mesada_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c; \
+	status=$$?; \
+	if [[ -s mesada.FCStd && -s mesada.step && -s mesada_bom.csv ]]; then \
+		echo "model-mesada: OK (FreeCAD puede crashear al salir, pero los archivos se generaron)"; \
+		exit 0; \
+	fi; \
+	exit $$status
+
 screenshots-gui:
 	@echo "Abrir FreeCAD GUI con columna_horno_micro.FCStd y ejecutar macro:"
 	@echo "  /home/tin/lab/diseños_CAD/export_screenshots_gui_macro.py"
@@ -60,10 +90,13 @@ clean-manuales:
 
 help:
 	@echo "Targets:"
-	@echo "  make model            Regenera modelos H + AA + AB (FCStd/STEP/BOM)"
+	@echo "  make model            Regenera modelos H + AA + AB + BA + BB + mesada"
 	@echo "  make model-h          Regenera solo mueble H"
 	@echo "  make model-aa         Regenera solo alacena AA"
 	@echo "  make model-ab         Regenera solo alacena AB (A2+A3)"
+	@echo "  make model-ba         Regenera solo bajo mesada BA"
+	@echo "  make model-bb         Regenera solo bajo mesada BB"
+	@echo "  make model-mesada     Regenera piedra de mesada con calado"
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
 	@echo "  make manual-h         Genera manual H (MD + HTML + PDF si hay engine/fallback)"
 	@echo "  make manual-aa        Genera manual AA (alacena izquierda)"
