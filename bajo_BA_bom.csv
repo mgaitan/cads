@@ -8,10 +8,10 @@ BA6,Casco,Soporte_Sup_Fondo,1,1050.0,200.0,18.0,Sin canto
 BA7,Casco,Repisa_Separadora,1,1014.0,600.0,18.0,Canto frente
 BA8,Casco,Particion_TopRow,1,82.0,579.0,18.0,Sin canto
 BA9,Interior,Estante_Inferior,1,1014.0,600.0,18.0,Canto frente
-BA10,Frente,Frente_Cajon_Sup_Izq,1,515.0,100.0,18.0,4 cantos
-BA11,Frente,Frente_Falso_Sup_Der,1,515.0,100.0,18.0,4 cantos
-BA12,Frente,Puerta_Izq,1,515.0,672.0,18.0,4 cantos
-BA13,Frente,Puerta_Der,1,515.0,672.0,18.0,4 cantos
+BA10,Frente,Frente_Cajon_Sup_Izq,1,519.0,100.0,18.0,4 cantos
+BA11,Frente,Frente_Falso_Sup_Der,1,519.0,100.0,18.0,4 cantos
+BA12,Frente,Puerta_Izq,1,519.0,672.0,18.0,4 cantos
+BA13,Frente,Puerta_Der,1,519.0,672.0,18.0,4 cantos
 BA14a,Cajon,BA14_Caja_Cajon_Sup_Izq_Lateral,2,500.0,80.0,18.0,Sin canto
 BA14b,Cajon,BA14_Caja_Cajon_Sup_Izq_Frente_Trasera,2,437.0,80.0,18.0,Sin canto
 BA14c,Cajon,BA14_Caja_Cajon_Sup_Izq_Fondo_6mm,1,437.0,464.0,6.0,Sin canto

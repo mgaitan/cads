@@ -1,7 +1,7 @@
 # Bajo mesada BB (derecha)
 
 ## Parametros
-- Ancho: 1208 mm
+- Ancho: 1124 mm
 - Profundidad: 600 mm
 - Alto casco: 870 mm
 - Zocalo: 80 mm

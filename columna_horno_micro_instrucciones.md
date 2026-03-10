@@ -3,8 +3,8 @@
 ## Parametros usados
 - Altura total: 2300 mm
 - Profundidad total: 600 mm
-- Ancho interior util: 636 mm
-- Ancho exterior: 672 mm
+- Ancho interior util: 720 mm
+- Ancho exterior: 756 mm
 - Patas: 80 mm (ocultas por zocalo)
 - Fondo 3 mm (oculto en vistas de captura)
 - Piso y techo del casco pasantes (636 mm), con laterales apoyados
@@ -26,8 +26,8 @@
 - H12: Faja frontal inferior 50 mm (entre puerta inferior y horno)
 - H13: Faja frontal superior micro 50 mm (techo del hueco micro)
 - H14: Fondo 3 mm
-- H15: Liston vertical frontal izq (regrueso solo horno)
-- H16: Liston vertical frontal der (regrueso solo horno)
+- H15: Liston vertical frontal izq 60 mm (regrueso solo horno)
+- H16: Liston vertical frontal der 60 mm (regrueso solo horno)
 - Hueco horno visible: 600 x 599 mm, arranque a 800 mm desde piso
 - Hueco horno interno: 600 x 650 mm
 - Hueco microondas: 600 x 436 mm

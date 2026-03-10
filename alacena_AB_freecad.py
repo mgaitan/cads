@@ -30,8 +30,8 @@ TH_AC = 25.4
 BACK_TH = 3.0
 AC_BACK_TH = 18.0
 
-# Ancho restante total: 2930 - 672 - 1050 = 1208
-WIDTH = 1208.0
+# Ancho restante total: 2930 - 756 - 1050 = 1124
+WIDTH = 1124.0
 DEPTH = 320.0
 
 # AC (cajon paraiso inferior)

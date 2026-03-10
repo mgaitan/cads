@@ -28,7 +28,7 @@ except Exception:
 # Parametros principales (mm)
 TH = 18.0
 BACK_TH = 3.0
-WIDTH_INT = 636.0
+WIDTH_INT = 720.0
 DEPTH = 600.0
 HEIGHT_TOTAL = 2300.0
 LEG_H = 80.0
@@ -65,7 +65,7 @@ Z_MICRO_SHELF_BOTTOM = Z_MICRO_BASE - TH
 Z_MICRO_TOP_FASCIA_BOTTOM = Z_MICRO_TOP - FASCIA_H
 
 # Regrueso vertical frontal para apoyo de frente de horno/micro
-LISTON_W = TH
+LISTON_W = 60.0
 LISTON_D = TH
 LISTON_Z0 = Z_OVEN_BASE
 LISTON_H = OVEN_OPENING_VISIBLE_H
@@ -81,7 +81,7 @@ TOP_CLEAR_H = Z_TOP_PANEL - Z_MICRO_TOP
 # Puertas centradas sobre cantos de 18 mm:
 # solape 9 mm por lado (TH/2) en ancho y alto.
 DOOR_OVERLAP = TH / 2.0
-DOOR_W = W - TH  # 672 - 18 = 654
+DOOR_W = W - TH  # 756 - 18 = 738
 DOOR_X = DOOR_OVERLAP
 
 # H10: solape vertical explicito de 9 mm sobre H12 (faja inferior de horno).
@@ -185,8 +185,8 @@ def main():
             "Liston_Vert_Izq",
             1,
             LISTON_H,
-            LISTON_D,
             LISTON_W,
+            LISTON_D,
             "Canto frente",
         )
     )
@@ -208,8 +208,8 @@ def main():
             "Liston_Vert_Der",
             1,
             LISTON_H,
-            LISTON_D,
             LISTON_W,
+            LISTON_D,
             "Canto frente",
         )
     )

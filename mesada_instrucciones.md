@@ -1,7 +1,7 @@
 # Mesada piedra gris mara
 
 ## Parametros
-- Largo total: 2258 mm
+- Largo total: 2174 mm
 - Profundidad: 600 mm
 - Espesor: 30 mm
 - Cota inferior: 870 mm (cota superior final 900 mm)

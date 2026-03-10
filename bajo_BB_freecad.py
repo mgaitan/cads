@@ -26,7 +26,7 @@ TH = 18.0
 BACK_TH = 3.0
 DRAWER_BOTTOM_TH = 6.0
 
-WIDTH = 1208.0
+WIDTH = 1124.0
 DEPTH = 600.0
 CAB_H = 870.0
 TOE_H = 80.0
@@ -36,6 +36,11 @@ TOP_SUPPORT_D = 200.0
 SLIDE_CLR = 12.5
 DRAWER_DEPTH = 500.0
 OPEN_DRAWER_OFFSET = 120.0  # para visualizacion 3D
+
+# Luces/frentes para continuidad visual con BA
+CENTER_GAP = 2.0
+SEAM_INSET_L = 1.0  # deja 2 mm de luz total con BA (1 + 1)
+OUTER_OVERLAY_R = TH / 2.0
 
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
@@ -53,7 +58,7 @@ ROW1_Z = ROW2_Z + MID_BOT_H + 2.0
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
 COL_INT_W = (W_INT - TH) / 2.0
-FRONT_W = (WIDTH - TH - 2.0) / 2.0
+FRONT_W = (WIDTH - SEAM_INSET_L - OUTER_OVERLAY_R - CENTER_GAP) / 2.0
 
 # Caja cajon por columna
 DRAWER_OUT_W = COL_INT_W - 2 * SLIDE_CLR
@@ -211,8 +216,8 @@ def main():
     )
 
     # Frentes (2 columnas x 3 filas = 6 cajones)
-    x_l = TH / 2.0
-    x_r = x_l + FRONT_W + 2.0
+    x_l = SEAM_INSET_L
+    x_r = x_l + FRONT_W + CENTER_GAP
 
     add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
     add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)

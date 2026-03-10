@@ -37,6 +37,11 @@ TOP_SUPPORT_D = 200.0
 SLIDE_CLR = 12.5
 DRAWER_DEPTH = 500.0
 
+# Luces/frentes para continuidad visual con BB
+CENTER_GAP = 2.0
+OUTER_OVERLAY_L = TH / 2.0
+SEAM_INSET_R = 1.0  # deja 2 mm de luz total con BB (1 + 1)
+
 # Cotas en Z
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
@@ -53,7 +58,7 @@ D_INT = DEPTH - BACK_TH
 # Dos bay para frentes superiores (izq cajon funcional, der frente falso)
 TOP_MID_X = TH + (W_INT - TH) / 2.0
 TOP_BAY_W = (W_INT - TH) / 2.0
-TOP_FRONT_W = (WIDTH - TH - 2.0) / 2.0
+TOP_FRONT_W = (WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R - CENTER_GAP) / 2.0
 TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 
 # Puertas inferiores (2 hojas)
@@ -62,8 +67,8 @@ LOWER_OPEN_Z1 = Z_TOPROW_SHELF
 LOWER_DOOR_H = (LOWER_OPEN_Z1 - LOWER_OPEN_Z0) + TH  # solape 9/9
 LOWER_DOOR_Z = LOWER_OPEN_Z0 - TH / 2.0
 DOOR_W = TOP_FRONT_W
-DOOR_X_L = TH / 2.0
-DOOR_X_R = DOOR_X_L + DOOR_W + 2.0
+DOOR_X_L = OUTER_OVERLAY_L
+DOOR_X_R = DOOR_X_L + DOOR_W + CENTER_GAP
 
 # Estante interior BA (mitad del hueco inferior)
 LOWER_SHELF_Z = LOWER_OPEN_Z0 + (LOWER_OPEN_Z1 - LOWER_OPEN_Z0 - TH) / 2.0
@@ -249,7 +254,7 @@ def main():
     add_box(
         doc,
         "BA10_Frente_Cajon_Sup_Izq",
-        TH / 2.0,
+        OUTER_OVERLAY_L,
         -TH,
         TOP_FRONT_Z,
         TOP_FRONT_W,
@@ -272,7 +277,7 @@ def main():
     add_box(
         doc,
         "BA11_Frente_Falso_Sup_Der",
-        TH / 2.0 + TOP_FRONT_W + 2.0,
+        OUTER_OVERLAY_L + TOP_FRONT_W + CENTER_GAP,
         -TH,
         TOP_FRONT_Z,
         TOP_FRONT_W,

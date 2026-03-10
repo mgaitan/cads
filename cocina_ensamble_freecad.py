@@ -25,10 +25,10 @@ def main():
     here = os.path.dirname(os.path.abspath(script_path)) if script_path else os.getcwd()
 
     # Layout en planta (mm):
-    # BA [0..1050], BB [1050..2258], H [2258..2930]
+    # BA [0..1050], BB [1050..2174], H [2174..2930]
     x_ba = 0.0
     x_bb = 1050.0
-    x_h = 2258.0
+    x_h = 2174.0
 
     # Alacenas superiores a cota de colgado definida.
     z_upper = 1620.0

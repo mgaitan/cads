@@ -14,7 +14,7 @@ import FreeCAD as App
 import Part
 
 # Parametros (mm)
-WIDTH = 2258.0  # BA + BB (1050 + 1208)
+WIDTH = 2174.0  # BA + BB (1050 + 1124)
 DEPTH = 648.0  # 600 de modulo + 18 de frente + 30 de vuelo extra
 THICK = 30.0
 Z_BASE = 870.0  # sobre cascos de bajo mesada
