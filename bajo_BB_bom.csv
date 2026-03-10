@@ -12,21 +12,21 @@ BB10,Frente,Frente_Mid,2,670.0,315.0,18.0,4 cantos
 BB12,Frente,Frente_Bot,2,670.0,315.0,18.0,4 cantos
 BB14a,Cajon,BB14_Caja_Top_Izq_Lateral,2,500.0,80.0,18.0,Sin canto
 BB14b,Cajon,BB14_Caja_Top_Izq_Frente_Trasera,2,589.5,80.0,18.0,Sin canto
-BB14c,Cajon,BB14_Caja_Top_Izq_Fondo_6mm,1,589.5,464.0,6.0,Sin canto
+BB14c,Cajon,BB14_Caja_Top_Izq_Fondo_6mm,1,625.5,500.0,6.0,Fondo clavado pasante
 BB15a,Cajon,BB15_Caja_Top_Der_Lateral,2,500.0,80.0,18.0,Sin canto
 BB15b,Cajon,BB15_Caja_Top_Der_Frente_Trasera,2,589.5,80.0,18.0,Sin canto
-BB15c,Cajon,BB15_Caja_Top_Der_Fondo_6mm,1,589.5,464.0,6.0,Sin canto
+BB15c,Cajon,BB15_Caja_Top_Der_Fondo_6mm,1,625.5,500.0,6.0,Fondo clavado pasante
 BB16a,Cajon,BB16_Caja_Mid_Izq_Lateral,2,500.0,180.0,18.0,Sin canto
 BB16b,Cajon,BB16_Caja_Mid_Izq_Frente_Trasera,2,589.5,180.0,18.0,Sin canto
-BB16c,Cajon,BB16_Caja_Mid_Izq_Fondo_6mm,1,589.5,464.0,6.0,Sin canto
+BB16c,Cajon,BB16_Caja_Mid_Izq_Fondo_6mm,1,625.5,500.0,6.0,Fondo clavado pasante
 BB17a,Cajon,BB17_Caja_Mid_Der_Lateral,2,500.0,180.0,18.0,Sin canto
 BB17b,Cajon,BB17_Caja_Mid_Der_Frente_Trasera,2,589.5,180.0,18.0,Sin canto
-BB17c,Cajon,BB17_Caja_Mid_Der_Fondo_6mm,1,589.5,464.0,6.0,Sin canto
+BB17c,Cajon,BB17_Caja_Mid_Der_Fondo_6mm,1,625.5,500.0,6.0,Fondo clavado pasante
 BB18a,Cajon,BB18_Caja_Bot_Izq_Lateral,2,500.0,180.0,18.0,Sin canto
 BB18b,Cajon,BB18_Caja_Bot_Izq_Frente_Trasera,2,589.5,180.0,18.0,Sin canto
-BB18c,Cajon,BB18_Caja_Bot_Izq_Fondo_6mm,1,589.5,464.0,6.0,Sin canto
+BB18c,Cajon,BB18_Caja_Bot_Izq_Fondo_6mm,1,625.5,500.0,6.0,Fondo clavado pasante
 BB19a,Cajon,BB19_Caja_Bot_Der_Lateral,2,500.0,180.0,18.0,Sin canto
 BB19b,Cajon,BB19_Caja_Bot_Der_Frente_Trasera,2,589.5,180.0,18.0,Sin canto
-BB19c,Cajon,BB19_Caja_Bot_Der_Fondo_6mm,1,589.5,464.0,6.0,Sin canto
+BB19c,Cajon,BB19_Caja_Bot_Der_Fondo_6mm,1,625.5,500.0,6.0,Fondo clavado pasante
 BB20,Herraje,Gola_C_Superior,1,1355.0,25.0,20.0,Aluminio
 BB21,Herraje,Gola_J_Media,1,1355.0,25.0,20.0,Aluminio

@@ -62,14 +62,9 @@ Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
 
-# Unico frente falso superior bajo anafe.
-# Se iguala al ancho de columna de cajones de BB para continuidad.
-BB_WIDTH = 1355.0
-BB_SEAM_INSET_L = GRID_GAP / 2.0
-BB_OUTER_OVERLAY_R = TH / 2.0
-BB_CENTER_GAP = GRID_GAP
-TOP_FALSE_W = (BB_WIDTH - BB_SEAM_INSET_L - BB_OUTER_OVERLAY_R - BB_CENTER_GAP) / 2.0
-TOP_FALSE_X = WIDTH - SEAM_INSET_R - TOP_FALSE_W
+# Unico frente falso superior bajo anafe (ancho completo de BA, misma grilla que frentes inferiores).
+TOP_FALSE_X = OUTER_OVERLAY_L
+TOP_FALSE_W = WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R
 TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 
 # Filas inferiores (2 frentes grandes de todo el ancho, continuidad con BB)
@@ -114,11 +109,11 @@ def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
     add_box(
         doc,
         f"{prefix}_Fondo_6mm",
-        x + side_t,
-        y + side_t,
-        z,
-        front_back_w,
-        depth - 2 * side_t,
+        x,
+        y,
+        z - DRAWER_BOTTOM_TH,
+        outer_w,
+        depth,
         DRAWER_BOTTOM_TH,
     )
 
@@ -149,10 +144,10 @@ def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
                 "Cajon",
                 f"{prefix}_Fondo_6mm",
                 1,
-                front_back_w,
-                depth - 2 * side_t,
+                outer_w,
+                depth,
                 DRAWER_BOTTOM_TH,
-                "Sin canto",
+                "Fondo clavado pasante",
             ),
         ]
     )

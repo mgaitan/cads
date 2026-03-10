@@ -106,11 +106,11 @@ def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
     add_box(
         doc,
         f"{prefix}_Fondo_6mm",
-        x + side_t,
-        y + side_t,
-        z,
-        front_back_w,
-        depth - 2 * side_t,
+        x,
+        y,
+        z - DRAWER_BOTTOM_TH,
+        outer_w,
+        depth,
         DRAWER_BOTTOM_TH,
     )
 
@@ -141,10 +141,10 @@ def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
                 "Cajon",
                 f"{prefix}_Fondo_6mm",
                 1,
-                front_back_w,
-                depth - 2 * side_t,
+                outer_w,
+                depth,
                 DRAWER_BOTTOM_TH,
-                "Sin canto",
+                "Fondo clavado pasante",
             ),
         ]
     )
