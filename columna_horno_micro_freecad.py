@@ -27,6 +27,7 @@ except Exception:
 
 # Parametros principales (mm)
 TH = 18.0
+BACK_TH = 3.0
 WIDTH_INT = 600.0
 DEPTH = 600.0
 HEIGHT_TOTAL = 2300.0
@@ -143,6 +144,21 @@ def main():
 
     add_part(doc, "H4_Tapa_Casco", 0, 0, Z_TOP_PANEL, W, DEPTH, TH)
     parts.append(("H4", "Horizontal", "Tapa_Casco", 1, W, DEPTH, TH, "Canto frente"))
+
+    # Fondo (oculto para no interferir en capturas, pero incluido en despiece)
+    add_part(
+        doc,
+        "H14_Fondo_3mm",
+        X_INT0,
+        DEPTH - BACK_TH,
+        Z_SIDE_START,
+        WIDTH_INT,
+        BACK_TH,
+        CARCASS_H,
+    )
+    parts.append(
+        ("H14", "Fondo", "Fondo_3mm", 1, WIDTH_INT, CARCASS_H, BACK_TH, "Sin canto")
+    )
 
     # Divisiones horizontales
     add_part(
@@ -324,6 +340,8 @@ def main():
             if vo is not None:
                 try:
                     vo.Visibility = True
+                    if obj.Name.endswith("_Fondo_3mm"):
+                        vo.Visibility = False
                 except Exception:
                     pass
 

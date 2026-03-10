@@ -6,7 +6,7 @@
 - Ancho interior util: 600 mm
 - Ancho exterior: 636 mm
 - Patas: 80 mm (ocultas por zocalo)
-- Sin fondo
+- Fondo 3 mm (oculto en vistas de captura)
 - Piso y techo del casco pasantes (636 mm), con laterales apoyados
 - Laterales entre piso y techo (36 mm menos de altura respecto al casco)
 - Piso de horno y piso de micro retranqueados 18 mm (profundidad 582 mm)
@@ -25,6 +25,7 @@
 - H11: Puerta superior
 - H12: Faja frontal inferior 50 mm (entre puerta inferior y horno)
 - H13: Faja frontal superior micro 50 mm (techo del hueco micro)
+- H14: Fondo 3 mm
 - Hueco horno visible: 600 x 600 mm, arranque a 800 mm desde piso
 - Hueco horno interno: 600 x 650 mm
 - Hueco microondas: 600 x 400 mm

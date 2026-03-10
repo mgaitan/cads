@@ -15,6 +15,7 @@ OUT_DIR = "/home/tin/lab/diseños_CAD/screenshots"
 WIDTH = 1920
 HEIGHT = 1080
 BG = "White"
+DOOR_TRANSPARENCY = 65  # 0 opaco, 100 transparente
 
 
 def save(view, name):
@@ -46,11 +47,18 @@ def main():
 
     view = gdoc.ActiveView
 
-    # Asegura visibilidad de todas las piezas
+    # Asegura visibilidad de piezas, excepto fondos (ocultos intencionalmente).
     for obj in doc.Objects:
         vo = getattr(obj, "ViewObject", None)
         if vo is not None:
             vo.Visibility = True
+            if "Fondo" in obj.Name:
+                vo.Visibility = False
+            if "Puerta" in obj.Name:
+                try:
+                    vo.Transparency = DOOR_TRANSPARENCY
+                except Exception:
+                    pass
             try:
                 vo.DisplayMode = "Flat Lines"
             except Exception:

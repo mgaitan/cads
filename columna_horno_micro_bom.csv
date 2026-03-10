@@ -3,6 +3,7 @@ H1,Lateral,Lateral_Izq,1,2184.0,600.0,18.0,Cantos frente+arriba+abajo
 H2,Lateral,Lateral_Der,1,2184.0,600.0,18.0,Cantos frente+arriba+abajo
 H3,Horizontal,Piso_Casco,1,636.0,600.0,18.0,Canto frente
 H4,Horizontal,Tapa_Casco,1,636.0,600.0,18.0,Canto frente
+H14,Fondo,Fondo_3mm,1,600.0,2184.0,3.0,Sin canto
 H5,Horizontal,Piso_Horno,1,600.0,582.0,18.0,Canto frente
 H6,Horizontal,Piso_Micro,1,600.0,582.0,18.0,Canto frente
 H7,Horizontal,Tapa_Micro,1,600.0,600.0,18.0,Canto frente

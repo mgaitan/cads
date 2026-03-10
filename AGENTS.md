@@ -7,8 +7,8 @@ Este repositorio se usa para desarrollar muebles de cocina parametrizados y obte
 - instrucciones de armado.
 
 ## Convenciones
-- Prefijo por mueble: ejemplo `H` para columna horno/micro.
-- Piezas etiquetadas como `H1`, `H2`, ...
+- Prefijo por mueble: ejemplo `H` para columna horno/micro, `AA` para alacena A.
+- Piezas etiquetadas como `H1`, `H2`, ... o `AA1`, `AA2`, ...
 - Unidades en milímetros.
 - Espesor por defecto: melamina `18 mm`.
 
@@ -16,6 +16,9 @@ Este repositorio se usa para desarrollar muebles de cocina parametrizados y obte
 - `columna_horno_micro_freecad.py`: script paramétrico FreeCAD.
 - `columna_horno_micro_bom.csv`: lista de piezas actual.
 - `columna_horno_micro_instrucciones.md`: montaje y notas.
+- `alacena_AA_freecad.py`: script paramétrico alacena A.
+- `alacena_AA_bom.csv`: lista de piezas actual alacena A.
+- `alacena_AA_instrucciones.md`: montaje y notas alacena A.
 
 ## Flujo recomendado
 1. Actualizar parámetros en el script.

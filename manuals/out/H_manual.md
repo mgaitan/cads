@@ -46,6 +46,7 @@ th, td {
 | H2 | Lateral | Lateral_Der | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |
 | H3 | Horizontal | Piso_Casco | 1 | 636.0 | 600.0 | 18.0 | Canto frente |
 | H4 | Horizontal | Tapa_Casco | 1 | 636.0 | 600.0 | 18.0 | Canto frente |
+| H14 | Fondo | Fondo_3mm | 1 | 600.0 | 2184.0 | 3.0 | Sin canto |
 | H5 | Horizontal | Piso_Horno | 1 | 600.0 | 582.0 | 18.0 | Canto frente |
 | H6 | Horizontal | Piso_Micro | 1 | 600.0 | 582.0 | 18.0 | Canto frente |
 | H7 | Horizontal | Tapa_Micro | 1 | 600.0 | 600.0 | 18.0 | Canto frente |
@@ -65,7 +66,7 @@ th, td {
 - Ancho interior util: 600 mm
 - Ancho exterior: 636 mm
 - Patas: 80 mm (ocultas por zocalo)
-- Sin fondo
+- Fondo 3 mm (oculto en vistas de captura)
 - Piso y techo del casco pasantes (636 mm), con laterales apoyados
 - Laterales entre piso y techo (36 mm menos de altura respecto al casco)
 - Piso de horno y piso de micro retranqueados 18 mm (profundidad 582 mm)
@@ -84,6 +85,7 @@ th, td {
 - H11: Puerta superior
 - H12: Faja frontal inferior 50 mm (entre puerta inferior y horno)
 - H13: Faja frontal superior micro 50 mm (techo del hueco micro)
+- H14: Fondo 3 mm
 - Hueco horno visible: 600 x 600 mm, arranque a 800 mm desde piso
 - Hueco horno interno: 600 x 650 mm
 - Hueco microondas: 600 x 400 mm

@@ -4,11 +4,17 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 
 ## Estado actual
 - Módulo implementado: columna de horno + microondas (`mueble H`).
+- Módulo implementado: alacena superior izquierda (`mueble AA`).
 - Modelo principal: `columna_horno_micro.FCStd`
 - Intercambio CAD: `columna_horno_micro.step`
 - Despiece: `columna_horno_micro_bom.csv`
 - Script generador: `columna_horno_micro_freecad.py`
 - Instrucciones: `columna_horno_micro_instrucciones.md`
+- Modelo alacena: `alacena_AA.FCStd`
+- Intercambio CAD: `alacena_AA.step`
+- Despiece: `alacena_AA_bom.csv`
+- Script generador: `alacena_AA_freecad.py`
+- Instrucciones: `alacena_AA_instrucciones.md`
 - Referencias visuales: carpeta `renders/`
 
 ## Parámetros base del mueble H
@@ -34,6 +40,18 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 - `H11` puerta superior
 - `H12` faja frontal inferior 50 mm
 - `H13` faja frontal superior micro 50 mm
+- `H14` fondo 3 mm (oculto en vistas)
+
+### Alacena A (prefijo AA)
+- `AA1` lateral izquierdo
+- `AA2` lateral derecho
+- `AA3` piso casco calado 160
+- `AA4` tapa casco calada 160
+- `AA5` divisor central
+- `AA6` estante derecho
+- `AA7` fondo 3 mm
+- `AA8` puerta izquierda
+- `AA9` puerta derecha
 
 ## Regenerar modelo por CLI
 ```bash
@@ -45,6 +63,7 @@ printf "exec(open('columna_horno_micro_freecad.py').read())\nimport sys\nsys.exi
 ```bash
 cd /home/tin/lab/diseños_CAD
 make model
+make model-aa
 make screenshots-gui
 make manual-h
 ```
