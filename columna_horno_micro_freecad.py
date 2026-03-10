@@ -33,14 +33,15 @@ DEPTH = 600.0
 HEIGHT_TOTAL = 2300.0
 LEG_H = 80.0
 
-OVEN_Z_START = 793.0
+OVEN_Z_START = 768.0
 OVEN_OPENING_VISIBLE_H = 599.0
 OVEN_OPENING_W = 600.0
 
 MICRO_OPENING_H = 420.0
 MICRO_SHIFT_UP = 0.0
 FASCIA_H = 50.0  # altura de cada faja frontal
-OVEN_EXTRA_INTERNAL_H = FASCIA_H  # juego interno oculto por faja central
+# Juego interno oculto por faja central (ajustado para alinear lineas de gola en ensamble)
+OVEN_EXTRA_INTERNAL_H = 13.0
 GOLA_H = 25.0
 GOLA_D = 20.0
 LEG_W = 40.0

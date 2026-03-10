@@ -43,10 +43,11 @@ LEG_D = 40.0
 LEG_INSET = 30.0
 
 # Luces/frentes para continuidad visual con BA
-CENTER_GAP = 2.0
-SEAM_INSET_L = 1.0  # deja 2 mm de luz total con BA (1 + 1)
+GRID_GAP = 4.0
+CENTER_GAP = GRID_GAP
+SEAM_INSET_L = GRID_GAP / 2.0  # deja 4 mm de luz total con BA (2 + 2)
 OUTER_OVERLAY_R = TH / 2.0
-ROW_GAP = 2.0
+ROW_GAP = GRID_GAP
 
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
@@ -54,12 +55,13 @@ Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
 SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
 
-# Fajas/frentes (3 filas: 100 + 2 iguales), apoyando en canto inferior del soporte superior
-TOTAL_FACE_H = Z_TOP_SUPPORT - Z_BOTTOM
-MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 4.0) / 2.0
-ROW3_Z = Z_BOTTOM
-ROW2_Z = ROW3_Z + MID_BOT_H + 2.0
-ROW1_Z = ROW2_Z + MID_BOT_H + 2.0
+# Fajas/frentes (3 filas), apoyando en canto inferior del soporte superior.
+# Se deja luz inferior igual al GRID_GAP para completar el efecto de grilla.
+ROW3_Z = Z_BOTTOM + ROW_GAP
+TOTAL_FACE_H = Z_TOP_SUPPORT - ROW3_Z
+MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 2.0 * ROW_GAP) / 2.0
+ROW2_Z = ROW3_Z + MID_BOT_H + ROW_GAP
+ROW1_Z = ROW2_Z + MID_BOT_H + ROW_GAP
 
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH

@@ -43,10 +43,11 @@ LEG_D = 40.0
 LEG_INSET = 30.0
 
 # Luces/frentes para continuidad visual con BB
-CENTER_GAP = 2.0
+GRID_GAP = 4.0
+CENTER_GAP = GRID_GAP
 OUTER_OVERLAY_L = TH / 2.0
-SEAM_INSET_R = 1.0  # deja 2 mm de luz total con BB (1 + 1)
-ROW_GAP = 2.0
+SEAM_INSET_R = GRID_GAP / 2.0  # deja 4 mm de luz total con BB (2 + 2)
+ROW_GAP = GRID_GAP
 
 # Cotas en Z
 Z_BOTTOM = TOE_H
@@ -68,11 +69,12 @@ TOP_FRONT_W = (WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R - CENTER_GAP) / 2.0
 TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 
 # Filas inferiores (2 frentes grandes de todo el ancho, continuidad con BB)
-TOTAL_FACE_H = Z_TOP_SUPPORT - Z_BOTTOM
-MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 4.0) / 2.0
-ROW3_Z = Z_BOTTOM
-ROW2_Z = ROW3_Z + MID_BOT_H + 2.0
-ROW1_Z = ROW2_Z + MID_BOT_H + 2.0
+# Se deja luz inferior igual al GRID_GAP para completar el efecto de grilla.
+ROW3_Z = Z_BOTTOM + ROW_GAP
+TOTAL_FACE_H = Z_TOP_SUPPORT - ROW3_Z
+MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 2.0 * ROW_GAP) / 2.0
+ROW2_Z = ROW3_Z + MID_BOT_H + ROW_GAP
+ROW1_Z = ROW2_Z + MID_BOT_H + ROW_GAP
 
 # Estante interior BA (mitad del hueco inferior)
 LOWER_SHELF_Z = Z_BOTTOM_TOP + (ROW2_Z - Z_BOTTOM_TOP - TH) / 2.0
@@ -330,7 +332,7 @@ def main():
             "Frente",
             "Frente_Mid_Ancho_Completo",
             1,
-            WIDTH - TH,
+            WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R,
             MID_BOT_H,
             TH,
             "4 cantos",
@@ -353,7 +355,7 @@ def main():
             "Frente",
             "Frente_Bot_Ancho_Completo",
             1,
-            WIDTH - TH,
+            WIDTH - OUTER_OVERLAY_L - SEAM_INSET_R,
             MID_BOT_H,
             TH,
             "4 cantos",
