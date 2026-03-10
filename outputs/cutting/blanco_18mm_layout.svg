@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2946" height="1474" viewBox="0 0 2946 1474">
+<rect x="0" y="0" width="2946" height="1474" fill="#ffffff"/>
+<text x="12" y="20" font-size="14" font-family="Arial">Layout de corte - blanco_18mm</text>
+<rect x="40" y="58" width="903.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="40" y="52" font-size="11" font-family="Arial">Placa 1</text>
+<rect x="1022" y="58" width="903.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="1022" y="52" font-size="11" font-family="Arial">Placa 2</text>
+<rect x="2004" y="58" width="903.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="2004" y="52" font-size="11" font-family="Arial">Placa 3</text>
+<rect x="40" y="795" width="903.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="40" y="789" font-size="11" font-family="Arial">Placa 4</text>
+<rect x="1022" y="795" width="903.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="1022" y="789" font-size="11" font-family="Arial">Placa 5</text>
+<rect x="40.0" y="58.0" width="765.4" height="211.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="71.0" font-size="9" font-family="Arial">H1 (2184x600) - Cantos frente+arriba+abajo</text>
+<rect x="805.4" y="58.0" width="113.0" height="160.3" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="808.4" y="71.0" font-size="9" font-family="Arial">AB2 (455x320) - Canto frente</text>
+<rect x="40.0" y="269.0" width="765.4" height="211.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="282.0" font-size="9" font-family="Arial">H2 (2184x600) - Cantos frente+arriba+abajo</text>
+<rect x="40.0" y="480.1" width="475.3" height="211.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="493.1" font-size="9" font-family="Arial">BB3 (1355x600) - Canto frente</text>
+<rect x="515.3" y="480.1" width="317.1" height="211.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="518.3" y="493.1" font-size="9" font-family="Arial">BA3 (903x600) - Canto frente</text>
+<rect x="1022.0" y="58.0" width="304.5" height="211.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="71.0" font-size="9" font-family="Arial">BA7 (867x600) - Canto frente</text>
+<rect x="1326.5" y="58.0" width="304.5" height="211.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1329.5" y="71.0" font-size="9" font-family="Arial">BA8 (867x600) - Canto frente</text>
+<rect x="1631.0" y="58.0" width="264.9" height="211.0" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1634.0" y="71.0" font-size="9" font-family="Arial">BA1 (754x600) - Canto frente</text>
+<rect x="1022.0" y="269.0" width="264.9" height="211.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="282.0" font-size="9" font-family="Arial">BA2 (754x600) - Canto frente</text>
+<rect x="1287.0" y="269.0" width="264.9" height="211.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1290.0" y="282.0" font-size="9" font-family="Arial">BB1 (754x600) - Canto frente</text>
+<rect x="1551.9" y="269.0" width="264.9" height="211.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1554.9" y="282.0" font-size="9" font-family="Arial">BB2 (754x600) - Canto frente</text>
+<rect x="1022.0" y="480.1" width="264.9" height="203.7" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="493.1" font-size="9" font-family="Arial">BB7 (754x579) - Sin canto</text>
+<rect x="1287.0" y="480.1" width="475.3" height="113.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1290.0" y="493.1" font-size="9" font-family="Arial">AB3 (1355x320) - Canto frente</text>
+<rect x="1762.2" y="480.1" width="156.4" height="166.6" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1765.2" y="493.1" font-size="9" font-family="Arial">AB8 (444x473) - 4 cantos</text>
+<rect x="2004.0" y="58.0" width="475.3" height="113.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="2007.0" y="71.0" font-size="9" font-family="Arial">AB4 (1355x320) - Canto frente</text>
+<rect x="2479.3" y="58.0" width="317.1" height="113.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="2482.3" y="71.0" font-size="9" font-family="Arial">AA3 (903x320) - Canto frente</text>
+<rect x="2004.0" y="171.1" width="229.9" height="224.3" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="2007.0" y="184.1" font-size="9" font-family="Arial">H10 (654x638) - 4 cantos</text>
+<rect x="2233.9" y="171.1" width="236.2" height="211.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="2236.9" y="184.1" font-size="9" font-family="Arial">H3 (672x600) - Canto frente</text>
+<rect x="2470.2" y="171.1" width="236.2" height="211.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="2473.2" y="184.1" font-size="9" font-family="Arial">H4 (672x600) - Canto frente</text>
+<rect x="2706.4" y="171.1" width="166.6" height="156.4" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="2709.4" y="184.1" font-size="9" font-family="Arial">AB6 (444x473) - 4 cantos</text>
+<rect x="2004.0" y="395.4" width="223.6" height="211.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="2007.0" y="408.4" font-size="9" font-family="Arial">H7 (636x600) - Canto frente</text>
+<rect x="2227.7" y="395.4" width="223.6" height="211.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="2230.7" y="408.4" font-size="9" font-family="Arial">H8 (636x600) - Canto frente</text>
+<rect x="2451.3" y="395.4" width="223.6" height="204.8" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="2454.3" y="408.4" font-size="9" font-family="Arial">H5 (636x582) - Canto frente</text>
+<rect x="2674.9" y="395.4" width="223.6" height="204.8" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="2677.9" y="408.4" font-size="9" font-family="Arial">H6 (636x582) - Canto frente</text>
+<rect x="2004.0" y="606.4" width="475.3" height="71.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="2007.0" y="619.4" font-size="9" font-family="Arial">BB5 (1355x200) - Canto frente</text>
+<rect x="2479.3" y="606.4" width="317.1" height="71.0" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="2482.3" y="619.4" font-size="9" font-family="Arial">BA5 (903x200) - Canto frente</text>
+<rect x="40.0" y="795.0" width="229.9" height="169.8" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="808.0" font-size="9" font-family="Arial">H11 (654x482) - 4 cantos</text>
+<rect x="269.9" y="795.0" width="243.2" height="155.8" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="272.9" y="808.0" font-size="9" font-family="Arial">AA8 (442x692) - 4 cantos</text>
+<rect x="513.2" y="795.0" width="243.2" height="155.8" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="516.2" y="808.0" font-size="9" font-family="Arial">AA9 (442x692) - 4 cantos</text>
+<rect x="756.4" y="795.0" width="166.6" height="156.4" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="759.4" y="808.0" font-size="9" font-family="Arial">AB7 (444x473) - 4 cantos</text>
+<rect x="40.0" y="964.8" width="317.1" height="113.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="977.8" font-size="9" font-family="Arial">AA4 (903x320) - Canto frente</text>
+<rect x="357.1" y="964.8" width="313.2" height="111.3" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="360.1" y="977.8" font-size="9" font-family="Arial">BA10 (892x315) - 4 cantos</text>
+<rect x="670.3" y="964.8" width="236.9" height="113.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="673.3" y="977.8" font-size="9" font-family="Arial">AA1 (674x320) - Canto frente</text>
+<rect x="40.0" y="1077.8" width="313.2" height="111.3" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="1090.8" font-size="9" font-family="Arial">BA11 (892x315) - 4 cantos</text>
+<rect x="353.2" y="1077.8" width="475.3" height="71.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="356.2" y="1090.8" font-size="9" font-family="Arial">BB6 (1355x200) - Sin canto</text>
+<rect x="40.0" y="1189.1" width="236.9" height="113.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="1202.1" font-size="9" font-family="Arial">AA2 (674x320) - Canto frente</text>
+<rect x="276.9" y="1189.1" width="235.5" height="111.3" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="279.9" y="1202.1" font-size="9" font-family="Arial">BB10 (670x315) - 4 cantos</text>
+<rect x="512.5" y="1189.1" width="235.5" height="111.3" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="515.5" y="1202.1" font-size="9" font-family="Arial">BB10 (670x315) - 4 cantos</text>
+<rect x="748.0" y="1189.1" width="160.3" height="113.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="751.0" y="1202.1" font-size="9" font-family="Arial">AB1 (455x320) - Canto frente</text>
+<rect x="40.0" y="1302.2" width="235.5" height="111.3" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="1315.2" font-size="9" font-family="Arial">BB12 (670x315) - 4 cantos</text>
+<rect x="275.5" y="1302.2" width="235.5" height="111.3" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="278.5" y="1315.2" font-size="9" font-family="Arial">BB12 (670x315) - 4 cantos</text>
+<rect x="511.1" y="1302.2" width="317.1" height="71.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="514.1" y="1315.2" font-size="9" font-family="Arial">BA6 (903x200) - Sin canto</text>
+<rect x="1022.0" y="795.0" width="313.2" height="46.5" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="808.0" font-size="9" font-family="Arial">BA9 (892x130) - 4 cantos</text>
+<rect x="1335.2" y="795.0" width="235.5" height="46.5" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1338.2" y="808.0" font-size="9" font-family="Arial">BB8 (670x130) - 4 cantos</text>
+<rect x="1570.8" y="795.0" width="235.5" height="46.5" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1573.8" y="808.0" font-size="9" font-family="Arial">BB8 (670x130) - 4 cantos</text>
+<rect x="1022.0" y="841.5" width="207.5" height="64.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="854.5" font-size="9" font-family="Arial">BB16b (590x180) - Sin canto</text>
+<rect x="1229.5" y="841.5" width="207.5" height="64.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1232.5" y="854.5" font-size="9" font-family="Arial">BB16b (590x180) - Sin canto</text>
+<rect x="1437.1" y="841.5" width="207.5" height="64.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1440.1" y="854.5" font-size="9" font-family="Arial">BB17b (590x180) - Sin canto</text>
+<rect x="1644.7" y="841.5" width="207.5" height="64.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1647.7" y="854.5" font-size="9" font-family="Arial">BB17b (590x180) - Sin canto</text>
+<rect x="1022.0" y="905.6" width="207.5" height="64.0" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="918.6" font-size="9" font-family="Arial">BB18b (590x180) - Sin canto</text>
+<rect x="1229.5" y="905.6" width="207.5" height="64.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1232.5" y="918.6" font-size="9" font-family="Arial">BB18b (590x180) - Sin canto</text>
+<rect x="1437.1" y="905.6" width="207.5" height="64.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1440.1" y="918.6" font-size="9" font-family="Arial">BB19b (590x180) - Sin canto</text>
+<rect x="1644.7" y="905.6" width="207.5" height="64.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1647.7" y="918.6" font-size="9" font-family="Arial">BB19b (590x180) - Sin canto</text>
+<rect x="1022.0" y="969.6" width="176.0" height="64.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="982.6" font-size="9" font-family="Arial">BB16a (500x180) - Sin canto</text>
+<rect x="1198.0" y="969.6" width="176.0" height="64.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1201.0" y="982.6" font-size="9" font-family="Arial">BB16a (500x180) - Sin canto</text>
+<rect x="1374.1" y="969.6" width="176.0" height="64.0" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1377.1" y="982.6" font-size="9" font-family="Arial">BB17a (500x180) - Sin canto</text>
+<rect x="1550.2" y="969.6" width="176.0" height="64.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1553.2" y="982.6" font-size="9" font-family="Arial">BB17a (500x180) - Sin canto</text>
+<rect x="1726.2" y="969.6" width="176.0" height="64.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1729.2" y="982.6" font-size="9" font-family="Arial">BB18a (500x180) - Sin canto</text>
+<rect x="1022.0" y="1033.7" width="176.0" height="64.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="1046.7" font-size="9" font-family="Arial">BB18a (500x180) - Sin canto</text>
+<rect x="1198.0" y="1033.7" width="176.0" height="64.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1201.0" y="1046.7" font-size="9" font-family="Arial">BB19a (500x180) - Sin canto</text>
+<rect x="1374.1" y="1033.7" width="176.0" height="64.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1377.1" y="1046.7" font-size="9" font-family="Arial">BB19a (500x180) - Sin canto</text>
+<rect x="1550.2" y="1033.7" width="310.8" height="32.5" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1553.2" y="1046.7" font-size="9" font-family="Arial">AA10 (885x90) - 4 cantos</text>
+<rect x="1022.0" y="1097.8" width="304.5" height="22.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="1110.8" font-size="9" font-family="Arial">AA5 (867x60) - Sin canto</text>
+<rect x="1326.5" y="1097.8" width="304.5" height="22.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1329.5" y="1110.8" font-size="9" font-family="Arial">AA6 (867x60) - Sin canto</text>
+<rect x="1631.0" y="1097.8" width="210.7" height="22.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1634.0" y="1110.8" font-size="9" font-family="Arial">H15 (599x60) - Canto frente</text>
+<rect x="1022.0" y="1119.8" width="207.5" height="29.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="1132.8" font-size="9" font-family="Arial">BB14b (590x80) - Sin canto</text>
+<rect x="1229.5" y="1119.8" width="207.5" height="29.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1232.5" y="1132.8" font-size="9" font-family="Arial">BB14b (590x80) - Sin canto</text>
+<rect x="1437.1" y="1119.8" width="207.5" height="29.0" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1440.1" y="1132.8" font-size="9" font-family="Arial">BB15b (590x80) - Sin canto</text>
+<rect x="1644.7" y="1119.8" width="207.5" height="29.0" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1647.7" y="1132.8" font-size="9" font-family="Arial">BB15b (590x80) - Sin canto</text>
+<rect x="1022.0" y="1148.8" width="176.0" height="29.0" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="1161.8" font-size="9" font-family="Arial">BB14a (500x80) - Sin canto</text>
+<rect x="1198.0" y="1148.8" width="176.0" height="29.0" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1201.0" y="1161.8" font-size="9" font-family="Arial">BB14a (500x80) - Sin canto</text>
+<rect x="1374.1" y="1148.8" width="176.0" height="29.0" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="1377.1" y="1161.8" font-size="9" font-family="Arial">BB15a (500x80) - Sin canto</text>
+<rect x="1550.2" y="1148.8" width="176.0" height="29.0" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="1553.2" y="1161.8" font-size="9" font-family="Arial">BB15a (500x80) - Sin canto</text>
+<rect x="1022.0" y="1177.9" width="210.7" height="22.0" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="1025.0" y="1190.9" font-size="9" font-family="Arial">H16 (599x60) - Canto frente</text>
+<rect x="1232.7" y="1177.9" width="223.6" height="18.5" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="1235.7" y="1190.9" font-size="9" font-family="Arial">H9 (636x50) - Cantos vistos</text>
+<rect x="1456.3" y="1177.9" width="223.6" height="18.5" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="1459.3" y="1190.9" font-size="9" font-family="Arial">H12 (636x50) - Cantos vistos</text>
+<rect x="1680.0" y="1177.9" width="223.6" height="18.5" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="1683.0" y="1190.9" font-size="9" font-family="Arial">H13 (636x50) - Cantos vistos</text>
+</svg>

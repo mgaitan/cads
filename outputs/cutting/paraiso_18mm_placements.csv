@@ -1,0 +1,2 @@
+board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
+1,AB_AC5_1,AB,AC5,AC_Fondo_18mm,0,0,1307,261,1304,258,0,Sin canto

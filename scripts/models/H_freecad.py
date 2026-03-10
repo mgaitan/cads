@@ -251,8 +251,8 @@ def main():
             "Liston_Vert_Izq",
             1,
             LISTON_H,
-            LISTON_W,
             LISTON_D,
+            LISTON_W,
             "Canto frente",
         )
     )
@@ -274,8 +274,8 @@ def main():
             "Liston_Vert_Der",
             1,
             LISTON_H,
-            LISTON_W,
             LISTON_D,
+            LISTON_W,
             "Canto frente",
         )
     )
