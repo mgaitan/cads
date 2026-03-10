@@ -31,31 +31,37 @@ th, td {
 **Espesor estándar:** 18 mm
 
 ## Vistas del Mueble
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Isométrica</figcaption></figure>
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Frente</figcaption></figure>
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_rear.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Posterior</figcaption></figure>
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Lateral Izquierdo</figcaption></figure>
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_right.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Lateral Derecho</figcaption></figure>
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_top.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Superior</figcaption></figure>
-<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/horno_bottom.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Inferior</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Isométrica</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Frente</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_rear.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Posterior</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Lateral Izquierdo</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_right.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Lateral Derecho</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_top.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Superior</figcaption></figure>
+<figure style="display:inline-block; width:48%; margin:0 1% 12px 0;"><img src="../../screenshots/H_bottom.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:11px">Inferior</figcaption></figure>
 
 ## Detalle de Cortes
-| Código | Categoría | Pieza | Cant. | Largo (mm) | Ancho (mm) | Espesor (mm) | Cantos |
-|---|---|---:|---:|---:|---:|---:|---|
-| H1 | Lateral | Lateral_Izq | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |
-| H2 | Lateral | Lateral_Der | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |
-| H3 | Horizontal | Piso_Casco | 1 | 636.0 | 600.0 | 18.0 | Canto frente |
-| H4 | Horizontal | Tapa_Casco | 1 | 636.0 | 600.0 | 18.0 | Canto frente |
-| H14 | Fondo | Fondo_3mm | 1 | 600.0 | 2184.0 | 3.0 | Sin canto |
-| H5 | Horizontal | Piso_Horno | 1 | 600.0 | 582.0 | 18.0 | Canto frente |
-| H6 | Horizontal | Piso_Micro | 1 | 600.0 | 582.0 | 18.0 | Canto frente |
-| H7 | Horizontal | Tapa_Micro | 1 | 600.0 | 600.0 | 18.0 | Canto frente |
-| H8 | Horizontal | Estante_Inferior | 1 | 600.0 | 600.0 | 18.0 | Canto frente |
-| H9 | Frente | Faja_Frontal_50 | 1 | 600.0 | 50.0 | 18.0 | Cantos vistos |
-| H12 | Frente | Faja_Frontal_Inferior_50 | 1 | 600.0 | 50.0 | 18.0 | Cantos vistos |
-| H13 | Frente | Faja_Frontal_Superior_Micro_50 | 1 | 600.0 | 50.0 | 18.0 | Cantos vistos |
-| H10 | Frente | Puerta_Inferior | 1 | 618.0 | 670.0 | 18.0 | 4 cantos |
-| H11 | Frente | Puerta_Superior | 1 | 618.0 | 433.0 | 18.0 | 4 cantos |
+| Código | Categoría | Pieza | Cant. | Largo (mm) | Ancho (mm) | Espesor (mm) | Cantos | ML Gola | Bisagras Cazoleta |
+|---|---|---:|---:|---:|---:|---:|---|---:|---:|
+| H1 | Lateral | Lateral_Izq | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |  |  |
+| H2 | Lateral | Lateral_Der | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |  |  |
+| H3 | Horizontal | Piso_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente |  |  |
+| H3L | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
+| H4 | Horizontal | Tapa_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente |  |  |
+| H14 | Fondo | Fondo_3mm | 1 | 636.0 | 2184.0 | 3.0 | Sin canto |  |  |
+| H15 | Regrueso | Liston_Vert_Izq | 1 | 599.0 | 18.0 | 60.0 | Canto frente |  |  |
+| H16 | Regrueso | Liston_Vert_Der | 1 | 599.0 | 18.0 | 60.0 | Canto frente |  |  |
+| H5 | Horizontal | Piso_Horno | 1 | 636.0 | 582.0 | 18.0 | Canto frente |  |  |
+| H6 | Horizontal | Piso_Micro | 1 | 636.0 | 582.0 | 18.0 | Canto frente |  |  |
+| H7 | Horizontal | Tapa_Micro | 1 | 636.0 | 600.0 | 18.0 | Canto frente |  |  |
+| H8 | Horizontal | Estante_Inferior | 1 | 636.0 | 600.0 | 18.0 | Canto frente |  |  |
+| H9 | Frente | Faja_Frontal_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos |  |  |
+| H12 | Frente | Faja_Frontal_Inferior_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos |  |  |
+| H13 | Frente | Faja_Frontal_Superior_Micro_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos |  |  |
+| H17 | Herraje | Gola_C_Continuidad | 1 | 672.0 | 25.0 | 20.0 | Aluminio | 0.672 |  |
+| H18 | Herraje | Gola_J_Sup | 1 | 672.0 | 25.0 | 20.0 | Aluminio | 0.672 |  |
+| H10 | Frente | Puerta_Inferior | 1 | 654.0 | 638.0 | 18.0 | 4 cantos |  | 2 |
+| H11 | Frente | Puerta_Superior | 1 | 654.0 | 482.0 | 18.0 | 4 cantos |  | 2 |
+| TOTAL | Resumen | Totales_Herrajes |  |  |  |  |  | 1.344 | 4 |
 
 ## Instrucciones de Ensamblado
 # Columna horno + microondas (melamina 18 mm)
@@ -63,11 +69,11 @@ th, td {
 ## Parametros usados
 - Altura total: 2300 mm
 - Profundidad total: 600 mm
-- Ancho interior util: 600 mm
-- Ancho exterior: 636 mm
+- Ancho interior util: 636 mm
+- Ancho exterior: 672 mm
 - Patas: 80 mm (ocultas por zocalo)
 - Fondo 3 mm (oculto en vistas de captura)
-- Piso y techo del casco pasantes (636 mm), con laterales apoyados
+- Piso y techo del casco pasantes (672 mm), con laterales apoyados
 - Laterales entre piso y techo (36 mm menos de altura respecto al casco)
 - Piso de horno y piso de micro retranqueados 18 mm (profundidad 582 mm)
 
@@ -86,9 +92,12 @@ th, td {
 - H12: Faja frontal inferior 50 mm (entre puerta inferior y horno)
 - H13: Faja frontal superior micro 50 mm (techo del hueco micro)
 - H14: Fondo 3 mm
-- Hueco horno visible: 600 x 600 mm, arranque a 800 mm desde piso
+- H15: Liston vertical frontal izq (18 mm frente x 60 mm fondo, solo horno)
+- H16: Liston vertical frontal der (18 mm frente x 60 mm fondo, solo horno)
+- Hueco horno visible: 600 x 599 mm, arranque a 800 mm desde piso
 - Hueco horno interno: 600 x 650 mm
-- Hueco microondas: 600 x 400 mm
+- Hueco microondas: 600 x 436 mm
+- Hueco microondas arranca a 1449 mm desde piso (enrasado con faja intermedia)
 - Fajas frontales: 3 unidades de 50 mm
 - Arriba del micro: puerta
 - Abajo del horno: puerta + 1 estante intermedio

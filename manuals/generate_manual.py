@@ -44,15 +44,26 @@ def markdown_table(rows: list[dict[str, str]]) -> str:
         "Ancho (mm)",
         "Espesor (mm)",
         "Cantos",
+        "ML Gola",
+        "Bisagras Cazoleta",
     ]
     lines = [
         "| " + " | ".join(header) + " |",
-        "|---|---|---:|---:|---:|---:|---:|---|",
+        "|---|---|---:|---:|---:|---:|---:|---|---:|---:|",
     ]
     for r in rows:
         lines.append(
-            "| {codigo} | {categoria} | {pieza} | {cantidad} | {largo_mm} | {ancho_mm} | {espesor_mm} | {cantos} |".format(
-                **r
+            "| {codigo} | {categoria} | {pieza} | {cantidad} | {largo_mm} | {ancho_mm} | {espesor_mm} | {cantos} | {ml_gola} | {bisagras_cazoleta} |".format(
+                codigo=r.get("codigo", ""),
+                categoria=r.get("categoria", ""),
+                pieza=r.get("pieza", ""),
+                cantidad=r.get("cantidad", ""),
+                largo_mm=r.get("largo_mm", ""),
+                ancho_mm=r.get("ancho_mm", ""),
+                espesor_mm=r.get("espesor_mm", ""),
+                cantos=r.get("cantos", ""),
+                ml_gola=r.get("ml_gola", ""),
+                bisagras_cazoleta=r.get("bisagras_cazoleta", ""),
             )
         )
     return "\n".join(lines)
