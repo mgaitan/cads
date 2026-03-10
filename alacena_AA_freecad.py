@@ -30,7 +30,7 @@ TH = 18.0
 BACK_TH = 3.0
 WIDTH = 1050.0
 DEPTH = 320.0
-HEIGHT = 650.0  # Recomendado para colgar con base a 1650 mm y llegar a techo 2300 mm.
+HEIGHT = 680.0  # Colgado a 1620 mm para llegar a techo 2300 mm.
 
 DOOR_GAP_CENTER = 2.0
 DOOR_OVERLAP = TH / 2.0

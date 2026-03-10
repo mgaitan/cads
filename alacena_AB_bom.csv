@@ -1,14 +1,14 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos
-AC1,AC_Paraiso,AC_Lateral_Izq,1,249.2,320.0,25.4,Canto frente
-AC2,AC_Paraiso,AC_Lateral_Der,1,249.2,320.0,25.4,Canto frente
-AC3,AC_Paraiso,AC_Piso,1,1244.0,320.0,25.4,Canto frente
-AC4,AC_Paraiso,AC_Tapa,1,1244.0,320.0,25.4,Canto frente
-AC5,AC_Paraiso,AC_Fondo_18mm,1,1193.2,249.2,18.0,Sin canto
-AB1,AB_Blanco,AB_Lateral_Izq,1,314.0,320.0,18.0,Canto frente
-AB2,AB_Blanco,AB_Lateral_Der,1,314.0,320.0,18.0,Canto frente
-AB3,AB_Blanco,AB_Piso,1,1244.0,320.0,18.0,Canto frente
-AB4,AB_Blanco,AB_Tapa,1,1244.0,320.0,18.0,Canto frente
-AB5,AB_Blanco,AB_Fondo_3mm,1,1208.0,314.0,3.0,Sin canto
-AB6,Frente,AB_Puerta_1,1,407.3333333333333,332.0,18.0,4 cantos
-AB7,Frente,AB_Puerta_2,1,407.3333333333333,332.0,18.0,4 cantos
-AB8,Frente,AB_Puerta_3,1,407.3333333333333,332.0,18.0,4 cantos
+AC1,AC_Paraiso,AC_Lateral_Izq,1,214.2,320.0,25.4,Canto frente
+AC2,AC_Paraiso,AC_Lateral_Der,1,214.2,320.0,25.4,Canto frente
+AC3,AC_Paraiso,AC_Piso,1,1208.0,320.0,25.4,Canto frente
+AC4,AC_Paraiso,AC_Tapa,1,1208.0,320.0,25.4,Canto frente
+AC5,AC_Paraiso,AC_Fondo_18mm,1,1157.2,214.2,18.0,Sin canto
+AB1,AB_Blanco,AB_Lateral_Izq,1,379.0,320.0,18.0,Canto frente
+AB2,AB_Blanco,AB_Lateral_Der,1,379.0,320.0,18.0,Canto frente
+AB3,AB_Blanco,AB_Piso,1,1208.0,320.0,18.0,Canto frente
+AB4,AB_Blanco,AB_Tapa,1,1208.0,320.0,18.0,Canto frente
+AB5,AB_Blanco,AB_Fondo_3mm,1,1172.0,379.0,3.0,Sin canto
+AB6,Frente,AB_Puerta_1,1,395.3333333333333,397.0,18.0,4 cantos
+AB7,Frente,AB_Puerta_2,1,395.3333333333333,397.0,18.0,4 cantos
+AB8,Frente,AB_Puerta_3,1,395.3333333333333,397.0,18.0,4 cantos

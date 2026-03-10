@@ -1,10 +1,10 @@
 SHELL := /bin/bash
 
-.PHONY: all model model-h model-aa model-ab model-ba model-bb model-mesada screenshots-gui manual-h manual-aa manual-ab manuales clean-screens clean-manuales help
+.PHONY: all model model-h model-aa model-ab model-ba model-bb model-mesada model-ensamble screenshots-gui manual-h manual-aa manual-ab manuales clean-screens clean-manuales help
 
 all: model
 
-model: model-h model-aa model-ab model-ba model-bb model-mesada
+model: model-h model-aa model-ab model-ba model-bb model-mesada model-ensamble
 
 model-h:
 	@set +e; \
@@ -66,6 +66,16 @@ model-mesada:
 	fi; \
 	exit $$status
 
+model-ensamble:
+	@set +e; \
+	printf "exec(open('cocina_ensamble_freecad.py').read())\nimport sys\nsys.exit()\n" | freecad -c; \
+	status=$$?; \
+	if [[ -s cocina_ensamble.FCStd && -s cocina_ensamble.step ]]; then \
+		echo "model-ensamble: OK"; \
+		exit 0; \
+	fi; \
+	exit $$status
+
 screenshots-gui:
 	@echo "Abrir FreeCAD GUI con columna_horno_micro.FCStd y ejecutar macro:"
 	@echo "  /home/tin/lab/diseños_CAD/export_screenshots_gui_macro.py"
@@ -97,6 +107,7 @@ help:
 	@echo "  make model-ba         Regenera solo bajo mesada BA"
 	@echo "  make model-bb         Regenera solo bajo mesada BB"
 	@echo "  make model-mesada     Regenera piedra de mesada con calado"
+	@echo "  make model-ensamble   Regenera escena conjunta de toda la cocina"
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
 	@echo "  make manual-h         Genera manual H (MD + HTML + PDF si hay engine/fallback)"
 	@echo "  make manual-aa        Genera manual AA (alacena izquierda)"

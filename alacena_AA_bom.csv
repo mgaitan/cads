@@ -1,10 +1,10 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos
-AA1,Lateral,Lateral_Izq,1,614.0,320.0,18.0,Canto frente
-AA2,Lateral,Lateral_Der,1,614.0,320.0,18.0,Canto frente
+AA1,Lateral,Lateral_Izq,1,644.0,320.0,18.0,Canto frente
+AA2,Lateral,Lateral_Der,1,644.0,320.0,18.0,Canto frente
 AA3,Horizontal,Piso_Casco_Calado160,1,1050.0,320.0,18.0,Canto frente
 AA4,Horizontal,Tapa_Casco_Calado160,1,1050.0,320.0,18.0,Canto frente
-AA5,Vertical,Divisor_Central,1,614.0,317.0,18.0,Canto frente
+AA5,Vertical,Divisor_Central,1,644.0,317.0,18.0,Canto frente
 AA6,Horizontal,Estante_Derecho_Calado160,1,498.0,317.0,18.0,Canto frente
-AA7,Fondo,Fondo_3mm,1,1014.0,614.0,3.0,Sin canto
-AA8,Frente,Puerta_Izquierda,1,515.0,632.0,18.0,4 cantos
-AA9,Frente,Puerta_Derecha,1,515.0,632.0,18.0,4 cantos
+AA7,Fondo,Fondo_3mm,1,1014.0,644.0,3.0,Sin canto
+AA8,Frente,Puerta_Izquierda,1,515.0,662.0,18.0,4 cantos
+AA9,Frente,Puerta_Derecha,1,515.0,662.0,18.0,4 cantos

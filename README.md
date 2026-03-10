@@ -27,8 +27,8 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 - Espesor melamina: `18 mm`
 - Alto total: `2300 mm`
 - Profundidad: `600 mm`
-- Ancho interior útil: `600 mm`
-- Ancho exterior: `636 mm`
+- Ancho interior útil: `636 mm`
+- Ancho exterior: `672 mm`
 - Patas: `80 mm` (ocultas con zócalo)
 - Sin fondo
 
@@ -47,6 +47,8 @@ Repositorio de trabajo para modelado y despiece de muebles de cocina en FreeCAD 
 - `H12` faja frontal inferior 50 mm
 - `H13` faja frontal superior micro 50 mm
 - `H14` fondo 3 mm (oculto en vistas)
+- `H15` listón vertical frontal izq (regrueso solo horno)
+- `H16` listón vertical frontal der (regrueso solo horno)
 
 ### Alacena A (prefijo AA)
 - `AA1` lateral izquierdo

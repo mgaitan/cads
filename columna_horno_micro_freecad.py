@@ -28,7 +28,7 @@ except Exception:
 # Parametros principales (mm)
 TH = 18.0
 BACK_TH = 3.0
-WIDTH_INT = 600.0
+WIDTH_INT = 636.0
 DEPTH = 600.0
 HEIGHT_TOTAL = 2300.0
 LEG_H = 80.0
@@ -37,7 +37,8 @@ OVEN_Z_START = 800.0
 OVEN_OPENING_VISIBLE_H = 599.0
 OVEN_OPENING_W = 600.0
 
-MICRO_OPENING_H = 400.0
+MICRO_OPENING_H = 436.0
+MICRO_SHIFT_UP = 0.0
 FASCIA_H = 50.0  # altura de cada faja frontal
 OVEN_EXTRA_INTERNAL_H = FASCIA_H  # juego interno oculto por faja central
 
@@ -58,10 +59,16 @@ Z_OVEN_INTERNAL_TOP = Z_OVEN_VISIBLE_TOP + OVEN_EXTRA_INTERNAL_H
 Z_OVEN_FASCIA_BOTTOM = Z_OVEN_BASE - FASCIA_H
 Z_OVEN_SHELF_BOTTOM = Z_OVEN_BASE - TH
 
-Z_MICRO_BASE = Z_OVEN_INTERNAL_TOP
+Z_MICRO_BASE = Z_OVEN_INTERNAL_TOP + MICRO_SHIFT_UP
 Z_MICRO_TOP = Z_MICRO_BASE + MICRO_OPENING_H
 Z_MICRO_SHELF_BOTTOM = Z_MICRO_BASE - TH
 Z_MICRO_TOP_FASCIA_BOTTOM = Z_MICRO_TOP - FASCIA_H
+
+# Regrueso vertical frontal para apoyo de frente de horno/micro
+LISTON_W = TH
+LISTON_D = TH
+LISTON_Z0 = Z_OVEN_BASE
+LISTON_H = OVEN_OPENING_VISIBLE_H
 
 # Compartimento inferior (bajo horno)
 LOWER_CLEAR_H = Z_OVEN_FASCIA_BOTTOM - Z_BOTTOM_PANEL
@@ -74,7 +81,7 @@ TOP_CLEAR_H = Z_TOP_PANEL - Z_MICRO_TOP
 # Puertas centradas sobre cantos de 18 mm:
 # solape 9 mm por lado (TH/2) en ancho y alto.
 DOOR_OVERLAP = TH / 2.0
-DOOR_W = W - TH  # 636 - 18 = 618
+DOOR_W = W - TH  # 672 - 18 = 654
 DOOR_X = DOOR_OVERLAP
 
 # H10: solape vertical explicito de 9 mm sobre H12 (faja inferior de horno).
@@ -107,7 +114,7 @@ def main():
 
     parts = []
 
-    # Codigos de despiece: H1..H13
+    # Codigos de despiece: H1..H16
     # Laterales
     add_part(doc, "H1_Lateral_Izq", 0, 0, Z_SIDE_START, TH, DEPTH, CARCASS_H)
     parts.append(
@@ -158,6 +165,53 @@ def main():
     )
     parts.append(
         ("H14", "Fondo", "Fondo_3mm", 1, WIDTH_INT, CARCASS_H, BACK_TH, "Sin canto")
+    )
+
+    # Regruesos verticales frontales para apoyo del frente de horno/micro
+    add_part(
+        doc,
+        "H15_Liston_Vert_Izq",
+        X_INT0,
+        0,
+        LISTON_Z0,
+        LISTON_W,
+        LISTON_D,
+        LISTON_H,
+    )
+    parts.append(
+        (
+            "H15",
+            "Regrueso",
+            "Liston_Vert_Izq",
+            1,
+            LISTON_H,
+            LISTON_D,
+            LISTON_W,
+            "Canto frente",
+        )
+    )
+
+    add_part(
+        doc,
+        "H16_Liston_Vert_Der",
+        X_INT1 - LISTON_W,
+        0,
+        LISTON_Z0,
+        LISTON_W,
+        LISTON_D,
+        LISTON_H,
+    )
+    parts.append(
+        (
+            "H16",
+            "Regrueso",
+            "Liston_Vert_Der",
+            1,
+            LISTON_H,
+            LISTON_D,
+            LISTON_W,
+            "Canto frente",
+        )
     )
 
     # Divisiones horizontales

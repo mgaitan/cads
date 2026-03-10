@@ -4,11 +4,11 @@
 - Espesor melamina AB: 18 mm
 - Espesor melamina AC (paraiso): 25.4 mm (1 pulgada)
 - Fondo AB: 3 mm (oculto en vistas)
-- Ancho exterior total AB: 1244 mm
+- Ancho exterior total AB: 1208 mm
 - Profundidad: 320 mm
-- AC (paraiso): alto 300 mm
-- AB (blanco): alto 350 mm
-- Altura total AB+AC: 650 mm
+- AC (paraiso): alto 265 mm
+- AB (blanco): alto 415 mm
+- Altura total AB+AC: 680 mm
 - AB con 3 puertas iguales y equidistantes
 
 ## Configuracion AC

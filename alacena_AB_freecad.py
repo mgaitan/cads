@@ -30,17 +30,17 @@ TH_AC = 25.4
 BACK_TH = 3.0
 AC_BACK_TH = 18.0
 
-# Ancho restante total: 2930 - 636 - 1050 = 1244
-WIDTH = 1244.0
+# Ancho restante total: 2930 - 672 - 1050 = 1208
+WIDTH = 1208.0
 DEPTH = 320.0
 
 # AC (cajon paraiso inferior)
-AC_H = 300.0
+AC_H = 265.0
 AC_SIDE_H = AC_H - 2 * TH_AC
 AC_INT_W = WIDTH - 2 * TH_AC
 
 # AB (alacena superior blanca)
-AB_H = 350.0
+AB_H = 415.0
 AB_SIDE_H = AB_H - 2 * TH
 
 # AB: 3 puertas iguales, equidistantes

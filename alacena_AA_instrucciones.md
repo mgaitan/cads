@@ -5,7 +5,7 @@
 - Fondo: 3 mm
 - Ancho exterior: 1050 mm
 - Profundidad exterior: 320 mm
-- Alto del mueble: 650 mm
+- Alto del mueble: 680 mm
 - Piso y tapa pasantes (laterales entre piso y tapa)
 - Interior dividido en 2 mitades iguales por divisor vertical central
 - Estante solo en lado derecho, a media altura
@@ -17,8 +17,8 @@
 ## Instalacion recomendada (respecto a cocina)
 - Mesada: 900 mm
 - Techo: 2300 mm
-- Colocacion sugerida: base de alacena a 1650 mm
-- Con eso, la alacena llega al techo (1650 + 650 = 2300)
+- Colocacion sugerida: base de alacena a 1620 mm
+- Con eso, la alacena llega al techo (1620 + 680 = 2300)
 
 ## Codigos de piezas (prefijo AA)
 - AA1: lateral izquierdo
@@ -48,4 +48,4 @@
 
 ## Nota tecnica
 - El fondo se deja oculto en las capturas para mantener limpieza visual del modelo.
-- Si queres cambiar altura de colgado, modificar la cota de instalacion; el mueble sigue midiendo 650 mm.
+- Si queres cambiar altura de colgado, modificar la cota de instalacion; el mueble sigue midiendo 680 mm.
