@@ -31,6 +31,8 @@ def main():
     x_h = 2258.0
 
     # Alacenas superiores a cota de colgado definida.
+    # Van contra el fondo (pared): profundidad 320 sobre referencia de 600.
+    y_upper = 600.0 - 320.0
     z_upper = 1620.0
 
     doc = App.newDocument("CocinaEnsamble")
@@ -54,7 +56,7 @@ def main():
             "AA_Alacena_Izq",
             os.path.join(here, "alacena_AA.step"),
             x_ba,
-            0,
+            y_upper,
             z_upper,
         )
     )
@@ -64,7 +66,7 @@ def main():
             "ABAC_Alacena_Der",
             os.path.join(here, "alacena_AB.step"),
             x_bb,
-            0,
+            y_upper,
             z_upper,
         )
     )
