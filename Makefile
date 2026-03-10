@@ -3,7 +3,7 @@ SHELL := /bin/bash
 MODELS_SCRIPT_DIR := scripts/models
 MACRO_DIR := scripts/macros
 
-.PHONY: all model model-h model-aa model-ab model-ba model-bb model-m model-ensamble screenshots-gui manual-h manual-aa manual-ab manuales clean-screens clean-manuales clean-models help
+.PHONY: all model model-h model-aa model-ab model-ba model-bb model-m model-ensamble screenshots-gui manual-h manual-aa manual-ab manual-all manuales clean-screens clean-manuales clean-models help
 
 all: model
 
@@ -55,6 +55,9 @@ manual-aa:
 manual-ab:
 	python3 manuals/generate_manual.py manuals/muebles/AB.toml
 
+manual-all:
+	python3 manuals/generate_master_manual.py
+
 manuales: manual-h manual-aa manual-ab
 
 clean-screens:
@@ -77,5 +80,6 @@ help:
 	@echo "  make model-m          Regenera piedra de mesada con calado"
 	@echo "  make model-ensamble   Regenera escena conjunta"
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
+	@echo "  make manual-all       Genera manual integral unico (ensamble + modulos + BOM total)"
 	@echo "  make manuales         Genera manuales PDF/HTML/MD de H, AA y AB"
 	@echo "  make clean-models     Limpia FCStd/STEP/BOM generados"
