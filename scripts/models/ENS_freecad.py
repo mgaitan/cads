@@ -65,10 +65,11 @@ def main():
     out_step_dir.mkdir(parents=True, exist_ok=True)
 
     # Layout en planta (mm):
-    # BA [0..903], BB [903..2258], H [2258..2930]
+    # BA [0..903], BB [903..2258], H [2258..2930], L [2930..3820]
     x_ba = 0.0
     x_bb = 903.0
     x_h = 2258.0
+    x_l = 2930.0
 
     # Alacenas superiores a cota de colgado definida.
     # Van contra el fondo (pared): profundidad 320 sobre referencia de 600.
@@ -76,7 +77,9 @@ def main():
     z_abac = 1500.0
     z_aa = 1590.0
 
-    # Extractor: ya esta incluido como referencia en el modulo AA.
+    # Modulo L retranqueado respecto al frente de H.
+    # Frente de L queda 390 mm por detras del frente de H.
+    y_l = 390.0
 
     doc = App.newDocument("CocinaEnsamble")
 
@@ -105,6 +108,9 @@ def main():
         )
     )
     objs.append(add_step(doc, "M_Mesada", str(step_dir / "M.step"), 0, 0, 0))
+    objs.append(
+        add_step(doc, "L_Armario_Lavadero", str(step_dir / "L.step"), x_l, y_l, 0)
+    )
 
     doc.recompute()
 
