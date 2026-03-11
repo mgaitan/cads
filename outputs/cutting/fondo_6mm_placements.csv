@@ -1,7 +1,7 @@
 board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
 1,BB_BB14c_1,BB,BB14c,BB14_Caja_Top_Izq_Fondo_6mm,0,0,629,503,626,500,0,Fondo clavado pasante
-1,BB_BB17c_1,BB,BB17c,BB17_Caja_Mid_Der_Fondo_6mm,1006,0,503,629,626,500,1,Fondo clavado pasante
-1,BB_BB18c_1,BB,BB18c,BB18_Caja_Bot_Izq_Fondo_6mm,1509,0,503,629,626,500,1,Fondo clavado pasante
-1,BB_BB19c_1,BB,BB19c,BB19_Caja_Bot_Der_Fondo_6mm,2012,0,503,629,626,500,1,Fondo clavado pasante
-1,BB_BB15c_1,BB,BB15c,BB15_Caja_Top_Der_Fondo_6mm,0,503,503,629,626,500,1,Fondo clavado pasante
-1,BB_BB16c_1,BB,BB16c,BB16_Caja_Mid_Izq_Fondo_6mm,503,503,503,629,626,500,1,Fondo clavado pasante
+1,BB_BB16c_1,BB,BB16c,BB16_Caja_Mid_Izq_Fondo_6mm,629,0,503,629,626,500,1,Fondo clavado pasante
+1,BB_BB17c_1,BB,BB17c,BB17_Caja_Mid_Der_Fondo_6mm,1132,0,503,629,626,500,1,Fondo clavado pasante
+1,BB_BB18c_1,BB,BB18c,BB18_Caja_Bot_Izq_Fondo_6mm,1635,0,503,629,626,500,1,Fondo clavado pasante
+1,BB_BB19c_1,BB,BB19c,BB19_Caja_Bot_Der_Fondo_6mm,2138,1,629,503,626,500,0,Fondo clavado pasante
+1,BB_BB15c_1,BB,BB15c,BB15_Caja_Top_Der_Fondo_6mm,0,503,629,503,626,500,0,Fondo clavado pasante
