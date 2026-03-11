@@ -85,10 +85,11 @@ def add_extractor(doc, name, x, y, z, w, d, h, bevel_d=120.0, bevel_h=40.0):
     body = Part.makeBox(w, d, h, App.Vector(x, y, z))
     tri = Part.makePolygon(
         [
-            App.Vector(x, y, z),
-            App.Vector(x, y + bevel_d, z),
-            App.Vector(x, y, z + bevel_h),
-            App.Vector(x, y, z),
+            # Bisel frontal superior: baja desde la tapa hacia atras.
+            App.Vector(x, y, z + h),
+            App.Vector(x, y + bevel_d, z + h),
+            App.Vector(x, y, z + h - bevel_h),
+            App.Vector(x, y, z + h),
         ]
     )
     tri_face = Part.Face(tri)

@@ -5,8 +5,8 @@ H3,Horizontal,Piso_Casco,1,672.0,600.0,18.0,Canto frente,,
 H3L,Herraje,Pata_80,4,40.0,40.0,80.0,PVC/Aluminio,,
 H4,Horizontal,Tapa_Casco,1,672.0,600.0,18.0,Canto frente,,
 H14,Fondo,Fondo_3mm,1,636.0,2184.0,3.0,Sin canto,,
-H15,Regrueso,Liston_Vert_Izq,1,599.0,60.0,18.0,Canto frente,,
-H16,Regrueso,Liston_Vert_Der,1,599.0,60.0,18.0,Canto frente,,
+H15,Regrueso,Liston_Vert_Izq,1,614.0,60.0,18.0,Canto frente,,
+H16,Regrueso,Liston_Vert_Der,1,614.0,60.0,18.0,Canto frente,,
 H5,Horizontal,Piso_Horno,1,636.0,582.0,18.0,Canto frente,,
 H6,Horizontal,Piso_Micro,1,636.0,582.0,18.0,Canto frente,,
 H7,Horizontal,Tapa_Micro,1,636.0,600.0,18.0,Canto frente,,
@@ -17,5 +17,5 @@ H13,Frente,Faja_Frontal_Superior_Micro_50,1,636.0,50.0,18.0,Cantos vistos,,
 H17,Herraje,Gola_C_Continuidad,1,672.0,25.0,20.0,Aluminio,0.672,
 H18,Herraje,Gola_J_Sup,1,672.0,25.0,20.0,Aluminio,0.672,
 H10,Frente,Puerta_Inferior,1,654.0,638.0,18.0,4 cantos,,2
-H11,Frente,Puerta_Superior,1,654.0,482.0,18.0,4 cantos,,2
+H11,Frente,Puerta_Superior,1,654.0,462.0,18.0,4 cantos,,2
 TOTAL,Resumen,Totales_Herrajes,,,,,,1.344,4

@@ -39,7 +39,7 @@ OVEN_OPENING_VISIBLE_H = 599.0
 OVEN_OPENING_W = 600.0
 
 MICRO_OPENING_H = 420.0
-MICRO_SHIFT_UP = 0.0
+MICRO_SHIFT_UP = 20.0
 FASCIA_H = 50.0  # altura de cada faja frontal
 # Juego interno oculto por faja central (ajustado para alinear lineas de gola en ensamble)
 OVEN_EXTRA_INTERNAL_H = 13.0
@@ -76,6 +76,10 @@ LISTON_W = TH
 LISTON_D = 60.0
 LISTON_Z0 = Z_OVEN_BASE
 LISTON_H = OVEN_OPENING_VISIBLE_H
+# Extension para que el liston llegue justo a la cara inferior de H6
+# (manteniendo un calado frontal donde encastra H9).
+LISTON_EXT = max(0.0, (OVEN_EXTRA_INTERNAL_H + MICRO_SHIFT_UP - TH))
+LISTON_H_TOTAL = LISTON_H + LISTON_EXT
 
 # Compartimento inferior (bajo horno)
 LOWER_CLEAR_H = Z_OVEN_FASCIA_BOTTOM - Z_BOTTOM_PANEL
@@ -111,6 +115,23 @@ def add_part(doc, name, x, y, z, dx, dy, dz):
     obj = doc.addObject("Part::Feature", name)
     obj.Shape = box
     obj.Placement.Base = App.Vector(x, y, z)
+    return obj
+
+
+def add_liston_calado(doc, name, x, y, z):
+    """Liston vertical con extension superior y calado frontal para encastre de H9."""
+    shape = Part.makeBox(LISTON_W, LISTON_D, LISTON_H_TOTAL, App.Vector(x, y, z))
+    if LISTON_EXT > 0.0:
+        notch = Part.makeBox(
+            LISTON_W,
+            TH,
+            LISTON_EXT,
+            App.Vector(x, y, z + LISTON_H),
+        )
+        shape = shape.cut(notch)
+
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = shape
     return obj
 
 
@@ -234,46 +255,28 @@ def main():
     )
 
     # Regruesos verticales frontales para apoyo del frente de horno/micro
-    add_part(
-        doc,
-        "H15_Liston_Vert_Izq",
-        X_INT0,
-        0,
-        LISTON_Z0,
-        LISTON_W,
-        LISTON_D,
-        LISTON_H,
-    )
+    add_liston_calado(doc, "H15_Liston_Vert_Izq", X_INT0, 0, LISTON_Z0)
     parts.append(
         (
             "H15",
             "Regrueso",
             "Liston_Vert_Izq",
             1,
-            LISTON_H,
+            LISTON_H_TOTAL,
             LISTON_D,
             LISTON_W,
             "Canto frente",
         )
     )
 
-    add_part(
-        doc,
-        "H16_Liston_Vert_Der",
-        X_INT1 - LISTON_W,
-        0,
-        LISTON_Z0,
-        LISTON_W,
-        LISTON_D,
-        LISTON_H,
-    )
+    add_liston_calado(doc, "H16_Liston_Vert_Der", X_INT1 - LISTON_W, 0, LISTON_Z0)
     parts.append(
         (
             "H16",
             "Regrueso",
             "Liston_Vert_Der",
             1,
-            LISTON_H,
+            LISTON_H_TOTAL,
             LISTON_D,
             LISTON_W,
             "Canto frente",
