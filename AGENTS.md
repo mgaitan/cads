@@ -7,7 +7,7 @@ Desarrollar muebles de cocina parametrizados y producir:
 - instrucciones de armado.
 
 ## Convenciones
-- Prefijo por mueble: `H`, `AA`, `AB`, `AC`, `BA`, `BB`.
+- Prefijo por mueble: `H`, `AA`, `AB`, `AC`, `L`, `BA`, `BB`.
 - Piezas etiquetadas como `H1`, `AA1`, etc.
 - Unidades: milímetros.
 - Espesor melamina por defecto: `18 mm`.

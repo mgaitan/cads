@@ -29,16 +29,17 @@ Regla de bisagras:
 ```bash
 make model
 make model-ensamble
-make manuales
+make manual-all
 ```
 
 Targets útiles:
 - `make model-h`
 - `make model-aa`
 - `make model-ab`
+- `make model-l`
 - `make model-ba`
 - `make model-bb`
-- `make model-mesada`
+- `make model-m`
 - `make screenshots-gui`
 
 ## Capturas GUI
@@ -46,4 +47,3 @@ Ejecutar macro:
 - `scripts/macros/export_screenshots_gui_macro.py`
 
 La macro exporta `iso`, `front`, `rear`, `left`, `right`, `top`, `bottom` en `screenshots/`.
-

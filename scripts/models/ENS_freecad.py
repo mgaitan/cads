@@ -78,8 +78,8 @@ def main():
     z_aa = 1590.0
 
     # Modulo L retranqueado respecto al frente de H.
-    # Frente de L queda 390 mm por detras del frente de H.
-    y_l = 390.0
+    # Se alinea apertura 90° de hoja L (435 mm) con plano del frente de H.
+    y_l = 435.0
 
     doc = App.newDocument("CocinaEnsamble")
 

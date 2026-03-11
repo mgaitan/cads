@@ -13,6 +13,7 @@ Prefijo:
   - `AB.FCStd` -> `AB`
   - `BA.FCStd` -> `BA`
   - `BB.FCStd` -> `BB`
+  - `L.FCStd` -> `L`
   - `M.FCStd` -> `M`
   - `ENS.FCStd` -> `ENS`
 """
@@ -50,6 +51,7 @@ def detect_prefix(doc):
         "ab": "AB",
         "ba": "BA",
         "bb": "BB",
+        "l": "L",
         "m": "M",
         "ens": "ENS",
     }

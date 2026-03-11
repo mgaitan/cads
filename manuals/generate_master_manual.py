@@ -17,6 +17,7 @@ MODULES = [
     ("H", "Columna horno + micro", "Melamina blanca"),
     ("AA", "Alacena izquierda", "Melamina blanca"),
     ("AB", "Alacena derecha (incluye AC)", "AB blanco / AC simil paraiso"),
+    ("L", "Frente armario lavarropas", "Melamina blanca"),
     ("BA", "Bajo mesada izquierdo", "Melamina blanca"),
     ("BB", "Bajo mesada derecho", "Melamina blanca"),
     ("M", "Mesada", "Piedra gris mara"),

@@ -33,13 +33,15 @@ TH = 18.0
 BACK_TH = 3.0
 
 WIDTH = 890.0
-DEPTH = 800.0
+DEPTH = 760.0
 HEIGHT_TOTAL = 2300.0
 TOE_H = 80.0
 POST_D = 150.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_INSET = 30.0
+GOLA_H = 25.0
+GOLA_D = 20.0
 
 # Distribucion interior
 WASHER_CLEAR_W = 630.0
@@ -294,6 +296,12 @@ def main():
     )
     parts.append(
         ("L11", "Frente", "Puerta_Sup_Der", 1, DOOR_W, UPPER_DOOR_H, TH, "4 cantos")
+    )
+
+    # Gola C horizontal bajo puertas superiores (sirve tambien para abrir inferiores)
+    add_box(doc, "L12_Gola_C_Media", 0, -GOLA_D, AB_GOLA_Z, WIDTH, GOLA_D, GOLA_H)
+    parts.append(
+        ("L12", "Herraje", "Gola_C_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
     )
 
     doc.recompute()
