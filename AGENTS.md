@@ -29,6 +29,7 @@ Desarrollar muebles de cocina parametrizados y producir:
 - Tope del hueco microondas alineado con nivel superior de `AC`.
 - `AA` con frentes verticales y listón fijo inferior de `90 mm`.
 - `BA` con dos frentes grandes inferiores de ancho completo + frente falso superior bajo anafe.
+- En bajo mesadas `BA`, `BB` e `I`, los soportes superiores de mesada van por dentro del casco y con profundidad `100 mm`.
 - Reparto de anchos:
   - libre sin `H`: `2258 mm`
   - `AA = BA = 903 mm`
@@ -47,5 +48,5 @@ Regla actual de bisagras:
 ## Flujo recomendado
 1. Ajustar parámetros en `scripts/models/*.py`.
 2. Regenerar con `make model`.
-3. Validar cotas y continuidad visual en `models/fcstd/ENS.FCStd`.
+3. Validar cotas y continuidad visual en `models/fcstd/ENS.FCStd` y/o `models/fcstd/ENSI.FCStd`.
 4. Revisar `bom/*.csv` y manuales.

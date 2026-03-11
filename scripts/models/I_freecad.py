@@ -15,13 +15,15 @@ import FreeCAD as App
 import Part
 
 GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 TH = 18.0
 BACK_TH = 6.0
@@ -37,9 +39,10 @@ COUNTER_TH = 30.0
 OPEN_DW = 455.0
 OPEN_LEFT = 430.0
 OPEN_RIGHT = WIDTH - 4.0 * TH - OPEN_DW - OPEN_LEFT  # 583.0
+LEFT_NICHE_W = 290.0
 
-TOP_SUPPORT_D = 200.0
-DRAWER_DEPTH = 500.0
+TOP_SUPPORT_D = 100.0
+DRAWER_DEPTH = 210.0
 SLIDE_CLR = 12.5
 
 GOLA_H = 25.0
@@ -64,12 +67,27 @@ SINK_D = 390.0
 SINK_RIGHT_MARGIN = 50.0
 SINK_CENTER_Y = 300.0
 
+# Nicho trasero izquierdo (detras de cajones)
+LEFT_REAR_NICHE_D = 350.0
+LEFT_REAR_Y = DEPTH - LEFT_REAR_NICHE_D
+# I1 queda casi al encuentro de la cava (1 mm de luz).
+LEFT_FRONT_BLOCK_D = 311.0
+
+# Cava integrada en el nicho (simil paraiso), orientada perpendicular a cajones.
+V_CLR = 2.0  # luz total
+V_FACE_W = LEFT_NICHE_W - V_CLR  # 288 mm (ancho de frente de cava, visto lateral)
+V_DX = LEFT_NICHE_W - TH - V_CLR  # 270 mm (profundidad hacia adentro, eje X)
+V_COLS = 2
+V_ROWS = 3  # 6 botellas
+V_CELL = (V_FACE_W - (V_COLS + 1.0) * TH) / V_COLS
+V_H = (V_ROWS + 1.0) * TH + V_ROWS * V_CELL
+
 # Cotas Z
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
-SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
+SIDE_H = Z_TOP - Z_BOTTOM_TOP
 TOP_GOLA_Z = Z_TOP_SUPPORT - GOLA_H
 
 # Tabiques en X
@@ -229,6 +247,16 @@ def add_bom_metadata(parts):
     return rows
 
 
+def ensure_visible(doc):
+    for obj in doc.Objects:
+        view = getattr(obj, "ViewObject", None)
+        if view is not None:
+            try:
+                view.Visibility = True
+            except Exception:
+                pass
+
+
 def main():
     script_path = globals().get("__file__")
     if script_path:
@@ -246,8 +274,27 @@ def main():
     parts = []
 
     # Casco
-    add_box(doc, "I1_Lateral_Izq", 0, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
-    parts.append(("I1", "Casco", "Lateral_Izq", 1, SIDE_H, DEPTH, TH, "Canto frente"))
+    # Lateral izquierdo como bastidor: bloque frontal + montante trasero
+    add_box(
+        doc, "I1_Lateral_Izq_Frente", 0, 0, Z_BOTTOM_TOP, TH, LEFT_FRONT_BLOCK_D, SIDE_H
+    )
+    parts.append(
+        (
+            "I1",
+            "Casco",
+            "Lateral_Izq_Frente",
+            1,
+            SIDE_H,
+            LEFT_FRONT_BLOCK_D,
+            TH,
+            "Canto frente",
+        )
+    )
+
+    add_box(doc, "I1B_Lateral_Izq_Trasero", 0, DEPTH - TH, Z_BOTTOM_TOP, TH, TH, SIDE_H)
+    parts.append(
+        ("I1B", "Casco", "Lateral_Izq_Trasero", 1, SIDE_H, TH, TH, "Canto frente")
+    )
 
     add_box(doc, "I2_Lateral_Der", WIDTH - TH, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
     parts.append(("I2", "Casco", "Lateral_Der", 1, SIDE_H, DEPTH, TH, "Canto frente"))
@@ -262,10 +309,10 @@ def main():
         doc,
         "I4B_Parante_Union_CR",
         EXTRA_STILE_X,
-        0,
+        -TH,
         Z_BOTTOM_TOP,
         EXTRA_STILE_W,
-        DEPTH,
+        TH,
         SIDE_H,
     )
     parts.append(
@@ -275,38 +322,20 @@ def main():
             "Parante_Union_CR",
             1,
             SIDE_H,
-            DEPTH,
+            TH,
             EXTRA_STILE_W,
             "Canto frente",
         )
     )
 
-    # Pisos internos (sin piso en lavavajillas, no pasantes)
-    floor_y = TH
-    floor_d = DEPTH - TH - BACK_TH
-    add_box(doc, "I5_Piso_Izq", TH, floor_y, Z_BOTTOM, OPEN_LEFT, floor_d, TH)
-    parts.append(("I5", "Casco", "Piso_Izq", 1, OPEN_LEFT, floor_d, TH, "Canto frente"))
+    # Pisos pasantes por modulo (sin piso en lavavajillas)
+    add_box(doc, "I5_Piso_Izq", TH, 0, Z_BOTTOM, OPEN_LEFT, DEPTH, TH)
+    parts.append(("I5", "Casco", "Piso_Izq", 1, OPEN_LEFT, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "I6_Piso_Der", X_P2 + TH, floor_y, Z_BOTTOM, OPEN_RIGHT, floor_d, TH)
-    parts.append(
-        ("I6", "Casco", "Piso_Der", 1, OPEN_RIGHT, floor_d, TH, "Canto frente")
-    )
+    add_box(doc, "I6_Piso_Der", X_P2 + TH, 0, Z_BOTTOM, OPEN_RIGHT, DEPTH, TH)
+    parts.append(("I6", "Casco", "Piso_Der", 1, OPEN_RIGHT, DEPTH, TH, "Canto frente"))
 
-    # Fondos 6mm solo en izquierda y derecha
-    add_box(
-        doc,
-        "I7_Fondo_Izq_6mm",
-        TH,
-        DEPTH - BACK_TH,
-        Z_BOTTOM_TOP,
-        OPEN_LEFT,
-        BACK_TH,
-        SIDE_H,
-    )
-    parts.append(
-        ("I7", "Casco", "Fondo_Izq_6mm", 1, OPEN_LEFT, SIDE_H, BACK_TH, "Sin canto")
-    )
-
+    # Fondo 6mm en modulo derecho
     add_box(
         doc,
         "I8_Fondo_Der_6mm",
@@ -321,15 +350,118 @@ def main():
         ("I8", "Casco", "Fondo_Der_6mm", 1, OPEN_RIGHT, SIDE_H, BACK_TH, "Sin canto")
     )
 
-    # Soportes superiores
-    add_box(doc, "I9_Soporte_Sup_Frente", 0, 0, Z_TOP_SUPPORT, WIDTH, TOP_SUPPORT_D, TH)
+    # Lateral derecho del nicho de cava (blanco), en profundidad.
+    add_box(
+        doc,
+        "I8S_Panel_Nicho_Izq_18mm",
+        LEFT_NICHE_W,
+        LEFT_FRONT_BLOCK_D,
+        Z_BOTTOM_TOP,
+        TH,
+        DEPTH - LEFT_FRONT_BLOCK_D - TH,
+        SIDE_H,
+    )
+    parts.append(
+        (
+            "I8S",
+            "Nicho",
+            "Panel_Nicho_Izq_18mm",
+            1,
+            SIDE_H,
+            DEPTH - LEFT_FRONT_BLOCK_D - TH,
+            TH,
+            "Blanco (sin canto visible)",
+        )
+    )
+
+    # Cava integrada (codigo V) dentro del nicho trasero izquierdo.
+    # Frente sobre lateral izquierdo (V1), perpendicular a cajones.
+    # Queda centrada en el nicho de 290 mm con 1 mm de luz por lado.
+    v_x = TH + (LEFT_NICHE_W - TH - V_DX) / 2.0
+    v_y = DEPTH - V_FACE_W
+    v_z = Z_BOTTOM_TOP
+    v_inner_w = V_FACE_W - 2.0 * TH
+    v_inner_h = V_H - 2.0 * TH
+
+    add_box(doc, "V1_Cava_Lateral_Izq", v_x, v_y, v_z, V_DX, TH, V_H)
+    add_box(
+        doc, "V2_Cava_Lateral_Der", v_x, v_y + V_FACE_W - 2.0 * TH, v_z, V_DX, TH, V_H
+    )
+    add_box(doc, "V3_Cava_Base", v_x + TH, v_y + TH, v_z, V_DX - TH, v_inner_w, TH)
+    add_box(
+        doc,
+        "V4_Cava_Tapa",
+        v_x + TH,
+        v_y + TH,
+        v_z + V_H - TH,
+        V_DX - TH,
+        v_inner_w,
+        TH,
+    )
+
+    y_div = v_y + TH + V_CELL
+    add_box(doc, "V5_Cava_Divisor_Vert", v_x, y_div, v_z + TH, V_DX, TH, v_inner_h)
+
+    for i in range(1, V_ROWS):
+        z_h = v_z + TH + i * V_CELL + (i - 1) * TH
+        add_box(
+            doc,
+            f"V{5 + i}_Cava_Divisor_Hor_{i}",
+            v_x + TH,
+            v_y + TH,
+            z_h,
+            V_DX - TH,
+            v_inner_w,
+            TH,
+        )
+
+    parts.extend(
+        [
+            ("V1", "Cava_Paraiso", "Lateral_Izq", 1, V_H, V_DX, TH, "Canto frente"),
+            ("V2", "Cava_Paraiso", "Lateral_Der", 1, V_H, V_DX, TH, "Canto frente"),
+            ("V3", "Cava_Paraiso", "Base", 1, V_DX - TH, v_inner_w, TH, "Canto frente"),
+            ("V4", "Cava_Paraiso", "Tapa", 1, V_DX - TH, v_inner_w, TH, "Canto frente"),
+            (
+                "V5",
+                "Cava_Paraiso",
+                "Divisor_Vert",
+                1,
+                v_inner_h,
+                V_DX,
+                TH,
+                "Canto frente",
+            ),
+            (
+                "V6",
+                "Cava_Paraiso",
+                "Divisor_Hor",
+                V_ROWS - 1,
+                V_DX - TH,
+                v_inner_w,
+                TH,
+                "Canto frente",
+            ),
+        ]
+    )
+
+    # Soportes superiores interiores solo en el tramo derecho para que no queden vistos en la cava.
+    add_box(
+        doc,
+        "I9_Soporte_Sup_Frente",
+        X_P1,
+        0,
+        Z_TOP_SUPPORT,
+        WIDTH - X_P1 - TH,
+        TOP_SUPPORT_D,
+        TH,
+    )
     parts.append(
         (
             "I9",
             "Casco",
             "Soporte_Sup_Frente",
             1,
-            WIDTH,
+            WIDTH - X_P1 - TH,
             TOP_SUPPORT_D,
             TH,
             "Canto frente",
@@ -339,15 +471,24 @@ def main():
     add_box(
         doc,
         "I10_Soporte_Sup_Fondo",
-        0,
+        X_P1,
         DEPTH - TOP_SUPPORT_D,
         Z_TOP_SUPPORT,
-        WIDTH,
+        WIDTH - X_P1 - TH,
         TOP_SUPPORT_D,
         TH,
     )
     parts.append(
-        ("I10", "Casco", "Soporte_Sup_Fondo", 1, WIDTH, TOP_SUPPORT_D, TH, "Sin canto")
+        (
+            "I10",
+            "Casco",
+            "Soporte_Sup_Fondo",
+            1,
+            WIDTH - X_P1 - TH,
+            TOP_SUPPORT_D,
+            TH,
+            "Sin canto",
+        )
     )
 
     # Patas: 8 unidades
@@ -515,6 +656,7 @@ def main():
     )
 
     doc.recompute()
+    ensure_visible(doc)
 
     fcstd = out_fcstd_dir / "I.FCStd"
     step = out_step_dir / "I.step"
@@ -555,6 +697,10 @@ def main():
     print(f"- Parante union C/R: {EXTRA_STILE_W} mm")
     print(f"- Altura frentes cajon: {DRAWER_FRONT_H:.3f} mm")
     print(f"- Altura puerta der / frente lavavajillas: {DOOR_H:.3f} mm")
+    print(f"- Nicho izquierdo (ancho): {LEFT_NICHE_W} mm")
+    print(f"- Nicho trasero izquierdo: {LEFT_REAR_NICHE_D} mm profundidad")
+    print(f"- Cava integrada (V): {V_DX:.1f}x{V_FACE_W:.1f}x{V_H:.1f} mm (XxYxZ)")
+    print(f"- Hueco cava: {V_CELL:.1f} x {V_CELL:.1f} mm")
 
 
 if __name__ == "__main__":

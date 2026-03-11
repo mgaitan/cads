@@ -11,7 +11,7 @@ model: model-h model-aa model-ab model-f model-l model-ba model-bb model-i model
 
 define run_freecad_model
 	@set +e; \
-	printf "exec(open('$(MODELS_SCRIPT_DIR)/$(1)').read())\nimport sys\nsys.exit()\n" | freecad -c; \
+	printf "exec(open('$(MODELS_SCRIPT_DIR)/$(1)').read())\nimport sys\nsys.exit()\n" | APPIMAGE_EXTRACT_AND_RUN=1 FREECAD_NO_GUI=1 freecad -c; \
 	status=$$?; \
 	if [[ -s models/fcstd/$(2).FCStd && -s models/step/$(2).step $(3) ]]; then \
 		echo "$(4): OK (FreeCAD puede crashear al salir, pero los archivos se generaron)"; \
@@ -86,7 +86,7 @@ clean-models:
 
 help:
 	@echo "Targets:"
-	@echo "  make model            Regenera modelos H + AA + AB + F + L + BA + BB + mesada + ensamble"
+	@echo "  make model            Regenera H + AA + AB + F + L + BA + BB + I + M + ENS"
 	@echo "  make model-h          Regenera solo mueble H"
 	@echo "  make model-aa         Regenera solo alacena AA"
 	@echo "  make model-ab         Regenera solo alacena AB+AC"

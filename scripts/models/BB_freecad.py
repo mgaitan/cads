@@ -15,13 +15,15 @@ import FreeCAD as App
 import Part
 
 GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 TH = 18.0
 BACK_TH = 3.0
@@ -33,7 +35,7 @@ CAB_H = 870.0
 TOE_H = 80.0
 
 TOP_FRONT_H = 130.0
-TOP_SUPPORT_D = 200.0
+TOP_SUPPORT_D = 100.0
 SLIDE_CLR = 12.5
 DRAWER_DEPTH = 500.0
 OPEN_DRAWER_OFFSET = 0.0  # frente enrasado para verificar grilla
@@ -190,6 +192,16 @@ def add_bom_metadata(parts):
     return rows
 
 
+def ensure_visible(doc):
+    for obj in doc.Objects:
+        view = getattr(obj, "ViewObject", None)
+        if view is not None:
+            try:
+                view.Visibility = True
+            except Exception:
+                pass
+
+
 def main():
     script_path = globals().get("__file__")
     if script_path:
@@ -234,10 +246,10 @@ def main():
     add_box(
         doc,
         "BB5_Soporte_Superior_Frente",
-        0,
+        TH,
         0,
         Z_TOP_SUPPORT,
-        WIDTH,
+        WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
         TH,
     )
@@ -247,7 +259,7 @@ def main():
             "Casco",
             "Soporte_Sup_Frente",
             1,
-            WIDTH,
+            WIDTH - 2.0 * TH,
             TOP_SUPPORT_D,
             TH,
             "Canto frente",
@@ -257,15 +269,24 @@ def main():
     add_box(
         doc,
         "BB6_Soporte_Superior_Fondo",
-        0,
+        TH,
         DEPTH - TOP_SUPPORT_D,
         Z_TOP_SUPPORT,
-        WIDTH,
+        WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
         TH,
     )
     parts.append(
-        ("BB6", "Casco", "Soporte_Sup_Fondo", 1, WIDTH, TOP_SUPPORT_D, TH, "Sin canto")
+        (
+            "BB6",
+            "Casco",
+            "Soporte_Sup_Fondo",
+            1,
+            WIDTH - 2.0 * TH,
+            TOP_SUPPORT_D,
+            TH,
+            "Sin canto",
+        )
     )
 
     # Division central para dos columnas de cajones
@@ -410,6 +431,7 @@ def main():
             obj.Placement.Base.y -= OPEN_DRAWER_OFFSET
 
     doc.recompute()
+    ensure_visible(doc)
 
     if GUI_AVAILABLE:
         for obj in doc.Objects:
