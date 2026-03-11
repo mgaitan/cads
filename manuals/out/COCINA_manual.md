@@ -63,6 +63,10 @@ th, td {
 | Casco | Fondo_3mm | 1 | 1319.0 | 754.0 | 3.0 | Sin canto | BB |  |  |
 | Casco | Lateral_Der | 2 | 754.0 | 600.0 | 18.0 | Canto frente | BA,BB |  |  |
 | Casco | Lateral_Izq | 2 | 754.0 | 600.0 | 18.0 | Canto frente | BA,BB |  |  |
+| Casco | Parante_Front_Der | 1 | 2202.0 | 150.0 | 18.0 | Canto frente | L |  |  |
+| Casco | Parante_Front_Izq | 1 | 2202.0 | 150.0 | 18.0 | Canto frente | L |  |  |
+| Casco | Parante_Rear_Der | 1 | 2202.0 | 150.0 | 18.0 | Sin canto | L |  |  |
+| Casco | Parante_Rear_Izq | 1 | 2202.0 | 150.0 | 18.0 | Sin canto | L |  |  |
 | Casco | Piso_Pasante | 1 | 903.0 | 600.0 | 18.0 | Canto frente | BA |  |  |
 | Casco | Piso_Pasante | 1 | 1355.0 | 600.0 | 18.0 | Canto frente | BB |  |  |
 | Casco | Repisa_Separadora | 1 | 867.0 | 600.0 | 18.0 | Canto frente | BA |  |  |
@@ -70,8 +74,11 @@ th, td {
 | Casco | Soporte_Sup_Fondo | 1 | 1355.0 | 200.0 | 18.0 | Sin canto | BB |  |  |
 | Casco | Soporte_Sup_Frente | 1 | 903.0 | 200.0 | 18.0 | Canto frente | BA |  |  |
 | Casco | Soporte_Sup_Frente | 1 | 1355.0 | 200.0 | 18.0 | Canto frente | BB |  |  |
+| Casco | Tapa_Casco | 1 | 890.0 | 760.0 | 18.0 | Canto frente | L |  |  |
+| Division | Parante_Interior | 1 | 2202.0 | 760.0 | 18.0 | Canto frente | L |  |  |
 | Fondo | Fondo_3mm | 1 | 636.0 | 2184.0 | 3.0 | Sin canto | H |  |  |
 | Fondo | Fondo_3mm | 1 | 867.0 | 674.0 | 3.0 | Sin canto | AA |  |  |
+| Fondo | Fondo_3mm | 1 | 854.0 | 2202.0 | 3.0 | Sin canto | L |  |  |
 | Frente | AB_Puerta_1 | 1 | 444.3333333333333 | 473.0 | 18.0 | 4 cantos | AB |  | 2 |
 | Frente | AB_Puerta_2 | 1 | 444.3333333333333 | 473.0 | 18.0 | 4 cantos | AB |  | 2 |
 | Frente | AB_Puerta_3 | 1 | 444.3333333333333 | 473.0 | 18.0 | 4 cantos | AB |  | 2 |
@@ -87,9 +94,14 @@ th, td {
 | Frente | Frente_Mid_Ancho_Completo | 1 | 892.0 | 315.0 | 18.0 | 4 cantos | BA |  |  |
 | Frente | Frente_Top | 2 | 670.0 | 130.0 | 18.0 | 4 cantos | BB |  |  |
 | Frente | Liston_Fijo_90 | 1 | 885.0 | 90.0 | 18.0 | 4 cantos | AA |  |  |
+| Frente | Puerta_Inf_Der | 1 | 435.0 | 1729.0 | 18.0 | 4 cantos | L |  | 3 |
+| Frente | Puerta_Inf_Izq | 1 | 435.0 | 1729.0 | 18.0 | 4 cantos | L |  | 3 |
 | Frente | Puerta_Inferior | 1 | 654.0 | 638.0 | 18.0 | 4 cantos | H |  | 2 |
-| Frente | Puerta_Superior | 1 | 654.0 | 482.0 | 18.0 | 4 cantos | H |  | 2 |
+| Frente | Puerta_Sup_Der | 1 | 435.0 | 473.0 | 18.0 | 4 cantos | L |  | 2 |
+| Frente | Puerta_Sup_Izq | 1 | 435.0 | 473.0 | 18.0 | 4 cantos | L |  | 2 |
+| Frente | Puerta_Superior | 1 | 654.0 | 462.0 | 18.0 | 4 cantos | H |  | 2 |
 | Herraje | Gola_C_Continuidad | 1 | 672.0 | 25.0 | 20.0 | Aluminio | H | 0.672 |  |
+| Herraje | Gola_C_Media | 1 | 890.0 | 25.0 | 20.0 | Aluminio | L | 0.890 |  |
 | Herraje | Gola_C_Superior | 1 | 903.0 | 25.0 | 20.0 | Aluminio | BA | 0.903 |  |
 | Herraje | Gola_C_Superior | 1 | 1355.0 | 25.0 | 20.0 | Aluminio | BB | 1.355 |  |
 | Herraje | Gola_J_Inferior | 1 | 903.0 | 25.0 | 20.0 | Aluminio | AA | 0.903 |  |
@@ -97,7 +109,7 @@ th, td {
 | Herraje | Gola_J_Media | 1 | 903.0 | 25.0 | 20.0 | Aluminio | BA | 0.903 |  |
 | Herraje | Gola_J_Media | 1 | 1355.0 | 25.0 | 20.0 | Aluminio | BB | 1.355 |  |
 | Herraje | Gola_J_Sup | 1 | 672.0 | 25.0 | 20.0 | Aluminio | H | 0.672 |  |
-| Herraje | Pata_80 | 12 | 40.0 | 40.0 | 80.0 | PVC/Aluminio | BA,BB,H |  |  |
+| Herraje | Pata_80 | 16 | 40.0 | 40.0 | 80.0 | PVC/Aluminio | BA,BB,H,L |  |  |
 | Horizontal | Estante_Inferior | 1 | 636.0 | 600.0 | 18.0 | Canto frente | H |  |  |
 | Horizontal | Piso_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente | H |  |  |
 | Horizontal | Piso_Casco_Calados | 1 | 903.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
@@ -106,6 +118,7 @@ th, td {
 | Horizontal | Tapa_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente | H |  |  |
 | Horizontal | Tapa_Casco_Calados_IzqDer160 | 1 | 903.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
 | Horizontal | Tapa_Micro | 1 | 636.0 | 600.0 | 18.0 | Canto frente | H |  |  |
+| Horizontal | Techo_Lavarropas_Der | 1 | 630.0 | 760.0 | 18.0 | Canto frente | L |  |  |
 | Interior | Divisor_Central | 1 | 754.0 | 579.0 | 18.0 | Sin canto | BB |  |  |
 | Interior | Estante_Inferior | 1 | 867.0 | 600.0 | 18.0 | Canto frente | BA |  |  |
 | Interior | Travesano_Inf | 1 | 867.0 | 60.0 | 18.0 | Sin canto | AA |  |  |
@@ -116,8 +129,23 @@ th, td {
 | Lateral | Lateral_Izq | 1 | 674.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
 | Mesada | Piedra_Gris_Mara_Calado_600x555 | 1 | 2258.0 | 648.0 | 30.0 | Pulido perimetral segun proveedor | M |  |  |
 | Referencia | Extractor_590x470x90 | 1 | 590.0 | 470.0 | 90.0 | No fabricar | AA |  |  |
-| Regrueso | Liston_Vert_Der | 1 | 599.0 | 18.0 | 60.0 | Canto frente | H |  |  |
-| Regrueso | Liston_Vert_Izq | 1 | 599.0 | 18.0 | 60.0 | Canto frente | H |  |  |
+| Refuerzo | Regrueso_Techo_Lav | 1 | 630.0 | 60.0 | 18.0 | Cantos vistos | L |  |  |
+| Regrueso | Liston_Vert_Der | 1 | 614.0 | 60.0 | 18.0 | Canto frente | H |  |  |
+| Regrueso | Liston_Vert_Izq | 1 | 614.0 | 60.0 | 18.0 | Canto frente | H |  |  |
+
+
+## 2.1 Plan de corte optimizado
+| Grupo | Piezas | Placas | Placa util (mm) | Kerf | Margen | Aprovechamiento | Descarte |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| blanco_18mm | 77 | 5 | 2580 x 1810 | 3 | 10 | 80.62% | 19.38% |
+| fondo_3mm | 5 | 2 | 2580 x 1810 | 3 | 10 | 45.52% | 54.48% |
+| fondo_6mm | 6 | 1 | 2580 x 1810 | 3 | 10 | 40.65% | 59.35% |
+| paraiso_18mm | 1 | 1 | 2580 x 1810 | 3 | 10 | 7.30% | 92.70% |
+| paraiso_25.4mm | 4 | 1 | 2580 x 1810 | 3 | 10 | 22.40% | 77.60% |
+
+### Visualizacion de cortes por grupo
+<figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte blanco_18mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_3mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte fondo_3mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_6mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte fondo_6mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_18mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte paraiso_18mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_25.4mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte paraiso_25.4mm</figcaption></figure>
+
 
 ## 3. Criterios constructivos generales
 | Tema | Criterio |
@@ -145,8 +173,8 @@ th, td {
 | H3L | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
 | H4 | Horizontal | Tapa_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente |  |  |
 | H14 | Fondo | Fondo_3mm | 1 | 636.0 | 2184.0 | 3.0 | Sin canto |  |  |
-| H15 | Regrueso | Liston_Vert_Izq | 1 | 599.0 | 18.0 | 60.0 | Canto frente |  |  |
-| H16 | Regrueso | Liston_Vert_Der | 1 | 599.0 | 18.0 | 60.0 | Canto frente |  |  |
+| H15 | Regrueso | Liston_Vert_Izq | 1 | 614.0 | 60.0 | 18.0 | Canto frente |  |  |
+| H16 | Regrueso | Liston_Vert_Der | 1 | 614.0 | 60.0 | 18.0 | Canto frente |  |  |
 | H5 | Horizontal | Piso_Horno | 1 | 636.0 | 582.0 | 18.0 | Canto frente |  |  |
 | H6 | Horizontal | Piso_Micro | 1 | 636.0 | 582.0 | 18.0 | Canto frente |  |  |
 | H7 | Horizontal | Tapa_Micro | 1 | 636.0 | 600.0 | 18.0 | Canto frente |  |  |
@@ -157,7 +185,7 @@ th, td {
 | H17 | Herraje | Gola_C_Continuidad | 1 | 672.0 | 25.0 | 20.0 | Aluminio | 0.672 |  |
 | H18 | Herraje | Gola_J_Sup | 1 | 672.0 | 25.0 | 20.0 | Aluminio | 0.672 |  |
 | H10 | Frente | Puerta_Inferior | 1 | 654.0 | 638.0 | 18.0 | 4 cantos |  | 2 |
-| H11 | Frente | Puerta_Superior | 1 | 654.0 | 482.0 | 18.0 | 4 cantos |  | 2 |
+| H11 | Frente | Puerta_Superior | 1 | 654.0 | 462.0 | 18.0 | 4 cantos |  | 2 |
 
 ### Notas de armado H
 # Columna horno + microondas (melamina 18 mm)
@@ -372,6 +400,48 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 3. Fijar fondo 3 mm de AB para escuadra.
 4. Montar AB sobre AC.
 5. Colocar puertas AB6, AB7 y AB8 y regular luces.
+
+
+## Modulo L - Frente armario lavarropas
+**Terminacion:** Melamina blanca
+
+<figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/L_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">L Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/L_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">L Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/L_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">L Lateral</figcaption></figure>
+
+### Despiece L
+| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| L1 | Casco | Parante_Front_Izq | 1 | 2202.0 | 150.0 | 18.0 | Canto frente |  |  |
+| L2 | Casco | Parante_Front_Der | 1 | 2202.0 | 150.0 | 18.0 | Canto frente |  |  |
+| L15 | Casco | Parante_Rear_Izq | 1 | 2202.0 | 150.0 | 18.0 | Sin canto |  |  |
+| L16 | Casco | Parante_Rear_Der | 1 | 2202.0 | 150.0 | 18.0 | Sin canto |  |  |
+| L17 | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
+| L3 | Casco | Tapa_Casco | 1 | 890.0 | 760.0 | 18.0 | Canto frente |  |  |
+| L4 | Fondo | Fondo_3mm | 1 | 854.0 | 2202.0 | 3.0 | Sin canto |  |  |
+| L5 | Division | Parante_Interior | 1 | 2202.0 | 760.0 | 18.0 | Canto frente |  |  |
+| L6 | Horizontal | Techo_Lavarropas_Der | 1 | 630.0 | 760.0 | 18.0 | Canto frente |  |  |
+| L7 | Refuerzo | Regrueso_Techo_Lav | 1 | 630.0 | 60.0 | 18.0 | Cantos vistos |  |  |
+| L8 | Frente | Puerta_Inf_Izq | 1 | 435.0 | 1729.0 | 18.0 | 4 cantos |  | 3 |
+| L9 | Frente | Puerta_Inf_Der | 1 | 435.0 | 1729.0 | 18.0 | 4 cantos |  | 3 |
+| L10 | Frente | Puerta_Sup_Izq | 1 | 435.0 | 473.0 | 18.0 | 4 cantos |  | 2 |
+| L11 | Frente | Puerta_Sup_Der | 1 | 435.0 | 473.0 | 18.0 | 4 cantos |  | 2 |
+| L12 | Herraje | Gola_C_Media | 1 | 890.0 | 25.0 | 20.0 | Aluminio | 0.890 |  |
+
+### Notas de armado L
+1. Armar casco `L1-L4` sobre patas/zócalo de `80 mm`, verificando escuadra y plomo.
+2. Colocar fondo `L5` (3 mm) clavado/atornillado para rigidizar el frente completo.
+3. Instalar divisor `L6` a `260 mm` desde el lateral derecho (medida exterior), dejando nicho derecho para escobas.
+4. Montar `L7` (techo lavarropas) con cara superior a `900 mm` y reforzar con `L8` por debajo.
+5. Montar faja frontal `L9` de `50 mm` en la cota alineada con puerta superior de `H`.
+6. Verificar calados en piso/tapa:
+   - piso `L3`: 3 perforaciones de `35 mm` para conexiones;
+   - tapa `L4`: perforación `160 mm` para ducto.
+7. Instalar golas:
+   - `L12` (J inferior) alineada con nivel de puerta inferior de `H`;
+   - `L15` (J superior) bajo puertas superiores.
+8. Colgar frentes:
+   - inferiores `L10-L11` (2 hojas iguales);
+   - superiores `L13-L14` (2 hojas iguales).
+9. Ajustar luces finales (2 mm central) y solape lateral (9 mm) en todas las hojas.
 
 
 ## Modulo BA - Bajo mesada izquierdo

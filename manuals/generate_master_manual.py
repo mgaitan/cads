@@ -39,6 +39,13 @@ def load_text(path: Path) -> str:
     return path.read_text(encoding="utf-8").strip()
 
 
+def load_cut_summary() -> list[dict[str, str]]:
+    path = ROOT / "outputs" / "cutting" / "summary.csv"
+    if not path.exists():
+        return []
+    return load_csv(path)
+
+
 def img(md_path: Path, rel_target: Path, caption: str, width: str = "48%") -> str:
     src = relpath(md_path, rel_target)
     return f'<figure style="display:inline-block; width:{width}; margin:0 1% 10px 0;"><img src="{src}" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">{caption}</figcaption></figure>'
@@ -148,6 +155,57 @@ def module_section(md_path: Path, code: str, name: str, finish: str) -> str:
 """
 
 
+def cut_plan_section(md_path: Path) -> str:
+    rows = load_cut_summary()
+    if not rows:
+        return (
+            "## 2.1 Plan de corte optimizado\n"
+            "_No hay resultados de optimizacion de corte. Ejecutar: `make optimize-cuts`._\n"
+        )
+
+    headers = [
+        "Grupo",
+        "Piezas",
+        "Placas",
+        "Placa util (mm)",
+        "Kerf",
+        "Margen",
+        "Aprovechamiento",
+        "Descarte",
+    ]
+    table_rows: list[list[str]] = []
+    fig_rows: list[str] = []
+    out_cut = ROOT / "outputs" / "cutting"
+
+    for r in rows:
+        group = r.get("group", "")
+        table_rows.append(
+            [
+                group,
+                r.get("pieces", ""),
+                r.get("boards_used", ""),
+                f"{r.get('board_usable_w_mm', '')} x {r.get('board_usable_h_mm', '')}",
+                r.get("kerf_mm", ""),
+                r.get("margin_mm", ""),
+                f"{r.get('utilization_pct', '')}%",
+                f"{r.get('waste_pct', '')}%",
+            ]
+        )
+
+        svg = out_cut / f"{group}_layout.svg"
+        if svg.exists():
+            fig_rows.append(img(md_path, svg, f"Corte {group}", "48%"))
+
+    figures = "".join(fig_rows) if fig_rows else "_Sin layouts SVG para mostrar._"
+    return f"""
+## 2.1 Plan de corte optimizado
+{table(headers, table_rows)}
+
+### Visualizacion de cortes por grupo
+{figures}
+"""
+
+
 def build_markdown() -> str:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     md_path = OUT_DIR / "COCINA_manual.md"
@@ -172,6 +230,7 @@ def build_markdown() -> str:
         "Bisagras",
     ]
     total_rows = consolidated_rows()
+    cut_section = cut_plan_section(md_path)
 
     modules = "\n".join(module_section(md_path, c, n, t) for c, n, t in MODULES)
 
@@ -207,6 +266,8 @@ th, td {{
 
 ## 2. Lista unica total de partes
 {table(total_headers, total_rows)}
+
+{cut_section}
 
 ## 3. Criterios constructivos generales
 | Tema | Criterio |

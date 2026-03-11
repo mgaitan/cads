@@ -64,7 +64,7 @@ manual-all:
 manuales: manual-h manual-aa manual-ab
 
 optimize-cuts:
-	uv run scripts/tools/optimize_cuts.py
+	uv run scripts/tools/optimize_cuts.py --svg
 
 clean-screens:
 	rm -f screenshots/*.png
@@ -89,5 +89,5 @@ help:
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
 	@echo "  make manual-all       Genera manual integral unico (ensamble + modulos + BOM total)"
 	@echo "  make manuales         Genera manuales PDF/HTML/MD de H, AA y AB"
-	@echo "  make optimize-cuts    Optimiza cortes de placas desde BOM (OR-Tools + uv)"
+	@echo "  make optimize-cuts    Optimiza cortes de placas y genera layouts SVG (OR-Tools + uv)"
 	@echo "  make clean-models     Limpia FCStd/STEP/BOM generados"
