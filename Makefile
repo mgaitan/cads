@@ -3,11 +3,11 @@ SHELL := /bin/bash
 MODELS_SCRIPT_DIR := scripts/models
 MACRO_DIR := scripts/macros
 
-.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-m model-ensamble screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts clean-screens clean-manuales clean-models help
+.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble model-ensamble-isla screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts clean-screens clean-manuales clean-models help
 
 all: model
 
-model: model-h model-aa model-ab model-f model-l model-ba model-bb model-m model-ensamble
+model: model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble
 
 define run_freecad_model
 	@set +e; \
@@ -41,11 +41,17 @@ model-ba:
 model-bb:
 	$(call run_freecad_model,BB_freecad.py,BB,&& -s bom/BB_bom.csv,model-bb)
 
+model-i:
+	$(call run_freecad_model,I_freecad.py,I,&& -s bom/I_bom.csv,model-i)
+
 model-m:
 	$(call run_freecad_model,M_freecad.py,M,&& -s bom/M_bom.csv,model-m)
 
 model-ensamble:
 	$(call run_freecad_model,ENS_freecad.py,ENS,,model-ensamble)
+
+model-ensamble-isla:
+	$(call run_freecad_model,ENSI_freecad.py,ENSI,,model-ensamble-isla)
 
 screenshots-gui:
 	@echo "Abrir FreeCAD GUI con el modelo deseado y ejecutar macro:"
@@ -88,8 +94,10 @@ help:
 	@echo "  make model-l          Regenera solo frente armario L"
 	@echo "  make model-ba         Regenera solo bajo mesada BA"
 	@echo "  make model-bb         Regenera solo bajo mesada BB"
+	@echo "  make model-i          Regenera solo bajo mesada isla I"
 	@echo "  make model-m          Regenera piedra de mesada con calado"
 	@echo "  make model-ensamble   Regenera escena conjunta"
+	@echo "  make model-ensamble-isla Regenera ensamble isla (I + F)"
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
 	@echo "  make manual-all       Genera manual integral unico (ensamble + modulos + BOM total)"
 	@echo "  make manuales         Genera manuales PDF/HTML/MD de H, AA y AB"
