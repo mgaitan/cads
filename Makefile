@@ -3,11 +3,11 @@ SHELL := /bin/bash
 MODELS_SCRIPT_DIR := scripts/models
 MACRO_DIR := scripts/macros
 
-.PHONY: all model model-h model-aa model-ab model-l model-ba model-bb model-m model-ensamble screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts clean-screens clean-manuales clean-models help
+.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-m model-ensamble screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts clean-screens clean-manuales clean-models help
 
 all: model
 
-model: model-h model-aa model-ab model-l model-ba model-bb model-m model-ensamble
+model: model-h model-aa model-ab model-f model-l model-ba model-bb model-m model-ensamble
 
 define run_freecad_model
 	@set +e; \
@@ -28,6 +28,9 @@ model-aa:
 
 model-ab:
 	$(call run_freecad_model,AB_freecad.py,AB,&& -s bom/AB_bom.csv,model-ab)
+
+model-f:
+	$(call run_freecad_model,F_freecad.py,F,&& -s bom/F_bom.csv,model-f)
 
 model-l:
 	$(call run_freecad_model,L_freecad.py,L,&& -s bom/L_bom.csv,model-l)
@@ -77,10 +80,11 @@ clean-models:
 
 help:
 	@echo "Targets:"
-	@echo "  make model            Regenera modelos H + AA + AB + BA + BB + mesada + ensamble"
+	@echo "  make model            Regenera modelos H + AA + AB + F + L + BA + BB + mesada + ensamble"
 	@echo "  make model-h          Regenera solo mueble H"
 	@echo "  make model-aa         Regenera solo alacena AA"
 	@echo "  make model-ab         Regenera solo alacena AB+AC"
+	@echo "  make model-f          Regenera solo mueble F (fridge + modular)"
 	@echo "  make model-l          Regenera solo frente armario L"
 	@echo "  make model-ba         Regenera solo bajo mesada BA"
 	@echo "  make model-bb         Regenera solo bajo mesada BB"
