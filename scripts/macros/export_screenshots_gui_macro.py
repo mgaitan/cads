@@ -2,7 +2,7 @@
 """Macro para ejecutar dentro de FreeCAD GUI.
 
 Exporta:
-- la vista actual como `<prefijo>_iso.png` (dejala manualmente como quieras),
+- vista isometrica estandar como `<prefijo>_iso.png`,
 - vistas estandar via comandos Std_View*: front/rear/left/right/top/bottom.
 
 Prefijo:
@@ -19,6 +19,7 @@ Prefijo:
 """
 
 import os
+import time
 from pathlib import Path
 
 import FreeCAD as App
@@ -32,6 +33,7 @@ BG = "White"
 DOOR_TRANSPARENCY = 65  # 0 opaco, 100 transparente
 OUTPUT_PREFIX = None  # ejemplo: "AA", "AB", "H"
 EXPORT_ALL_OPEN = True  # True: exporta todos los documentos abiertos
+FORCE_STANDARD_ISO = True  # True: fuerza Std_ViewIsometric para *_iso
 
 
 def detect_prefix(doc):
@@ -71,6 +73,7 @@ def set_std_view(command_name):
     Gui.runCommand(command_name, 0)
     Gui.SendMsgToActiveView("ViewFit")
     Gui.updateGui()
+    time.sleep(0.12)
 
 
 def prepare_visuals(doc, view):
@@ -124,7 +127,9 @@ def export_doc(doc):
 
     prepare_visuals(doc, view)
 
-    # 1) iso = vista actual (la que tengas guardada en esa pestaña)
+    # 1) iso
+    if FORCE_STANDARD_ISO:
+        set_std_view("Std_ViewIsometric")
     save(view, f"{prefix}_iso.png")
 
     # 2) vistas estandar

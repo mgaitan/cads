@@ -194,9 +194,18 @@ def cut_plan_section(md_path: Path) -> str:
 
         svg = out_cut / f"{group}_layout.svg"
         if svg.exists():
-            fig_rows.append(img(md_path, svg, f"Corte {group}", "48%"))
+            fig_rows.append(img(md_path, svg, f"Corte {group}", "96%"))
 
-    figures = "".join(fig_rows) if fig_rows else "_Sin layouts SVG para mostrar._"
+    paged_blocks: list[str] = []
+    for i in range(0, len(fig_rows), 2):
+        chunk = "".join(fig_rows[i : i + 2])
+        if i + 2 < len(fig_rows):
+            chunk += '<div style="page-break-after: always;"></div>'
+        paged_blocks.append(chunk)
+
+    figures = (
+        "".join(paged_blocks) if paged_blocks else "_Sin layouts SVG para mostrar._"
+    )
     return f"""
 ## 2.1 Plan de corte optimizado
 {table(headers, table_rows)}
@@ -267,8 +276,6 @@ th, td {{
 ## 2. Lista unica total de partes
 {table(total_headers, total_rows)}
 
-{cut_section}
-
 ## 3. Criterios constructivos generales
 | Tema | Criterio |
 | --- | --- |
@@ -281,6 +288,9 @@ th, td {{
 | Continuidad visual | Prioridad en lineas de gola y grilla de frentes |
 
 {modules}
+
+## 4. Plan de corte
+{cut_section}
 """
 
 

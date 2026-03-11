@@ -4,7 +4,8 @@
 Version simplificada:
 - 2 hojas frontales simetricas (tirador comun, sin gola),
 - sin piso,
-- parante interior a la derecha (nicho lavarropas),
+- parante interior a la derecha hasta linea de puertas superiores,
+- estante corrido de todo el ancho en la base del modulo superior,
 - 4 parantes exteriores (2 frente + 2 fondo) de 150 mm de profundidad.
 
 Salida:
@@ -67,6 +68,8 @@ LOWER_DOOR_H = (AB_GOLA_Z + OVERLAY) - LOWER_DOOR_Z
 
 UPPER_DOOR_Z = AB_GOLA_Z + OVERLAY
 UPPER_DOOR_H = (HEIGHT_TOTAL - TH + OVERLAY) - UPPER_DOOR_Z
+
+INNER_DIV_H = AB_GOLA_Z - TOE_H
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -187,10 +190,19 @@ def main():
         ("L4", "Fondo", "Fondo_3mm", 1, WIDTH - 2 * TH, side_h, BACK_TH, "Sin canto")
     )
 
-    # Parante interior derecho
-    add_box(doc, "L5_Parante_Interior", DIV_X, 0, TOE_H, TH, DEPTH, side_h)
+    # Parante interior derecho (solo hasta inicio de modulo superior)
+    add_box(doc, "L5_Parante_Interior", DIV_X, 0, TOE_H, TH, DEPTH, INNER_DIV_H)
     parts.append(
-        ("L5", "Division", "Parante_Interior", 1, side_h, DEPTH, TH, "Canto frente")
+        (
+            "L5",
+            "Division",
+            "Parante_Interior",
+            1,
+            INNER_DIV_H,
+            DEPTH,
+            TH,
+            "Canto frente",
+        )
     )
 
     # Techo lavarropas (lado derecho)
@@ -237,6 +249,21 @@ def main():
             REGRUESO_H,
             TH,
             "Cantos vistos",
+        )
+    )
+
+    # Piso del modulo superior (ancho completo)
+    add_box(doc, "L13_Piso_Modulo_Superior", 0, 0, AB_GOLA_Z, WIDTH, DEPTH, TH)
+    parts.append(
+        (
+            "L13",
+            "Horizontal",
+            "Piso_Modulo_Superior",
+            1,
+            WIDTH,
+            DEPTH,
+            TH,
+            "Canto frente",
         )
     )
 

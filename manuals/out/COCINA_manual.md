@@ -75,7 +75,7 @@ th, td {
 | Casco | Soporte_Sup_Frente | 1 | 903.0 | 200.0 | 18.0 | Canto frente | BA |  |  |
 | Casco | Soporte_Sup_Frente | 1 | 1355.0 | 200.0 | 18.0 | Canto frente | BB |  |  |
 | Casco | Tapa_Casco | 1 | 890.0 | 760.0 | 18.0 | Canto frente | L |  |  |
-| Division | Parante_Interior | 1 | 2202.0 | 760.0 | 18.0 | Canto frente | L |  |  |
+| Division | Parante_Interior | 1 | 1729.0 | 760.0 | 18.0 | Canto frente | L |  |  |
 | Fondo | Fondo_3mm | 1 | 636.0 | 2184.0 | 3.0 | Sin canto | H |  |  |
 | Fondo | Fondo_3mm | 1 | 867.0 | 674.0 | 3.0 | Sin canto | AA |  |  |
 | Fondo | Fondo_3mm | 1 | 854.0 | 2202.0 | 3.0 | Sin canto | L |  |  |
@@ -115,6 +115,7 @@ th, td {
 | Horizontal | Piso_Casco_Calados | 1 | 903.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
 | Horizontal | Piso_Horno | 1 | 636.0 | 582.0 | 18.0 | Canto frente | H |  |  |
 | Horizontal | Piso_Micro | 1 | 636.0 | 582.0 | 18.0 | Canto frente | H |  |  |
+| Horizontal | Piso_Modulo_Superior | 1 | 890.0 | 760.0 | 18.0 | Canto frente | L |  |  |
 | Horizontal | Tapa_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente | H |  |  |
 | Horizontal | Tapa_Casco_Calados_IzqDer160 | 1 | 903.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
 | Horizontal | Tapa_Micro | 1 | 636.0 | 600.0 | 18.0 | Canto frente | H |  |  |
@@ -132,20 +133,6 @@ th, td {
 | Refuerzo | Regrueso_Techo_Lav | 1 | 630.0 | 60.0 | 18.0 | Cantos vistos | L |  |  |
 | Regrueso | Liston_Vert_Der | 1 | 614.0 | 60.0 | 18.0 | Canto frente | H |  |  |
 | Regrueso | Liston_Vert_Izq | 1 | 614.0 | 60.0 | 18.0 | Canto frente | H |  |  |
-
-
-## 2.1 Plan de corte optimizado
-| Grupo | Piezas | Placas | Placa util (mm) | Kerf | Margen | Aprovechamiento | Descarte |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| blanco_18mm | 77 | 5 | 2580 x 1810 | 3 | 10 | 80.62% | 19.38% |
-| fondo_3mm | 5 | 2 | 2580 x 1810 | 3 | 10 | 45.52% | 54.48% |
-| fondo_6mm | 6 | 1 | 2580 x 1810 | 3 | 10 | 40.65% | 59.35% |
-| paraiso_18mm | 1 | 1 | 2580 x 1810 | 3 | 10 | 7.30% | 92.70% |
-| paraiso_25.4mm | 4 | 1 | 2580 x 1810 | 3 | 10 | 22.40% | 77.60% |
-
-### Visualizacion de cortes por grupo
-<figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte blanco_18mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_3mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte fondo_3mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_6mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte fondo_6mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_18mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte paraiso_18mm</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_25.4mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte paraiso_25.4mm</figcaption></figure>
-
 
 ## 3. Criterios constructivos generales
 | Tema | Criterio |
@@ -417,9 +404,10 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 | L17 | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
 | L3 | Casco | Tapa_Casco | 1 | 890.0 | 760.0 | 18.0 | Canto frente |  |  |
 | L4 | Fondo | Fondo_3mm | 1 | 854.0 | 2202.0 | 3.0 | Sin canto |  |  |
-| L5 | Division | Parante_Interior | 1 | 2202.0 | 760.0 | 18.0 | Canto frente |  |  |
+| L5 | Division | Parante_Interior | 1 | 1729.0 | 760.0 | 18.0 | Canto frente |  |  |
 | L6 | Horizontal | Techo_Lavarropas_Der | 1 | 630.0 | 760.0 | 18.0 | Canto frente |  |  |
 | L7 | Refuerzo | Regrueso_Techo_Lav | 1 | 630.0 | 60.0 | 18.0 | Cantos vistos |  |  |
+| L13 | Horizontal | Piso_Modulo_Superior | 1 | 890.0 | 760.0 | 18.0 | Canto frente |  |  |
 | L8 | Frente | Puerta_Inf_Izq | 1 | 435.0 | 1729.0 | 18.0 | 4 cantos |  | 3 |
 | L9 | Frente | Puerta_Inf_Der | 1 | 435.0 | 1729.0 | 18.0 | 4 cantos |  | 3 |
 | L10 | Frente | Puerta_Sup_Izq | 1 | 435.0 | 473.0 | 18.0 | 4 cantos |  | 2 |
@@ -580,4 +568,19 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 
 ## Nota
 - Verificar plantilla final in situ antes de corte definitivo de piedra.
+
+
+## 4. Plan de corte
+
+## 2.1 Plan de corte optimizado
+| Grupo | Piezas | Placas | Placa util (mm) | Kerf | Margen | Aprovechamiento | Descarte |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| blanco_18mm | 90 | 7 | 2580 x 1810 | 3 | 10 | 77.41% | 22.59% |
+| fondo_3mm | 6 | 2 | 2580 x 1810 | 3 | 10 | 65.75% | 34.25% |
+| fondo_6mm | 6 | 1 | 2580 x 1810 | 3 | 10 | 40.65% | 59.35% |
+| paraiso_18mm | 1 | 1 | 2580 x 1810 | 3 | 10 | 7.30% | 92.70% |
+| paraiso_25.4mm | 4 | 1 | 2580 x 1810 | 3 | 10 | 22.40% | 77.60% |
+
+### Visualizacion de cortes por grupo
+<figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte blanco_18mm</figcaption></figure><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_3mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte fondo_3mm</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_6mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte fondo_6mm</figcaption></figure><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_18mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte paraiso_18mm</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_25.4mm_layout.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:9pt">Corte paraiso_25.4mm</figcaption></figure>
 
