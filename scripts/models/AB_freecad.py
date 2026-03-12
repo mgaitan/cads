@@ -18,16 +18,18 @@ import FreeCAD as App
 import Part
 
 GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 TH = 18.0
-TH_AC = 25.4
+TH_AC = 18.0
 BACK_TH = 3.0
 AC_BACK_TH = 18.0
 
@@ -39,6 +41,8 @@ DEPTH = 320.0
 AC_H = 309.0
 AC_SIDE_H = AC_H - 2 * TH_AC
 AC_INT_W = WIDTH - 2 * TH_AC
+AC_INNER_W = WIDTH - 4 * TH_AC
+AC_INNER_H = AC_H - 2 * TH_AC
 
 # AB (alacena superior blanca)
 AB_H = 491.0
@@ -126,7 +130,7 @@ def main():
     doc = App.newDocument("AlacenaAB")
     parts = []
 
-    # --- AC: cajon inferior (melamina paraiso 25.4 mm) ---
+    # --- AC: cajon inferior (paraiso doble 18 mm + fondo 18 mm) ---
     add_box(doc, "AC1_Lateral_Izq", 0, 0, TH_AC, TH_AC, DEPTH, AC_SIDE_H)
     parts.append(
         (
@@ -137,7 +141,7 @@ def main():
             AC_SIDE_H,
             DEPTH,
             TH_AC,
-            "Canto frente",
+            "Crudo (enchapar en obra)",
         )
     )
 
@@ -151,28 +155,66 @@ def main():
             AC_SIDE_H,
             DEPTH,
             TH_AC,
-            "Canto frente",
+            "Crudo (enchapar en obra)",
         )
     )
 
     add_box(doc, "AC3_Piso", 0, 0, 0, WIDTH, DEPTH, TH_AC)
     parts.append(
-        ("AC3", "AC_Paraiso", "AC_Piso", 1, WIDTH, DEPTH, TH_AC, "Canto frente")
+        ("AC3", "AC_Paraiso", "AC_Piso", 1, WIDTH, DEPTH, TH_AC, "Crudo (enchapar en obra)")
     )
 
     add_box(doc, "AC4_Tapa", 0, 0, AC_H - TH_AC, WIDTH, DEPTH, TH_AC)
     parts.append(
-        ("AC4", "AC_Paraiso", "AC_Tapa", 1, WIDTH, DEPTH, TH_AC, "Canto frente")
+        ("AC4", "AC_Paraiso", "AC_Tapa", 1, WIDTH, DEPTH, TH_AC, "Crudo (enchapar en obra)")
+    )
+
+    add_box(doc, "AC6_Lateral_Izq_Interior", TH_AC, 0, TH_AC, TH_AC, DEPTH, AC_SIDE_H)
+    parts.append(
+        (
+            "AC6",
+            "AC_Paraiso",
+            "AC_Lateral_Izq_Interior",
+            1,
+            AC_SIDE_H,
+            DEPTH,
+            TH_AC,
+            "Crudo (enchapar en obra)",
+        )
+    )
+
+    add_box(doc, "AC7_Lateral_Der_Interior", WIDTH - 2 * TH_AC, 0, TH_AC, TH_AC, DEPTH, AC_SIDE_H)
+    parts.append(
+        (
+            "AC7",
+            "AC_Paraiso",
+            "AC_Lateral_Der_Interior",
+            1,
+            AC_SIDE_H,
+            DEPTH,
+            TH_AC,
+            "Crudo (enchapar en obra)",
+        )
+    )
+
+    add_box(doc, "AC8_Piso_Interior", 2 * TH_AC, 0, TH_AC, AC_INNER_W, DEPTH, TH_AC)
+    parts.append(
+        ("AC8", "AC_Paraiso", "AC_Piso_Interior", 1, AC_INNER_W, DEPTH, TH_AC, "Crudo (enchapar en obra)")
+    )
+
+    add_box(doc, "AC9_Tapa_Interior", 2 * TH_AC, 0, AC_H - 2 * TH_AC, AC_INNER_W, DEPTH, TH_AC)
+    parts.append(
+        ("AC9", "AC_Paraiso", "AC_Tapa_Interior", 1, AC_INNER_W, DEPTH, TH_AC, "Crudo (enchapar en obra)")
     )
 
     # Fondo AC en paraiso 18 mm (entre laterales y entre piso/tapa)
     add_box(
         doc,
         "AC5_Fondo_18mm",
-        TH_AC,
+        2 * TH_AC,
         DEPTH - AC_BACK_TH,
         TH_AC,
-        AC_INT_W,
+        AC_INNER_W,
         AC_BACK_TH,
         AC_SIDE_H,
     )
@@ -182,10 +224,10 @@ def main():
             "AC_Paraiso",
             "AC_Fondo_18mm",
             1,
-            AC_INT_W,
+            AC_INNER_W,
             AC_SIDE_H,
             AC_BACK_TH,
-            "Sin canto",
+            "Crudo (enchapar en obra)",
         )
     )
 
