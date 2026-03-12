@@ -30,7 +30,7 @@ BACK_TH = 6.0
 DRAWER_BOTTOM_TH = 6.0
 
 WIDTH = 1540.0
-DEPTH = 600.0
+DEPTH = 650.0
 CAB_H = 870.0
 TOE_H = 80.0
 COUNTER_TH = 30.0
@@ -58,7 +58,7 @@ CENTER_GAP = 4.0
 ROW_GAP = 4.0
 
 # Mesada con bacha
-TOP_OVERHANG = 30.0
+TOP_OVERHANG = 20.0
 COUNTER_D = DEPTH + TH + TOP_OVERHANG
 COUNTER_Y = -(TH + TOP_OVERHANG)
 # Bacha de apoyo 560x420 (solapa 15 mm por lado): calado 530x390.
@@ -68,8 +68,8 @@ SINK_RIGHT_MARGIN = 50.0
 SINK_CENTER_Y = 300.0
 
 # Nicho trasero izquierdo (detras de cajones)
-LEFT_REAR_NICHE_D = 350.0
-LEFT_FRONT_BLOCK_D = 311.0
+LEFT_FRONT_BLOCK_D = 361.0
+LEFT_REAR_NICHE_D = DEPTH - LEFT_FRONT_BLOCK_D
 DRAWER_DEPTH = LEFT_FRONT_BLOCK_D - 2.0 * TH
 
 # Nicho izquierdo abierto con estante regulable.
@@ -419,7 +419,7 @@ def main():
         "I8B_Faja_Superior_Nicho",
         niche_x,
         niche_y,
-        Z_TOP_SUPPORT,
+        Z_TOP - 50.0,
         TH,
         NICHE_D,
         50.0,
