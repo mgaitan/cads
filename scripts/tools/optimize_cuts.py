@@ -9,7 +9,7 @@
 
 Uso:
   uv run scripts/tools/optimize_cuts.py
-  uv run scripts/tools/optimize_cuts.py --board 2600x1830 --kerf 3 --margin 10
+  uv run scripts/tools/optimize_cuts.py --board 2820x1830 --kerf 3 --margin 10
 
 Salida:
   - outputs/cutting/summary.csv
@@ -69,8 +69,8 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Optimizacion de cortes de placas.")
     p.add_argument(
         "--board",
-        default="2600x1830",
-        help="Tamano placa bruto en mm: ANCHOxALTO (default: 2600x1830)",
+        default="2820x1830",
+        help="Tamano placa bruto en mm: ANCHOxALTO (default: 2820x1830)",
     )
     p.add_argument(
         "--kerf",

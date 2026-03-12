@@ -83,9 +83,20 @@ def prepare_visuals(doc, view):
         vo = getattr(obj, "ViewObject", None)
         if vo is not None:
             vo.Visibility = True
-            if "Fondo" in obj.Name:
+            name = obj.Name
+            is_panel_back = (
+                name.startswith("H14_")
+                or name.startswith("AB5_")
+                or name.startswith("AA") and "Fondo" in name
+                or name.startswith("BA") and "Fondo" in name
+                or name.startswith("BB") and "Fondo" in name
+                or name.startswith("I") and "Fondo_6mm" in name
+                or name.startswith("L") and "Fondo" in name
+                or name.startswith("F") and "Fondo" in name
+            )
+            if is_panel_back:
                 vo.Visibility = False
-            if "Puerta" in obj.Name:
+            if "Puerta" in name:
                 try:
                     vo.Transparency = DOOR_TRANSPARENCY
                 except Exception:

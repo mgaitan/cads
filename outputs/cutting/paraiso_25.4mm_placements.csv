@@ -1,5 +1,0 @@
-board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
-1,AB_AC1_1,AB,AC1,AC_Lateral_Izq,0,0,261,323,258,320,0,Canto frente
-1,AB_AC2_1,AB,AC2,AC_Lateral_Der,261,0,261,323,258,320,0,Canto frente
-1,AB_AC3_1,AB,AC3,AC_Piso,522,0,323,1358,1355,320,1,Canto frente
-1,AB_AC4_1,AB,AC4,AC_Tapa,845,0,1358,323,1355,320,0,Canto frente

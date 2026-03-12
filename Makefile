@@ -3,7 +3,7 @@ SHELL := /bin/bash
 MODELS_SCRIPT_DIR := scripts/models
 MACRO_DIR := scripts/macros
 
-.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble model-ensamble-isla screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts clean-screens clean-manuales clean-models help
+.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble model-ensamble-isla screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts site clean-screens clean-manuales clean-models help
 
 all: model
 
@@ -74,6 +74,10 @@ manuales: manual-h manual-aa manual-ab
 
 optimize-cuts:
 	uv run scripts/tools/optimize_cuts.py --svg
+
+site:
+	python3 scripts/tools/generate_site.py
+
 
 clean-screens:
 	rm -f screenshots/*.png

@@ -1,47 +1,20 @@
-# Conjunto Derecho - AB + AC
+# Conjunto derecho AB + AC
 
-## Parametros usados
-- Espesor melamina AB: 18 mm
-- Espesor melamina AC (paraiso): 25.4 mm (1 pulgada)
-- Fondo AB: 3 mm (oculto en vistas)
-- Ancho exterior total AB: 1208 mm
+## Parametros
+- Ancho exterior total: 1355 mm
 - Profundidad: 320 mm
-- AC (paraiso): alto 265 mm
-- AB (blanco): alto 415 mm
-- Altura total AB+AC: 680 mm
-- AB con 3 puertas iguales y equidistantes
+- AC inferior en simil paraiso
+- AB superior en melamina blanca
 
 ## Configuracion AC
-- AC es un cajon completo de melamina paraiso 25.4 mm
-- Piso y tapa pasantes (laterales entre ambos)
-- Incluye piso y tapa
-- Fondo AC en paraiso 18 mm
-- El piso de AC coincide en altura con el piso de A1 al montar en cocina
+- Doble bastidor en 18 mm: uno exterior y otro interior
+- Fondo en 18 mm por dentro del bastidor interior
+- Cantos crudos en todas las piezas de AC para enchapar en obra
 
 ## Configuracion AB
-- Sin estantes
-- Sin divisores internos (espacio horizontal libre)
-- Tres puertas iguales y equidistantes
-- Piso y tapa pasantes (laterales entre ambos)
+- 3 puertas iguales
+- Gola J inferior continua
+- Fondo 3 mm
 
-## Codigos de piezas
-- AC1: AC lateral izq
-- AC2: AC lateral der
-- AC3: AC piso
-- AC4: AC tapa
-- AC5: AC fondo 18 mm
-- AB1: AB lateral izq
-- AB2: AB lateral der
-- AB3: AB piso
-- AB4: AB tapa
-- AB5: AB fondo 3 mm
-- AB6: AB puerta 1
-- AB7: AB puerta 2
-- AB8: AB puerta 3
-
-## Secuencia de armado
-1. Armar AC (paraiso): laterales + piso + tapa.
-2. Armar AB (blanco): laterales + piso + tapa.
-3. Fijar fondo 3 mm de AB para escuadra.
-4. Montar AB sobre AC.
-5. Colocar puertas AB6, AB7 y AB8 y regular luces.
+## Nota
+- AC reemplaza la solucion anterior en 25.4 mm: ahora es doble 18 mm (36 mm visuales) + fondo de 18 mm.
