@@ -315,10 +315,10 @@ def main():
     add_box(
         doc,
         "I4B_Parante_Union_CR",
-        X_P2,
+        X_P2 + TH,
         0,
         Z_BOTTOM_TOP,
-        TH,
+        60.0,
         TH,
         SIDE_H,
     )
@@ -330,17 +330,21 @@ def main():
             1,
             SIDE_H,
             TH,
-            TH,
+            60.0,
             "Canto frente",
         )
     )
 
     # Pisos pasantes por modulo (sin piso en lavavajillas)
-    add_box(doc, "I5_Piso_Izq", TH, 0, Z_BOTTOM, OPEN_LEFT, DEPTH, TH)
-    parts.append(("I5", "Casco", "Piso_Izq", 1, OPEN_LEFT, DEPTH, TH, "Canto frente"))
+    add_box(doc, "I5_Piso_Izq", 0, 0, Z_BOTTOM, OPEN_LEFT + 2.0 * TH, DEPTH, TH)
+    parts.append(
+        ("I5", "Casco", "Piso_Izq", 1, OPEN_LEFT + 2.0 * TH, DEPTH, TH, "Canto frente")
+    )
 
-    add_box(doc, "I6_Piso_Der", X_P2 + TH, 0, Z_BOTTOM, OPEN_RIGHT, DEPTH, TH)
-    parts.append(("I6", "Casco", "Piso_Der", 1, OPEN_RIGHT, DEPTH, TH, "Canto frente"))
+    add_box(doc, "I6_Piso_Der", X_P2, 0, Z_BOTTOM, OPEN_RIGHT + 2.0 * TH, DEPTH, TH)
+    parts.append(
+        ("I6", "Casco", "Piso_Der", 1, OPEN_RIGHT + 2.0 * TH, DEPTH, TH, "Canto frente")
+    )
 
     # Lateral derecho del nicho de cava (blanco), en profundidad.
     add_box(
