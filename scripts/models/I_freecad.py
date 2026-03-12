@@ -307,7 +307,7 @@ def main():
         doc,
         "I1C_Fondo_Cajonera",
         0,
-        LEFT_FRONT_BLOCK_D,
+        LEFT_FRONT_BLOCK_D - TH,
         Z_BOTTOM_TOP,
         OPEN_LEFT + TH,
         TH,
