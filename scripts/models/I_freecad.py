@@ -283,10 +283,10 @@ def main():
     add_box(
         doc,
         "I1B_Lateral_Izq_Trasero",
-        TH,
+        0,
         DEPTH - TH,
         Z_BOTTOM_TOP,
-        OPEN_LEFT,
+        OPEN_LEFT + TH,
         TH,
         SIDE_H,
     )
@@ -297,7 +297,7 @@ def main():
             "Fondo_Modulo_Izq",
             1,
             SIDE_H,
-            OPEN_LEFT,
+            OPEN_LEFT + TH,
             TH,
             "Canto frente",
         )
@@ -377,7 +377,9 @@ def main():
     add_box(
         doc, "V2_Cava_Lateral_Der", v_x, v_y + V_FACE_W - 2.0 * TH, v_z, V_DX, TH, V_H
     )
-    add_box(doc, "V3_Cava_Base", v_x + TH, v_y + TH, v_z, V_DX - TH, v_inner_w, TH)
+    add_box(
+        doc, "V3_Cava_Base", v_x + TH, v_y + TH, v_z, V_DX - 2.0 * TH, v_inner_w, TH
+    )
     add_box(
         doc,
         "V4_Cava_Tapa",
@@ -409,7 +411,16 @@ def main():
         [
             ("V1", "Cava_Paraiso", "Lateral_Izq", 1, V_H, V_DX, TH, "Canto frente"),
             ("V2", "Cava_Paraiso", "Lateral_Der", 1, V_H, V_DX, TH, "Canto frente"),
-            ("V3", "Cava_Paraiso", "Base", 1, V_DX - TH, v_inner_w, TH, "Canto frente"),
+            (
+                "V3",
+                "Cava_Paraiso",
+                "Base",
+                1,
+                V_DX - 2.0 * TH,
+                v_inner_w,
+                TH,
+                "Canto frente",
+            ),
             (
                 "V4",
                 "Cava_Paraiso",
