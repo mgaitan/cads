@@ -52,7 +52,7 @@ LEG_INSET = 30.0
 W_INT = WIDTH - 2 * TH
 W_INT_REGR = WIDTH - 4 * TH
 SIDE_H = BODY_HEIGHT - TOE_H
-SIDE_PANEL_H = SIDE_H + SIDE_TOP_RISE
+SIDE_PANEL_H = SIDE_H + (TOP_DRAWER_H - 3.0 * TH - 4.0)
 LEFT_SIDE_PANEL_H = HEIGHT_TOTAL - TOE_H
 Z_BOTTOM = TOE_H
 Z_TOP = BODY_HEIGHT
@@ -343,11 +343,11 @@ def main():
     add_box(
         doc,
         "F9_Estante_Fijo_Interior",
-        MOD_X_VIS,
-        VISIBLE_SETBACK_Y,
-        SHELF_Z_2,
-        W_VIS,
-        MOD_INT_D - VISIBLE_SETBACK_Y,
+        MOD_X,
+        0,
+        SHELF_Z_2 + TH,
+        W_INT_REGR,
+        MOD_INT_D,
         TH,
     )
     parts.append(
@@ -356,8 +356,8 @@ def main():
             "Horizontal",
             "Estante_Fijo_Interior",
             1,
-            W_VIS,
-            MOD_INT_D - VISIBLE_SETBACK_Y,
+            W_INT_REGR,
+            MOD_INT_D,
             TH,
             "Canto frente",
         )
@@ -367,11 +367,11 @@ def main():
     add_box(
         doc,
         "F20_Regrueso_Sobre_F9",
-        MOD_X_VIS,
+        MOD_X,
         0,
-        SHELF_Z_2 + TH,
-        W_VIS,
-        DEPTH_MOD,
+        SHELF_Z_2,
+        W_INT_REGR,
+        MIN_STRIP,
         TH,
     )
     parts.append(
@@ -380,8 +380,8 @@ def main():
             "Regrueso",
             "Regrueso_Sobre_F9",
             1,
-            W_VIS,
-            DEPTH_MOD,
+            W_INT_REGR,
+            MIN_STRIP,
             TH,
             "Canto frente",
         )
@@ -489,16 +489,16 @@ def main():
     # Cajon superior corrido (en L invertida), toma el techo del sector modular y continua 1540 mm.
     top_z0 = BODY_HEIGHT
     inner_top_w = TOP_DRAWER_TOTAL_W - 2.0 * TH
-    inner_top_d = TOP_DRAWER_D - TH
+    inner_top_d = TOP_DRAWER_D - 2.0 * TH
 
     add_box(
         doc,
         "F23_Cajon_Sup_Lateral_Der",
         TOP_DRAWER_TOTAL_W - 2.0 * TH,
-        0,
+        TH,
         top_z0 + TH,
         TH,
-        inner_top_d,
+        TOP_DRAWER_D - 2.0 * TH,
         TOP_DRAWER_H - TH,
     )
     parts.append(
@@ -508,7 +508,7 @@ def main():
             "Lateral_Der",
             1,
             TOP_DRAWER_H - TH,
-            inner_top_d,
+            TOP_DRAWER_D - 2.0 * TH,
             TH,
             "Canto frente",
         )
@@ -517,12 +517,12 @@ def main():
     add_box(
         doc,
         "F24_Cajon_Sup_Trasera",
-        WIDTH - TH,
+        TH,
         TOP_DRAWER_D - TH,
         top_z0,
-        TOP_DRAWER_TOTAL_W - WIDTH,
+        TOP_DRAWER_TOTAL_W - 2.0 * TH,
         TH,
-        SIDE_TOP_RISE,
+        TOP_DRAWER_H - 3.0 * TH - 4.0,
     )
     parts.append(
         (
@@ -530,8 +530,8 @@ def main():
             "Cajon_Sup",
             "Trasera",
             1,
-            TOP_DRAWER_TOTAL_W - WIDTH,
-            SIDE_TOP_RISE,
+            TOP_DRAWER_TOTAL_W - 2.0 * TH,
+            TOP_DRAWER_H - 3.0 * TH - 4.0,
             TH,
             "Sin canto",
         )
@@ -552,7 +552,7 @@ def main():
         doc,
         "F25_Cajon_Sup_Piso",
         TH,
-        0,
+        TH,
         top_z0,
         inner_top_w,
         inner_top_d,
@@ -575,10 +575,10 @@ def main():
     add_box(
         doc,
         "F26_Cajon_Sup_Frente",
+        TH,
         0,
-        -TH,
         top_z0,
-        TOP_DRAWER_TOTAL_W,
+        TOP_DRAWER_TOTAL_W - 2.0 * TH,
         TH,
         TOP_DRAWER_H,
     )
@@ -588,7 +588,7 @@ def main():
             "Frente",
             "Frente_Cajon_Superior",
             1,
-            TOP_DRAWER_TOTAL_W,
+            TOP_DRAWER_TOTAL_W - 2.0 * TH,
             TOP_DRAWER_H,
             TH,
             "4 cantos",

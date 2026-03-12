@@ -28,6 +28,7 @@ if not os.environ.get("FREECAD_NO_GUI"):
 TH = 18.0
 BACK_TH = 6.0
 DRAWER_BOTTOM_TH = 6.0
+MIN_STRIP = 50.0
 
 WIDTH = 1540.0
 DEPTH = 600.0
@@ -291,9 +292,27 @@ def main():
         )
     )
 
-    add_box(doc, "I1B_Lateral_Izq_Trasero", 0, DEPTH - TH, Z_BOTTOM_TOP, TH, TH, SIDE_H)
+    add_box(
+        doc,
+        "I1B_Lateral_Izq_Trasero",
+        0,
+        DEPTH - MIN_STRIP,
+        Z_BOTTOM_TOP,
+        TH,
+        MIN_STRIP,
+        SIDE_H,
+    )
     parts.append(
-        ("I1B", "Casco", "Lateral_Izq_Trasero", 1, SIDE_H, TH, TH, "Canto frente")
+        (
+            "I1B",
+            "Casco",
+            "Lateral_Izq_Trasero",
+            1,
+            SIDE_H,
+            MIN_STRIP,
+            TH,
+            "Canto frente",
+        )
     )
 
     add_box(doc, "I2_Lateral_Der", WIDTH - TH, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
@@ -309,10 +328,10 @@ def main():
         doc,
         "I4B_Parante_Union_CR",
         EXTRA_STILE_X,
-        -TH,
+        -MIN_STRIP,
         Z_BOTTOM_TOP,
         EXTRA_STILE_W,
-        TH,
+        MIN_STRIP,
         SIDE_H,
     )
     parts.append(
@@ -322,7 +341,7 @@ def main():
             "Parante_Union_CR",
             1,
             SIDE_H,
-            TH,
+            MIN_STRIP,
             EXTRA_STILE_W,
             "Canto frente",
         )

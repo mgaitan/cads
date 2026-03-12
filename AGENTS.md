@@ -11,6 +11,8 @@ Desarrollar muebles de cocina parametrizados y producir:
 - Piezas etiquetadas como `H1`, `AA1`, etc.
 - Unidades: milímetros.
 - Espesor melamina por defecto: `18 mm`.
+- Regla de corte: ninguna pieza de placa debe tener `largo` o `ancho` menor a `50 mm`.
+  El espesor no cuenta para esta restricción.
 
 ## Estructura de trabajo
 - Scripts de modelado: `scripts/models/`
