@@ -70,7 +70,6 @@ CENTER_GAP = GRID_GAP
 SEAM_INSET_L = GRID_GAP / 2.0  # deja 4 mm de luz total con BA (2 + 2)
 OUTER_OVERLAY_R = TH / 2.0
 ROW_GAP = GRID_GAP
-FINGER_CLEAR = GOLA_SETBACK - TH
 
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
@@ -82,9 +81,9 @@ SIDE_H = Z_TOP - Z_BOTTOM_TOP
 # Se deja luz inferior igual al GRID_GAP para completar el efecto de grilla.
 ROW3_Z = Z_BOTTOM + ROW_GAP
 TOTAL_FACE_H = Z_TOP_SUPPORT - ROW3_Z
-MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 2.0 * ROW_GAP) / 2.0
-ROW2_Z = ROW3_Z + MID_BOT_H + ROW_GAP
-ROW1_Z = ROW2_Z + MID_BOT_H + ROW_GAP
+MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 2.0 * GOLA_VISIBLE_H) / 2.0
+ROW2_Z = ROW3_Z + MID_BOT_H + GOLA_VISIBLE_H
+ROW1_Z = ROW2_Z + MID_BOT_H + GOLA_VISIBLE_H
 
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
@@ -96,7 +95,7 @@ DRAWER_OUT_W = COL_INT_W - 2 * SLIDE_CLR
 LEFT_COL_X = TH
 RIGHT_COL_X = TH + COL_INT_W + TH
 
-TOP_BOX_H = 80.0
+TOP_BOX_H = 60.0
 LOW_BOX_H = 180.0
 
 
@@ -328,32 +327,32 @@ def main():
     x_l = SEAM_INSET_L
     x_r = x_l + FRONT_W + CENTER_GAP
 
-    add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H - FINGER_CLEAR)
-    add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H - FINGER_CLEAR)
+    add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
+    add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
     parts.append(
-        ("BB8", "Frente", "Frente_Top", 2, FRONT_W, TOP_FRONT_H - FINGER_CLEAR, TH, "4 cantos")
+        ("BB8", "Frente", "Frente_Top", 2, FRONT_W, TOP_FRONT_H, TH, "4 cantos")
     )
 
-    add_box(doc, "BB10_Frente_Mid_Izq", x_l, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
-    add_box(doc, "BB11_Frente_Mid_Der", x_r, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
+    add_box(doc, "BB10_Frente_Mid_Izq", x_l, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H)
+    add_box(doc, "BB11_Frente_Mid_Der", x_r, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H)
     parts.append(
-        ("BB10", "Frente", "Frente_Mid", 2, FRONT_W, MID_BOT_H - FINGER_CLEAR, TH, "4 cantos")
+        ("BB10", "Frente", "Frente_Mid", 2, FRONT_W, MID_BOT_H, TH, "4 cantos")
     )
 
-    add_box(doc, "BB12_Frente_Bot_Izq", x_l, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
-    add_box(doc, "BB13_Frente_Bot_Der", x_r, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
+    add_box(doc, "BB12_Frente_Bot_Izq", x_l, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H)
+    add_box(doc, "BB13_Frente_Bot_Der", x_r, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H)
     parts.append(
-        ("BB12", "Frente", "Frente_Bot", 2, FRONT_W, MID_BOT_H - FINGER_CLEAR, TH, "4 cantos")
+        ("BB12", "Frente", "Frente_Bot", 2, FRONT_W, MID_BOT_H, TH, "4 cantos")
     )
 
     # Cajas de cajones (6 unidades)
-    y_draw = TH
+    y_draw = 0
     add_drawer(
         doc,
         "BB14_Caja_Top_Izq",
         LEFT_COL_X + SLIDE_CLR,
         y_draw,
-        ROW1_Z + TH,
+        ROW1_Z + TH + GOLA_VISIBLE_H,
         DRAWER_OUT_W,
         DRAWER_DEPTH,
         TOP_BOX_H,
@@ -365,7 +364,7 @@ def main():
         "BB15_Caja_Top_Der",
         RIGHT_COL_X + SLIDE_CLR,
         y_draw,
-        ROW1_Z + TH,
+        ROW1_Z + TH + GOLA_VISIBLE_H,
         DRAWER_OUT_W,
         DRAWER_DEPTH,
         TOP_BOX_H,
@@ -378,7 +377,7 @@ def main():
         "BB16_Caja_Mid_Izq",
         LEFT_COL_X + SLIDE_CLR,
         y_draw,
-        ROW2_Z + TH,
+        ROW2_Z + TH + 10.0,
         DRAWER_OUT_W,
         DRAWER_DEPTH,
         LOW_BOX_H,
@@ -390,7 +389,7 @@ def main():
         "BB17_Caja_Mid_Der",
         RIGHT_COL_X + SLIDE_CLR,
         y_draw,
-        ROW2_Z + TH,
+        ROW2_Z + TH + 10.0,
         DRAWER_OUT_W,
         DRAWER_DEPTH,
         LOW_BOX_H,
@@ -424,13 +423,13 @@ def main():
     )
 
     # Perfiles gola
-    c_top_z = (ROW1_Z - ROW_GAP) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
+    c_top_z = (ROW2_Z + MID_BOT_H) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
     make_c_gola(doc, "BB20_Gola_C_Superior", 0, 0, c_top_z, WIDTH)
     parts.append(
         ("BB20", "Herraje", "Gola_C_Superior", 1, WIDTH, C_GOLA_TOTAL_H, C_GOLA_D, "Aluminio")
     )
 
-    j_mid_z = ROW2_Z - (J_GOLA_TOTAL_H - GOLA_VISIBLE_H)
+    j_mid_z = (ROW3_Z + MID_BOT_H) - GOLA_VISIBLE_H
     make_j_gola(doc, "BB21_Gola_J_Media", 0, 0, j_mid_z, WIDTH)
     parts.append(
         ("BB21", "Herraje", "Gola_J_Media", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
