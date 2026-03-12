@@ -72,14 +72,10 @@ LEFT_REAR_NICHE_D = 350.0
 LEFT_FRONT_BLOCK_D = 311.0
 DRAWER_DEPTH = LEFT_FRONT_BLOCK_D - 2.0 * TH
 
-# Cava integrada en el nicho (simil paraiso), orientada perpendicular a cajones.
-V_CLR = 2.0
-V_FACE_W = LEFT_NICHE_W - V_CLR
-V_DX = 330.0
-V_COLS = 2
-V_ROWS = 3
-V_CELL = (V_FACE_W - (V_COLS + 1.0) * TH) / V_COLS
-V_H = (V_ROWS + 1.0) * TH + V_ROWS * V_CELL
+# Nicho izquierdo abierto con estante regulable.
+NICHE_D = DEPTH - LEFT_FRONT_BLOCK_D
+NICHE_SHELF_W = LEFT_NICHE_W - 2.0
+NICHE_SHELF_D = NICHE_D - 2.0
 
 # Cotas Z
 Z_BOTTOM = TOE_H
@@ -306,10 +302,10 @@ def main():
     add_box(
         doc,
         "I1C_Fondo_Cajonera",
-        0,
+        TH,
         LEFT_FRONT_BLOCK_D - TH,
         Z_BOTTOM_TOP,
-        OPEN_LEFT + TH,
+        OPEN_LEFT,
         TH,
         SIDE_H,
     )
@@ -320,7 +316,7 @@ def main():
             "Fondo_Cajonera",
             1,
             SIDE_H,
-            OPEN_LEFT + TH,
+            OPEN_LEFT,
             TH,
             "Canto frente",
         )
@@ -369,92 +365,76 @@ def main():
         ("I6", "Casco", "Piso_Der", 1, OPEN_RIGHT + 2.0 * TH, DEPTH, TH, "Canto frente")
     )
 
-    # Cava integrada (codigo V) dentro del nicho trasero izquierdo.
-    v_x = TH
-    v_y = DEPTH - V_FACE_W
-    v_z = Z_BOTTOM_TOP
-    v_inner_w = V_FACE_W - 2.0 * TH
-    v_inner_h = V_H - 2.0 * TH
-
-    add_box(doc, "V1_Cava_Lateral_Izq", v_x, v_y, v_z, V_DX, TH, V_H)
-    add_box(
-        doc, "V2_Cava_Lateral_Der", v_x, v_y + V_FACE_W - 2.0 * TH, v_z, V_DX, TH, V_H
-    )
-    add_box(
-        doc, "V3_Cava_Base", v_x + TH, v_y + TH, v_z, V_DX - 2.0 * TH, v_inner_w, TH
-    )
+    niche_x = TH
+    niche_y = LEFT_FRONT_BLOCK_D
+    niche_shelf_z = Z_BOTTOM_TOP + (SIDE_H - TH) / 2.0
     add_box(
         doc,
-        "V4_Cava_Tapa",
-        v_x + TH,
-        v_y + TH,
-        v_z + V_H - TH,
-        V_DX - 2.0 * TH,
-        v_inner_w,
+        "I8_Estante_Nicho_Regulable",
+        niche_x + 1.0,
+        niche_y + 1.0,
+        niche_shelf_z,
+        NICHE_SHELF_W,
+        NICHE_SHELF_D,
         TH,
     )
-
-    y_div = v_y + TH + V_CELL
-    add_box(doc, "V5_Cava_Divisor_Vert", v_x, y_div, v_z + TH, V_DX, TH, v_inner_h)
-
-    for i in range(1, V_ROWS):
-        z_h = v_z + TH + i * V_CELL + (i - 1) * TH
-        add_box(
-            doc,
-            f"V{5 + i}_Cava_Divisor_Hor_{i}",
-            v_x + TH,
-            v_y + TH,
-            z_h,
-            V_DX - 2.0 * TH,
-            v_inner_w,
+    parts.append(
+        (
+            "I8",
+            "Nicho",
+            "Estante_Nicho_Regulable",
+            1,
+            NICHE_SHELF_W,
+            NICHE_SHELF_D,
             TH,
+            "Canto frente",
         )
+    )
 
-    parts.extend(
-        [
-            ("V1", "Cava_Paraiso", "Lateral_Izq", 1, V_H, V_DX, TH, "Canto frente"),
-            ("V2", "Cava_Paraiso", "Lateral_Der", 1, V_H, V_DX, TH, "Canto frente"),
-            (
-                "V3",
-                "Cava_Paraiso",
-                "Base",
-                1,
-                V_DX - 2.0 * TH,
-                v_inner_w,
-                TH,
-                "Canto frente",
-            ),
-            (
-                "V4",
-                "Cava_Paraiso",
-                "Tapa",
-                1,
-                V_DX - 2.0 * TH,
-                v_inner_w,
-                TH,
-                "Canto frente",
-            ),
-            (
-                "V5",
-                "Cava_Paraiso",
-                "Divisor_Vert",
-                1,
-                v_inner_h,
-                V_DX,
-                TH,
-                "Canto frente",
-            ),
-            (
-                "V6",
-                "Cava_Paraiso",
-                "Divisor_Hor",
-                V_ROWS - 1,
-                V_DX - 2.0 * TH,
-                v_inner_w,
-                TH,
-                "Canto frente",
-            ),
-        ]
+    add_box(
+        doc,
+        "I8C_Faja_Frontal_Estante_Nicho",
+        niche_x,
+        niche_y,
+        niche_shelf_z - TH,
+        TH,
+        NICHE_D,
+        TH,
+    )
+    parts.append(
+        (
+            "I8C",
+            "Nicho",
+            "Faja_Frontal_Estante_Nicho",
+            1,
+            NICHE_D,
+            TH,
+            TH,
+            "Canto frente",
+        )
+    )
+
+    add_box(
+        doc,
+        "I8B_Faja_Superior_Nicho",
+        niche_x,
+        niche_y,
+        Z_TOP_SUPPORT,
+        TH,
+        NICHE_D,
+        50.0,
+    )
+    parts.append(
+        (
+            "I8B",
+            "Nicho",
+            "Faja_Superior_Nicho",
+            1,
+            NICHE_D,
+            50.0,
+            TH,
+            "Canto frente",
+        )
     )
 
     # Soportes superiores
@@ -711,8 +691,8 @@ def main():
     print(f"- Altura puerta der / frente lavavajillas: {DOOR_H:.3f} mm")
     print(f"- Nicho izquierdo (ancho): {LEFT_NICHE_W} mm")
     print(f"- Nicho trasero izquierdo: {LEFT_REAR_NICHE_D} mm profundidad")
-    print(f"- Cava integrada (V): {V_DX:.1f}x{V_FACE_W:.1f}x{V_H:.1f} mm (XxYxZ)")
-    print(f"- Hueco cava: {V_CELL:.1f} x {V_CELL:.1f} mm")
+    print(f"- Nicho izquierdo abierto: {LEFT_NICHE_W:.1f} x {NICHE_D:.1f} mm (XxY)")
+    print(f"- Estante regulable nicho: {NICHE_SHELF_W:.1f} x {NICHE_SHELF_D:.1f} mm")
 
 
 if __name__ == "__main__":
