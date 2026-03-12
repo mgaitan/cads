@@ -143,38 +143,48 @@ def add_compound(doc, name, shapes):
 
 
 def make_j_gola(doc, x, y, z, length):
+    y0 = y
     shapes = [
         Part.makeBox(
-            length, GOLA_TH, J_GOLA_TOTAL_H, App.Vector(x, y + J_GOLA_D - GOLA_TH, z)
+            length, GOLA_TH, J_GOLA_TOTAL_H, App.Vector(x, y0 + J_GOLA_D - GOLA_TH, z)
         ),
-        Part.makeBox(length, J_GOLA_D, GOLA_TH, App.Vector(x, y, z)),
-        Part.makeBox(length, GOLA_TH, 6.0, App.Vector(x, y, z)),
+        Part.makeBox(length, J_GOLA_D, GOLA_TH, App.Vector(x, y0, z)),
+        Part.makeBox(length, GOLA_TH, 6.0, App.Vector(x, y0, z)),
         Part.makeBox(
             length,
             6.0,
             GOLA_TH,
-            App.Vector(x, y + J_GOLA_D - 6.0, z + J_GOLA_TOTAL_H - GOLA_TH),
+            App.Vector(x, y0 + J_GOLA_D - 6.0, z + GOLA_TH),
         ),
     ]
     return add_compound(doc, "I12_Gola_J_Superior", shapes)
 
 
 def make_c_gola(doc, x, y, z, length):
+    y0 = y
     lip_h = 10.0
     shapes = [
         Part.makeBox(
-            length, GOLA_TH, C_GOLA_TOTAL_H, App.Vector(x, y + C_GOLA_D - GOLA_TH, z)
+            length, GOLA_TH, C_GOLA_TOTAL_H, App.Vector(x, y0 + C_GOLA_D - GOLA_TH, z)
         ),
-        Part.makeBox(length, C_GOLA_D, GOLA_TH, App.Vector(x, y, z)),
+        Part.makeBox(length, C_GOLA_D, GOLA_TH, App.Vector(x, y0, z)),
         Part.makeBox(
-            length, C_GOLA_D, GOLA_TH, App.Vector(x, y, z + C_GOLA_TOTAL_H - GOLA_TH)
+            length,
+            C_GOLA_D,
+            GOLA_TH,
+            App.Vector(x, y0, z + C_GOLA_TOTAL_H - GOLA_TH),
         ),
-        Part.makeBox(length, GOLA_TH, lip_h, App.Vector(x, y, z + GOLA_TH)),
         Part.makeBox(
             length,
             GOLA_TH,
             lip_h,
-            App.Vector(x, y, z + C_GOLA_TOTAL_H - GOLA_TH - lip_h),
+            App.Vector(x, y0, z + GOLA_TH),
+        ),
+        Part.makeBox(
+            length,
+            GOLA_TH,
+            lip_h,
+            App.Vector(x, y0, z + C_GOLA_TOTAL_H - GOLA_TH - lip_h),
         ),
     ]
     return add_compound(doc, "I13_Gola_C_Cajon_Medio_Bajo", shapes)
@@ -424,10 +434,10 @@ def main():
         doc,
         "I8_Estante_Nicho_Regulable",
         niche_x + 1.0,
-        niche_y - 39.0,
+        niche_y,
         niche_shelf_z,
         NICHE_SHELF_W,
-        NICHE_SHELF_D + 40.0,
+        NICHE_D,
         TH,
     )
     parts.append(
@@ -437,7 +447,7 @@ def main():
             "Estante_Nicho_Regulable",
             1,
             NICHE_SHELF_W,
-            NICHE_SHELF_D + 40.0,
+            NICHE_D,
             TH,
             "Canto frente",
         )
@@ -449,7 +459,7 @@ def main():
         niche_x,
         niche_y,
         niche_shelf_z - TH,
-        TH,
+        50.0,
         NICHE_D,
         TH,
     )
@@ -460,7 +470,7 @@ def main():
             "Faja_Frontal_Estante_Nicho",
             1,
             NICHE_D,
-            TH,
+            50.0,
             TH,
             "Canto frente",
         )
@@ -675,7 +685,7 @@ def main():
         "I20_Cajon_Med",
         drawer_x,
         drawer_y,
-        ROW2_Z + 20.0,
+        ROW2_Z + 38.0,
         drawer_outer_w,
         DRAWER_DEPTH,
         box_h,
