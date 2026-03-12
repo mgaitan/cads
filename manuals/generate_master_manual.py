@@ -102,6 +102,9 @@ def ensemble_section(md_path: Path, code: str, title: str) -> str:
         img(md_path, shots / f'{code}_iso.png', f'{code} Iso', '48%'),
         img(md_path, shots / f'{code}_front.png', f'{code} Frente', '48%'),
         img(md_path, shots / f'{code}_left.png', f'{code} Lateral', '48%'),
+        img(md_path, shots / f'{code}_right.png', f'{code} Lateral opuesto', '48%'),
+        img(md_path, shots / f'{code}_rear.png', f'{code} Posterior', '48%'),
+        img(md_path, shots / f'{code}_top.png', f'{code} Superior', '48%'),
     ])
     return f"""
 ## {code} - {title}

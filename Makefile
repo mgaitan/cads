@@ -3,7 +3,7 @@ SHELL := /bin/bash
 MODELS_SCRIPT_DIR := scripts/models
 MACRO_DIR := scripts/macros
 
-.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble model-ensamble-isla screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts site clean-screens clean-manuales clean-models help
+.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble model-ensamble-isla screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts web-models site clean-screens clean-manuales clean-models help
 
 all: model
 
@@ -76,7 +76,11 @@ optimize-cuts:
 	uv run scripts/tools/optimize_cuts.py --svg
 
 site:
+	python3 scripts/tools/export_web_meshes.py
 	python3 scripts/tools/generate_site.py
+
+web-models:
+	python3 scripts/tools/export_web_meshes.py
 
 
 clean-screens:
@@ -106,4 +110,5 @@ help:
 	@echo "  make manual-all       Genera manual integral unico (ensamble + modulos + BOM total)"
 	@echo "  make manuales         Genera manuales PDF/HTML/MD de H, AA y AB"
 	@echo "  make optimize-cuts    Optimiza cortes de placas y genera layouts SVG (OR-Tools + uv)"
+	@echo "  make web-models       Exporta STL livianos para el sitio web"
 	@echo "  make clean-models     Limpia FCStd/STEP/BOM generados"
