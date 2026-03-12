@@ -50,9 +50,12 @@ def main():
     i_w = 1540.0
     f_w = 780.0
     f_d = 950.0
+    i_d = 650.0
     wall_th = 150.0
     wall_h = 1080.0
-    bar_th = 40.0
+    bar_th = 30.0
+    bar_w = 370.0
+    bar_len = i_w + 20.0
 
     doc = App.newDocument("IslaEnsamble")
     objs = []
@@ -69,11 +72,19 @@ def main():
             180.0,
         )
     )
+    wall_y = i_d
+    objs.append(add_box(doc, "ENSI_Muro_Fondo_Heladera", 0, wall_y, 0, i_w, wall_th, wall_h))
     objs.append(
-        add_box(doc, "ENSI_Muro_Fondo_Heladera", 0, f_d, 0, i_w, wall_th, wall_h)
-    )
-    objs.append(
-        add_box(doc, "ENSI_Barra_Sobre_Muro", 0, 0, wall_h, i_w, f_d + wall_th, bar_th)
+        add_box(
+            doc,
+            "ENSI_Barra_Sobre_Muro",
+            -20.0,
+            wall_y - 50.0,
+            wall_h,
+            bar_len,
+            bar_w,
+            bar_th,
+        )
     )
 
     doc.recompute()
@@ -89,8 +100,8 @@ def main():
     print("\nLayout frontal:")
     print("- I: x=0..1540")
     print("- F: x=1540..2320")
-    print("- Muro: x=0..1540, y=950..1100, h=1080")
-    print("- Barra: x=0..1540, y=0..1100, esp=40")
+    print(f"- Muro: x=0..1540, y={wall_y:.0f}..{wall_y + wall_th:.0f}, h=1080")
+    print(f"- Barra: x=-20..{bar_len - 20.0:.0f}, y={wall_y - 50.0:.0f}..{wall_y - 50.0 + bar_w:.0f}, esp=30")
 
 
 if __name__ == "__main__":
