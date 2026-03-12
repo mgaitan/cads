@@ -18,13 +18,15 @@ import FreeCAD as App
 import Part
 
 GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 # Parametros principales (mm)
 TH = 18.0
@@ -39,12 +41,13 @@ OVEN_OPENING_VISIBLE_H = 599.0
 OVEN_OPENING_W = 600.0
 
 MICRO_OPENING_H = 420.0
-MICRO_SHIFT_UP = 20.0
+MICRO_SHIFT_UP = 0.0
 FASCIA_H = 50.0  # altura de cada faja frontal
 # Juego interno oculto por faja central (ajustado para alinear lineas de gola en ensamble)
 OVEN_EXTRA_INTERNAL_H = 13.0
 GOLA_H = 25.0
 GOLA_D = 20.0
+AB_GOLA_Z = 1809.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_INSET = 30.0
@@ -67,7 +70,8 @@ Z_OVEN_FASCIA_BOTTOM = Z_OVEN_BASE - FASCIA_H
 Z_OVEN_SHELF_BOTTOM = Z_OVEN_BASE - TH
 
 Z_MICRO_BASE = Z_OVEN_INTERNAL_TOP + MICRO_SHIFT_UP
-Z_MICRO_TOP = Z_MICRO_BASE + MICRO_OPENING_H
+Z_MICRO_TOP = AB_GOLA_Z
+MICRO_OPENING_H = Z_MICRO_TOP - Z_MICRO_BASE
 Z_MICRO_SHELF_BOTTOM = Z_MICRO_BASE - TH
 Z_MICRO_TOP_FASCIA_BOTTOM = Z_MICRO_TOP - FASCIA_H
 
@@ -87,7 +91,6 @@ LOWER_MID_SHELF_Z = Z_BOTTOM_PANEL + (LOWER_CLEAR_H - TH) / 2.0
 
 # Compartimento superior (sobre micro)
 TOP_CLEAR_H = Z_TOP_PANEL - Z_MICRO_TOP
-
 # Puertas (frente aplicado, holgura 2 mm perimetral)
 # Puertas centradas sobre cantos de 18 mm:
 # solape 9 mm por lado (TH/2) en ancho y alto.
@@ -102,10 +105,8 @@ LOWER_DOOR_Z = Z_BOTTOM_PANEL
 LOWER_DOOR_TOP = Z_OVEN_FASCIA_BOTTOM
 LOWER_DOOR_H = LOWER_DOOR_TOP - LOWER_DOOR_Z
 
-UPPER_OPEN_Z0 = Z_MICRO_TOP + TH
-UPPER_OPEN_Z1 = Z_TOP_PANEL
-UPPER_DOOR_H = (UPPER_OPEN_Z1 - UPPER_OPEN_Z0) + TH
-UPPER_DOOR_Z = UPPER_OPEN_Z0 - DOOR_OVERLAP
+UPPER_DOOR_Z = AB_GOLA_Z + DOOR_OVERLAP
+UPPER_DOOR_H = (Z_TOP_PANEL + DOOR_OVERLAP) - UPPER_DOOR_Z
 
 DOOR_DEPTH = TH
 
@@ -445,7 +446,7 @@ def main():
         "H18_Gola_J_Sup",
         0,
         -GOLA_D,
-        UPPER_DOOR_Z,
+        AB_GOLA_Z,
         W,
         GOLA_D,
         GOLA_H,
