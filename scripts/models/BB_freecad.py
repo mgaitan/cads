@@ -327,10 +327,10 @@ def main():
     x_l = SEAM_INSET_L
     x_r = x_l + FRONT_W + CENTER_GAP
 
-    add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
-    add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
+    add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H + 9.0)
+    add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H + 9.0)
     parts.append(
-        ("BB8", "Frente", "Frente_Top", 2, FRONT_W, TOP_FRONT_H, TH, "4 cantos")
+        ("BB8", "Frente", "Frente_Top", 2, FRONT_W, TOP_FRONT_H + 9.0, TH, "4 cantos")
     )
 
     add_box(doc, "BB10_Frente_Mid_Izq", x_l, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H)
@@ -402,7 +402,7 @@ def main():
         "BB18_Caja_Bot_Izq",
         LEFT_COL_X + SLIDE_CLR,
         y_draw,
-        ROW3_Z + TH,
+        ROW3_Z + TH + 10.0,
         DRAWER_OUT_W,
         DRAWER_DEPTH,
         LOW_BOX_H,
@@ -414,7 +414,7 @@ def main():
         "BB19_Caja_Bot_Der",
         RIGHT_COL_X + SLIDE_CLR,
         y_draw,
-        ROW3_Z + TH,
+        ROW3_Z + TH + 10.0,
         DRAWER_OUT_W,
         DRAWER_DEPTH,
         LOW_BOX_H,
