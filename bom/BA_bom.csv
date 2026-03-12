@@ -11,6 +11,6 @@ BA8,Interior,Estante_Inferior,1,867.0,600.0,18.0,Canto frente,,
 BA9,Frente,Frente_Falso_Sup,1,892.0,130.0,18.0,4 cantos,,
 BA10,Frente,Frente_Mid_Ancho_Completo,1,892.0,315.0,18.0,4 cantos,,
 BA11,Frente,Frente_Bot_Ancho_Completo,1,892.0,315.0,18.0,4 cantos,,
-BA12,Herraje,Gola_C_Superior,1,903.0,25.0,20.0,Aluminio,0.903,
-BA13,Herraje,Gola_J_Media,1,903.0,25.0,20.0,Aluminio,0.903,
+BA12,Herraje,Gola_C_Superior,1,903.0,72.8,26.0,Aluminio,0.903,
+BA13,Herraje,Gola_J_Media,1,903.0,48.0,24.4,Aluminio,0.903,
 TOTAL,Resumen,Totales_Herrajes,,,,,,1.806,0

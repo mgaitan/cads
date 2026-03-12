@@ -9,10 +9,31 @@ Salida:
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 import FreeCAD as App
 import Part
+
+ROOT = Path(globals().get("__file__", Path.cwd())).resolve()
+if ROOT.is_file():
+    ROOT = ROOT.parents[2]
+else:
+    ROOT = Path.cwd()
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from cads.freecad_gola import (
+    C_GOLA_D,
+    C_GOLA_TOTAL_H,
+    GOLA_SETBACK,
+    GOLA_VISIBLE_H,
+    J_GOLA_D,
+    J_GOLA_TOTAL_H,
+    make_c_gola,
+    make_j_gola,
+)
 
 GUI_AVAILABLE = False
 Gui = None
@@ -39,8 +60,6 @@ TOP_SUPPORT_D = 100.0
 SLIDE_CLR = 12.7
 DRAWER_DEPTH = 500.0
 OPEN_DRAWER_OFFSET = 0.0  # frente enrasado para verificar grilla
-GOLA_H = 25.0
-GOLA_D = 20.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_INSET = 30.0
@@ -51,12 +70,13 @@ CENTER_GAP = GRID_GAP
 SEAM_INSET_L = GRID_GAP / 2.0  # deja 4 mm de luz total con BA (2 + 2)
 OUTER_OVERLAY_R = TH / 2.0
 ROW_GAP = GRID_GAP
+FINGER_CLEAR = GOLA_SETBACK - TH
 
 Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
-SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
+SIDE_H = Z_TOP - Z_BOTTOM_TOP
 
 # Fajas/frentes (3 filas), apoyando en canto inferior del soporte superior.
 # Se deja luz inferior igual al GRID_GAP para completar el efecto de grilla.
@@ -248,7 +268,7 @@ def main():
         "BB5_Soporte_Superior_Frente",
         TH,
         0,
-        Z_TOP_SUPPORT,
+        Z_TOP - TH,
         WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
         TH,
@@ -271,7 +291,7 @@ def main():
         "BB6_Soporte_Superior_Fondo",
         TH,
         DEPTH - TOP_SUPPORT_D,
-        Z_TOP_SUPPORT,
+        Z_TOP - TH,
         WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
         TH,
@@ -294,36 +314,36 @@ def main():
         doc,
         "BB7_Divisor_Central",
         TH + COL_INT_W,
-        TH,
+        0,
         Z_BOTTOM_TOP,
         TH,
-        D_INT - TH,
+        DEPTH,
         SIDE_H,
     )
     parts.append(
-        ("BB7", "Interior", "Divisor_Central", 1, SIDE_H, D_INT - TH, TH, "Sin canto")
+        ("BB7", "Interior", "Divisor_Central", 1, SIDE_H, DEPTH, TH, "Sin canto")
     )
 
     # Frentes (2 columnas x 3 filas = 6 cajones)
     x_l = SEAM_INSET_L
     x_r = x_l + FRONT_W + CENTER_GAP
 
-    add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
-    add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H)
+    add_box(doc, "BB8_Frente_Top_Izq", x_l, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H - FINGER_CLEAR)
+    add_box(doc, "BB9_Frente_Top_Der", x_r, -TH, ROW1_Z, FRONT_W, TH, TOP_FRONT_H - FINGER_CLEAR)
     parts.append(
-        ("BB8", "Frente", "Frente_Top", 2, FRONT_W, TOP_FRONT_H, TH, "4 cantos")
+        ("BB8", "Frente", "Frente_Top", 2, FRONT_W, TOP_FRONT_H - FINGER_CLEAR, TH, "4 cantos")
     )
 
-    add_box(doc, "BB10_Frente_Mid_Izq", x_l, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H)
-    add_box(doc, "BB11_Frente_Mid_Der", x_r, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H)
+    add_box(doc, "BB10_Frente_Mid_Izq", x_l, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
+    add_box(doc, "BB11_Frente_Mid_Der", x_r, -TH, ROW2_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
     parts.append(
-        ("BB10", "Frente", "Frente_Mid", 2, FRONT_W, MID_BOT_H, TH, "4 cantos")
+        ("BB10", "Frente", "Frente_Mid", 2, FRONT_W, MID_BOT_H - FINGER_CLEAR, TH, "4 cantos")
     )
 
-    add_box(doc, "BB12_Frente_Bot_Izq", x_l, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H)
-    add_box(doc, "BB13_Frente_Bot_Der", x_r, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H)
+    add_box(doc, "BB12_Frente_Bot_Izq", x_l, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
+    add_box(doc, "BB13_Frente_Bot_Der", x_r, -TH, ROW3_Z, FRONT_W, TH, MID_BOT_H - FINGER_CLEAR)
     parts.append(
-        ("BB12", "Frente", "Frente_Bot", 2, FRONT_W, MID_BOT_H, TH, "4 cantos")
+        ("BB12", "Frente", "Frente_Bot", 2, FRONT_W, MID_BOT_H - FINGER_CLEAR, TH, "4 cantos")
     )
 
     # Cajas de cajones (6 unidades)
@@ -404,23 +424,16 @@ def main():
     )
 
     # Perfiles gola
-    add_box(
-        doc,
-        "BB20_Gola_C_Superior",
-        0,
-        -GOLA_D,
-        ROW1_Z - ROW_GAP,
-        WIDTH,
-        GOLA_D,
-        GOLA_H,
-    )
+    c_top_z = (ROW1_Z - ROW_GAP) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
+    make_c_gola(doc, "BB20_Gola_C_Superior", 0, 0, c_top_z, WIDTH)
     parts.append(
-        ("BB20", "Herraje", "Gola_C_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("BB20", "Herraje", "Gola_C_Superior", 1, WIDTH, C_GOLA_TOTAL_H, C_GOLA_D, "Aluminio")
     )
 
-    add_box(doc, "BB21_Gola_J_Media", 0, -GOLA_D, ROW2_Z, WIDTH, GOLA_D, GOLA_H)
+    j_mid_z = ROW2_Z - (J_GOLA_TOTAL_H - GOLA_VISIBLE_H)
+    make_j_gola(doc, "BB21_Gola_J_Media", 0, 0, j_mid_z, WIDTH)
     parts.append(
-        ("BB21", "Herraje", "Gola_J_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("BB21", "Herraje", "Gola_J_Media", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
     )
 
     # Visual: dejar un cajon apenas abierto (fila media izquierda).

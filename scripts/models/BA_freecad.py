@@ -9,10 +9,31 @@ Salida:
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 import FreeCAD as App
 import Part
+
+ROOT = Path(globals().get("__file__", Path.cwd())).resolve()
+if ROOT.is_file():
+    ROOT = ROOT.parents[2]
+else:
+    ROOT = Path.cwd()
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from cads.freecad_gola import (
+    C_GOLA_D,
+    C_GOLA_TOTAL_H,
+    GOLA_SETBACK,
+    GOLA_VISIBLE_H,
+    J_GOLA_D,
+    J_GOLA_TOTAL_H,
+    make_c_gola,
+    make_j_gola,
+)
 
 GUI_AVAILABLE = False
 Gui = None
@@ -39,8 +60,6 @@ TOP_FRONT_H = 130.0
 TOP_SUPPORT_D = 100.0
 SLIDE_CLR = 12.7
 DRAWER_DEPTH = 500.0
-GOLA_H = 25.0
-GOLA_D = 20.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_INSET = 30.0
@@ -252,7 +271,7 @@ def main():
         doc,
         "BA5_Soporte_Superior_Frente",
         TH,
-        0,
+        GOLA_SETBACK,
         Z_TOP_SUPPORT,
         WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
@@ -378,23 +397,16 @@ def main():
     )
 
     # Perfiles gola
-    add_box(
-        doc,
-        "BA12_Gola_C_Superior",
-        0,
-        -GOLA_D,
-        ROW1_Z - ROW_GAP,
-        WIDTH,
-        GOLA_D,
-        GOLA_H,
-    )
+    c_top_z = (ROW1_Z - ROW_GAP) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
+    make_c_gola(doc, "BA12_Gola_C_Superior", 0, 0, c_top_z, WIDTH)
     parts.append(
-        ("BA12", "Herraje", "Gola_C_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("BA12", "Herraje", "Gola_C_Superior", 1, WIDTH, C_GOLA_TOTAL_H, C_GOLA_D, "Aluminio")
     )
 
-    add_box(doc, "BA13_Gola_J_Media", 0, -GOLA_D, MID_LINE_Z, WIDTH, GOLA_D, GOLA_H)
+    j_mid_z = MID_LINE_Z - (J_GOLA_TOTAL_H - GOLA_VISIBLE_H)
+    make_j_gola(doc, "BA13_Gola_J_Media", 0, 0, j_mid_z, WIDTH)
     parts.append(
-        ("BA13", "Herraje", "Gola_J_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("BA13", "Herraje", "Gola_J_Media", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
     )
 
     doc.recompute()

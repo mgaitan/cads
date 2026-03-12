@@ -11,7 +11,7 @@ model: model-h model-aa model-ab model-f model-l model-ba model-bb model-i model
 
 define run_freecad_model
 	@set +e; \
-	printf "exec(open('$(MODELS_SCRIPT_DIR)/$(1)').read())\nimport sys\nsys.exit()\n" | APPIMAGE_EXTRACT_AND_RUN=1 FREECAD_NO_GUI=1 freecad -c; \
+	printf "exec(open('$(MODELS_SCRIPT_DIR)/$(1)').read())\nimport sys\nsys.exit()\n" | PYTHONPATH=$(PWD)/src APPIMAGE_EXTRACT_AND_RUN=1 FREECAD_NO_GUI=1 freecad -c; \
 	status=$$?; \
 	if [[ -s models/fcstd/$(2).FCStd && -s models/step/$(2).step $(3) ]]; then \
 		echo "$(4): OK (FreeCAD puede crashear al salir, pero los archivos se generaron)"; \
@@ -59,16 +59,16 @@ screenshots-gui:
 	@echo "La macro exporta: iso (vista actual), front, rear, left, right, top, bottom."
 
 manual-h:
-	python3 manuals/generate_manual.py manuals/muebles/H.toml
+	uv run python manuals/generate_manual.py manuals/muebles/H.toml
 
 manual-aa:
-	python3 manuals/generate_manual.py manuals/muebles/AA.toml
+	uv run python manuals/generate_manual.py manuals/muebles/AA.toml
 
 manual-ab:
-	python3 manuals/generate_manual.py manuals/muebles/AB.toml
+	uv run python manuals/generate_manual.py manuals/muebles/AB.toml
 
 manual-all:
-	python3 manuals/generate_master_manual.py
+	uv run python manuals/generate_master_manual.py
 
 manuales: manual-h manual-aa manual-ab
 
@@ -76,11 +76,11 @@ optimize-cuts:
 	uv run scripts/tools/optimize_cuts.py --svg
 
 site:
-	python3 scripts/tools/export_web_meshes.py
-	python3 scripts/tools/generate_site.py
+	uv run python scripts/tools/export_web_meshes.py
+	uv run python scripts/tools/generate_site.py
 
 web-models:
-	python3 scripts/tools/export_web_meshes.py
+	uv run python scripts/tools/export_web_meshes.py
 
 
 clean-screens:
