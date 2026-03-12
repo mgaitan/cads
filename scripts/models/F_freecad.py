@@ -9,20 +9,28 @@ import FreeCAD as App
 import Part
 
 GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 TH = 18.0
+MIN_STRIP = 50.0
 WIDTH = 780.0
 DEPTH_TOTAL = 950.0
 DEPTH_MOD = 300.0
-HEIGHT_TOTAL = 2230.0
+BODY_HEIGHT = 2260.0
+TOP_DRAWER_TOTAL_W = WIDTH + 1540.0
+TOP_DRAWER_D = 300.0
+TOP_DRAWER_H = 140.0
+HEIGHT_TOTAL = BODY_HEIGHT + TOP_DRAWER_H
 TOE_H = 80.0
+SIDE_TOP_RISE = 70.0
 
 FRIDGE_ROOF_Z = 1800.0
 CENTER_GAP = 2.0
@@ -43,9 +51,11 @@ LEG_INSET = 30.0
 
 W_INT = WIDTH - 2 * TH
 W_INT_REGR = WIDTH - 4 * TH
-SIDE_H = HEIGHT_TOTAL - TOE_H - TH
+SIDE_H = BODY_HEIGHT - TOE_H
+SIDE_PANEL_H = SIDE_H + SIDE_TOP_RISE
+LEFT_SIDE_PANEL_H = HEIGHT_TOTAL - TOE_H
 Z_BOTTOM = TOE_H
-Z_TOP = HEIGHT_TOTAL - TH
+Z_TOP = BODY_HEIGHT
 Z_SIDE = TOE_H
 MOD_BACK_Y = DEPTH_MOD - TH
 FRIDGE_DEPTH = DEPTH_TOTAL - DEPTH_MOD
@@ -66,9 +76,9 @@ GRID = (Z_TOP - Z_BOTTOM) / 5.0
 SHELF_Z_1 = Z_BOTTOM + 1.0 * GRID
 SHELF_Z_2 = Z_BOTTOM + 2.0 * GRID  # fijo F9
 
-# Reparto visual uniforme de los 3 huecos superiores (entre F20 y F21)
+# Reparto visual uniforme de los 3 huecos superiores hasta el piso del cajon superior.
 Z_LOWER = SHELF_Z_2 + 2.0 * TH  # cara superior de F20
-Z_UPPER = Z_TOP - TH  # cara inferior de F21
+Z_UPPER = Z_TOP
 OPEN_UP = (Z_UPPER - Z_LOWER - 4.0 * TH) / 3.0
 SHELF_Z_3 = Z_LOWER + OPEN_UP + TH
 SHELF_Z_4 = SHELF_Z_3 + OPEN_UP + 2.0 * TH
@@ -76,7 +86,7 @@ SHELF_Z_4 = SHELF_Z_3 + OPEN_UP + 2.0 * TH
 # Las puertas inferiores deben superponer sobre F9
 DOOR_H = (SHELF_Z_2 + DOOR_OVERLAP_TOP) - DOOR_Z
 
-REGRUESO_LONG_H = SIDE_H - 2.0 * TH  # "todo el largo" menos 36 mm
+REGRUESO_LONG_H = SIDE_H - TH  # llega hasta apoyar bajo el cajon superior
 REGRUESO_LONG_Z = Z_SIDE + TH
 
 
@@ -92,6 +102,26 @@ def add_box_with_rect_cut(doc, name, x, y, z, dx, dy, dz, cut):
     cx, cy, cz, cdx, cdy, cdz = cut
     cut_box = Part.makeBox(cdx, cdy, cdz, App.Vector(cx, cy, cz))
     shape = shape.cut(cut_box)
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = shape
+    return obj
+
+
+def add_box_with_rect_cuts(doc, name, x, y, z, dx, dy, dz, cuts):
+    shape = Part.makeBox(dx, dy, dz, App.Vector(x, y, z))
+    for cx, cy, cz, cdx, cdy, cdz in cuts:
+        cut_box = Part.makeBox(cdx, cdy, cdz, App.Vector(cx, cy, cz))
+        shape = shape.cut(cut_box)
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = shape
+    return obj
+
+
+def add_box_with_cyl_cuts(doc, name, x, y, z, dx, dy, dz, holes):
+    shape = Part.makeBox(dx, dy, dz, App.Vector(x, y, z))
+    for hx, hy, hz, radius, height in holes:
+        cyl = Part.makeCylinder(radius, height, App.Vector(hx, hy, hz))
+        shape = shape.cut(cyl)
     obj = doc.addObject("Part::Feature", name)
     obj.Shape = shape
     return obj
@@ -153,6 +183,8 @@ def main():
     parts = []
 
     vent_y = (DEPTH_TOTAL - VENT_W) / 2.0
+    side_top_notch = (-1.0, 0.0, BODY_HEIGHT, TH + 2.0, DEPTH_MOD, SIDE_TOP_RISE)
+    vent_cut = (-1.0, vent_y, VENT_Z, TH + 2.0, VENT_W, VENT_H)
     add_box_with_rect_cut(
         doc,
         "F1_Lateral_Izq",
@@ -161,8 +193,8 @@ def main():
         Z_SIDE,
         TH,
         DEPTH_TOTAL,
-        SIDE_H,
-        (-1.0, vent_y, VENT_Z, TH + 2.0, VENT_W, VENT_H),
+        LEFT_SIDE_PANEL_H,
+        vent_cut,
     )
     parts.append(
         (
@@ -170,21 +202,31 @@ def main():
             "Casco",
             "Lateral_Izq",
             1,
-            SIDE_H,
+            LEFT_SIDE_PANEL_H,
             DEPTH_TOTAL,
             TH,
             "Crudo (cinta 36mm en obra)",
         )
     )
 
-    add_box(doc, "F2_Lateral_Der", WIDTH - TH, 0, Z_SIDE, TH, DEPTH_TOTAL, SIDE_H)
+    add_box_with_rect_cuts(
+        doc,
+        "F2_Lateral_Der",
+        WIDTH - TH,
+        0,
+        Z_SIDE,
+        TH,
+        DEPTH_TOTAL,
+        SIDE_PANEL_H,
+        [(WIDTH - TH - 1.0, 0.0, BODY_HEIGHT, TH + 2.0, DEPTH_MOD, SIDE_TOP_RISE)],
+    )
     parts.append(
         (
             "F2",
             "Casco",
             "Lateral_Der",
             1,
-            SIDE_H,
+            SIDE_PANEL_H,
             DEPTH_TOTAL,
             TH,
             "Crudo (cinta 36mm en obra)",
@@ -194,11 +236,6 @@ def main():
     add_box(doc, "F3_Piso_Modular", TH, 0, Z_BOTTOM, W_INT, DEPTH_MOD, TH)
     parts.append(
         ("F3", "Casco", "Piso_Modular", 1, W_INT, DEPTH_MOD, TH, "Canto frente")
-    )
-
-    add_box(doc, "F4_Tapa_Casco", 0, 0, Z_TOP, WIDTH, DEPTH_TOTAL, TH)
-    parts.append(
-        ("F4", "Casco", "Tapa_Casco", 1, WIDTH, DEPTH_TOTAL, TH, "Canto frente")
     )
 
     leg_pos = [
@@ -350,11 +387,6 @@ def main():
         )
     )
 
-    add_box(doc, "F21_Regrueso_Bajo_F4", TH, 0, Z_TOP - TH, W_INT, DEPTH_MOD, TH)
-    parts.append(
-        ("F21", "Regrueso", "Regrueso_Bajo_F4", 1, W_INT, DEPTH_MOD, TH, "Canto frente")
-    )
-
     # Estantes moviles superiores (visibles) + regrueso frontal
     add_box(
         doc,
@@ -386,7 +418,7 @@ def main():
         VISIBLE_SETBACK_Y,
         SHELF_Z_3 - TH,
         W_VIS,
-        TH,
+        MIN_STRIP,
         TH,
     )
     parts.append(
@@ -396,7 +428,7 @@ def main():
             "Regrueso_Front_Estante_Sup_1",
             1,
             W_VIS,
-            TH,
+            MIN_STRIP,
             TH,
             "Canto frente",
         )
@@ -432,7 +464,7 @@ def main():
         VISIBLE_SETBACK_Y,
         SHELF_Z_4 - TH,
         W_VIS,
-        TH,
+        MIN_STRIP,
         TH,
     )
     parts.append(
@@ -442,7 +474,7 @@ def main():
             "Regrueso_Front_Estante_Sup_2",
             1,
             W_VIS,
-            TH,
+            MIN_STRIP,
             TH,
             "Canto frente",
         )
@@ -453,6 +485,115 @@ def main():
 
     add_box(doc, "F13_Puerta_Mod_Der", DOOR_X2, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
     parts.append(("F13", "Frente", "Puerta_Mod_Der", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
+
+    # Cajon superior corrido (en L invertida), toma el techo del sector modular y continua 1540 mm.
+    top_z0 = BODY_HEIGHT
+    inner_top_w = TOP_DRAWER_TOTAL_W - 2.0 * TH
+    inner_top_d = TOP_DRAWER_D - TH
+
+    add_box(
+        doc,
+        "F23_Cajon_Sup_Lateral_Der",
+        TOP_DRAWER_TOTAL_W - 2.0 * TH,
+        0,
+        top_z0 + TH,
+        TH,
+        inner_top_d,
+        TOP_DRAWER_H - TH,
+    )
+    parts.append(
+        (
+            "F23",
+            "Cajon_Sup",
+            "Lateral_Der",
+            1,
+            TOP_DRAWER_H - TH,
+            inner_top_d,
+            TH,
+            "Canto frente",
+        )
+    )
+
+    add_box(
+        doc,
+        "F24_Cajon_Sup_Trasera",
+        WIDTH - TH,
+        TOP_DRAWER_D - TH,
+        top_z0,
+        TOP_DRAWER_TOTAL_W - WIDTH,
+        TH,
+        SIDE_TOP_RISE,
+    )
+    parts.append(
+        (
+            "F24",
+            "Cajon_Sup",
+            "Trasera",
+            1,
+            TOP_DRAWER_TOTAL_W - WIDTH,
+            SIDE_TOP_RISE,
+            TH,
+            "Sin canto",
+        )
+    )
+
+    floating_start_x = WIDTH
+    floating_step = 1540.0 / 4.0
+    spot_centers_x = [
+        floating_start_x + floating_step,
+        floating_start_x + 2.0 * floating_step,
+        floating_start_x + 3.0 * floating_step,
+    ]
+    spot_center_y = TOP_DRAWER_D / 2.0
+    spot_holes = [
+        (cx, spot_center_y, top_z0 - 1.0, 30.0, TH + 2.0) for cx in spot_centers_x
+    ]
+    add_box_with_cyl_cuts(
+        doc,
+        "F25_Cajon_Sup_Piso",
+        TH,
+        0,
+        top_z0,
+        inner_top_w,
+        inner_top_d,
+        TH,
+        spot_holes,
+    )
+    parts.append(
+        (
+            "F25",
+            "Cajon_Sup",
+            "Piso_Interior_3xØ60",
+            1,
+            inner_top_w,
+            inner_top_d,
+            TH,
+            "Sin canto",
+        )
+    )
+
+    add_box(
+        doc,
+        "F26_Cajon_Sup_Frente",
+        0,
+        -TH,
+        top_z0,
+        TOP_DRAWER_TOTAL_W,
+        TH,
+        TOP_DRAWER_H,
+    )
+    parts.append(
+        (
+            "F26",
+            "Frente",
+            "Frente_Cajon_Superior",
+            1,
+            TOP_DRAWER_TOTAL_W,
+            TOP_DRAWER_H,
+            TH,
+            "4 cantos",
+        )
+    )
 
     doc.recompute()
 
@@ -500,6 +641,8 @@ def main():
     print(f"- Ancho: {WIDTH}")
     print(f"- Profundidad total: {DEPTH_TOTAL}")
     print(f"- Profundidad modulo: {DEPTH_MOD}")
+    print(f"- Altura cuerpo: {BODY_HEIGHT}")
+    print(f"- Cajon superior: {TOP_DRAWER_TOTAL_W} x {TOP_DRAWER_D} x {TOP_DRAWER_H}")
     print(f"- Altura total: {HEIGHT_TOTAL}")
     print(f"- Grilla (1/5): {GRID}")
     print(f"- Puertas modular: {DOOR_W} x {DOOR_H}")
