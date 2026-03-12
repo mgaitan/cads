@@ -13,10 +13,19 @@ import FreeCAD as App
 import Part
 
 
-def add_step(doc, name, step_path, x=0.0, y=0.0, z=0.0):
+def add_step(doc, name, step_path, x=0.0, y=0.0, z=0.0, rot_z=0.0):
     shape = Part.read(step_path)
     obj = doc.addObject("Part::Feature", name)
     obj.Shape = shape
+    obj.Placement = App.Placement(
+        App.Vector(x, y, z), App.Rotation(App.Vector(0, 0, 1), rot_z)
+    )
+    return obj
+
+
+def add_box(doc, name, x, y, z, dx, dy, dz):
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = Part.makeBox(dx, dy, dz)
     obj.Placement.Base = App.Vector(x, y, z)
     return obj
 
@@ -38,11 +47,34 @@ def main():
     # I (1540) a la izquierda, F (780) a la derecha.
     x_i = 0.0
     x_f = 1540.0
+    i_w = 1540.0
+    f_w = 780.0
+    f_d = 950.0
+    wall_th = 150.0
+    wall_h = 1080.0
+    bar_th = 40.0
 
     doc = App.newDocument("IslaEnsamble")
     objs = []
     objs.append(add_step(doc, "I_Bajo_Isla", str(step_dir / "I.step"), x_i, 0, 0))
-    objs.append(add_step(doc, "F_Fridge_Modular", str(step_dir / "F.step"), x_f, 0, 0))
+    # Rotado 180° y recolocado para conservar su huella en x=1540..2320 / y=0..950.
+    objs.append(
+        add_step(
+            doc,
+            "F_Fridge_Modular",
+            str(step_dir / "F.step"),
+            x_i + i_w + f_w,
+            f_d,
+            0,
+            180.0,
+        )
+    )
+    objs.append(
+        add_box(doc, "ENSI_Muro_Fondo_Heladera", 0, f_d, 0, i_w, wall_th, wall_h)
+    )
+    objs.append(
+        add_box(doc, "ENSI_Barra_Sobre_Muro", 0, 0, wall_h, i_w, f_d + wall_th, bar_th)
+    )
 
     doc.recompute()
 
@@ -57,6 +89,8 @@ def main():
     print("\nLayout frontal:")
     print("- I: x=0..1540")
     print("- F: x=1540..2320")
+    print("- Muro: x=0..1540, y=950..1100, h=1080")
+    print("- Barra: x=0..1540, y=0..1100, esp=40")
 
 
 if __name__ == "__main__":
