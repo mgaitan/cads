@@ -70,6 +70,7 @@ SINK_CENTER_Y = 300.0
 # Nicho trasero izquierdo (detras de cajones)
 LEFT_REAR_NICHE_D = 350.0
 LEFT_FRONT_BLOCK_D = 311.0
+DRAWER_DEPTH = LEFT_FRONT_BLOCK_D - 2.0 * TH
 
 # Cava integrada en el nicho (simil paraiso), orientada perpendicular a cajones.
 V_CLR = 2.0
@@ -86,6 +87,7 @@ Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
 SIDE_H = Z_TOP - Z_BOTTOM_TOP
+DIV_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
 TOP_GOLA_Z = Z_TOP_SUPPORT - GOLA_H
 
 # Tabiques en X
@@ -278,27 +280,45 @@ def main():
         )
     )
 
-    add_box(doc, "I1B_Lateral_Izq_Trasero", 0, DEPTH - TH, Z_BOTTOM_TOP, TH, TH, SIDE_H)
+    add_box(
+        doc,
+        "I1B_Lateral_Izq_Trasero",
+        TH,
+        DEPTH - TH,
+        Z_BOTTOM_TOP,
+        OPEN_LEFT,
+        TH,
+        SIDE_H,
+    )
     parts.append(
-        ("I1B", "Casco", "Lateral_Izq_Trasero", 1, SIDE_H, TH, TH, "Canto frente")
+        (
+            "I1B",
+            "Casco",
+            "Fondo_Modulo_Izq",
+            1,
+            SIDE_H,
+            OPEN_LEFT,
+            TH,
+            "Canto frente",
+        )
     )
 
     add_box(doc, "I2_Lateral_Der", WIDTH - TH, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
     parts.append(("I2", "Casco", "Lateral_Der", 1, SIDE_H, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "I3_Division_1", X_P1, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
-    parts.append(("I3", "Division", "Divisor_1", 1, SIDE_H, DEPTH, TH, "Canto frente"))
+    add_box(doc, "I3_Division_1", X_P1, 0, Z_BOTTOM_TOP, TH, DEPTH, DIV_H)
+    parts.append(("I3", "Division", "Divisor_1", 1, DIV_H, DEPTH, TH, "Canto frente"))
 
-    add_box(doc, "I4_Division_2", X_P2, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
-    parts.append(("I4", "Division", "Divisor_2", 1, SIDE_H, DEPTH, TH, "Canto frente"))
+    add_box(doc, "I4_Division_2", X_P2, 0, Z_BOTTOM_TOP, TH, DEPTH, DIV_H)
+    parts.append(("I4", "Division", "Divisor_2", 1, DIV_H, DEPTH, TH, "Canto frente"))
 
     add_box(
         doc,
         "I4B_Parante_Union_CR",
-        EXTRA_STILE_X,
-        -TH,
+        X_P2,
+        0,
         Z_BOTTOM_TOP,
-        EXTRA_STILE_W,
+        TH,
         TH,
         SIDE_H,
     )
@@ -310,7 +330,7 @@ def main():
             1,
             SIDE_H,
             TH,
-            EXTRA_STILE_W,
+            TH,
             "Canto frente",
         )
     )
@@ -325,7 +345,7 @@ def main():
     # Lateral derecho del nicho de cava (blanco), en profundidad.
     add_box(
         doc,
-        "I7_Panel_Nicho_Izq_18mm",
+        "I8S_Panel_Nicho_Izq_18mm",
         LEFT_NICHE_W,
         LEFT_FRONT_BLOCK_D,
         Z_BOTTOM_TOP,
@@ -335,7 +355,7 @@ def main():
     )
     parts.append(
         (
-            "I7",
+            "I8S",
             "Nicho",
             "Panel_Nicho_Izq_18mm",
             1,
@@ -364,7 +384,7 @@ def main():
         v_x + TH,
         v_y + TH,
         v_z + V_H - TH,
-        V_DX - TH,
+        V_DX - 2.0 * TH,
         v_inner_w,
         TH,
     )
@@ -390,7 +410,16 @@ def main():
             ("V1", "Cava_Paraiso", "Lateral_Izq", 1, V_H, V_DX, TH, "Canto frente"),
             ("V2", "Cava_Paraiso", "Lateral_Der", 1, V_H, V_DX, TH, "Canto frente"),
             ("V3", "Cava_Paraiso", "Base", 1, V_DX - TH, v_inner_w, TH, "Canto frente"),
-            ("V4", "Cava_Paraiso", "Tapa", 1, V_DX - TH, v_inner_w, TH, "Canto frente"),
+            (
+                "V4",
+                "Cava_Paraiso",
+                "Tapa",
+                1,
+                V_DX - 2.0 * TH,
+                v_inner_w,
+                TH,
+                "Canto frente",
+            ),
             (
                 "V5",
                 "Cava_Paraiso",
@@ -441,10 +470,10 @@ def main():
     add_box(
         doc,
         "I10_Soporte_Sup_Fondo",
-        TH,
+        X_P1,
         DEPTH - TH - TOP_SUPPORT_D,
         Z_TOP_SUPPORT,
-        WIDTH - 2.0 * TH,
+        WIDTH - X_P1 - TH,
         TOP_SUPPORT_D,
         TH,
     )
@@ -454,7 +483,7 @@ def main():
             "Casco",
             "Soporte_Sup_Fondo",
             1,
-            WIDTH - 2.0 * TH,
+            WIDTH - X_P1 - TH,
             TOP_SUPPORT_D,
             TH,
             "Sin canto",
