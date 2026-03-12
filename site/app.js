@@ -22,29 +22,44 @@ function setupViewer(selector, url){
  const scene = new THREE.Scene();
  scene.background = new THREE.Color(0xf7f4ed);
  const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 10000);
+ camera.up.set(0, 0, 1);
  const controls = new OrbitControls(camera, canvas);
  controls.enableDamping = true;
+ controls.screenSpacePanning = false;
  controls.target.set(0, 0, 0);
  scene.add(new THREE.HemisphereLight(0xffffff, 0xb7ae9d, 1.7));
  const dir1 = new THREE.DirectionalLight(0xffffff, 1.2); dir1.position.set(1, 2, 3); scene.add(dir1);
  const dir2 = new THREE.DirectionalLight(0xffffff, 0.7); dir2.position.set(-2, 1, -1); scene.add(dir2);
+ const grid = new THREE.GridHelper(4000, 40, 0xcabda9, 0xe3ddd1);
+ grid.rotation.x = Math.PI / 2;
+ scene.add(grid);
  let mesh = null;
  let wire = false;
+ let fitState = null;
  const material = new THREE.MeshStandardMaterial({color:0xd7d3ca, metalness:0.0, roughness:0.92});
  const loader = new STLLoader();
  loader.load(url, geometry => {
    geometry.computeVertexNormals();
-   geometry.center();
+   geometry.computeBoundingBox();
+   const box0 = geometry.boundingBox;
+   const cx = (box0.min.x + box0.max.x) / 2;
+   const cy = (box0.min.y + box0.max.y) / 2;
+   geometry.translate(-cx, -cy, -box0.min.z);
    mesh = new THREE.Mesh(geometry, material);
    scene.add(mesh);
    const box = new THREE.Box3().setFromObject(mesh);
    const size = box.getSize(new THREE.Vector3());
+   const center = box.getCenter(new THREE.Vector3());
    const maxDim = Math.max(size.x, size.y, size.z) || 1;
-   camera.position.set(maxDim * 1.5, maxDim * 1.1, maxDim * 1.6);
+   fitState = {
+     position: new THREE.Vector3(center.x + maxDim * 1.35, center.y - maxDim * 1.45, center.z + maxDim * 0.95),
+     target: center.clone(),
+   };
+   camera.position.copy(fitState.position);
    camera.near = maxDim / 100;
    camera.far = maxDim * 20;
    camera.updateProjectionMatrix();
-   controls.target.set(0, 0, 0);
+   controls.target.copy(fitState.target);
    controls.update();
  }, undefined, err => {
    console.error('No se pudo cargar STL', err);
@@ -67,12 +82,9 @@ function setupViewer(selector, url){
  const resetBtn = $('#viewer-reset');
  const wireBtn = $('#viewer-wire');
  if(resetBtn) resetBtn.onclick = () => {
-   if(!mesh) return;
-   const box = new THREE.Box3().setFromObject(mesh);
-   const size = box.getSize(new THREE.Vector3());
-   const maxDim = Math.max(size.x, size.y, size.z) || 1;
-   camera.position.set(maxDim * 1.5, maxDim * 1.1, maxDim * 1.6);
-   controls.target.set(0, 0, 0);
+   if(!mesh || !fitState) return;
+   camera.position.copy(fitState.position);
+   controls.target.copy(fitState.target);
    controls.update();
  };
  if(wireBtn) wireBtn.onclick = () => {
