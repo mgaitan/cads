@@ -416,13 +416,13 @@ def main():
     )
 
     # Perfiles gola
-    c_top_z = (ROW2_Z + MID_BOT_H) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
+    c_top_z = (ROW2_Z + MID_BOT_H) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0 + 4.0
     make_c_gola(doc, "BA12_Gola_C_Superior", 0, 0, c_top_z, WIDTH)
     parts.append(
         ("BA12", "Herraje", "Gola_C_Superior", 1, WIDTH, C_GOLA_TOTAL_H, C_GOLA_D, "Aluminio")
     )
 
-    j_mid_z = (ROW3_Z + MID_BOT_H) - GOLA_VISIBLE_H
+    j_mid_z = ROW2_Z - J_GOLA_TOTAL_H - 0.5
     make_j_gola(doc, "BA13_Gola_J_Media", 0, 0, j_mid_z, WIDTH)
     parts.append(
         ("BA13", "Herraje", "Gola_J_Media", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
