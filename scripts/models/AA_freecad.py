@@ -3,19 +3,33 @@
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 import FreeCAD as App
 import Part
 
-GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+ROOT = Path(globals().get("__file__", Path.cwd())).resolve()
+if ROOT.is_file():
+    ROOT = ROOT.parents[2]
+else:
+    ROOT = Path.cwd()
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+from cads.freecad_gola import GOLA_VISIBLE_H, J_GOLA_D, J_GOLA_TOTAL_H, make_j_gola_inverted
+
+GUI_AVAILABLE = False
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
+
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 TH = 18.0
 BACK_TH = 3.0
@@ -29,8 +43,7 @@ EXTRACTOR_H = 90.0
 DUCT_D = 160.0
 DUCT_R = DUCT_D / 2.0
 DUCT_REAR_CLR = 20.0
-GOLA_J_H = 25.0
-GOLA_J_D = 20.0
+GOLA_SETBACK = 26.0
 
 CONN_D = 35.0
 CONN_R = CONN_D / 2.0
@@ -53,12 +66,15 @@ Y_DUCT_FLOOR = Y_DUCT_TOP
 Y_CONN = D_INT - 55.0
 
 # Dos frentes verticales
-FRONT_H = HEIGHT - TH
+FRONT_H = HEIGHT - TH - 17.0
 FRONT_W = (WIDTH - TH - 2.0) / 2.0
 LEFT_FRONT_X = TH / 2.0
 RIGHT_FRONT_X = LEFT_FRONT_X + FRONT_W + 2.0
 FRONT_Y = -TH
-FRONT_Z = TH / 2.0
+OUTER_OVERLAY = TH / 2.0
+GOLA_Z = TH
+FRONT_Z = Z_INNER0 + GOLA_VISIBLE_H
+FRONT_H = (HEIGHT - OUTER_OVERLAY) - FRONT_Z - 35.0
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -200,12 +216,6 @@ def main():
         )
     )
 
-    add_box(doc, "AA5_Travesano_Sup", TH, 0, Z_TOP - 60.0, W_INT, TH, 60.0)
-    parts.append(("AA5", "Interior", "Travesano_Sup", 1, W_INT, 60.0, TH, "Sin canto"))
-
-    add_box(doc, "AA6_Travesano_Inf", TH, 0, Z_INNER0, W_INT, TH, 60.0)
-    parts.append(("AA6", "Interior", "Travesano_Inf", 1, W_INT, 60.0, TH, "Sin canto"))
-
     add_box(doc, "AA7_Fondo_3mm", TH, D_INT, Z_INNER0, W_INT, BACK_TH, SIDE_H)
     parts.append(("AA7", "Fondo", "Fondo_3mm", 1, W_INT, SIDE_H, BACK_TH, "Sin canto"))
 
@@ -223,11 +233,9 @@ def main():
     )
 
     # Perfil gola J bajo puertas (tirador inferior continuo)
-    add_box(
-        doc, "AA12_Gola_J_Inferior", 0, -GOLA_J_D, Z_BOTTOM, WIDTH, GOLA_J_D, GOLA_J_H
-    )
+    make_j_gola_inverted(doc, "AA12_Gola_J_Inferior", 0, 0, GOLA_Z, WIDTH)
     parts.append(
-        ("AA12", "Herraje", "Gola_J_Inferior", 1, WIDTH, GOLA_J_H, GOLA_J_D, "Aluminio")
+        ("AA12", "Herraje", "Gola_J_Inferior", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
     )
 
     # Liston fijo 90 mm para completar visual hacia linea AC (se monta por debajo del piso)

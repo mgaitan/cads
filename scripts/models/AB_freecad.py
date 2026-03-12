@@ -12,10 +12,22 @@ Salida:
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 import FreeCAD as App
 import Part
+
+ROOT = Path(globals().get("__file__", Path.cwd())).resolve()
+if ROOT.is_file():
+    ROOT = ROOT.parents[2]
+else:
+    ROOT = Path.cwd()
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from cads.freecad_gola import GOLA_VISIBLE_H, J_GOLA_D, J_GOLA_TOTAL_H, make_j_gola_inverted
 
 GUI_AVAILABLE = False
 Gui = None
@@ -47,8 +59,7 @@ AC_INNER_H = AC_H - 2 * TH_AC
 # AB (alacena superior blanca)
 AB_H = 491.0
 AB_SIDE_H = AB_H - 2 * TH
-GOLA_J_H = 25.0
-GOLA_J_D = 20.0
+GOLA_SETBACK = 26.0
 
 # AB: 3 puertas iguales, equidistantes
 CENTER_GAP = 2.0
@@ -58,14 +69,14 @@ AB_INT_W = WIDTH - 2 * TH
 AB_INT_H = AB_SIDE_H
 AB_INT_D = DEPTH - BACK_TH
 
-DOOR_H = AB_H - TH
+DOOR_Z = AC_H + TH + GOLA_VISIBLE_H
+DOOR_H = (AC_H + AB_H - OUTER_OVERLAY) - DOOR_Z
 DOOR_W = (WIDTH - 2 * OUTER_OVERLAY - 2 * CENTER_GAP) / 3.0
 DOOR1_X = OUTER_OVERLAY
 DOOR2_X = DOOR1_X + DOOR_W + CENTER_GAP
 DOOR3_X = DOOR2_X + DOOR_W + CENTER_GAP
 DOOR_Y = -TH
-DOOR_Z = AC_H + OUTER_OVERLAY
-GOLA_Z = AC_H
+GOLA_Z = AC_H + TH
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -275,9 +286,9 @@ def main():
     parts.append(("AB8", "Frente", "AB_Puerta_3", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
 
     # Perfil gola J inferior (debajo de puertas)
-    add_box(doc, "AB9_Gola_J_Inferior", 0, -GOLA_J_D, GOLA_Z, WIDTH, GOLA_J_D, GOLA_J_H)
+    make_j_gola_inverted(doc, "AB9_Gola_J_Inferior", 0, 0, GOLA_Z, WIDTH)
     parts.append(
-        ("AB9", "Herraje", "Gola_J_Inferior", 1, WIDTH, GOLA_J_H, GOLA_J_D, "Aluminio")
+        ("AB9", "Herraje", "Gola_J_Inferior", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
     )
 
     doc.recompute()
