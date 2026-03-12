@@ -36,7 +36,7 @@ TOE_H = 80.0
 
 TOP_FRONT_H = 130.0
 TOP_SUPPORT_D = 100.0
-SLIDE_CLR = 12.5
+SLIDE_CLR = 12.7
 DRAWER_DEPTH = 500.0
 OPEN_DRAWER_OFFSET = 0.0  # frente enrasado para verificar grilla
 GOLA_H = 25.0

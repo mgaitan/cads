@@ -43,7 +43,7 @@ LEFT_NICHE_W = 290.0
 
 TOP_SUPPORT_D = 100.0
 DRAWER_DEPTH = 210.0
-SLIDE_CLR = 12.5
+SLIDE_CLR = 12.7
 
 GOLA_H = 25.0
 GOLA_D = 20.0
@@ -372,10 +372,10 @@ def main():
         doc,
         "I8_Estante_Nicho_Regulable",
         niche_x + 1.0,
-        niche_y + 1.0,
+        niche_y - 39.0,
         niche_shelf_z,
         NICHE_SHELF_W,
-        NICHE_SHELF_D,
+        NICHE_SHELF_D + 40.0,
         TH,
     )
     parts.append(
@@ -385,7 +385,7 @@ def main():
             "Estante_Nicho_Regulable",
             1,
             NICHE_SHELF_W,
-            NICHE_SHELF_D,
+            NICHE_SHELF_D + 40.0,
             TH,
             "Canto frente",
         )
@@ -417,7 +417,7 @@ def main():
     add_box(
         doc,
         "I8B_Faja_Superior_Nicho",
-        niche_x,
+        0,
         niche_y,
         Z_TOP - 50.0,
         TH,
