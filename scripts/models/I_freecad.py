@@ -75,7 +75,7 @@ DRAWER_DEPTH = LEFT_FRONT_BLOCK_D - 2.0 * TH
 # Cava integrada en el nicho (simil paraiso), orientada perpendicular a cajones.
 V_CLR = 2.0
 V_FACE_W = LEFT_NICHE_W - V_CLR
-V_DX = LEFT_NICHE_W - TH - V_CLR
+V_DX = 330.0
 V_COLS = 2
 V_ROWS = 3
 V_CELL = (V_FACE_W - (V_COLS + 1.0) * TH) / V_COLS
@@ -303,6 +303,29 @@ def main():
         )
     )
 
+    add_box(
+        doc,
+        "I1C_Fondo_Cajonera",
+        0,
+        LEFT_FRONT_BLOCK_D,
+        Z_BOTTOM_TOP,
+        OPEN_LEFT + TH,
+        TH,
+        SIDE_H,
+    )
+    parts.append(
+        (
+            "I1C",
+            "Casco",
+            "Fondo_Cajonera",
+            1,
+            SIDE_H,
+            OPEN_LEFT + TH,
+            TH,
+            "Canto frente",
+        )
+    )
+
     add_box(doc, "I2_Lateral_Der", WIDTH - TH, 0, Z_BOTTOM_TOP, TH, DEPTH, SIDE_H)
     parts.append(("I2", "Casco", "Lateral_Der", 1, SIDE_H, DEPTH, TH, "Canto frente"))
 
@@ -346,32 +369,8 @@ def main():
         ("I6", "Casco", "Piso_Der", 1, OPEN_RIGHT + 2.0 * TH, DEPTH, TH, "Canto frente")
     )
 
-    # Lateral derecho del nicho de cava (blanco), en profundidad.
-    add_box(
-        doc,
-        "I8S_Panel_Nicho_Izq_18mm",
-        LEFT_NICHE_W,
-        LEFT_FRONT_BLOCK_D,
-        Z_BOTTOM_TOP,
-        TH,
-        DEPTH - LEFT_FRONT_BLOCK_D - TH,
-        SIDE_H,
-    )
-    parts.append(
-        (
-            "I8S",
-            "Nicho",
-            "Panel_Nicho_Izq_18mm",
-            1,
-            SIDE_H,
-            DEPTH - LEFT_FRONT_BLOCK_D - TH,
-            TH,
-            "Blanco (sin canto visible)",
-        )
-    )
-
     # Cava integrada (codigo V) dentro del nicho trasero izquierdo.
-    v_x = TH + (LEFT_NICHE_W - TH - V_DX) / 2.0
+    v_x = TH
     v_y = DEPTH - V_FACE_W
     v_z = Z_BOTTOM_TOP
     v_inner_w = V_FACE_W - 2.0 * TH
@@ -615,7 +614,7 @@ def main():
     # Cajones internos izquierda (3 iguales)
     drawer_outer_w = OPEN_LEFT - 2.0 * SLIDE_CLR
     drawer_x = TH + SLIDE_CLR
-    drawer_y = TH
+    drawer_y = 0
     box_h = 170.0
     add_drawer(
         doc,
