@@ -44,9 +44,15 @@ LEFT_NICHE_W = 290.0
 TOP_SUPPORT_D = 100.0
 DRAWER_DEPTH = 210.0
 SLIDE_CLR = 12.7
+GOLA_SETBACK = 26.0
 
-GOLA_H = 25.0
-GOLA_D = 20.0
+GOLA_VISIBLE_H = 26.0
+GOLA_FRONT_GAP = 4.0
+J_GOLA_TOTAL_H = 48.0
+J_GOLA_D = 24.4
+C_GOLA_TOTAL_H = 72.8
+C_GOLA_D = 26.0
+GOLA_TH = 2.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_Y_FRONT = 30.0
@@ -83,8 +89,8 @@ Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
 SIDE_H = Z_TOP - Z_BOTTOM_TOP
-DIV_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
-TOP_GOLA_Z = Z_TOP_SUPPORT - GOLA_H
+DIV_H = Z_TOP - Z_BOTTOM_TOP
+TOP_GOLA_Z = Z_TOP - GOLA_VISIBLE_H
 
 # Tabiques en X
 X_P1 = TH + OPEN_LEFT
@@ -107,11 +113,13 @@ EXTRA_STILE_X = X_P2 + TH
 # 3 cajones iguales a izquierda:
 #  - top abre con gola J superior
 #  - medio y abajo con gola C entre ambos
-DRAWER_FRONT_H = (TOP_GOLA_Z - ROW_GAP - (Z_BOTTOM + ROW_GAP) - GOLA_H - ROW_GAP) / 3.0
+DRAWER_FRONT_H = (
+    (Z_TOP - GOLA_VISIBLE_H) - (Z_BOTTOM + ROW_GAP) - GOLA_VISIBLE_H - GOLA_FRONT_GAP
+) / 3.0
 ROW3_Z = Z_BOTTOM + ROW_GAP  # cajon inferior
 GOLA_C_Z = ROW3_Z + DRAWER_FRONT_H
-ROW2_Z = GOLA_C_Z + GOLA_H  # cajon medio
-ROW1_Z = ROW2_Z + DRAWER_FRONT_H + ROW_GAP  # cajon superior
+ROW2_Z = GOLA_C_Z + GOLA_VISIBLE_H  # cajon medio
+ROW1_Z = ROW2_Z + DRAWER_FRONT_H + GOLA_FRONT_GAP  # cajon superior
 DOOR_Z = ROW3_Z
 DOOR_H = ROW1_Z + DRAWER_FRONT_H - DOOR_Z
 
@@ -126,6 +134,50 @@ def add_box(doc, name, x, y, z, dx, dy, dz):
     obj.Shape = Part.makeBox(dx, dy, dz)
     obj.Placement.Base = App.Vector(x, y, z)
     return obj
+
+
+def add_compound(doc, name, shapes):
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = Part.makeCompound(shapes)
+    return obj
+
+
+def make_j_gola(doc, x, y, z, length):
+    shapes = [
+        Part.makeBox(
+            length, GOLA_TH, J_GOLA_TOTAL_H, App.Vector(x, y + J_GOLA_D - GOLA_TH, z)
+        ),
+        Part.makeBox(length, J_GOLA_D, GOLA_TH, App.Vector(x, y, z)),
+        Part.makeBox(length, GOLA_TH, 6.0, App.Vector(x, y, z)),
+        Part.makeBox(
+            length,
+            6.0,
+            GOLA_TH,
+            App.Vector(x, y + J_GOLA_D - 6.0, z + J_GOLA_TOTAL_H - GOLA_TH),
+        ),
+    ]
+    return add_compound(doc, "I12_Gola_J_Superior", shapes)
+
+
+def make_c_gola(doc, x, y, z, length):
+    lip_h = 10.0
+    shapes = [
+        Part.makeBox(
+            length, GOLA_TH, C_GOLA_TOTAL_H, App.Vector(x, y + C_GOLA_D - GOLA_TH, z)
+        ),
+        Part.makeBox(length, C_GOLA_D, GOLA_TH, App.Vector(x, y, z)),
+        Part.makeBox(
+            length, C_GOLA_D, GOLA_TH, App.Vector(x, y, z + C_GOLA_TOTAL_H - GOLA_TH)
+        ),
+        Part.makeBox(length, GOLA_TH, lip_h, App.Vector(x, y, z + GOLA_TH)),
+        Part.makeBox(
+            length,
+            GOLA_TH,
+            lip_h,
+            App.Vector(x, y, z + C_GOLA_TOTAL_H - GOLA_TH - lip_h),
+        ),
+    ]
+    return add_compound(doc, "I13_Gola_C_Cajon_Medio_Bajo", shapes)
 
 
 def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
@@ -347,7 +399,7 @@ def main():
             "Division",
             "Parante_Union_CR",
             1,
-            SIDE_H,
+            DIV_H,
             TH,
             60.0,
             "Canto frente",
@@ -442,7 +494,7 @@ def main():
         doc,
         "I9_Soporte_Sup_Frente",
         TH,
-        0,
+        GOLA_SETBACK,
         Z_TOP_SUPPORT,
         WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
@@ -491,24 +543,34 @@ def main():
         add_box(doc, f"I11_Pata_Back_{i}", lx, LEG_Y_BACK, 0.0, LEG_W, LEG_D, TOE_H)
     parts.append(("I11", "Herraje", "Pata_80", 8, LEG_W, LEG_D, TOE_H, "PVC/Aluminio"))
 
-    # Golas
-    add_box(doc, "I12_Gola_J_Superior", 0, -GOLA_D, TOP_GOLA_Z, WIDTH, GOLA_D, GOLA_H)
+    # Golas con perfil aproximado real
+    make_j_gola(doc, 0, 0, Z_TOP - J_GOLA_TOTAL_H, WIDTH)
     parts.append(
-        ("I12", "Herraje", "Gola_J_Superior", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        (
+            "I12",
+            "Herraje",
+            "Gola_J_Superior",
+            1,
+            WIDTH,
+            J_GOLA_TOTAL_H,
+            J_GOLA_D,
+            "Aluminio",
+        )
     )
 
-    add_box(
-        doc,
-        "I13_Gola_C_Cajon_Medio_Bajo",
-        FRONT_L_X,
-        -GOLA_D,
-        GOLA_C_Z,
-        FRONT_L_W,
-        GOLA_D,
-        GOLA_H,
-    )
+    c_gola_z = GOLA_C_Z - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
+    make_c_gola(doc, FRONT_L_X, 0, c_gola_z, FRONT_L_W)
     parts.append(
-        ("I13", "Herraje", "Gola_C_Izq", 1, FRONT_L_W, GOLA_H, GOLA_D, "Aluminio")
+        (
+            "I13",
+            "Herraje",
+            "Gola_C_Izq",
+            1,
+            FRONT_L_W,
+            C_GOLA_TOTAL_H,
+            C_GOLA_D,
+            "Aluminio",
+        )
     )
 
     # Frentes
