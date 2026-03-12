@@ -76,10 +76,10 @@ Z_BOTTOM = TOE_H
 Z_BOTTOM_TOP = Z_BOTTOM + TH
 Z_TOP = CAB_H
 Z_TOP_SUPPORT = Z_TOP - TH
-SIDE_H = Z_TOP_SUPPORT - Z_BOTTOM_TOP
+SIDE_H = Z_TOP - Z_BOTTOM_TOP
 
 # Plataforma separadora top row
-Z_TOPROW_SHELF = Z_TOP - TOP_FRONT_H - TH
+Z_TOPROW_SHELF = Z_TOP - (TOP_FRONT_H + 9.0) - TH
 
 W_INT = WIDTH - 2 * TH
 D_INT = DEPTH - BACK_TH
@@ -93,13 +93,15 @@ TOP_FRONT_Z = Z_TOP_SUPPORT - TOP_FRONT_H
 # Se deja luz inferior igual al GRID_GAP para completar el efecto de grilla.
 ROW3_Z = Z_BOTTOM + ROW_GAP
 TOTAL_FACE_H = Z_TOP_SUPPORT - ROW3_Z
-MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 2.0 * ROW_GAP) / 2.0
-ROW2_Z = ROW3_Z + MID_BOT_H + ROW_GAP
-ROW1_Z = ROW2_Z + MID_BOT_H + ROW_GAP
+MID_BOT_H = (TOTAL_FACE_H - TOP_FRONT_H - 2.0 * GOLA_VISIBLE_H) / 2.0
+ROW2_Z = ROW3_Z + MID_BOT_H + GOLA_VISIBLE_H
+ROW1_Z = ROW2_Z + MID_BOT_H + GOLA_VISIBLE_H
 
 # Estante interior BA (mitad del hueco inferior)
 LOWER_SHELF_Z = Z_BOTTOM_TOP + (ROW2_Z - Z_BOTTOM_TOP - TH) / 2.0
 MID_LINE_Z = ROW2_Z
+MID_BOX_H = 180.0
+BOT_BOX_H = 180.0
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -271,8 +273,8 @@ def main():
         doc,
         "BA5_Soporte_Superior_Frente",
         TH,
-        GOLA_SETBACK,
-        Z_TOP_SUPPORT,
+        0,
+        Z_TOP - TH,
         WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
         TH,
@@ -295,7 +297,7 @@ def main():
         "BA6_Soporte_Superior_Fondo",
         TH,
         DEPTH - TOP_SUPPORT_D,
-        Z_TOP_SUPPORT,
+        Z_TOP - TH,
         WIDTH - 2.0 * TH,
         TOP_SUPPORT_D,
         TH,
@@ -313,18 +315,6 @@ def main():
         )
     )
 
-    # Repisa separadora de fila superior
-    add_box(doc, "BA7_Repisa_Separadora", TH, 0, Z_TOPROW_SHELF, W_INT, DEPTH, TH)
-    parts.append(
-        ("BA7", "Casco", "Repisa_Separadora", 1, W_INT, DEPTH, TH, "Canto frente")
-    )
-
-    # Estante interior inferior (todo el ancho)
-    add_box(doc, "BA8_Estante_Inferior", TH, 0, LOWER_SHELF_Z, W_INT, DEPTH, TH)
-    parts.append(
-        ("BA8", "Interior", "Estante_Inferior", 1, W_INT, DEPTH, TH, "Canto frente")
-    )
-
     # Unico frente superior falso bajo anafe
     add_box(
         doc,
@@ -334,7 +324,7 @@ def main():
         TOP_FRONT_Z,
         TOP_FALSE_W,
         TH,
-        TOP_FRONT_H,
+        TOP_FRONT_H + 9.0,
     )
     parts.append(
         (
@@ -343,7 +333,7 @@ def main():
             "Frente_Falso_Sup",
             1,
             TOP_FALSE_W,
-            TOP_FRONT_H,
+            TOP_FRONT_H + 9.0,
             TH,
             "4 cantos",
         )
@@ -396,14 +386,43 @@ def main():
         )
     )
 
+    # Cajas de cajones (2 anchos completos)
+    drawer_outer_w = W_INT - 2.0 * SLIDE_CLR
+    drawer_x = TH + SLIDE_CLR
+    y_draw = 0.0
+    add_drawer(
+        doc,
+        "BA14_Caja_Mid",
+        drawer_x,
+        y_draw,
+        ROW2_Z + TH + 10.0,
+        drawer_outer_w,
+        DRAWER_DEPTH,
+        MID_BOX_H,
+        parts,
+        "BA14",
+    )
+    add_drawer(
+        doc,
+        "BA15_Caja_Bot",
+        drawer_x,
+        y_draw,
+        ROW3_Z + TH + 10.0,
+        drawer_outer_w,
+        DRAWER_DEPTH,
+        BOT_BOX_H,
+        parts,
+        "BA15",
+    )
+
     # Perfiles gola
-    c_top_z = (ROW1_Z - ROW_GAP) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
+    c_top_z = (ROW2_Z + MID_BOT_H) - (C_GOLA_TOTAL_H - GOLA_VISIBLE_H) / 2.0
     make_c_gola(doc, "BA12_Gola_C_Superior", 0, 0, c_top_z, WIDTH)
     parts.append(
         ("BA12", "Herraje", "Gola_C_Superior", 1, WIDTH, C_GOLA_TOTAL_H, C_GOLA_D, "Aluminio")
     )
 
-    j_mid_z = MID_LINE_Z - (J_GOLA_TOTAL_H - GOLA_VISIBLE_H)
+    j_mid_z = (ROW3_Z + MID_BOT_H) - GOLA_VISIBLE_H
     make_j_gola(doc, "BA13_Gola_J_Media", 0, 0, j_mid_z, WIDTH)
     parts.append(
         ("BA13", "Herraje", "Gola_J_Media", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio")
