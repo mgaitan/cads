@@ -67,6 +67,8 @@ ROW_GAP = 4.0
 TOP_OVERHANG = 20.0
 COUNTER_D = DEPTH + TH + TOP_OVERHANG
 COUNTER_Y = -(TH + TOP_OVERHANG)
+COUNTER_X = -TOP_OVERHANG
+COUNTER_W = WIDTH + 2.0 * TOP_OVERHANG
 # Bacha de apoyo 560x420 (solapa 15 mm por lado): calado 530x390.
 SINK_W = 530.0
 SINK_D = 390.0
@@ -259,7 +261,7 @@ def add_drawer(doc, prefix, x, y, z, outer_w, depth, box_h, parts, code_base):
 
 
 def add_counter_with_sink(doc):
-    slab = Part.makeBox(WIDTH, COUNTER_D, COUNTER_TH, App.Vector(0, COUNTER_Y, Z_TOP))
+    slab = Part.makeBox(COUNTER_W, COUNTER_D, COUNTER_TH, App.Vector(COUNTER_X, COUNTER_Y, Z_TOP))
     sink = Part.makeBox(
         SINK_W, SINK_D, COUNTER_TH + 2.0, App.Vector(SINK_X, SINK_Y, Z_TOP - 1.0)
     )
@@ -715,7 +717,7 @@ def main():
             "Mesada",
             f"Mesada_Calado_Bacha_{int(SINK_W)}x{int(SINK_D)}",
             1,
-            WIDTH,
+            COUNTER_W,
             COUNTER_D,
             COUNTER_TH,
             "Pulido perimetral segun proveedor",
