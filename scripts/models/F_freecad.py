@@ -219,7 +219,16 @@ def main():
         TH,
         DEPTH_TOTAL,
         SIDE_PANEL_H,
-        [(WIDTH - TH - 1.0, 0.0, BODY_HEIGHT, TH + 2.0, DEPTH_MOD, SIDE_TOP_RISE)],
+        [
+            (
+                WIDTH - TH - 1.0,
+                0.0,
+                BODY_HEIGHT,
+                TH + 2.0,
+                DEPTH_MOD,
+                (Z_SIDE + SIDE_PANEL_H) - BODY_HEIGHT,
+            )
+        ],
     )
     parts.append(
         (
