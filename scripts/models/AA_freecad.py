@@ -74,7 +74,7 @@ FRONT_Y = -TH
 OUTER_OVERLAY = TH / 2.0
 GOLA_Z = TH
 FRONT_Z = Z_INNER0 + GOLA_VISIBLE_H
-FRONT_H = (HEIGHT - OUTER_OVERLAY) - FRONT_Z - 35.0
+FRONT_H = (710.0 - OUTER_OVERLAY) - FRONT_Z
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
