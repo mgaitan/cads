@@ -68,6 +68,7 @@ def main():
     win_w = 1100.0
     win_h = 1200.0
     win_sill_z = 800.0
+    ens_wall_th = 150.0
 
     doc = App.newDocument("CocinaFull")
     objs = []
@@ -120,6 +121,65 @@ def main():
             mullion_w,
             mullion_w,
             win_h,
+        )
+    )
+
+    # Muro quebrado detras de ENS:
+    # - tramo detras de L
+    # - sube en el quiebre
+    # - tramo largo detras de BA/BB/H/AA/AB
+    # - retorno corto en el extremo derecho
+    ens_back_l_y = ens_y - 1195.0
+    ens_back_main_y = ens_y - 600.0
+    l_w = 890.0
+    ens_total_w = 3820.0
+
+    objs.append(
+        add_box(
+            doc,
+            "FULL_Muro_ENS_L",
+            0.0,
+            ens_back_l_y - ens_wall_th,
+            0.0,
+            l_w,
+            ens_wall_th,
+            wall_h,
+        )
+    )
+    objs.append(
+        add_box(
+            doc,
+            "FULL_Muro_ENS_Quiebre_Izq",
+            l_w,
+            ens_back_l_y - ens_wall_th,
+            0.0,
+            ens_wall_th,
+            (ens_back_main_y - ens_back_l_y) + ens_wall_th,
+            wall_h,
+        )
+    )
+    objs.append(
+        add_box(
+            doc,
+            "FULL_Muro_ENS_Main",
+            l_w,
+            ens_back_main_y - ens_wall_th,
+            0.0,
+            ens_total_w - l_w,
+            ens_wall_th,
+            wall_h,
+        )
+    )
+    objs.append(
+        add_box(
+            doc,
+            "FULL_Muro_ENS_Retorno_Der",
+            ens_total_w,
+            ens_back_main_y - ens_wall_th,
+            0.0,
+            ens_wall_th,
+            ens_wall_th,
+            wall_h,
         )
     )
 
