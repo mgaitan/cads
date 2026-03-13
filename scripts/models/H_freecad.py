@@ -12,10 +12,22 @@ Salida:
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 import FreeCAD as App
 import Part
+
+ROOT = Path(globals().get("__file__", Path.cwd())).resolve()
+if ROOT.is_file():
+    ROOT = ROOT.parents[2]
+else:
+    ROOT = Path.cwd()
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
+
+from cads.freecad_gola import J_GOLA_D, J_GOLA_TOTAL_H, make_j_gola, make_j_gola_inverted
 
 GUI_AVAILABLE = False
 Gui = None
@@ -45,9 +57,10 @@ MICRO_SHIFT_UP = 0.0
 FASCIA_H = 50.0  # altura de cada faja frontal
 # Juego interno oculto por faja central (ajustado para alinear lineas de gola en ensamble)
 OVEN_EXTRA_INTERNAL_H = 13.0
-GOLA_H = 25.0
-GOLA_D = 20.0
-AB_GOLA_Z = 1809.0
+AB_GOLA_Z = 1827.0
+AB_UPPER_DOOR_Z = 1853.0
+AB_UPPER_DOOR_H = 438.0
+LOW_BASE_GOLA_TOP_Z = 696.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_INSET = 30.0
@@ -101,12 +114,12 @@ DOOR_X = DOOR_OVERLAP
 # H10 ajustado a grilla de bajos (sin solape vertical):
 # arranca en Z_BOTTOM_PANEL y termina en la cara inferior de H12.
 LOWER_OPEN_Z0 = Z_BOTTOM_PANEL + TH
-LOWER_DOOR_Z = Z_BOTTOM_PANEL
-LOWER_DOOR_TOP = Z_OVEN_FASCIA_BOTTOM
+LOWER_DOOR_Z = Z_BOTTOM_PANEL + 4.0
+LOWER_DOOR_TOP = LOW_BASE_GOLA_TOP_Z
 LOWER_DOOR_H = LOWER_DOOR_TOP - LOWER_DOOR_Z
 
-UPPER_DOOR_Z = AB_GOLA_Z + DOOR_OVERLAP
-UPPER_DOOR_H = (Z_TOP_PANEL + DOOR_OVERLAP) - UPPER_DOOR_Z
+UPPER_DOOR_Z = AB_UPPER_DOOR_Z
+UPPER_DOOR_H = AB_UPPER_DOOR_H
 
 DOOR_DEPTH = TH
 
@@ -331,7 +344,7 @@ def main():
         )
     )
 
-    add_part(doc, "H7_Tapa_Micro", X_INT0, 0, Z_MICRO_TOP, WIDTH_INT, DEPTH, TH)
+    add_part(doc, "H7_Tapa_Micro", X_INT0, 0, Z_MICRO_TOP - TH, WIDTH_INT, DEPTH, TH)
     parts.append(
         ("H7", "Horizontal", "Tapa_Micro", 1, WIDTH_INT, DEPTH, TH, "Canto frente")
     )
@@ -425,33 +438,25 @@ def main():
         )
     )
 
-    # Perfil gola C de continuidad con bajo mesada (sobre puerta inferior)
-    add_part(
-        doc,
-        "H17_Gola_C_Continuidad",
-        0,
-        -GOLA_D,
-        Z_OVEN_FASCIA_BOTTOM,
-        W,
-        GOLA_D,
-        GOLA_H,
-    )
+    # Perfil gola J de continuidad con bajo mesada (sobre puerta inferior)
+    h17_z = LOWER_DOOR_TOP - J_GOLA_TOTAL_H + 0.5 + 26.0
+    make_j_gola(doc, "H17_Gola_J_Continuidad", 0, 0, h17_z, W)
     parts.append(
-        ("H17", "Herraje", "Gola_C_Continuidad", 1, W, GOLA_H, GOLA_D, "Aluminio")
+        (
+            "H17",
+            "Herraje",
+            "Gola_J_Continuidad",
+            1,
+            W,
+            J_GOLA_TOTAL_H,
+            J_GOLA_D,
+            "Aluminio",
+        )
     )
 
     # Perfil gola J bajo puerta superior
-    add_part(
-        doc,
-        "H18_Gola_J_Sup",
-        0,
-        -GOLA_D,
-        AB_GOLA_Z,
-        W,
-        GOLA_D,
-        GOLA_H,
-    )
-    parts.append(("H18", "Herraje", "Gola_J_Sup", 1, W, GOLA_H, GOLA_D, "Aluminio"))
+    make_j_gola_inverted(doc, "H18_Gola_J_Sup", 0, 0, Z_MICRO_TOP, W)
+    parts.append(("H18", "Herraje", "Gola_J_Sup", 1, W, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio"))
 
     # Puertas (referencia de frente aplicado)
     add_part(
