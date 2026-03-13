@@ -6,13 +6,13 @@ L16,Casco,Parante_Rear_Der,1,2202.0,150.0,18.0,Sin canto,,
 L17,Herraje,Pata_80,4,40.0,40.0,80.0,PVC/Aluminio,,
 L3,Casco,Tapa_Casco,1,890.0,760.0,18.0,Canto frente,,
 L4,Fondo,Fondo_3mm,1,854.0,2202.0,3.0,Sin canto,,
-L5,Division,Parante_Interior,1,1729.0,760.0,18.0,Canto frente,,
+L5,Division,Parante_Interior,1,1747.0,760.0,18.0,Canto frente,,
 L6,Horizontal,Techo_Lavarropas_Der,1,630.0,760.0,18.0,Canto frente,,
 L7,Refuerzo,Regrueso_Techo_Lav,1,630.0,60.0,18.0,Cantos vistos,,
 L13,Horizontal,Piso_Modulo_Superior,1,890.0,760.0,18.0,Canto frente,,
-L8,Frente,Puerta_Inf_Izq,1,435.0,1729.0,18.0,4 cantos,,3
-L9,Frente,Puerta_Inf_Der,1,435.0,1729.0,18.0,4 cantos,,3
-L10,Frente,Puerta_Sup_Izq,1,435.0,473.0,18.0,4 cantos,,2
-L11,Frente,Puerta_Sup_Der,1,435.0,473.0,18.0,4 cantos,,2
-L12,Herraje,Gola_C_Media,1,890.0,25.0,20.0,Aluminio,0.890,
+L8,Frente,Puerta_Inf_Izq,1,435.0,1738.0,18.0,4 cantos,,3
+L9,Frente,Puerta_Inf_Der,1,435.0,1738.0,18.0,4 cantos,,3
+L10,Frente,Puerta_Sup_Izq,1,435.0,438.0,18.0,4 cantos,,2
+L11,Frente,Puerta_Sup_Der,1,435.0,438.0,18.0,4 cantos,,2
+L12,Herraje,Gola_C_Media,1,890.0,72.8,26.0,Aluminio,0.890,
 TOTAL,Resumen,Totales_Herrajes,,,,,,0.890,10

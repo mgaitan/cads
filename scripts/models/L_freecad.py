@@ -16,19 +16,42 @@ Salida:
 
 import csv
 import os
+import sys
 from pathlib import Path
 
 import FreeCAD as App
 import Part
 
-GUI_AVAILABLE = False
-try:
-    import FreeCADGui as Gui
+ROOT = Path(globals().get("__file__", Path.cwd())).resolve()
+if ROOT.is_file():
+    ROOT = ROOT.parents[2]
+else:
+    ROOT = Path.cwd()
+SRC = ROOT / "src"
+if str(SRC) not in sys.path:
+    sys.path.insert(0, str(SRC))
 
-    Gui.showMainWindow()
-    GUI_AVAILABLE = True
-except Exception:
-    Gui = None
+from cads.freecad_gola import (
+    C_GOLA_D,
+    C_GOLA_TOTAL_H,
+    GOLA_SETBACK,
+    GOLA_VISIBLE_H,
+    J_GOLA_D,
+    J_GOLA_TOTAL_H,
+    make_c_gola,
+    make_j_gola_inverted,
+)
+
+GUI_AVAILABLE = False
+Gui = None
+if not os.environ.get("FREECAD_NO_GUI"):
+    try:
+        import FreeCADGui as Gui
+
+        Gui.showMainWindow()
+        GUI_AVAILABLE = True
+    except Exception:
+        Gui = None
 
 TH = 18.0
 BACK_TH = 3.0
@@ -41,9 +64,6 @@ POST_D = 150.0
 LEG_W = 40.0
 LEG_D = 40.0
 LEG_INSET = 30.0
-GOLA_H = 25.0
-GOLA_D = 20.0
-
 # Distribucion interior
 WASHER_CLEAR_W = 630.0
 WASHER_CLEAR_H = 880.0
@@ -53,7 +73,7 @@ W_RIGHT_CLEAR = WIDTH - TH - (DIV_X + TH)
 WASHER_SHELF_Z = TOE_H + WASHER_CLEAR_H
 REGRUESO_H = 60.0
 
-# Frentes: 2 hojas inferiores + 2 hojas superiores (linea AB en Z=1809)
+# Frentes: 2 hojas inferiores + 2 hojas superiores alineadas con AB/H
 OVERLAY = TH / 2.0
 CENTER_GAP = 2.0
 DOOR_Y = -TH
@@ -61,13 +81,15 @@ DOOR_W = (WIDTH - 2.0 * OVERLAY - CENTER_GAP) / 2.0
 DOOR1_X = OVERLAY
 DOOR2_X = DOOR1_X + DOOR_W + CENTER_GAP
 
-AB_GOLA_Z = 1809.0
+AB_GOLA_Z = 1827.0
+AB_UPPER_DOOR_Z = 1853.0
+AB_UPPER_DOOR_H = 438.0
 
 LOWER_DOOR_Z = TOE_H + OVERLAY
-LOWER_DOOR_H = (AB_GOLA_Z + OVERLAY) - LOWER_DOOR_Z
+LOWER_DOOR_H = (AB_UPPER_DOOR_Z - GOLA_VISIBLE_H) - LOWER_DOOR_Z
 
-UPPER_DOOR_Z = AB_GOLA_Z + OVERLAY
-UPPER_DOOR_H = (HEIGHT_TOTAL - TH + OVERLAY) - UPPER_DOOR_Z
+UPPER_DOOR_Z = AB_UPPER_DOOR_Z
+UPPER_DOOR_H = AB_UPPER_DOOR_H
 
 INNER_DIV_H = AB_GOLA_Z - TOE_H
 
@@ -253,7 +275,7 @@ def main():
     )
 
     # Piso del modulo superior (ancho completo)
-    add_box(doc, "L13_Piso_Modulo_Superior", 0, 0, AB_GOLA_Z, WIDTH, DEPTH, TH)
+    add_box(doc, "L13_Piso_Modulo_Superior", 0, GOLA_SETBACK, AB_GOLA_Z - TH, WIDTH, DEPTH - GOLA_SETBACK, TH)
     parts.append(
         (
             "L13",
@@ -325,10 +347,10 @@ def main():
         ("L11", "Frente", "Puerta_Sup_Der", 1, DOOR_W, UPPER_DOOR_H, TH, "4 cantos")
     )
 
-    # Gola C horizontal bajo puertas superiores (sirve tambien para abrir inferiores)
-    add_box(doc, "L12_Gola_C_Media", 0, -GOLA_D, AB_GOLA_Z, WIDTH, GOLA_D, GOLA_H)
+    # Gola C entre puertas superiores e inferiores.
+    make_c_gola(doc, "L12_Gola_C_Media", 0, 0, AB_UPPER_DOOR_Z - C_GOLA_TOTAL_H + 18.5, WIDTH)
     parts.append(
-        ("L12", "Herraje", "Gola_C_Media", 1, WIDTH, GOLA_H, GOLA_D, "Aluminio")
+        ("L12", "Herraje", "Gola_C_Media", 1, WIDTH, C_GOLA_TOTAL_H, C_GOLA_D, "Aluminio")
     )
 
     doc.recompute()
