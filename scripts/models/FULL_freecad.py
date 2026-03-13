@@ -58,11 +58,11 @@ def main():
     ensi_wall_face_y = 650.0
     wall_th = 300.0
     wall_x = -wall_th
-    wall_y = 0.0
-    wall_len = 2820.0
+    wall_y = -5.0
+    wall_len = 2825.0
     wall_h = 2400.0
     ensi_x = 0.0
-    ensi_y = wall_len - ensi_wall_face_y
+    ensi_y = 2170.0
 
     win_w = 1100.0
     win_h = 1200.0
