@@ -138,10 +138,10 @@ def main():
         add_box(
             doc,
             "FULL_Muro_ENS_L",
-            0.0,
+            -300.0,
             ens_back_l_y - ens_wall_th,
             0.0,
-            l_w,
+            l_w + 300.0,
             ens_wall_th,
             wall_h,
         )
@@ -178,6 +178,18 @@ def main():
             ens_back_main_y - ens_wall_th,
             0.0,
             ens_wall_th,
+            580.0,
+            wall_h,
+        )
+    )
+    objs.append(
+        add_box(
+            doc,
+            "FULL_Muro_ENS_Martillo_Der",
+            ens_total_w,
+            ens_back_main_y - ens_wall_th + 580.0 - ens_wall_th,
+            0.0,
+            320.0,
             ens_wall_th,
             wall_h,
         )
