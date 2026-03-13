@@ -25,7 +25,8 @@ WIDTH = 780.0
 DEPTH_TOTAL = 950.0
 DEPTH_MOD = 300.0
 BODY_HEIGHT = 2260.0
-TOP_DRAWER_TOTAL_W = WIDTH + 1540.0
+TOP_DRAWER_FLOATING_W = 1540.0 + 820.0
+TOP_DRAWER_TOTAL_W = WIDTH + TOP_DRAWER_FLOATING_W
 TOP_DRAWER_D = 300.0
 TOP_DRAWER_H = 140.0
 HEIGHT_TOTAL = BODY_HEIGHT + TOP_DRAWER_H
@@ -486,7 +487,7 @@ def main():
     add_box(doc, "F13_Puerta_Mod_Der", DOOR_X2, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
     parts.append(("F13", "Frente", "Puerta_Mod_Der", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
 
-    # Cajon superior corrido (en L invertida), toma el techo del sector modular y continua 1540 mm.
+    # Cajon superior corrido (en L invertida), toma el techo del sector modular y continua sobre isla.
     top_z0 = BODY_HEIGHT
     inner_top_w = TOP_DRAWER_TOTAL_W - 2.0 * TH
     inner_top_d = TOP_DRAWER_D - 2.0 * TH
@@ -538,6 +539,7 @@ def main():
     )
 
     floating_start_x = WIDTH
+    # Los spots mantienen su posicion absoluta respecto del origen historico del tramo flotante.
     floating_step = 1540.0 / 4.0
     spot_centers_x = [
         floating_start_x + floating_step,

@@ -17,7 +17,7 @@ F17,Regrueso,Regrueso_Front_Estante_Sup_2,1,692.0,50.0,18.0,Canto frente,,
 F12,Frente,Puerta_Mod_Izq,1,369.0,877.0,18.0,4 cantos,,2
 F13,Frente,Puerta_Mod_Der,1,369.0,877.0,18.0,4 cantos,,2
 F23,Cajon_Sup,Lateral_Der,1,122.0,264.0,18.0,Canto frente,,
-F24,Cajon_Sup,Trasera,1,2284.0,82.0,18.0,Sin canto,,
-F25,Cajon_Sup,Piso_Interior_3xØ60,1,2284.0,264.0,18.0,Sin canto,,
-F26,Frente,Frente_Cajon_Superior,1,2284.0,140.0,18.0,4 cantos,,
+F24,Cajon_Sup,Trasera,1,3104.0,82.0,18.0,Sin canto,,
+F25,Cajon_Sup,Piso_Interior_3xØ60,1,3104.0,264.0,18.0,Sin canto,,
+F26,Frente,Frente_Cajon_Superior,1,3104.0,140.0,18.0,4 cantos,,
 TOTAL,Resumen,Totales_Herrajes,,,,,,0.000,4
