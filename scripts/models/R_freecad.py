@@ -25,7 +25,6 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from cads.freecad_gola import (
-    GOLA_SETBACK,
     GOLA_VISIBLE_H,
     J_GOLA_D,
     J_GOLA_TOTAL_H,
@@ -45,7 +44,7 @@ if not os.environ.get("FREECAD_NO_GUI"):
 
 TH = 18.0
 BACK_TH = 6.0
-WIDTH = 890.0
+WIDTH = 800.0
 DEPTH = 450.0
 CAB_H = 870.0
 TOE_H = 80.0
@@ -79,6 +78,8 @@ COUNTER_X = 0.0
 COUNTER_Y = -(TH + TOP_OVERHANG)
 COUNTER_W = WIDTH + TOP_OVERHANG
 COUNTER_D = DEPTH + TH + TOP_OVERHANG
+COUNTER_NOTCH_W = TOP_OVERHANG
+COUNTER_NOTCH_D = 100.0
 
 
 def add_box(doc, name, x, y, z, dx, dy, dz):
@@ -139,8 +140,16 @@ def ensure_visible(doc):
 
 def add_counter(doc):
     obj = doc.addObject("Part::Feature", "R11_Mesada")
-    obj.Shape = Part.makeBox(COUNTER_W, COUNTER_D, COUNTER_TH)
-    obj.Placement.Base = App.Vector(COUNTER_X, COUNTER_Y, Z_TOP)
+    slab = Part.makeBox(
+        COUNTER_W, COUNTER_D, COUNTER_TH, App.Vector(COUNTER_X, COUNTER_Y, Z_TOP)
+    )
+    notch = Part.makeBox(
+        COUNTER_NOTCH_W,
+        COUNTER_NOTCH_D,
+        COUNTER_TH + 2.0,
+        App.Vector(WIDTH, DEPTH - COUNTER_NOTCH_D, Z_TOP - 1.0),
+    )
+    obj.Shape = slab.cut(notch)
     return obj
 
 
@@ -173,14 +182,56 @@ def main():
     add_box(doc, "R4_Fondo_6mm", TH, DEPTH - BACK_TH, Z_BOTTOM, W_INT, BACK_TH, SIDE_H)
     parts.append(("R4", "Fondo", "Fondo_6mm", 1, W_INT, SIDE_H, BACK_TH, "Sin canto"))
 
-    add_box(doc, "R5_Travesano_Sup_Trasero", 0, DEPTH - TOP_REAR_D, Z_TOP - TH, WIDTH, TOP_REAR_D, TH)
-    parts.append(("R5", "Casco", "Travesano_Sup_Trasero", 1, WIDTH, TOP_REAR_D, TH, "Sin canto"))
+    add_box(
+        doc,
+        "R5_Travesano_Sup_Trasero",
+        TH,
+        DEPTH - TOP_REAR_D,
+        Z_TOP - TH,
+        W_INT,
+        TOP_REAR_D,
+        TH,
+    )
+    parts.append(
+        ("R5", "Casco", "Travesano_Sup_Trasero", 1, W_INT, TOP_REAR_D, TH, "Sin canto")
+    )
 
-    add_box(doc, "R6_Estante_Regulable", TH + SHELF_SETBACK, 0, SHELF_Z, W_INT - 2.0 * SHELF_SETBACK, D_INT - SHELF_SETBACK, TH)
-    parts.append(("R6", "Interior", "Estante_Regulable", 1, W_INT - 2.0 * SHELF_SETBACK, D_INT - SHELF_SETBACK, TH, "Canto frente"))
+    add_box(
+        doc,
+        "R6_Estante_Regulable",
+        TH + SHELF_SETBACK,
+        0,
+        SHELF_Z,
+        W_INT - 2.0 * SHELF_SETBACK,
+        D_INT - SHELF_SETBACK,
+        TH,
+    )
+    parts.append(
+        (
+            "R6",
+            "Interior",
+            "Estante_Regulable",
+            1,
+            W_INT - 2.0 * SHELF_SETBACK,
+            D_INT - SHELF_SETBACK,
+            TH,
+            "Canto frente",
+        )
+    )
 
     make_j_gola(doc, "R7_Gola_J_Superior", 0, 0, GOLA_Z, WIDTH)
-    parts.append(("R7", "Herraje", "Gola_J_Superior", 1, WIDTH, J_GOLA_TOTAL_H, J_GOLA_D, "Aluminio"))
+    parts.append(
+        (
+            "R7",
+            "Herraje",
+            "Gola_J_Superior",
+            1,
+            WIDTH,
+            J_GOLA_TOTAL_H,
+            J_GOLA_D,
+            "Aluminio",
+        )
+    )
 
     add_box(doc, "R8_Puerta_Izq", DOOR1_X, DOOR_Y, DOOR_Z, DOOR_W, TH, DOOR_H)
     parts.append(("R8", "Frente", "Puerta_Izq", 1, DOOR_W, DOOR_H, TH, "4 cantos"))
@@ -199,7 +250,9 @@ def main():
     parts.append(("R10", "Herraje", "Pata_80", 4, LEG_W, LEG_D, TOE_H, "PVC/Aluminio"))
 
     add_counter(doc)
-    parts.append(("R11", "Mesada", "Mesada", 1, COUNTER_W, COUNTER_D, COUNTER_TH, "Piedra"))
+    parts.append(
+        ("R11", "Mesada", "Mesada", 1, COUNTER_W, COUNTER_D, COUNTER_TH, "Piedra")
+    )
 
     doc.recompute()
 
@@ -216,18 +269,20 @@ def main():
     rows = add_bom_metadata(parts)
     with open(bom_path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow([
-            "codigo",
-            "categoria",
-            "pieza",
-            "cantidad",
-            "largo_mm",
-            "ancho_mm",
-            "espesor_mm",
-            "cantos",
-            "ml_gola",
-            "bisagras_cazoleta",
-        ])
+        w.writerow(
+            [
+                "codigo",
+                "categoria",
+                "pieza",
+                "cantidad",
+                "largo_mm",
+                "ancho_mm",
+                "espesor_mm",
+                "cantos",
+                "ml_gola",
+                "bisagras_cazoleta",
+            ]
+        )
         w.writerows(rows)
 
     print("Modelo generado:")

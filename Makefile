@@ -3,11 +3,11 @@ SHELL := /bin/bash
 MODELS_SCRIPT_DIR := scripts/models
 MACRO_DIR := scripts/macros
 
-.PHONY: all model model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble model-ensamble-isla screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts web-models site clean-screens clean-manuales clean-models help
+.PHONY: all model model-h model-aa model-ab model-f model-l model-r model-ba model-bb model-i model-m model-ensamble model-ensamble-isla model-full screenshots-gui manual-h manual-aa manual-ab manual-all manuales optimize-cuts web-models site clean-screens clean-manuales clean-models help
 
 all: model
 
-model: model-h model-aa model-ab model-f model-l model-ba model-bb model-i model-m model-ensamble
+model: model-h model-aa model-ab model-f model-l model-r model-ba model-bb model-i model-m model-ensamble
 
 define run_freecad_model
 	@set +e; \
@@ -35,6 +35,9 @@ model-f:
 model-l:
 	$(call run_freecad_model,L_freecad.py,L,&& -s bom/L_bom.csv,model-l)
 
+model-r:
+	$(call run_freecad_model,R_freecad.py,R,&& -s bom/R_bom.csv,model-r)
+
 model-ba:
 	$(call run_freecad_model,BA_freecad.py,BA,&& -s bom/BA_bom.csv,model-ba)
 
@@ -52,6 +55,9 @@ model-ensamble:
 
 model-ensamble-isla:
 	$(call run_freecad_model,ENSI_freecad.py,ENSI,,model-ensamble-isla)
+
+model-full:
+	$(call run_freecad_model,FULL_freecad.py,FULL,,model-full)
 
 screenshots-gui:
 	@echo "Abrir FreeCAD GUI con el modelo deseado y ejecutar macro:"
@@ -100,12 +106,14 @@ help:
 	@echo "  make model-ab         Regenera solo alacena AB+AC"
 	@echo "  make model-f          Regenera solo mueble F (fridge + modular)"
 	@echo "  make model-l          Regenera solo frente armario L"
+	@echo "  make model-r          Regenera solo rinconera R"
 	@echo "  make model-ba         Regenera solo bajo mesada BA"
 	@echo "  make model-bb         Regenera solo bajo mesada BB"
 	@echo "  make model-i          Regenera solo bajo mesada isla I"
 	@echo "  make model-m          Regenera piedra de mesada con calado"
 	@echo "  make model-ensamble   Regenera escena conjunta"
 	@echo "  make model-ensamble-isla Regenera ensamble isla (I + F)"
+	@echo "  make model-full       Regenera ensamble completo ENS + ENSI + pared"
 	@echo "  make screenshots-gui  Indica uso de macro GUI (iso + 6 vistas estandar)"
 	@echo "  make manual-all       Genera manual integral unico (ensamble + modulos + BOM total)"
 	@echo "  make manuales         Genera manuales PDF/HTML/MD de H, AA y AB"

@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""Arma ENSI (ensamble isla) con modulos I + F.
-
-Salida:
-  - models/fcstd/ENSI.FCStd
-  - models/step/ENSI.step
-"""
+"""Arma ENSI (ensamble isla) con modulos R + I + F y apoyo de muros/barra."""
 
 import os
 from pathlib import Path
@@ -43,46 +38,85 @@ def main():
     out_fcstd_dir.mkdir(parents=True, exist_ok=True)
     out_step_dir.mkdir(parents=True, exist_ok=True)
 
-    # Vista de frente isla: I + F
-    # I (1540) a la izquierda, F (780) a la derecha.
-    x_i = 0.0
-    x_f = 1540.0
+    r_w = 800.0
+    r_d = 450.0
+    r_wall_h = 1080.0
+    r_wall_th = 150.0
+
+    col_w = 210.0
+    col_d = 210.0
+    paso_w = 820.0
+
     i_w = 1540.0
+    i_d = 650.0
+    i_wall_th = 150.0
+    i_wall_h = 1080.0
+
     f_w = 780.0
     f_d = 950.0
-    i_d = 650.0
-    wall_th = 150.0
-    wall_h = 1080.0
+
     bar_th = 30.0
-    bar_w = 370.0
-    bar_len = i_w + 20.0
+    r_bar_d = 250.0
+    i_bar_d = 370.0
+
+    x_r = 0.0
+    y_r = i_d - r_d
+    x_col = x_r + r_w
+    x_i = x_col + col_w + paso_w
+    x_f_place = x_i + i_w + f_w  # para rotacion 180, deja huella x_i+i_w .. +f_w
 
     doc = App.newDocument("IslaEnsamble")
     objs = []
+
+    objs.append(add_step(doc, "R_Rinconera", str(step_dir / "R.step"), x_r, y_r, 0))
     objs.append(add_step(doc, "I_Bajo_Isla", str(step_dir / "I.step"), x_i, 0, 0))
-    # Rotado 180° y recolocado para conservar su huella en x=1540..2320 / y=0..950.
     objs.append(
         add_step(
             doc,
             "F_Fridge_Modular",
             str(step_dir / "F.step"),
-            x_i + i_w + f_w,
+            x_f_place,
             f_d,
             0,
             180.0,
         )
     )
-    wall_y = i_d
-    objs.append(add_box(doc, "ENSI_Muro_Fondo_Heladera", 0, wall_y, 0, i_w, wall_th, wall_h))
+
+    # Muro de fondo de R
+    objs.append(
+        add_box(doc, "ENSI_Muro_Fondo_R", x_r, i_d, 0, r_w, r_wall_th, r_wall_h)
+    )
+    objs.append(
+        add_box(doc, "ENSI_Barra_R", x_r, i_d - 50.0, r_wall_h, r_w, r_bar_d, bar_th)
+    )
+
+    # Columna intermedia 250x250, con avance hacia el frente respecto de la linea del muro de I.
     objs.append(
         add_box(
             doc,
-            "ENSI_Barra_Sobre_Muro",
-            -20.0,
-            wall_y - 50.0,
-            wall_h,
-            bar_len,
-            bar_w,
+            "ENSI_Columna",
+            x_col,
+            i_d - col_d + i_wall_th,
+            0,
+            col_w,
+            col_d,
+            HEIGHT := 2400.0,
+        )
+    )
+
+    # Muro de fondo de I
+    objs.append(
+        add_box(doc, "ENSI_Muro_Fondo_I", x_i, i_d, 0, i_w, i_wall_th, i_wall_h)
+    )
+    objs.append(
+        add_box(
+            doc,
+            "ENSI_Barra_I",
+            x_i - 20.0,
+            i_d - 50.0,
+            i_wall_h,
+            i_w + 20.0,
+            i_bar_d,
             bar_th,
         )
     )
@@ -98,10 +132,11 @@ def main():
     print("-", fcstd)
     print("-", step)
     print("\nLayout frontal:")
-    print("- I: x=0..1540")
-    print("- F: x=1540..2320")
-    print(f"- Muro: x=0..1540, y={wall_y:.0f}..{wall_y + wall_th:.0f}, h=1080")
-    print(f"- Barra: x=-20..{bar_len - 20.0:.0f}, y={wall_y - 50.0:.0f}..{wall_y - 50.0 + bar_w:.0f}, esp=30")
+    print(f"- R: x={x_r:.0f}..{x_r + r_w:.0f}")
+    print(f"- Columna: x={x_col:.0f}..{x_col + col_w:.0f}")
+    print(f"- Paso libre: x={x_col + col_w:.0f}..{x_i:.0f}")
+    print(f"- I: x={x_i:.0f}..{x_i + i_w:.0f}")
+    print(f"- F: x={x_i + i_w:.0f}..{x_i + i_w + f_w:.0f}")
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ WIDTH = 780.0
 DEPTH_TOTAL = 950.0
 DEPTH_MOD = 300.0
 BODY_HEIGHT = 2260.0
-TOP_DRAWER_FLOATING_W = 1540.0 + 820.0
+TOP_DRAWER_FLOATING_W = 1540.0
 TOP_DRAWER_TOTAL_W = WIDTH + TOP_DRAWER_FLOATING_W
 TOP_DRAWER_D = 300.0
 TOP_DRAWER_H = 140.0
@@ -504,7 +504,7 @@ def main():
     add_box(
         doc,
         "F23_Cajon_Sup_Lateral_Der",
-        TOP_DRAWER_TOTAL_W - 2.0 * TH,
+        TOP_DRAWER_TOTAL_W - TH,
         TH,
         top_z0 + TH,
         TH,
@@ -530,7 +530,7 @@ def main():
         TH,
         TOP_DRAWER_D - TH,
         top_z0,
-        TOP_DRAWER_TOTAL_W - 2.0 * TH,
+        TOP_DRAWER_TOTAL_W - TH,
         TH,
         TOP_DRAWER_H - 3.0 * TH - 4.0,
     )
@@ -540,7 +540,7 @@ def main():
             "Cajon_Sup",
             "Trasera",
             1,
-            TOP_DRAWER_TOTAL_W - 2.0 * TH,
+            TOP_DRAWER_TOTAL_W - TH,
             TOP_DRAWER_H - 3.0 * TH - 4.0,
             TH,
             "Sin canto",
@@ -565,7 +565,7 @@ def main():
         TH,
         TH,
         top_z0,
-        inner_top_w,
+        inner_top_w + TH,
         inner_top_d,
         TH,
         spot_holes,
@@ -576,7 +576,7 @@ def main():
             "Cajon_Sup",
             "Piso_Interior_3xØ60",
             1,
-            inner_top_w,
+            inner_top_w + TH,
             inner_top_d,
             TH,
             "Sin canto",
@@ -589,7 +589,7 @@ def main():
         TH,
         0,
         top_z0,
-        TOP_DRAWER_TOTAL_W - 2.0 * TH,
+        TOP_DRAWER_TOTAL_W - TH,
         TH,
         TOP_DRAWER_H,
     )
@@ -599,7 +599,7 @@ def main():
             "Frente",
             "Frente_Cajon_Superior",
             1,
-            TOP_DRAWER_TOTAL_W - 2.0 * TH,
+            TOP_DRAWER_TOTAL_W - TH,
             TOP_DRAWER_H,
             TH,
             "4 cantos",
