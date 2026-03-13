@@ -399,8 +399,8 @@ def write_csv(path: Path, rows: list[dict[str, object]]):
         w.writerows(rows)
 
 
-def write_group_svg(
-    path: Path,
+def write_group_svgs(
+    out_dir: Path,
     group: str,
     placements: list[dict[str, object]],
     board_w: int,
@@ -411,8 +411,9 @@ def write_group_svg(
     scale = 0.35
     pad = 40
     boards = max(int(p["board_idx"]) for p in placements)
-    cols = min(3, boards)
-    rows = math.ceil(boards / cols)
+    boards_per_page = 2
+    cols = 1
+    rows = min(boards_per_page, boards)
     cell_w = int(board_w * scale) + pad * 2
     cell_h = int(board_h * scale) + pad * 2 + 24
     svg_w = cols * cell_w
@@ -427,51 +428,58 @@ def write_group_svg(
         "#fff3cd",
     ]
 
-    def board_origin(bidx: int) -> tuple[int, int]:
-        i = bidx - 1
+    def board_origin(local_idx: int) -> tuple[int, int]:
+        i = local_idx
         c = i % cols
         r = i // cols
         return c * cell_w + pad, r * cell_h + pad + 18
 
-    lines = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{svg_w}" height="{svg_h}" viewBox="0 0 {svg_w} {svg_h}">',
-        f'<rect x="0" y="0" width="{svg_w}" height="{svg_h}" fill="#ffffff"/>',
-        f'<text x="12" y="20" font-size="14" font-family="Arial">Layout de corte - {group}</text>',
-    ]
+    total_pages = math.ceil(boards / boards_per_page)
+    for page_idx in range(total_pages):
+        board_start = page_idx * boards_per_page + 1
+        board_end = min(boards, board_start + boards_per_page - 1)
+        lines = [
+            f'<svg xmlns="http://www.w3.org/2000/svg" width="{svg_w}" height="{svg_h}" viewBox="0 0 {svg_w} {svg_h}">',
+            f'<rect x="0" y="0" width="{svg_w}" height="{svg_h}" fill="#ffffff"/>',
+            f'<text x="12" y="20" font-size="14" font-family="Arial">Layout de corte - {group} - hoja {page_idx + 1}/{total_pages}</text>',
+        ]
 
-    for b in range(1, boards + 1):
-        ox, oy = board_origin(b)
-        bw = board_w * scale
-        bh = board_h * scale
-        lines.append(
-            f'<rect x="{ox}" y="{oy}" width="{bw:.1f}" height="{bh:.1f}" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>'
-        )
-        lines.append(
-            f'<text x="{ox}" y="{oy - 6}" font-size="11" font-family="Arial">Placa {b}</text>'
-        )
-
-    for idx, p in enumerate(placements):
-        b = int(p["board_idx"])
-        ox, oy = board_origin(b)
-        x = ox + float(p["x_mm"]) * scale
-        y = oy + float(p["y_mm"]) * scale
-        w = float(p["cut_w_mm"]) * scale
-        h = float(p["cut_h_mm"]) * scale
-        color = colors[idx % len(colors)]
-        label = f"{p['code']} ({int(p['part_w_mm'])}x{int(p['part_h_mm'])})"
-        cantos = str(p.get("cantos", "")).strip()
-        if cantos:
-            label = f"{label} - {cantos}"
-        lines.append(
-            f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{color}" stroke="#555" stroke-width="0.8"/>'
-        )
-        if w > 46 and h > 18:
+        for local_idx, b in enumerate(range(board_start, board_end + 1)):
+            ox, oy = board_origin(local_idx)
+            bw = board_w * scale
+            bh = board_h * scale
             lines.append(
-                f'<text x="{x + 3:.1f}" y="{y + 13:.1f}" font-size="9" font-family="Arial">{label}</text>'
+                f'<rect x="{ox}" y="{oy}" width="{bw:.1f}" height="{bh:.1f}" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>'
+            )
+            lines.append(
+                f'<text x="{ox}" y="{oy - 6}" font-size="11" font-family="Arial">Placa {b}</text>'
             )
 
-    lines.append("</svg>")
-    path.write_text("\n".join(lines), encoding="utf-8")
+        for idx, p in enumerate(placements):
+            b = int(p["board_idx"])
+            if not (board_start <= b <= board_end):
+                continue
+            ox, oy = board_origin(b - board_start)
+            x = ox + float(p["x_mm"]) * scale
+            y = oy + float(p["y_mm"]) * scale
+            w = float(p["cut_w_mm"]) * scale
+            h = float(p["cut_h_mm"]) * scale
+            color = colors[idx % len(colors)]
+            label = f"{p['code']} ({int(p['part_w_mm'])}x{int(p['part_h_mm'])})"
+            cantos = str(p.get("cantos", "")).strip()
+            if cantos:
+                label = f"{label} - {cantos}"
+            lines.append(
+                f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{color}" stroke="#555" stroke-width="0.8"/>'
+            )
+            if w > 46 and h > 18:
+                lines.append(
+                    f'<text x="{x + 3:.1f}" y="{y + 13:.1f}" font-size="9" font-family="Arial">{label}</text>'
+                )
+
+        lines.append("</svg>")
+        path = out_dir / f"{group}_layout_p{page_idx + 1:02d}.svg"
+        path.write_text("\n".join(lines), encoding="utf-8")
 
 
 def main():
@@ -484,7 +492,7 @@ def main():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for stale in OUT_DIR.glob("*_placements.csv"):
         stale.unlink(missing_ok=True)
-    for stale in OUT_DIR.glob("*_layout.svg"):
+    for stale in OUT_DIR.glob("*_layout*.svg"):
         stale.unlink(missing_ok=True)
 
     types = load_piece_types()
@@ -506,8 +514,8 @@ def main():
         placements.sort(key=lambda r: (r["board_idx"], r["y_mm"], r["x_mm"]))
         write_csv(OUT_DIR / f"{group}_placements.csv", placements)
         if args.svg:
-            write_group_svg(
-                OUT_DIR / f"{group}_layout.svg",
+            write_group_svgs(
+                OUT_DIR,
                 group=group,
                 placements=placements,
                 board_w=board_w,

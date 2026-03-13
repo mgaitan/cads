@@ -11,7 +11,21 @@ ROOT = Path(__file__).resolve().parents[2]
 STEP_DIR = ROOT / "models" / "step"
 OUT_DIR = ROOT / "outputs" / "web_models"
 
-MODEL_CODES = ["ENS", "ENSI", "H", "AA", "AB", "L", "BA", "BB", "F", "I", "M"]
+MODEL_CODES = [
+    "ENS",
+    "ENSI",
+    "FULL",
+    "H",
+    "AA",
+    "AB",
+    "L",
+    "BA",
+    "BB",
+    "F",
+    "I",
+    "R",
+    "M",
+]
 
 
 def build_freecad_script(pairs: list[tuple[Path, Path]]) -> str:

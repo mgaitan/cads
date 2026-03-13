@@ -17,6 +17,7 @@ DATA = SITE / "data"
 MODULE_META = {
     "ENS": {"title": "Ensamble cocina principal", "kind": "ensamble"},
     "ENSI": {"title": "Ensamble isla", "kind": "ensamble"},
+    "FULL": {"title": "Ensamble completo", "kind": "ensamble"},
     "H": {"title": "Columna horno + micro", "kind": "modulo"},
     "AA": {"title": "Alacena izquierda", "kind": "modulo"},
     "AB": {"title": "Alacena derecha + AC", "kind": "modulo"},
@@ -25,6 +26,7 @@ MODULE_META = {
     "BB": {"title": "Bajo mesada derecho", "kind": "modulo"},
     "F": {"title": "Heladera + modular", "kind": "modulo"},
     "I": {"title": "Bajo mesada isla", "kind": "modulo"},
+    "R": {"title": "Rinconera", "kind": "modulo"},
     "M": {"title": "Mesada", "kind": "modulo"},
 }
 
@@ -77,15 +79,19 @@ if sp.exists():
     with sp.open(encoding="utf-8", newline="") as f:
         summary = list(csv.DictReader(f))
 layouts = []
-for svg in sorted(CUT.glob("*_layout.svg")):
-    group = svg.name.replace("_layout.svg", "")
-    layouts.append(
+layout_groups: dict[str, dict[str, object]] = {}
+for svg in sorted(CUT.glob("*_layout_p*.svg")):
+    group = svg.name.split("_layout_p")[0]
+    entry = layout_groups.setdefault(
+        group,
         {
             "group": group,
-            "svg": f"assets/cutting/{svg.name}",
             "placements_csv": f"assets/cutting/{group}_placements.csv",
-        }
+            "svgs": [],
+        },
     )
+    entry["svgs"].append(f"assets/cutting/{svg.name}")
+layouts = list(layout_groups.values())
 
 (DATA / "site-data.json").write_text(
     json.dumps(
@@ -133,7 +139,7 @@ function renderCuts(){ const rows=DATA.bomRows; const tbody=$('#cuts-body'); con
  const modules=['Todos',...new Set(rows.map(r=>r.module))]; const cats=['Todas',...new Set(rows.map(r=>r.categoria))]; mod.innerHTML=modules.map(v=>`<option>${v}</option>`).join(''); cat.innerHTML=cats.map(v=>`<option>${v}</option>`).join(''); const totals=$('#cut-cards'); const byModule={}; rows.forEach(r=>{byModule[r.module]=(byModule[r.module]||0)+Number(r.cantidad||0)}); totals.innerHTML=Object.entries(byModule).sort().map(([k,v])=>`<div class="card"><strong>${k}</strong><div>${v} piezas</div></div>`).join('');
  function draw(){ const term=q.value.toLowerCase().trim(); const mv=mod.value, cv=cat.value; const filtered=rows.filter(r=>(!term||Object.values(r).join(' ').toLowerCase().includes(term))&&(mv==='Todos'||r.module===mv)&&(cv==='Todas'||r.categoria===cv)); tbody.innerHTML=filtered.map(r=>`<tr><td>${r.module}</td><td>${r.codigo}</td><td>${r.categoria}</td><td>${r.pieza}</td><td>${r.cantidad}</td><td>${r.largo_mm}</td><td>${r.ancho_mm}</td><td>${r.espesor_mm}</td><td>${r.cantos||''}</td></tr>`).join(''); $('#cuts-count').textContent=`${filtered.length} filas`; }
  [q,mod,cat].forEach(el=>el.oninput=draw); draw(); }
-function renderLayouts(){ $('#layout-summary').innerHTML=DATA.cutSummary.map(r=>`<div class="card"><strong>${r.group}</strong><div>${r.boards_used} placas</div><div>${r.utilization_pct}% uso</div><div class="small">${r.board_usable_w_mm} x ${r.board_usable_h_mm} util</div></div>`).join(''); $('#layouts').innerHTML=DATA.layouts.map(l=>`<section class="layout"><h3>${l.group}</h3><p class="small"><a href="${l.placements_csv}" target="_blank">placements.csv</a></p><img src="${l.svg}" alt="${l.group}"></section>`).join(''); }
+function renderLayouts(){ $('#layout-summary').innerHTML=DATA.cutSummary.map(r=>`<div class="card"><strong>${r.group}</strong><div>${r.boards_used} placas</div><div>${r.utilization_pct}% uso</div><div class="small">${r.board_usable_w_mm} x ${r.board_usable_h_mm} util</div></div>`).join(''); $('#layouts').innerHTML=DATA.layouts.map(l=>`<section class="layout"><h3>${l.group}</h3><p class="small"><a href="${l.placements_csv}" target="_blank">placements.csv</a></p>${l.svgs.map((s,i)=>`<figure><img src="${s}" alt="${l.group} hoja ${i+1}"><figcaption class="small">Hoja ${i+1}</figcaption></figure>`).join('')}</section>`).join(''); }
 function setupViewer(selector, url){
  const canvas = $(selector);
  const renderer = new THREE.WebGLRenderer({canvas, antialias:true});

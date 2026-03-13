@@ -1,10 +1,13 @@
 board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
-1,BB_BB14c_1,BB,BB14c,BB14_Caja_Top_Izq_Fondo_6mm,1,0,629,503,626,500,0,Fondo clavado pasante
-1,BB_BB18c_1,BB,BB18c,BB18_Caja_Bot_Izq_Fondo_6mm,630,378,503,629,626,500,1,Fondo clavado pasante
-1,BB_BB19c_1,BB,BB19c,BB19_Caja_Bot_Der_Fondo_6mm,1258,379,503,629,626,500,1,Fondo clavado pasante
-1,BB_BB16c_1,BB,BB16c,BB16_Caja_Mid_Izq_Fondo_6mm,1,503,629,503,626,500,0,Fondo clavado pasante
-1,I_I19c_1,I,I19c,I19_Cajon_Sup_Fondo_6mm,1761,600,328,408,405,325,1,Fondo clavado pasante
-1,I_I20c_1,I,I20c,I20_Cajon_Med_Fondo_6mm,2089,600,328,408,405,325,1,Fondo clavado pasante
-1,I_I21c_1,I,I21c,I21_Cajon_Inf_Fondo_6mm,2417,600,328,408,405,325,1,Fondo clavado pasante
-1,BB_BB17c_1,BB,BB17c,BB17_Caja_Mid_Der_Fondo_6mm,0,1006,629,503,626,500,0,Fondo clavado pasante
-1,BB_BB15c_1,BB,BB15c,BB15_Caja_Top_Der_Fondo_6mm,629,1007,629,503,626,500,0,Fondo clavado pasante
+1,BB_BB18c_1,BB,BB18c,BB18_Caja_Bot_Izq_Fondo_6mm,628,0,628,503,625,500,0,Fondo clavado pasante
+1,BA_BA15c_1,BA,BA15c,BA15_Caja_Bot_Fondo_6mm,2023,160,503,845,842,500,1,Fondo clavado pasante
+1,I_I19c_1,I,I19c,I19_Cajon_Sup_Fondo_6mm,1539,186,408,309,405,306,0,Fondo clavado pasante
+1,BB_BB17c_1,BB,BB17c,BB17_Caja_Mid_Der_Fondo_6mm,0,301,628,503,625,500,0,Fondo clavado pasante
+1,I_I20c_1,I,I20c,I20_Cajon_Med_Fondo_6mm,1256,495,408,309,405,306,0,Fondo clavado pasante
+1,BA_BA14c_1,BA,BA14c,BA14_Caja_Mid_Fondo_6mm,753,503,503,845,842,500,1,Fondo clavado pasante
+1,BB_BB14c_1,BB,BB14c,BB14_Caja_Top_Izq_Fondo_6mm,0,804,628,503,625,500,0,Fondo clavado pasante
+1,BB_BB15c_1,BB,BB15c,BB15_Caja_Top_Der_Fondo_6mm,1256,804,628,503,625,500,0,Fondo clavado pasante
+1,R_R4_1,R,R4,Fondo_6mm,1947,1005,767,793,764,790,0,Sin canto
+1,BB_BB16c_1,BB,BB16c,BB16_Caja_Mid_Izq_Fondo_6mm,125,1307,628,503,625,500,0,Fondo clavado pasante
+1,BB_BB19c_1,BB,BB19c,BB19_Caja_Bot_Der_Fondo_6mm,1319,1307,628,503,625,500,0,Fondo clavado pasante
+1,I_I21c_1,I,I21c,I21_Cajon_Inf_Fondo_6mm,848,1348,408,309,405,306,0,Fondo clavado pasante
