@@ -73,15 +73,17 @@ SINK_D = 390.0
 SINK_RIGHT_MARGIN = 50.0
 SINK_CENTER_Y = 300.0
 
-# Nicho trasero izquierdo (detras de cajones)
-LEFT_FRONT_BLOCK_D = 361.0
-LEFT_REAR_NICHE_D = DEPTH - LEFT_FRONT_BLOCK_D
+# Nicho trasero izquierdo (detras de cajones).
+# El vano libre en Y debe ser 290 mm hasta la cara interior del fondo I1B.
+NICHE_CLEAR_D = 290.0
+LEFT_FRONT_BLOCK_D = DEPTH - TH - NICHE_CLEAR_D
+LEFT_REAR_NICHE_D = NICHE_CLEAR_D
 DRAWER_DEPTH = LEFT_FRONT_BLOCK_D - 2.0 * TH
 
 # Nicho izquierdo abierto con estante regulable.
-NICHE_D = DEPTH - LEFT_FRONT_BLOCK_D
-NICHE_SHELF_W = LEFT_NICHE_W - 2.0
-NICHE_SHELF_D = NICHE_D - 2.0
+NICHE_D = NICHE_CLEAR_D
+NICHE_SHELF_W = 350.0
+NICHE_SHELF_D = 288.0
 
 # Cotas Z
 Z_BOTTOM = TOE_H
@@ -437,7 +439,7 @@ def main():
         niche_y,
         niche_shelf_z,
         NICHE_SHELF_W,
-        NICHE_D,
+        NICHE_SHELF_D,
         TH,
     )
     parts.append(
@@ -447,7 +449,7 @@ def main():
             "Estante_Nicho_Regulable",
             1,
             NICHE_SHELF_W,
-            NICHE_D,
+            NICHE_SHELF_D,
             TH,
             "Canto frente",
         )
@@ -460,7 +462,7 @@ def main():
         niche_y,
         niche_shelf_z - TH,
         50.0,
-        NICHE_D,
+        288.0,
         TH,
     )
     parts.append(
@@ -469,7 +471,7 @@ def main():
             "Nicho",
             "Faja_Frontal_Estante_Nicho",
             1,
-            NICHE_D,
+            288.0,
             50.0,
             TH,
             "Canto frente",
@@ -483,7 +485,7 @@ def main():
         niche_y,
         Z_TOP - 50.0,
         TH,
-        NICHE_D,
+        288.0,
         50.0,
     )
     parts.append(
@@ -492,7 +494,7 @@ def main():
             "Nicho",
             "Faja_Superior_Nicho",
             1,
-            NICHE_D,
+            288.0,
             50.0,
             TH,
             "Canto frente",
@@ -697,7 +699,7 @@ def main():
         "I21_Cajon_Inf",
         drawer_x,
         drawer_y,
-        ROW3_Z + 20.0,
+        ROW3_Z + 30.0,
         drawer_outer_w,
         DRAWER_DEPTH,
         box_h,
