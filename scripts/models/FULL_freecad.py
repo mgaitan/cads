@@ -64,9 +64,10 @@ def main():
     ensi_x = 0.0
     ensi_y = wall_len - ensi_wall_face_y
 
-    win_offset = 560.0
     win_w = 1100.0
     win_h = 1200.0
+    # La ventana se mide desde el fondo de R (extremo superior del muro), no desde el origen.
+    win_offset = wall_len - 560.0 - win_w
     win_sill_z = 800.0
     ens_wall_th = 150.0
 
@@ -187,7 +188,7 @@ def main():
             doc,
             "FULL_Muro_ENS_Martillo_Der",
             ens_total_w,
-            ens_back_main_y - ens_wall_th + 580.0 - ens_wall_th,
+            ens_back_main_y + 580.0 - ens_wall_th,
             0.0,
             320.0,
             ens_wall_th,
