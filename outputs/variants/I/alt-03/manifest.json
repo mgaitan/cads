@@ -1,0 +1,10 @@
+{
+  "module": "I",
+  "variant": "alt-03",
+  "title": "I · alternativa 03",
+  "fcstd": "models/fcstd/variants/I/alt-03.FCStd",
+  "bom_csv": "outputs/variants/I/alt-03/I_alt-03_bom.csv",
+  "step": "outputs/variants/I/alt-03/I_alt-03.step",
+  "stl": "outputs/variants/I/alt-03/I_alt-03.stl",
+  "object_count": 33
+}

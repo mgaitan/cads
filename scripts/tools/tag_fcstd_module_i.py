@@ -45,6 +45,12 @@ def build_script(fcstd: Path) -> str:
             "bom_categoria": "Division",
             "bom_cantos": "Canto frente",
         },
+        "I3B_Liston_Sup_Estantes_Izq": {
+            "bom_codigo": "I3B",
+            "bom_pieza": "Liston_Sup_Estantes_Izq",
+            "bom_categoria": "Casco",
+            "bom_cantos": "4 cantos",
+        },
         "I4_Division_2": {
             "bom_codigo": "I4",
             "bom_pieza": "Divisor_2",
@@ -76,6 +82,12 @@ def build_script(fcstd: Path) -> str:
         "I8C_Piso_Falso_Lavavajillas": {
             "bom_codigo": "I8C",
             "bom_pieza": "Piso_Falso_Lavavajillas",
+            "bom_categoria": "Casco",
+            "bom_cantos": "Canto frente",
+        },
+        "I8D_Estante_Regulable_Der": {
+            "bom_codigo": "I8D",
+            "bom_pieza": "Estante_Regulable_Der",
             "bom_categoria": "Casco",
             "bom_cantos": "Canto frente",
         },
@@ -121,9 +133,21 @@ def build_script(fcstd: Path) -> str:
             "bom_categoria": "Frente",
             "bom_cantos": "4 cantos",
         },
+        "I14_Estante_Flotante_Sup_Izq": {
+            "bom_codigo": "I14",
+            "bom_pieza": "Estante_Flotante_Sup_Izq",
+            "bom_categoria": "Casco",
+            "bom_cantos": "Canto frente",
+        },
         "I15_Frente_Cajon_Med_Izq": {
             "bom_categoria": "Frente",
             "bom_cantos": "4 cantos",
+        },
+        "I15_Estante_Flotante_Med_Izq": {
+            "bom_codigo": "I15",
+            "bom_pieza": "Estante_Flotante_Med_Izq",
+            "bom_categoria": "Casco",
+            "bom_cantos": "Canto frente",
         },
         "I16_Frente_Cajon_Inf_Izq": {
             "bom_categoria": "Frente",
