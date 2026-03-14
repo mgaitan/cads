@@ -139,6 +139,16 @@ def read_prop(obj, name, default=None):
     return default
 
 
+def prop_is_true(value) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        return value.strip().lower() not in ("", "0", "false", "no")
+    return bool(value)
+
+
 def bbox_dims(obj) -> tuple[float, float, float]:
     bb = obj.Shape.BoundBox
     dims = sorted([float(bb.XLength), float(bb.YLength), float(bb.ZLength)], reverse=True)
@@ -158,7 +168,7 @@ for obj in doc.Objects:
     code, piece = name.split("_", 1)
     if not code.startswith(MODULE):
         continue
-    include_in_bom = read_prop(obj, "bom_include", True)
+    include_in_bom = prop_is_true(read_prop(obj, "bom_include", True))
     if not include_in_bom:
         objects_for_export.append(obj)
         continue

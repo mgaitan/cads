@@ -1,0 +1,17 @@
+codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos,ml_gola,bisagras_cazoleta
+I1,Casco,Lateral_Izq_Frente,1,790.0,650.0,18.0,Canto frente,,
+I10,Casco,Soporte_Sup_Fondo,1,1049.0,100.0,18.0,Sin canto,,
+I11,Herraje,Pata_80,6,40.0,40.0,80.0,PVC/Aluminio,,
+I12,Herraje,Gola_J_Superior,1,1540.0,48.0,24.4,Aluminio,1.540,
+I17,Frente,Puerta_Lavavajillas,1,760.0,473.0,18.0,4 cantos,,2
+I18,Frente,Puerta_Bacha_Izq,1,760.0,526.5,18.0,4 cantos,,2
+I18B,Frente,Puerta_Bacha_Der,1,760.0,526.5,18.0,4 cantos,,2
+I2,Casco,Lateral_Der,1,772.0,650.0,18.0,Canto frente,,
+I22,Mesada,Mesada_Calado_Bacha_536x396,1,1580.0,688.0,30.0,Pulido perimetral segun proveedor,,
+I3,Division,Divisor_1,1,772.0,650.0,18.0,Canto frente,,
+I6,Casco,Piso_Der,1,1067.0,650.0,18.0,Canto frente,,
+I8,Casco,Estante_Regulable_Bacha,1,1027.0,612.0,18.0,Canto frente,,
+I8B,Casco,Piso_Removible_Lavavajillas,1,612.0,451.0,18.0,Canto frente,,
+I8C,Casco,Piso_Falso_Lavavajillas,1,612.0,451.0,18.0,Canto frente,,
+I9,Casco,Soporte_Sup_Frente,1,1504.0,100.0,18.0,Canto frente,,
+TOTAL,Resumen,Totales_Herrajes,,,,,,1.540,6

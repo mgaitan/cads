@@ -20,6 +20,8 @@ def parse_args() -> argparse.Namespace:
 def build_script(fcstd: Path) -> str:
     metadata = {
         "I1_Lateral_Izq_Frente": {
+            "bom_codigo": "I1",
+            "bom_pieza": "Lateral_Izq_Frente",
             "bom_categoria": "Casco",
             "bom_cantos": "Canto frente",
         },
@@ -32,6 +34,8 @@ def build_script(fcstd: Path) -> str:
             "bom_cantos": "Canto frente",
         },
         "I2_Lateral_Der": {
+            "bom_codigo": "I2",
+            "bom_pieza": "Lateral_Der",
             "bom_categoria": "Casco",
             "bom_cantos": "Canto frente",
         },
@@ -52,6 +56,26 @@ def build_script(fcstd: Path) -> str:
             "bom_cantos": "Canto frente",
         },
         "I6_Piso_Der": {
+            "bom_codigo": "I6",
+            "bom_pieza": "Piso_Der",
+            "bom_categoria": "Casco",
+            "bom_cantos": "Canto frente",
+        },
+        "I8_Estante_Regulable_Bacha": {
+            "bom_codigo": "I8",
+            "bom_pieza": "Estante_Regulable_Bacha",
+            "bom_categoria": "Casco",
+            "bom_cantos": "Canto frente",
+        },
+        "I8B_Piso_Removible_Lavavajillas": {
+            "bom_codigo": "I8B",
+            "bom_pieza": "Piso_Removible_Lavavajillas",
+            "bom_categoria": "Casco",
+            "bom_cantos": "Canto frente",
+        },
+        "I8C_Piso_Falso_Lavavajillas": {
+            "bom_codigo": "I8C",
+            "bom_pieza": "Piso_Falso_Lavavajillas",
             "bom_categoria": "Casco",
             "bom_cantos": "Canto frente",
         },
@@ -82,6 +106,8 @@ def build_script(fcstd: Path) -> str:
             "bom_cantos": "Sin canto",
         },
         "I12_Gola_J_Superior": {
+            "bom_codigo": "I12",
+            "bom_pieza": "Gola_J_Superior",
             "bom_categoria": "Herraje",
             "bom_cantos": "Aluminio",
         },
@@ -104,10 +130,38 @@ def build_script(fcstd: Path) -> str:
             "bom_cantos": "4 cantos",
         },
         "I17_Frente_Lavavajillas": {
+            "bom_codigo": "I17",
+            "bom_pieza": "Frente_Lavavajillas",
             "bom_categoria": "Frente",
             "bom_cantos": "4 cantos",
         },
+        "I17_Puerta_Lavavajillas": {
+            "bom_codigo": "I17",
+            "bom_pieza": "Puerta_Lavavajillas",
+            "bom_categoria": "Frente",
+            "bom_cantos": "4 cantos",
+            "bom_bisagras_cazoleta": 2,
+        },
+        "I17_Puerta_Izq": {
+            "bom_include": False,
+        },
         "I18_Puerta_Der": {
+            "bom_codigo": "I18",
+            "bom_pieza": "Puerta_Der",
+            "bom_categoria": "Frente",
+            "bom_cantos": "4 cantos",
+            "bom_bisagras_cazoleta": 2,
+        },
+        "I18_Puerta_Bacha_Izq": {
+            "bom_codigo": "I18",
+            "bom_pieza": "Puerta_Bacha_Izq",
+            "bom_categoria": "Frente",
+            "bom_cantos": "4 cantos",
+            "bom_bisagras_cazoleta": 2,
+        },
+        "I18B_Puerta_Bacha_Der": {
+            "bom_codigo": "I18B",
+            "bom_pieza": "Puerta_Bacha_Der",
             "bom_categoria": "Frente",
             "bom_cantos": "4 cantos",
             "bom_bisagras_cazoleta": 2,
@@ -120,7 +174,7 @@ def build_script(fcstd: Path) -> str:
         },
         "I20_Mesada_Calado_Bacha": {
             "bom_codigo": "I22",
-            "bom_pieza": "Mesada_Calado_Bacha_530x390",
+            "bom_pieza": "Mesada_Calado_Bacha_536x396",
             "bom_categoria": "Mesada",
             "bom_cantos": "Pulido perimetral segun proveedor",
             "bom_largo_mm": 1580.0,
@@ -156,6 +210,10 @@ for obj in doc.Objects:
 
     ensure_prop(obj, "App::PropertyBool", "bom_include")
     obj.bom_include = True
+
+    if name.endswith("_Preview"):
+        obj.bom_include = False
+        continue
 
     if name in metadata:
         data = metadata[name]
