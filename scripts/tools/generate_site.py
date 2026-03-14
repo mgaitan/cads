@@ -30,7 +30,10 @@ MODULE_META = {
     "M": {"title": "Mesada", "kind": "modulo"},
 }
 
-for p in [SITE, ASSETS, IMG, CUT, MODELS, DATA]:
+VARIANTS_OUT = ROOT / "outputs" / "variants"
+VARIANT_ASSETS = ASSETS / "variants"
+
+for p in [SITE, ASSETS, IMG, CUT, MODELS, DATA, VARIANT_ASSETS]:
     p.mkdir(parents=True, exist_ok=True)
 
 for shot in (ROOT / "screenshots").glob("*.png"):
@@ -63,6 +66,36 @@ for code, meta in MODULE_META.items():
     )
 modules.sort(key=lambda x: (0 if x["kind"] == "ensamble" else 1, x["code"]))
 
+variants = []
+for manifest_path in sorted(VARIANTS_OUT.glob("*/*/manifest.json")):
+    variant_dir = manifest_path.parent
+    rel_dir = variant_dir.relative_to(VARIANTS_OUT)
+    asset_dir = VARIANT_ASSETS / rel_dir
+    asset_dir.mkdir(parents=True, exist_ok=True)
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    for fname in [
+        Path(manifest["bom_csv"]).name,
+        Path(manifest["step"]).name,
+        Path(manifest["stl"]).name,
+    ]:
+        src = variant_dir / fname
+        if src.exists():
+            shutil.copy2(src, asset_dir / fname)
+
+    variants.append(
+        {
+            "code": f"{manifest['module']}:{manifest['variant']}",
+            "title": manifest["title"],
+            "kind": "variante",
+            "module": manifest["module"],
+            "variant": manifest["variant"],
+            "views": {},
+            "model3d": f"assets/variants/{rel_dir.as_posix()}/{Path(manifest['stl']).name}",
+            "bom_csv": f"assets/variants/{rel_dir.as_posix()}/{Path(manifest['bom_csv']).name}",
+        }
+    )
+
 bom_rows = []
 for path in sorted((ROOT / "bom").glob("*_bom.csv")):
     module = path.stem.replace("_bom", "")
@@ -71,6 +104,16 @@ for path in sorted((ROOT / "bom").glob("*_bom.csv")):
             if r.get("codigo") == "TOTAL":
                 continue
             r["module"] = module
+            bom_rows.append(r)
+for entry in variants:
+    bom_path = SITE / entry["bom_csv"]
+    if not bom_path.exists():
+        continue
+    with bom_path.open(encoding="utf-8", newline="") as f:
+        for r in csv.DictReader(f):
+            if r.get("codigo") == "TOTAL":
+                continue
+            r["module"] = entry["code"]
             bom_rows.append(r)
 
 summary = []
@@ -96,7 +139,8 @@ layouts = list(layout_groups.values())
 (DATA / "site-data.json").write_text(
     json.dumps(
         {
-            "modules": modules,
+            "modules": modules + variants,
+            "variants": variants,
             "bomRows": bom_rows,
             "cutSummary": summary,
             "layouts": layouts,
