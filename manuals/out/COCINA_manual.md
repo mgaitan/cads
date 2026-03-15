@@ -25,175 +25,6 @@ th, td { border: 1px solid #777; padding: 2px 4px; vertical-align: top; }
 ## 2. Lista unica total de partes
 | Categoria | Pieza | Cant total | Largo | Ancho | Espesor | Cantos | Modulos | ML gola | Bisagras |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AB_Blanco | AB_Fondo_3mm | 1 | 1319.0 | 455.0 | 3.0 | Sin canto | AB |  |  |
-| AB_Blanco | AB_Lateral_Der | 1 | 455.0 | 320.0 | 18.0 | Canto frente | AB |  |  |
-| AB_Blanco | AB_Lateral_Izq | 1 | 455.0 | 320.0 | 18.0 | Canto frente | AB |  |  |
-| AB_Blanco | AB_Piso | 1 | 1355.0 | 320.0 | 18.0 | Canto frente | AB |  |  |
-| AB_Blanco | AB_Tapa | 1 | 1355.0 | 320.0 | 18.0 | Canto frente | AB |  |  |
-| AC_Paraiso | AC_Fondo_18mm | 1 | 1283.0 | 273.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Lateral_Der | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Lateral_Der_Interior | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Lateral_Izq | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Lateral_Izq_Interior | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Piso | 1 | 1355.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Piso_Interior | 1 | 1283.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Tapa | 1 | 1355.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| AC_Paraiso | AC_Tapa_Interior | 1 | 1283.0 | 320.0 | 18.0 | Crudo (enchapar en obra) | AB |  |  |
-| Cajon | BA14_Caja_Mid_Fondo_6mm | 1 | 841.6 | 500.0 | 6.0 | Fondo clavado pasante | BA |  |  |
-| Cajon | BA14_Caja_Mid_Frente_Trasera | 2 | 805.6 | 180.0 | 18.0 | Sin canto | BA |  |  |
-| Cajon | BA14_Caja_Mid_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto | BA |  |  |
-| Cajon | BA15_Caja_Bot_Fondo_6mm | 1 | 841.6 | 500.0 | 6.0 | Fondo clavado pasante | BA |  |  |
-| Cajon | BA15_Caja_Bot_Frente_Trasera | 2 | 805.6 | 180.0 | 18.0 | Sin canto | BA |  |  |
-| Cajon | BA15_Caja_Bot_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto | BA |  |  |
-| Cajon | BB14_Caja_Top_Izq_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante | BB |  |  |
-| Cajon | BB14_Caja_Top_Izq_Frente_Trasera | 2 | 589.1 | 60.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB14_Caja_Top_Izq_Lateral | 2 | 500.0 | 60.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB15_Caja_Top_Der_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante | BB |  |  |
-| Cajon | BB15_Caja_Top_Der_Frente_Trasera | 2 | 589.1 | 60.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB15_Caja_Top_Der_Lateral | 2 | 500.0 | 60.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB16_Caja_Mid_Izq_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante | BB |  |  |
-| Cajon | BB16_Caja_Mid_Izq_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB16_Caja_Mid_Izq_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB17_Caja_Mid_Der_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante | BB |  |  |
-| Cajon | BB17_Caja_Mid_Der_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB17_Caja_Mid_Der_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB18_Caja_Bot_Izq_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante | BB |  |  |
-| Cajon | BB18_Caja_Bot_Izq_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB18_Caja_Bot_Izq_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB19_Caja_Bot_Der_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante | BB |  |  |
-| Cajon | BB19_Caja_Bot_Der_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | BB19_Caja_Bot_Der_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto | BB |  |  |
-| Cajon | I19_Cajon_Sup_Fondo_6mm | 1 | 404.6 | 306.0 | 6.0 | Fondo clavado pasante | I |  |  |
-| Cajon | I19_Cajon_Sup_Frente_Trasera | 2 | 368.6 | 170.0 | 18.0 | Sin canto | I |  |  |
-| Cajon | I19_Cajon_Sup_Lateral | 2 | 306.0 | 170.0 | 18.0 | Sin canto | I |  |  |
-| Cajon | I20_Cajon_Med_Fondo_6mm | 1 | 404.6 | 306.0 | 6.0 | Fondo clavado pasante | I |  |  |
-| Cajon | I20_Cajon_Med_Frente_Trasera | 2 | 368.6 | 170.0 | 18.0 | Sin canto | I |  |  |
-| Cajon | I20_Cajon_Med_Lateral | 2 | 306.0 | 170.0 | 18.0 | Sin canto | I |  |  |
-| Cajon | I21_Cajon_Inf_Fondo_6mm | 1 | 404.6 | 306.0 | 6.0 | Fondo clavado pasante | I |  |  |
-| Cajon | I21_Cajon_Inf_Frente_Trasera | 2 | 368.6 | 170.0 | 18.0 | Sin canto | I |  |  |
-| Cajon | I21_Cajon_Inf_Lateral | 2 | 306.0 | 170.0 | 18.0 | Sin canto | I |  |  |
-| Cajon_Sup | Lateral_Der | 1 | 122.0 | 264.0 | 18.0 | Canto frente | F |  |  |
-| Cajon_Sup | Piso_Interior_3xØ60 | 1 | 2302.0 | 264.0 | 18.0 | Sin canto | F |  |  |
-| Cajon_Sup | Trasera | 1 | 2302.0 | 82.0 | 18.0 | Sin canto | F |  |  |
-| Casco | Fondo_3mm | 1 | 867.0 | 772.0 | 3.0 | Sin canto | BA |  |  |
-| Casco | Fondo_3mm | 1 | 1319.0 | 772.0 | 3.0 | Sin canto | BB |  |  |
-| Casco | Fondo_Cajonera | 1 | 772.0 | 430.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Fondo_Modulo_Izq | 1 | 772.0 | 448.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Lateral_Der | 2 | 772.0 | 600.0 | 18.0 | Canto frente | BA,BB |  |  |
-| Casco | Lateral_Der | 1 | 2262.0 | 950.0 | 18.0 | Crudo (cinta 36mm en obra) | F |  |  |
-| Casco | Lateral_Der | 1 | 772.0 | 650.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Lateral_Der | 1 | 790.0 | 450.0 | 18.0 | Canto frente | R |  |  |
-| Casco | Lateral_Izq | 2 | 772.0 | 600.0 | 18.0 | Canto frente | BA,BB |  |  |
-| Casco | Lateral_Izq | 1 | 2320.0 | 950.0 | 18.0 | Crudo (cinta 36mm en obra) | F |  |  |
-| Casco | Lateral_Izq | 1 | 790.0 | 450.0 | 18.0 | Canto frente | R |  |  |
-| Casco | Lateral_Izq_Frente | 1 | 772.0 | 342.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Parante_Front_Der | 1 | 2202.0 | 150.0 | 18.0 | Canto frente | L |  |  |
-| Casco | Parante_Front_Izq | 1 | 2202.0 | 150.0 | 18.0 | Canto frente | L |  |  |
-| Casco | Parante_Rear_Der | 1 | 2202.0 | 150.0 | 18.0 | Sin canto | L |  |  |
-| Casco | Parante_Rear_Izq | 1 | 2202.0 | 150.0 | 18.0 | Sin canto | L |  |  |
-| Casco | Piso | 1 | 800.0 | 450.0 | 18.0 | Canto frente | R |  |  |
-| Casco | Piso_Der | 1 | 619.0 | 650.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Piso_Izq | 1 | 466.0 | 650.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Piso_Modular | 1 | 744.0 | 300.0 | 18.0 | Canto frente | F |  |  |
-| Casco | Piso_Pasante | 1 | 903.0 | 600.0 | 18.0 | Canto frente | BA |  |  |
-| Casco | Piso_Pasante | 1 | 1355.0 | 600.0 | 18.0 | Canto frente | BB |  |  |
-| Casco | Soporte_Sup_Fondo | 1 | 867.0 | 100.0 | 18.0 | Sin canto | BA |  |  |
-| Casco | Soporte_Sup_Fondo | 1 | 1319.0 | 100.0 | 18.0 | Sin canto | BB |  |  |
-| Casco | Soporte_Sup_Fondo | 1 | 1074.0 | 100.0 | 18.0 | Sin canto | I |  |  |
-| Casco | Soporte_Sup_Frente | 1 | 867.0 | 100.0 | 18.0 | Canto frente | BA |  |  |
-| Casco | Soporte_Sup_Frente | 1 | 1319.0 | 100.0 | 18.0 | Canto frente | BB |  |  |
-| Casco | Soporte_Sup_Frente | 1 | 1504.0 | 100.0 | 18.0 | Canto frente | I |  |  |
-| Casco | Tapa_Casco | 1 | 890.0 | 760.0 | 18.0 | Canto frente | L |  |  |
-| Casco | Travesano_Sup_Trasero | 1 | 764.0 | 100.0 | 18.0 | Sin canto | R |  |  |
-| Division | Divisor_1 | 1 | 772.0 | 650.0 | 18.0 | Canto frente | I |  |  |
-| Division | Divisor_2 | 1 | 772.0 | 650.0 | 18.0 | Canto frente | I |  |  |
-| Division | Panel_Divisor_Prof | 1 | 744.0 | 2180.0 | 18.0 | Sin canto | F |  |  |
-| Division | Parante_Interior | 1 | 1747.0 | 760.0 | 18.0 | Canto frente | L |  |  |
-| Division | Parante_Union_CR | 1 | 772.0 | 18.0 | 60.0 | Canto frente | I |  |  |
-| Estante_Regulable | Estante_Bajo | 1 | 708.0 | 282.0 | 18.0 | Canto frente | F |  |  |
-| Estante_Regulable | Estante_Sup_1 | 1 | 692.0 | 262.0 | 18.0 | Canto frente | F |  |  |
-| Estante_Regulable | Estante_Sup_2 | 1 | 692.0 | 262.0 | 18.0 | Canto frente | F |  |  |
-| Fondo | Fondo_3mm | 1 | 867.0 | 674.0 | 3.0 | Sin canto | AA |  |  |
-| Fondo | Fondo_3mm | 1 | 636.0 | 2184.0 | 3.0 | Sin canto | H |  |  |
-| Fondo | Fondo_3mm | 1 | 854.0 | 2202.0 | 3.0 | Sin canto | L |  |  |
-| Fondo | Fondo_6mm | 1 | 764.0 | 790.0 | 6.0 | Sin canto | R |  |  |
-| Frente | AB_Puerta_1 | 1 | 444.3333333333333 | 438.0 | 18.0 | 4 cantos | AB |  | 2 |
-| Frente | AB_Puerta_2 | 1 | 444.3333333333333 | 438.0 | 18.0 | 4 cantos | AB |  | 2 |
-| Frente | AB_Puerta_3 | 1 | 444.3333333333333 | 438.0 | 18.0 | 4 cantos | AB |  | 2 |
-| Frente | Faja_Frontal_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos | H |  |  |
-| Frente | Faja_Frontal_Inferior_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos | H |  |  |
-| Frente | Faja_Frontal_Superior_Micro_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos | H |  |  |
-| Frente | Frente_Bot | 2 | 670.0 | 293.0 | 18.0 | 4 cantos | BB |  |  |
-| Frente | Frente_Bot_Ancho_Completo | 1 | 892.0 | 293.0 | 18.0 | 4 cantos | BA |  |  |
-| Frente | Frente_Cajon_Inf_Izq | 1 | 448.0 | 243.33333333333334 | 18.0 | 4 cantos | I |  |  |
-| Frente | Frente_Cajon_Med_Izq | 1 | 448.0 | 243.33333333333334 | 18.0 | 4 cantos | I |  |  |
-| Frente | Frente_Cajon_Sup_Izq | 1 | 448.0 | 243.33333333333334 | 18.0 | 4 cantos | I |  |  |
-| Frente | Frente_Cajon_Superior | 1 | 2302.0 | 140.0 | 18.0 | 4 cantos | F |  |  |
-| Frente | Frente_Derecho | 1 | 441.5 | 657.0 | 18.0 | 4 cantos | AA |  | 2 |
-| Frente | Frente_Falso_Sup | 1 | 892.0 | 139.0 | 18.0 | 4 cantos | BA |  |  |
-| Frente | Frente_Izquierdo | 1 | 441.5 | 657.0 | 18.0 | 4 cantos | AA |  | 2 |
-| Frente | Frente_Lavavajillas | 1 | 537.0 | 760.0000000000001 | 18.0 | 4 cantos | I |  |  |
-| Frente | Frente_Mid | 2 | 670.0 | 293.0 | 18.0 | 4 cantos | BB |  |  |
-| Frente | Frente_Mid_Ancho_Completo | 1 | 892.0 | 293.0 | 18.0 | 4 cantos | BA |  |  |
-| Frente | Frente_Top | 2 | 670.0 | 139.0 | 18.0 | 4 cantos | BB |  |  |
-| Frente | Liston_Fijo_90 | 1 | 885.0 | 90.0 | 18.0 | 4 cantos | AA |  |  |
-| Frente | Puerta_Der | 1 | 537.0 | 760.0000000000001 | 18.0 | 4 cantos | I |  | 2 |
-| Frente | Puerta_Der | 1 | 390.0 | 764.0 | 18.0 | 4 cantos | R |  | 2 |
-| Frente | Puerta_Inf_Der | 1 | 435.0 | 1738.0 | 18.0 | 4 cantos | L |  | 3 |
-| Frente | Puerta_Inf_Izq | 1 | 435.0 | 1738.0 | 18.0 | 4 cantos | L |  | 3 |
-| Frente | Puerta_Inferior | 1 | 654.0 | 612.0 | 18.0 | 4 cantos | H |  | 2 |
-| Frente | Puerta_Izq | 1 | 390.0 | 764.0 | 18.0 | 4 cantos | R |  | 2 |
-| Frente | Puerta_Mod_Der | 1 | 369.0 | 877.0 | 18.0 | 4 cantos | F |  | 2 |
-| Frente | Puerta_Mod_Izq | 1 | 369.0 | 877.0 | 18.0 | 4 cantos | F |  | 2 |
-| Frente | Puerta_Sup_Der | 1 | 435.0 | 438.0 | 18.0 | 4 cantos | L |  | 2 |
-| Frente | Puerta_Sup_Izq | 1 | 435.0 | 438.0 | 18.0 | 4 cantos | L |  | 2 |
-| Frente | Puerta_Superior | 1 | 654.0 | 438.0 | 18.0 | 4 cantos | H |  | 2 |
-| Herraje | Gola_C_Izq | 1 | 448.0 | 72.8 | 26.0 | Aluminio | I | 0.448 |  |
-| Herraje | Gola_C_Media | 1 | 890.0 | 72.8 | 26.0 | Aluminio | L | 0.890 |  |
-| Herraje | Gola_C_Superior | 1 | 903.0 | 72.8 | 26.0 | Aluminio | BA | 0.903 |  |
-| Herraje | Gola_C_Superior | 1 | 1355.0 | 72.8 | 26.0 | Aluminio | BB | 1.355 |  |
-| Herraje | Gola_J_Continuidad | 1 | 672.0 | 48.0 | 24.4 | Aluminio | H | 0.672 |  |
-| Herraje | Gola_J_Inferior | 1 | 903.0 | 48.0 | 24.4 | Aluminio | AA | 0.903 |  |
-| Herraje | Gola_J_Inferior | 1 | 1355.0 | 48.0 | 24.4 | Aluminio | AB | 1.355 |  |
-| Herraje | Gola_J_Media | 1 | 903.0 | 48.0 | 24.4 | Aluminio | BA | 0.903 |  |
-| Herraje | Gola_J_Media | 1 | 1355.0 | 48.0 | 24.4 | Aluminio | BB | 1.355 |  |
-| Herraje | Gola_J_Sup | 1 | 672.0 | 48.0 | 24.4 | Aluminio | H | 0.672 |  |
-| Herraje | Gola_J_Superior | 1 | 1540.0 | 48.0 | 24.4 | Aluminio | I | 1.540 |  |
-| Herraje | Gola_J_Superior | 1 | 800.0 | 48.0 | 24.4 | Aluminio | R | 0.800 |  |
-| Herraje | Pata_80 | 33 | 40.0 | 40.0 | 80.0 | PVC/Aluminio | BA,BB,F,H,I,L,R |  |  |
-| Horizontal | Estante_Fijo_Interior | 1 | 708.0 | 282.0 | 18.0 | Canto frente | F |  |  |
-| Horizontal | Estante_Inferior | 1 | 636.0 | 600.0 | 18.0 | Canto frente | H |  |  |
-| Horizontal | Piso_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente | H |  |  |
-| Horizontal | Piso_Casco_Calados | 1 | 903.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
-| Horizontal | Piso_Horno | 1 | 636.0 | 582.0 | 18.0 | Canto frente | H |  |  |
-| Horizontal | Piso_Micro | 1 | 636.0 | 582.0 | 18.0 | Canto frente | H |  |  |
-| Horizontal | Piso_Modulo_Superior | 1 | 890.0 | 760.0 | 18.0 | Canto frente | L |  |  |
-| Horizontal | Tapa_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente | H |  |  |
-| Horizontal | Tapa_Casco_Calados_IzqDer160 | 1 | 903.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
-| Horizontal | Tapa_Micro | 1 | 636.0 | 600.0 | 18.0 | Canto frente | H |  |  |
-| Horizontal | Techo_Heladera_1800 | 1 | 744.0 | 650.0 | 18.0 | Canto frente | F |  |  |
-| Horizontal | Techo_Lavarropas_Der | 1 | 630.0 | 760.0 | 18.0 | Canto frente | L |  |  |
-| Interior | Divisor_Central | 1 | 772.0 | 600.0 | 18.0 | Sin canto | BB |  |  |
-| Interior | Estante_Regulable | 1 | 760.0 | 442.0 | 18.0 | Canto frente | R |  |  |
-| Lateral | Lateral_Der | 1 | 674.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
-| Lateral | Lateral_Der | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo | H |  |  |
-| Lateral | Lateral_Izq | 1 | 674.0 | 320.0 | 18.0 | Canto frente | AA |  |  |
-| Lateral | Lateral_Izq | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo | H |  |  |
-| Mesada | Mesada | 1 | 820.0 | 488.0 | 30.0 | Piedra | R |  |  |
-| Mesada | Mesada_Calado_Bacha_530x390 | 1 | 1580.0 | 688.0 | 30.0 | Pulido perimetral segun proveedor | I |  |  |
-| Mesada | Piedra_Gris_Mara_Calado_600x555 | 1 | 2258.0 | 648.0 | 30.0 | Pulido perimetral segun proveedor | M |  |  |
-| Nicho | Estante_Nicho_Regulable | 1 | 350.0 | 288.0 | 18.0 | Canto frente | I |  |  |
-| Nicho | Faja_Frontal_Estante_Nicho | 1 | 288.0 | 50.0 | 18.0 | Canto frente | I |  |  |
-| Nicho | Faja_Superior_Nicho | 1 | 288.0 | 50.0 | 18.0 | Canto frente | I |  |  |
-| Referencia | Extractor_590x470x90 | 1 | 590.0 | 470.0 | 90.0 | No fabricar | AA |  |  |
-| Refuerzo | Regrueso_Techo_Lav | 1 | 630.0 | 60.0 | 18.0 | Cantos vistos | L |  |  |
-| Regrueso | Liston_Vert_Der | 1 | 631.0 | 60.0 | 18.0 | Canto frente | H |  |  |
-| Regrueso | Liston_Vert_Izq | 1 | 631.0 | 60.0 | 18.0 | Canto frente | H |  |  |
-| Regrueso | Regrueso_Front_Estante_Sup_1 | 1 | 692.0 | 50.0 | 18.0 | Canto frente | F |  |  |
-| Regrueso | Regrueso_Front_Estante_Sup_2 | 1 | 692.0 | 50.0 | 18.0 | Canto frente | F |  |  |
-| Regrueso | Regrueso_Sobre_F9 | 1 | 708.0 | 50.0 | 18.0 | Canto frente | F |  |  |
-| Regrueso | Regrueso_Vis_Der | 1 | 2162.0 | 282.0 | 18.0 | Crudo (cinta 36mm en obra) | F |  |  |
-| Regrueso | Regrueso_Vis_Izq | 1 | 2162.0 | 282.0 | 18.0 | Crudo (cinta 36mm en obra) | F |  |  |
 
 ## 3. Modulos
 
@@ -203,27 +34,7 @@ th, td { border: 1px solid #777; padding: 2px 4px; vertical-align: top; }
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/H_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">H Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/H_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">H Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/H_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">H Lateral</figcaption></figure>
 
 ### Despiece H
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| H1 | Lateral | Lateral_Izq | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |  |  |
-| H2 | Lateral | Lateral_Der | 1 | 2184.0 | 600.0 | 18.0 | Cantos frente+arriba+abajo |  |  |
-| H3 | Horizontal | Piso_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente |  |  |
-| H3L | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| H4 | Horizontal | Tapa_Casco | 1 | 672.0 | 600.0 | 18.0 | Canto frente |  |  |
-| H14 | Fondo | Fondo_3mm | 1 | 636.0 | 2184.0 | 3.0 | Sin canto |  |  |
-| H15 | Regrueso | Liston_Vert_Izq | 1 | 631.0 | 60.0 | 18.0 | Canto frente |  |  |
-| H16 | Regrueso | Liston_Vert_Der | 1 | 631.0 | 60.0 | 18.0 | Canto frente |  |  |
-| H5 | Horizontal | Piso_Horno | 1 | 636.0 | 582.0 | 18.0 | Canto frente |  |  |
-| H6 | Horizontal | Piso_Micro | 1 | 636.0 | 582.0 | 18.0 | Canto frente |  |  |
-| H7 | Horizontal | Tapa_Micro | 1 | 636.0 | 600.0 | 18.0 | Canto frente |  |  |
-| H8 | Horizontal | Estante_Inferior | 1 | 636.0 | 600.0 | 18.0 | Canto frente |  |  |
-| H9 | Frente | Faja_Frontal_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos |  |  |
-| H12 | Frente | Faja_Frontal_Inferior_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos |  |  |
-| H13 | Frente | Faja_Frontal_Superior_Micro_50 | 1 | 636.0 | 50.0 | 18.0 | Cantos vistos |  |  |
-| H17 | Herraje | Gola_J_Continuidad | 1 | 672.0 | 48.0 | 24.4 | Aluminio | 0.672 |  |
-| H18 | Herraje | Gola_J_Sup | 1 | 672.0 | 48.0 | 24.4 | Aluminio | 0.672 |  |
-| H10 | Frente | Puerta_Inferior | 1 | 654.0 | 612.0 | 18.0 | 4 cantos |  | 2 |
-| H11 | Frente | Puerta_Superior | 1 | 654.0 | 438.0 | 18.0 | 4 cantos |  | 2 |
+_Sin BOM._
 
 ### Notas de armado H
 # Columna horno + microondas (melamina 18 mm)
@@ -298,18 +109,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/AA_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">AA Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/AA_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">AA Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/AA_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">AA Lateral</figcaption></figure>
 
 ### Despiece AA
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AA1 | Lateral | Lateral_Izq | 1 | 674.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AA2 | Lateral | Lateral_Der | 1 | 674.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AA3 | Horizontal | Piso_Casco_Calados | 1 | 903.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AA4 | Horizontal | Tapa_Casco_Calados_IzqDer160 | 1 | 903.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AA7 | Fondo | Fondo_3mm | 1 | 867.0 | 674.0 | 3.0 | Sin canto |  |  |
-| AA8 | Frente | Frente_Izquierdo | 1 | 441.5 | 657.0 | 18.0 | 4 cantos |  | 2 |
-| AA9 | Frente | Frente_Derecho | 1 | 441.5 | 657.0 | 18.0 | 4 cantos |  | 2 |
-| AA12 | Herraje | Gola_J_Inferior | 1 | 903.0 | 48.0 | 24.4 | Aluminio | 0.903 |  |
-| AA10 | Frente | Liston_Fijo_90 | 1 | 885.0 | 90.0 | 18.0 | 4 cantos |  |  |
-| AA11 | Referencia | Extractor_590x470x90 | 1 | 590.0 | 470.0 | 90.0 | No fabricar |  |  |
+_Sin BOM._
 
 ### Notas de armado AA
 # Alacena A (AA) - superior izquierda
@@ -371,26 +171,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/AB_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">AB Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/AB_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">AB Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/AB_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">AB Lateral</figcaption></figure>
 
 ### Despiece AB
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AC1 | AC_Paraiso | AC_Lateral_Izq | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC2 | AC_Paraiso | AC_Lateral_Der | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC3 | AC_Paraiso | AC_Piso | 1 | 1355.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC4 | AC_Paraiso | AC_Tapa | 1 | 1355.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC6 | AC_Paraiso | AC_Lateral_Izq_Interior | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC7 | AC_Paraiso | AC_Lateral_Der_Interior | 1 | 273.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC8 | AC_Paraiso | AC_Piso_Interior | 1 | 1283.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC9 | AC_Paraiso | AC_Tapa_Interior | 1 | 1283.0 | 320.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AC5 | AC_Paraiso | AC_Fondo_18mm | 1 | 1283.0 | 273.0 | 18.0 | Crudo (enchapar en obra) |  |  |
-| AB1 | AB_Blanco | AB_Lateral_Izq | 1 | 455.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AB2 | AB_Blanco | AB_Lateral_Der | 1 | 455.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AB3 | AB_Blanco | AB_Piso | 1 | 1355.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AB4 | AB_Blanco | AB_Tapa | 1 | 1355.0 | 320.0 | 18.0 | Canto frente |  |  |
-| AB5 | AB_Blanco | AB_Fondo_3mm | 1 | 1319.0 | 455.0 | 3.0 | Sin canto |  |  |
-| AB6 | Frente | AB_Puerta_1 | 1 | 444.3333333333333 | 438.0 | 18.0 | 4 cantos |  | 2 |
-| AB7 | Frente | AB_Puerta_2 | 1 | 444.3333333333333 | 438.0 | 18.0 | 4 cantos |  | 2 |
-| AB8 | Frente | AB_Puerta_3 | 1 | 444.3333333333333 | 438.0 | 18.0 | 4 cantos |  | 2 |
-| AB9 | Herraje | Gola_J_Inferior | 1 | 1355.0 | 48.0 | 24.4 | Aluminio | 1.355 |  |
+_Sin BOM._
 
 ### Notas de armado AB
 # Conjunto derecho AB + AC
@@ -421,24 +202,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/L_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">L Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/L_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">L Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/L_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">L Lateral</figcaption></figure>
 
 ### Despiece L
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| L1 | Casco | Parante_Front_Izq | 1 | 2202.0 | 150.0 | 18.0 | Canto frente |  |  |
-| L2 | Casco | Parante_Front_Der | 1 | 2202.0 | 150.0 | 18.0 | Canto frente |  |  |
-| L15 | Casco | Parante_Rear_Izq | 1 | 2202.0 | 150.0 | 18.0 | Sin canto |  |  |
-| L16 | Casco | Parante_Rear_Der | 1 | 2202.0 | 150.0 | 18.0 | Sin canto |  |  |
-| L17 | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| L3 | Casco | Tapa_Casco | 1 | 890.0 | 760.0 | 18.0 | Canto frente |  |  |
-| L4 | Fondo | Fondo_3mm | 1 | 854.0 | 2202.0 | 3.0 | Sin canto |  |  |
-| L5 | Division | Parante_Interior | 1 | 1747.0 | 760.0 | 18.0 | Canto frente |  |  |
-| L6 | Horizontal | Techo_Lavarropas_Der | 1 | 630.0 | 760.0 | 18.0 | Canto frente |  |  |
-| L7 | Refuerzo | Regrueso_Techo_Lav | 1 | 630.0 | 60.0 | 18.0 | Cantos vistos |  |  |
-| L13 | Horizontal | Piso_Modulo_Superior | 1 | 890.0 | 760.0 | 18.0 | Canto frente |  |  |
-| L8 | Frente | Puerta_Inf_Izq | 1 | 435.0 | 1738.0 | 18.0 | 4 cantos |  | 3 |
-| L9 | Frente | Puerta_Inf_Der | 1 | 435.0 | 1738.0 | 18.0 | 4 cantos |  | 3 |
-| L10 | Frente | Puerta_Sup_Izq | 1 | 435.0 | 438.0 | 18.0 | 4 cantos |  | 2 |
-| L11 | Frente | Puerta_Sup_Der | 1 | 435.0 | 438.0 | 18.0 | 4 cantos |  | 2 |
-| L12 | Herraje | Gola_C_Media | 1 | 890.0 | 72.8 | 26.0 | Aluminio | 0.890 |  |
+_Sin BOM._
 
 ### Notas de armado L
 1. Armar casco `L1-L4` sobre patas/zócalo de `80 mm`, verificando escuadra y plomo.
@@ -464,26 +228,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/BA_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">BA Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/BA_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">BA Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/BA_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">BA Lateral</figcaption></figure>
 
 ### Despiece BA
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| BA1 | Casco | Lateral_Izq | 1 | 772.0 | 600.0 | 18.0 | Canto frente |  |  |
-| BA2 | Casco | Lateral_Der | 1 | 772.0 | 600.0 | 18.0 | Canto frente |  |  |
-| BA3 | Casco | Piso_Pasante | 1 | 903.0 | 600.0 | 18.0 | Canto frente |  |  |
-| BA3L | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| BA4 | Casco | Fondo_3mm | 1 | 867.0 | 772.0 | 3.0 | Sin canto |  |  |
-| BA5 | Casco | Soporte_Sup_Frente | 1 | 867.0 | 100.0 | 18.0 | Canto frente |  |  |
-| BA6 | Casco | Soporte_Sup_Fondo | 1 | 867.0 | 100.0 | 18.0 | Sin canto |  |  |
-| BA9 | Frente | Frente_Falso_Sup | 1 | 892.0 | 139.0 | 18.0 | 4 cantos |  |  |
-| BA10 | Frente | Frente_Mid_Ancho_Completo | 1 | 892.0 | 293.0 | 18.0 | 4 cantos |  |  |
-| BA11 | Frente | Frente_Bot_Ancho_Completo | 1 | 892.0 | 293.0 | 18.0 | 4 cantos |  |  |
-| BA14a | Cajon | BA14_Caja_Mid_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto |  |  |
-| BA14b | Cajon | BA14_Caja_Mid_Frente_Trasera | 2 | 805.6 | 180.0 | 18.0 | Sin canto |  |  |
-| BA14c | Cajon | BA14_Caja_Mid_Fondo_6mm | 1 | 841.6 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BA15a | Cajon | BA15_Caja_Bot_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto |  |  |
-| BA15b | Cajon | BA15_Caja_Bot_Frente_Trasera | 2 | 805.6 | 180.0 | 18.0 | Sin canto |  |  |
-| BA15c | Cajon | BA15_Caja_Bot_Fondo_6mm | 1 | 841.6 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BA12 | Herraje | Gola_C_Superior | 1 | 903.0 | 72.8 | 26.0 | Aluminio | 0.903 |  |
-| BA13 | Herraje | Gola_J_Media | 1 | 903.0 | 48.0 | 24.4 | Aluminio | 0.903 |  |
+_Sin BOM._
 
 ### Notas de armado BA
 # Bajo mesada BA
@@ -503,39 +248,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/BB_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">BB Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/BB_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">BB Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/BB_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">BB Lateral</figcaption></figure>
 
 ### Despiece BB
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| BB1 | Casco | Lateral_Izq | 1 | 772.0 | 600.0 | 18.0 | Canto frente |  |  |
-| BB2 | Casco | Lateral_Der | 1 | 772.0 | 600.0 | 18.0 | Canto frente |  |  |
-| BB3 | Casco | Piso_Pasante | 1 | 1355.0 | 600.0 | 18.0 | Canto frente |  |  |
-| BB3L | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| BB4 | Casco | Fondo_3mm | 1 | 1319.0 | 772.0 | 3.0 | Sin canto |  |  |
-| BB5 | Casco | Soporte_Sup_Frente | 1 | 1319.0 | 100.0 | 18.0 | Canto frente |  |  |
-| BB6 | Casco | Soporte_Sup_Fondo | 1 | 1319.0 | 100.0 | 18.0 | Sin canto |  |  |
-| BB7 | Interior | Divisor_Central | 1 | 772.0 | 600.0 | 18.0 | Sin canto |  |  |
-| BB8 | Frente | Frente_Top | 2 | 670.0 | 139.0 | 18.0 | 4 cantos |  |  |
-| BB10 | Frente | Frente_Mid | 2 | 670.0 | 293.0 | 18.0 | 4 cantos |  |  |
-| BB12 | Frente | Frente_Bot | 2 | 670.0 | 293.0 | 18.0 | 4 cantos |  |  |
-| BB14a | Cajon | BB14_Caja_Top_Izq_Lateral | 2 | 500.0 | 60.0 | 18.0 | Sin canto |  |  |
-| BB14b | Cajon | BB14_Caja_Top_Izq_Frente_Trasera | 2 | 589.1 | 60.0 | 18.0 | Sin canto |  |  |
-| BB14c | Cajon | BB14_Caja_Top_Izq_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BB15a | Cajon | BB15_Caja_Top_Der_Lateral | 2 | 500.0 | 60.0 | 18.0 | Sin canto |  |  |
-| BB15b | Cajon | BB15_Caja_Top_Der_Frente_Trasera | 2 | 589.1 | 60.0 | 18.0 | Sin canto |  |  |
-| BB15c | Cajon | BB15_Caja_Top_Der_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BB16a | Cajon | BB16_Caja_Mid_Izq_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto |  |  |
-| BB16b | Cajon | BB16_Caja_Mid_Izq_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto |  |  |
-| BB16c | Cajon | BB16_Caja_Mid_Izq_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BB17a | Cajon | BB17_Caja_Mid_Der_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto |  |  |
-| BB17b | Cajon | BB17_Caja_Mid_Der_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto |  |  |
-| BB17c | Cajon | BB17_Caja_Mid_Der_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BB18a | Cajon | BB18_Caja_Bot_Izq_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto |  |  |
-| BB18b | Cajon | BB18_Caja_Bot_Izq_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto |  |  |
-| BB18c | Cajon | BB18_Caja_Bot_Izq_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BB19a | Cajon | BB19_Caja_Bot_Der_Lateral | 2 | 500.0 | 180.0 | 18.0 | Sin canto |  |  |
-| BB19b | Cajon | BB19_Caja_Bot_Der_Frente_Trasera | 2 | 589.1 | 180.0 | 18.0 | Sin canto |  |  |
-| BB19c | Cajon | BB19_Caja_Bot_Der_Fondo_6mm | 1 | 625.1 | 500.0 | 6.0 | Fondo clavado pasante |  |  |
-| BB20 | Herraje | Gola_C_Superior | 1 | 1355.0 | 72.8 | 26.0 | Aluminio | 1.355 |  |
-| BB21 | Herraje | Gola_J_Media | 1 | 1355.0 | 48.0 | 24.4 | Aluminio | 1.355 |  |
+_Sin BOM._
 
 ### Notas de armado BB
 # Bajo mesada BB
@@ -555,29 +268,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/F_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">F Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/F_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">F Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/F_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">F Lateral</figcaption></figure>
 
 ### Despiece F
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| F1 | Casco | Lateral_Izq | 1 | 2320.0 | 950.0 | 18.0 | Crudo (cinta 36mm en obra) |  |  |
-| F2 | Casco | Lateral_Der | 1 | 2262.0 | 950.0 | 18.0 | Crudo (cinta 36mm en obra) |  |  |
-| F3 | Casco | Piso_Modular | 1 | 744.0 | 300.0 | 18.0 | Canto frente |  |  |
-| F3L | Herraje | Pata_80 | 5 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| F5 | Division | Panel_Divisor_Prof | 1 | 744.0 | 2180.0 | 18.0 | Sin canto |  |  |
-| F14 | Regrueso | Regrueso_Vis_Izq | 1 | 2162.0 | 282.0 | 18.0 | Crudo (cinta 36mm en obra) |  |  |
-| F15 | Regrueso | Regrueso_Vis_Der | 1 | 2162.0 | 282.0 | 18.0 | Crudo (cinta 36mm en obra) |  |  |
-| F6 | Horizontal | Techo_Heladera_1800 | 1 | 744.0 | 650.0 | 18.0 | Canto frente |  |  |
-| F7 | Estante_Regulable | Estante_Bajo | 1 | 708.0 | 282.0 | 18.0 | Canto frente |  |  |
-| F9 | Horizontal | Estante_Fijo_Interior | 1 | 708.0 | 282.0 | 18.0 | Canto frente |  |  |
-| F20 | Regrueso | Regrueso_Sobre_F9 | 1 | 708.0 | 50.0 | 18.0 | Canto frente |  |  |
-| F10 | Estante_Regulable | Estante_Sup_1 | 1 | 692.0 | 262.0 | 18.0 | Canto frente |  |  |
-| F16 | Regrueso | Regrueso_Front_Estante_Sup_1 | 1 | 692.0 | 50.0 | 18.0 | Canto frente |  |  |
-| F11 | Estante_Regulable | Estante_Sup_2 | 1 | 692.0 | 262.0 | 18.0 | Canto frente |  |  |
-| F17 | Regrueso | Regrueso_Front_Estante_Sup_2 | 1 | 692.0 | 50.0 | 18.0 | Canto frente |  |  |
-| F12 | Frente | Puerta_Mod_Izq | 1 | 369.0 | 877.0 | 18.0 | 4 cantos |  | 2 |
-| F13 | Frente | Puerta_Mod_Der | 1 | 369.0 | 877.0 | 18.0 | 4 cantos |  | 2 |
-| F23 | Cajon_Sup | Lateral_Der | 1 | 122.0 | 264.0 | 18.0 | Canto frente |  |  |
-| F24 | Cajon_Sup | Trasera | 1 | 2302.0 | 82.0 | 18.0 | Sin canto |  |  |
-| F25 | Cajon_Sup | Piso_Interior_3xØ60 | 1 | 2302.0 | 264.0 | 18.0 | Sin canto |  |  |
-| F26 | Frente | Frente_Cajon_Superior | 1 | 2302.0 | 140.0 | 18.0 | 4 cantos |  |  |
+_Sin BOM._
 
 ### Notas de armado F
 # Mueble F (heladera + modular)
@@ -599,40 +290,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/I_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">I Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/I_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">I Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/I_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">I Lateral</figcaption></figure>
 
 ### Despiece I
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| I1 | Casco | Lateral_Izq_Frente | 1 | 772.0 | 342.0 | 18.0 | Canto frente |  |  |
-| I1B | Casco | Fondo_Modulo_Izq | 1 | 772.0 | 448.0 | 18.0 | Canto frente |  |  |
-| I1C | Casco | Fondo_Cajonera | 1 | 772.0 | 430.0 | 18.0 | Canto frente |  |  |
-| I2 | Casco | Lateral_Der | 1 | 772.0 | 650.0 | 18.0 | Canto frente |  |  |
-| I3 | Division | Divisor_1 | 1 | 772.0 | 650.0 | 18.0 | Canto frente |  |  |
-| I4 | Division | Divisor_2 | 1 | 772.0 | 650.0 | 18.0 | Canto frente |  |  |
-| I4B | Division | Parante_Union_CR | 1 | 772.0 | 18.0 | 60.0 | Canto frente |  |  |
-| I5 | Casco | Piso_Izq | 1 | 466.0 | 650.0 | 18.0 | Canto frente |  |  |
-| I6 | Casco | Piso_Der | 1 | 619.0 | 650.0 | 18.0 | Canto frente |  |  |
-| I8 | Nicho | Estante_Nicho_Regulable | 1 | 350.0 | 288.0 | 18.0 | Canto frente |  |  |
-| I8C | Nicho | Faja_Frontal_Estante_Nicho | 1 | 288.0 | 50.0 | 18.0 | Canto frente |  |  |
-| I8B | Nicho | Faja_Superior_Nicho | 1 | 288.0 | 50.0 | 18.0 | Canto frente |  |  |
-| I9 | Casco | Soporte_Sup_Frente | 1 | 1504.0 | 100.0 | 18.0 | Canto frente |  |  |
-| I10 | Casco | Soporte_Sup_Fondo | 1 | 1074.0 | 100.0 | 18.0 | Sin canto |  |  |
-| I11 | Herraje | Pata_80 | 8 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| I12 | Herraje | Gola_J_Superior | 1 | 1540.0 | 48.0 | 24.4 | Aluminio | 1.540 |  |
-| I13 | Herraje | Gola_C_Izq | 1 | 448.0 | 72.8 | 26.0 | Aluminio | 0.448 |  |
-| I14 | Frente | Frente_Cajon_Sup_Izq | 1 | 448.0 | 243.33333333333334 | 18.0 | 4 cantos |  |  |
-| I15 | Frente | Frente_Cajon_Med_Izq | 1 | 448.0 | 243.33333333333334 | 18.0 | 4 cantos |  |  |
-| I16 | Frente | Frente_Cajon_Inf_Izq | 1 | 448.0 | 243.33333333333334 | 18.0 | 4 cantos |  |  |
-| I17 | Frente | Frente_Lavavajillas | 1 | 537.0 | 760.0000000000001 | 18.0 | 4 cantos |  |  |
-| I18 | Frente | Puerta_Der | 1 | 537.0 | 760.0000000000001 | 18.0 | 4 cantos |  | 2 |
-| I19a | Cajon | I19_Cajon_Sup_Lateral | 2 | 306.0 | 170.0 | 18.0 | Sin canto |  |  |
-| I19b | Cajon | I19_Cajon_Sup_Frente_Trasera | 2 | 368.6 | 170.0 | 18.0 | Sin canto |  |  |
-| I19c | Cajon | I19_Cajon_Sup_Fondo_6mm | 1 | 404.6 | 306.0 | 6.0 | Fondo clavado pasante |  |  |
-| I20a | Cajon | I20_Cajon_Med_Lateral | 2 | 306.0 | 170.0 | 18.0 | Sin canto |  |  |
-| I20b | Cajon | I20_Cajon_Med_Frente_Trasera | 2 | 368.6 | 170.0 | 18.0 | Sin canto |  |  |
-| I20c | Cajon | I20_Cajon_Med_Fondo_6mm | 1 | 404.6 | 306.0 | 6.0 | Fondo clavado pasante |  |  |
-| I21a | Cajon | I21_Cajon_Inf_Lateral | 2 | 306.0 | 170.0 | 18.0 | Sin canto |  |  |
-| I21b | Cajon | I21_Cajon_Inf_Frente_Trasera | 2 | 368.6 | 170.0 | 18.0 | Sin canto |  |  |
-| I21c | Cajon | I21_Cajon_Inf_Fondo_6mm | 1 | 404.6 | 306.0 | 6.0 | Fondo clavado pasante |  |  |
-| I22 | Mesada | Mesada_Calado_Bacha_530x390 | 1 | 1580.0 | 688.0 | 30.0 | Pulido perimetral segun proveedor |  |  |
+_Sin BOM._
 
 ### Notas de armado I
 # Bajo mesada isla I
@@ -670,19 +328,7 @@ Si me pasas el modelo exacto de horno y micro, te ajusto holguras reales de fabr
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/R_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">R Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/R_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">R Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/R_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">R Lateral</figcaption></figure>
 
 ### Despiece R
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| R1 | Casco | Lateral_Izq | 1 | 790.0 | 450.0 | 18.0 | Canto frente |  |  |
-| R2 | Casco | Lateral_Der | 1 | 790.0 | 450.0 | 18.0 | Canto frente |  |  |
-| R3 | Casco | Piso | 1 | 800.0 | 450.0 | 18.0 | Canto frente |  |  |
-| R4 | Fondo | Fondo_6mm | 1 | 764.0 | 790.0 | 6.0 | Sin canto |  |  |
-| R5 | Casco | Travesano_Sup_Trasero | 1 | 764.0 | 100.0 | 18.0 | Sin canto |  |  |
-| R6 | Interior | Estante_Regulable | 1 | 760.0 | 442.0 | 18.0 | Canto frente |  |  |
-| R7 | Herraje | Gola_J_Superior | 1 | 800.0 | 48.0 | 24.4 | Aluminio | 0.800 |  |
-| R8 | Frente | Puerta_Izq | 1 | 390.0 | 764.0 | 18.0 | 4 cantos |  | 2 |
-| R9 | Frente | Puerta_Der | 1 | 390.0 | 764.0 | 18.0 | 4 cantos |  | 2 |
-| R10 | Herraje | Pata_80 | 4 | 40.0 | 40.0 | 80.0 | PVC/Aluminio |  |  |
-| R11 | Mesada | Mesada | 1 | 820.0 | 488.0 | 30.0 | Piedra |  |  |
+_Sin BOM._
 
 ### Notas de armado R
 _Sin notas cargadas._
@@ -694,9 +340,7 @@ _Sin notas cargadas._
 <figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/M_iso.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">M Iso</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/M_front.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">M Frente</figcaption></figure><figure style="display:inline-block; width:48%; margin:0 1% 10px 0;"><img src="../../screenshots/M_left.png" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">M Lateral</figcaption></figure>
 
 ### Despiece M
-| Codigo | Categoria | Pieza | Cant | Largo | Ancho | Espesor | Cantos | ML gola | Bisagras |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| M1 | Mesada | Piedra_Gris_Mara_Calado_600x555 | 1 | 2258.0 | 648.0 | 30.0 | Pulido perimetral segun proveedor |  |  |
+_Sin BOM._
 
 ### Notas de armado M
 # Mesada piedra gris mara
@@ -726,5 +370,5 @@ _Sin notas cargadas._
 | paraiso_18mm | 9 | 1 | 2800 x 1810 | 3 | 10 | 47.74% | 52.26% |
 
 ### Layouts por grupo
-<figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout_p01.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout blanco_18mm · 01</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout_p02.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout blanco_18mm · 02</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout_p03.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout blanco_18mm · 03</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout_p04.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout blanco_18mm · 04</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/blanco_18mm_layout_p05.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout blanco_18mm · 05</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_3mm_layout_p01.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout fondo_3mm · 01</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/fondo_6mm_layout_p01.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout fondo_6mm · 01</figcaption></figure><div style="page-break-after: always;"></div><figure style="display:inline-block; width:96%; margin:0 1% 10px 0;"><img src="../../outputs/cutting/paraiso_18mm_layout_p01.svg" style="width:100%; border:1px solid #ccc;" /><figcaption style="font-size:8.5pt">Layout paraiso_18mm · 01</figcaption></figure>
+_Sin SVGs._
 

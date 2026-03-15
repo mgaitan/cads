@@ -1,20 +1,2 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos,ml_gola,bisagras_cazoleta
-AC1,AC_Paraiso,AC_Lateral_Izq,1,273.0,320.0,18.0,Crudo (enchapar en obra),,
-AC2,AC_Paraiso,AC_Lateral_Der,1,273.0,320.0,18.0,Crudo (enchapar en obra),,
-AC3,AC_Paraiso,AC_Piso,1,1355.0,320.0,18.0,Crudo (enchapar en obra),,
-AC4,AC_Paraiso,AC_Tapa,1,1355.0,320.0,18.0,Crudo (enchapar en obra),,
-AC6,AC_Paraiso,AC_Lateral_Izq_Interior,1,273.0,320.0,18.0,Crudo (enchapar en obra),,
-AC7,AC_Paraiso,AC_Lateral_Der_Interior,1,273.0,320.0,18.0,Crudo (enchapar en obra),,
-AC8,AC_Paraiso,AC_Piso_Interior,1,1283.0,320.0,18.0,Crudo (enchapar en obra),,
-AC9,AC_Paraiso,AC_Tapa_Interior,1,1283.0,320.0,18.0,Crudo (enchapar en obra),,
-AC5,AC_Paraiso,AC_Fondo_18mm,1,1283.0,273.0,18.0,Crudo (enchapar en obra),,
-AB1,AB_Blanco,AB_Lateral_Izq,1,455.0,320.0,18.0,Canto frente,,
-AB2,AB_Blanco,AB_Lateral_Der,1,455.0,320.0,18.0,Canto frente,,
-AB3,AB_Blanco,AB_Piso,1,1355.0,320.0,18.0,Canto frente,,
-AB4,AB_Blanco,AB_Tapa,1,1355.0,320.0,18.0,Canto frente,,
-AB5,AB_Blanco,AB_Fondo_3mm,1,1319.0,455.0,3.0,Sin canto,,
-AB6,Frente,AB_Puerta_1,1,444.3333333333333,438.0,18.0,4 cantos,,2
-AB7,Frente,AB_Puerta_2,1,444.3333333333333,438.0,18.0,4 cantos,,2
-AB8,Frente,AB_Puerta_3,1,444.3333333333333,438.0,18.0,4 cantos,,2
-AB9,Herraje,Gola_J_Inferior,1,1355.0,48.0,24.4,Aluminio,1.355,
-TOTAL,Resumen,Totales_Herrajes,,,,,,1.355,6
+TOTAL,Resumen,Totales_Herrajes,,,,,,0.000,0

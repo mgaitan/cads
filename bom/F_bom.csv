@@ -1,23 +1,2 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos,ml_gola,bisagras_cazoleta
-F1,Casco,Lateral_Izq,1,2320.0,950.0,18.0,Crudo (cinta 36mm en obra),,
-F2,Casco,Lateral_Der,1,2262.0,950.0,18.0,Crudo (cinta 36mm en obra),,
-F3,Casco,Piso_Modular,1,744.0,300.0,18.0,Canto frente,,
-F3L,Herraje,Pata_80,5,40.0,40.0,80.0,PVC/Aluminio,,
-F5,Division,Panel_Divisor_Prof,1,744.0,2180.0,18.0,Sin canto,,
-F14,Regrueso,Regrueso_Vis_Izq,1,2162.0,282.0,18.0,Crudo (cinta 36mm en obra),,
-F15,Regrueso,Regrueso_Vis_Der,1,2162.0,282.0,18.0,Crudo (cinta 36mm en obra),,
-F6,Horizontal,Techo_Heladera_1800,1,744.0,650.0,18.0,Canto frente,,
-F7,Estante_Regulable,Estante_Bajo,1,708.0,282.0,18.0,Canto frente,,
-F9,Horizontal,Estante_Fijo_Interior,1,708.0,282.0,18.0,Canto frente,,
-F20,Regrueso,Regrueso_Sobre_F9,1,708.0,50.0,18.0,Canto frente,,
-F10,Estante_Regulable,Estante_Sup_1,1,692.0,262.0,18.0,Canto frente,,
-F16,Regrueso,Regrueso_Front_Estante_Sup_1,1,692.0,50.0,18.0,Canto frente,,
-F11,Estante_Regulable,Estante_Sup_2,1,692.0,262.0,18.0,Canto frente,,
-F17,Regrueso,Regrueso_Front_Estante_Sup_2,1,692.0,50.0,18.0,Canto frente,,
-F12,Frente,Puerta_Mod_Izq,1,369.0,877.0,18.0,4 cantos,,2
-F13,Frente,Puerta_Mod_Der,1,369.0,877.0,18.0,4 cantos,,2
-F23,Cajon_Sup,Lateral_Der,1,122.0,264.0,18.0,Canto frente,,
-F24,Cajon_Sup,Trasera,1,2302.0,82.0,18.0,Sin canto,,
-F25,Cajon_Sup,Piso_Interior_3xØ60,1,2302.0,264.0,18.0,Sin canto,,
-F26,Frente,Frente_Cajon_Superior,1,2302.0,140.0,18.0,4 cantos,,
-TOTAL,Resumen,Totales_Herrajes,,,,,,0.000,4
+TOTAL,Resumen,Totales_Herrajes,,,,,,0.000,0

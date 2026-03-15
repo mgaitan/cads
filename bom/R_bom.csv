@@ -1,13 +1,2 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos,ml_gola,bisagras_cazoleta
-R1,Casco,Lateral_Izq,1,790.0,450.0,18.0,Canto frente,,
-R2,Casco,Lateral_Der,1,790.0,450.0,18.0,Canto frente,,
-R3,Casco,Piso,1,800.0,450.0,18.0,Canto frente,,
-R4,Fondo,Fondo_6mm,1,764.0,790.0,6.0,Sin canto,,
-R5,Casco,Travesano_Sup_Trasero,1,764.0,100.0,18.0,Sin canto,,
-R6,Interior,Estante_Regulable,1,760.0,442.0,18.0,Canto frente,,
-R7,Herraje,Gola_J_Superior,1,800.0,48.0,24.4,Aluminio,0.800,
-R8,Frente,Puerta_Izq,1,390.0,764.0,18.0,4 cantos,,2
-R9,Frente,Puerta_Der,1,390.0,764.0,18.0,4 cantos,,2
-R10,Herraje,Pata_80,4,40.0,40.0,80.0,PVC/Aluminio,,
-R11,Mesada,Mesada,1,820.0,488.0,30.0,Piedra,,
-TOTAL,Resumen,Totales_Herrajes,,,,,,0.800,4
+TOTAL,Resumen,Totales_Herrajes,,,,,,0.000,0
