@@ -1,6 +1,6 @@
 codigo,categoria,pieza,cantidad,largo_mm,ancho_mm,espesor_mm,cantos,ml_gola,bisagras_cazoleta
 AA1,Casco,Lateral_Izq,1,674.0,320.0,18.0,Canto frente,,
-AA10,Casco,Liston_Fijo_90,1,885.0,90.0,18.0,Sin canto,,
+AA10,Casco,Liston_Fijo_90,1,894.0,90.0,18.0,Sin canto,,
 AA11,Casco,Extractor_Ref,1,590.0,470.0,90.0,Sin canto,,
 AA12,Herraje,Gola_J_Inferior,1,903.0,48.0,24.4,Aluminio,,
 AA2,Casco,Lateral_Der,1,674.0,320.0,18.0,Canto frente,,

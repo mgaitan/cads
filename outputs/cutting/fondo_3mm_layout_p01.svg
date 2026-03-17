@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1059" height="1474" viewBox="0 0 1059 1474">
+<rect x="0" y="0" width="1059" height="1474" fill="#ffffff"/>
+<text x="12" y="20" font-size="14" font-family="Arial">Layout de corte - fondo_3mm - hoja 1/1</text>
+<rect x="40" y="58" width="980.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="40" y="52" font-size="11" font-family="Arial">Placa 1</text>
+<rect x="40" y="795" width="980.0" height="633.5" fill="#f8f9fa" stroke="#333" stroke-width="1.2"/>
+<text x="40" y="789" font-size="11" font-family="Arial">Placa 2</text>
+<rect x="40.0" y="58.0" width="765.4" height="223.6" fill="#d9e8fb" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="71.0" font-size="9" font-family="Arial">H14 (2184x636) - Sin canto</text>
+<rect x="40.0" y="281.6" width="771.8" height="299.9" fill="#fce8d6" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="294.6" font-size="9" font-family="Arial">L4 (2202x854) - Sin canto</text>
+<rect x="40.0" y="795.0" width="304.5" height="236.9" fill="#d9f2e6" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="808.0" font-size="9" font-family="Arial">AA7 (867x674) - Sin canto</text>
+<rect x="502.7" y="795.0" width="304.5" height="271.2" fill="#f5d9fb" stroke="#555" stroke-width="0.8"/>
+<text x="505.7" y="808.0" font-size="9" font-family="Arial">BA4 (867x772) - Sin canto</text>
+<rect x="40.0" y="1032.0" width="462.7" height="160.3" fill="#fde2e2" stroke="#555" stroke-width="0.8"/>
+<text x="43.0" y="1045.0" font-size="9" font-family="Arial">AB5 (1319x455) - Sin canto</text>
+<rect x="502.7" y="1066.2" width="462.7" height="271.2" fill="#fff3cd" stroke="#555" stroke-width="0.8"/>
+<text x="505.7" y="1079.2" font-size="9" font-family="Arial">BB4 (1319x772) - Sin canto</text>
+</svg>

@@ -1,0 +1,7 @@
+board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
+1,H_H14_1,H,H14,Fondo_3mm,0,0,2187,639,2184,636,0,Sin canto
+1,L_L4_1,L,L4,Fondo_3mm,0,639,2205,857,2202,854,0,Sin canto
+2,AA_AA7_1,AA,AA7,Fondo_3mm,0,0,870,677,867,674,0,Sin canto
+2,BA_BA4_1,BA,BA4,Fondo_3mm,1322,0,870,775,867,772,0,Sin canto
+2,AB_AB5_1,AB,AB5,Fondo_3mm,0,677,1322,458,1319,455,0,Sin canto
+2,BB_BB4_1,BB,BB4,Fondo_3mm,1322,775,1322,775,1319,772,0,Sin canto

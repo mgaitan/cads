@@ -1,0 +1,8 @@
+board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
+1,AB_AC1_1,AB,AC1,Lateral_Izq,323,0,323,294,320,291,0,Canto frente
+1,AB_AC5_1,AB,AC5,Fondo_18mm,647,0,294,1322,1319,291,1,Sin canto
+1,I_I21B_1,I,I21B,Placa_Fondo_Paraiso,941,0,1003,1723,1720,1000,1,Sin canto
+1,R_R13_1,R,R13,Fondo_Paraiso,1944,0,803,1003,1000,800,1,Sin canto
+1,AB_AC2_1,AB,AC2,Lateral_Der,0,1,323,294,320,291,0,Canto frente
+1,AB_AC4_1,AB,AC4,Tapa,324,294,323,1358,1355,320,1,Sin canto
+1,AB_AC3_1,AB,AC3,Piso,1,295,323,1358,1355,320,1,Canto frente
