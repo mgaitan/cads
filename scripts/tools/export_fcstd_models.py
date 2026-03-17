@@ -166,11 +166,27 @@ def bbox_dims(obj) -> tuple[float, float, float]:
     return dims[0], dims[1], dims[2]
 
 
-def visible_shape_objects(doc):
+def allowed_prefixes(module: str) -> tuple[str, ...]:
+    if module == "AB":
+        return ("AB", "AC")
+    return (module,)
+
+
+def export_shape_objects(doc, module: str):
     out = []
+    prefixes = allowed_prefixes(module)
     for obj in doc.Objects:
         try:
-            if hasattr(obj, "Shape") and not obj.Shape.isNull() and obj.ViewObject.Visibility:
+            if not hasattr(obj, "Shape") or obj.Shape.isNull():
+                continue
+            name = str(getattr(obj, "Name", ""))
+            if module in ("ENS", "ENSI", "FULL"):
+                out.append(obj)
+                continue
+            if "_" not in name:
+                continue
+            code = name.split("_", 1)[0]
+            if any(code.startswith(prefix) for prefix in prefixes):
                 out.append(obj)
         except Exception:
             pass
@@ -179,7 +195,7 @@ def visible_shape_objects(doc):
 
 for module, fcstd_path in FCSTD_MAP.items():
     doc = App.openDocument(fcstd_path)
-    objects = visible_shape_objects(doc)
+    objects = export_shape_objects(doc, module)
 
     step_path = ROOT / "models" / "step" / f"{{module}}.step"
     step_path.parent.mkdir(parents=True, exist_ok=True)
