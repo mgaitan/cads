@@ -14,9 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = ROOT / "manuals" / "out"
 
 ENSEMBLES = [
+    ("FULL", "Ensamble completo"),
     ("ENS", "Ensamble cocina principal"),
     ("ENSI", "Ensamble isla"),
-    ("FULL", "Ensamble completo"),
 ]
 MODULES = [
     ("H", "Columna horno + micro", "Melamina blanca"),
@@ -45,6 +45,38 @@ def load_text(path: Path) -> str:
     if not path.exists():
         return "_Sin notas cargadas._"
     return path.read_text(encoding="utf-8").strip()
+
+
+def extract_parameters(path: Path) -> str:
+    if not path.exists():
+        return ""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not lines:
+        return ""
+
+    start = None
+    for idx, line in enumerate(lines):
+        if line.lstrip("# ").lower().startswith("parametros"):
+            start = idx + 1
+            break
+
+    if start is not None:
+        end = len(lines)
+        for idx in range(start, len(lines)):
+            line = lines[idx].strip()
+            if idx > start and line.startswith("#"):
+                end = idx
+                break
+        return "\n".join(lines[start:end]).strip()
+
+    body = lines[1:] if lines and lines[0].startswith("#") else lines
+    chunk = []
+    for line in body:
+        stripped = line.strip()
+        if stripped.startswith("#"):
+            break
+        chunk.append(line)
+    return "\n".join(chunk).strip()
 
 
 def img(md_path: Path, rel_target: Path, caption: str, width: str = "48%") -> str:
@@ -116,18 +148,24 @@ def consolidated_rows() -> list[list[str]]:
 
 def ensemble_section(md_path: Path, code: str, title: str) -> str:
     shots = ROOT / "screenshots"
+    if code == "FULL":
+        iso = img(md_path, shots / f"{code}_iso.png", "", "96%")
+        return f"""
+{iso}
+<div style="page-break-after: always;"></div>
+"""
+
+    iso = img(md_path, shots / f"{code}_iso.png", "", "48%")
     views = "".join(
         [
-            img(md_path, shots / f"{code}_iso.png", f"{code} Iso", "48%"),
-            img(md_path, shots / f"{code}_front.png", f"{code} Frente", "48%"),
-            img(md_path, shots / f"{code}_left.png", f"{code} Lateral", "48%"),
-            img(md_path, shots / f"{code}_right.png", f"{code} Lateral opuesto", "48%"),
-            img(md_path, shots / f"{code}_rear.png", f"{code} Posterior", "48%"),
-            img(md_path, shots / f"{code}_top.png", f"{code} Superior", "48%"),
+            img(md_path, shots / f"{code}_front.png", "", "48%"),
+            img(md_path, shots / f"{code}_left.png", "", "48%"),
+            img(md_path, shots / f"{code}_right.png", "", "48%"),
+            img(md_path, shots / f"{code}_rear.png", "", "48%"),
         ]
     )
     return f"""
-## {code} - {title}
+{iso}
 {views}
 """
 
@@ -161,26 +199,27 @@ def module_section(md_path: Path, code: str, name: str, finish: str) -> str:
                 r.get("bisagras_cazoleta", ""),
             ]
         )
-    instr = load_text(ROOT / "docs" / "instrucciones" / f"{code}_instrucciones.md")
+    params = extract_parameters(
+        ROOT / "docs" / "instrucciones" / f"{code}_instrucciones.md"
+    )
     shots = ROOT / "screenshots"
+    iso = img(md_path, shots / f"{code}_iso.png", "", "96%")
     views = "".join(
         [
-            img(md_path, shots / f"{code}_iso.png", f"{code} Iso"),
-            img(md_path, shots / f"{code}_front.png", f"{code} Frente"),
-            img(md_path, shots / f"{code}_left.png", f"{code} Lateral"),
+            img(md_path, shots / f"{code}_front.png", "", "48%"),
+            img(md_path, shots / f"{code}_left.png", "", "48%"),
         ]
     )
     return f"""
 ## Modulo {code} - {name}
-**Terminacion:** {finish}
-
+{iso}
 {views}
+
+### Parametros
+{params if params else "_Sin parametros cargados._"}
 
 ### Despiece {code}
 {table(headers, rows) if rows else "_Sin BOM._"}
-
-### Notas de armado {code}
-{instr}
 """
 
 
@@ -223,9 +262,9 @@ def cut_plan_section(md_path: Path) -> str:
                 img(md_path, svg, f"Layout {group} · {svg.stem.split('_p')[-1]}", "96%")
             )
     blocks = []
-    for i in range(0, len(fig_rows), 1):
-        chunk = fig_rows[i]
-        if i < len(fig_rows) - 1:
+    for i in range(0, len(fig_rows), 2):
+        chunk = "".join(fig_rows[i : i + 2])
+        if i + 2 < len(fig_rows):
             chunk += '<div style="page-break-after: always;"></div>'
         blocks.append(chunk)
     return f"""
@@ -240,19 +279,6 @@ def cut_plan_section(md_path: Path) -> str:
 def build_markdown() -> str:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     md_path = OUT_DIR / "COCINA_manual.md"
-    total_headers = [
-        "Categoria",
-        "Pieza",
-        "Cant total",
-        "Largo",
-        "Ancho",
-        "Espesor",
-        "Cantos",
-        "Modulos",
-        "ML gola",
-        "Bisagras",
-    ]
-    total_rows = consolidated_rows()
     ensambles = "\n".join(
         ensemble_section(md_path, code, title) for code, title in ENSEMBLES
     )
@@ -271,10 +297,7 @@ th, td {{ border: 1px solid #777; padding: 2px 4px; vertical-align: top; }}
 ## 1. Ensambles generales
 {ensambles}
 
-## 2. Lista unica total de partes
-{table(total_headers, total_rows)}
-
-## 3. Modulos
+## 2. Modulos
 {modules}
 
 {cut_section}
