@@ -1,8 +1,25 @@
 board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
-1,AB_AC1_1,AB,AC1,Lateral_Izq,323,0,323,294,320,291,0,Canto frente
-1,AB_AC5_1,AB,AC5,Fondo_18mm,647,0,294,1322,1319,291,1,Sin canto
-1,I_I21B_1,I,I21B,Placa_Fondo_Paraiso,941,0,1003,1723,1720,1000,1,Sin canto
-1,R_R13_1,R,R13,Fondo_Paraiso,1944,0,803,1003,1000,800,1,Sin canto
-1,AB_AC2_1,AB,AC2,Lateral_Der,0,1,323,294,320,291,0,Canto frente
-1,AB_AC4_1,AB,AC4,Tapa,324,294,323,1358,1355,320,1,Sin canto
-1,AB_AC3_1,AB,AC3,Piso,1,295,323,1358,1355,320,1,Canto frente
+1,AB_AC3_1,AB,AC3,Piso,0,0,323,1358,1355,320,1,Canto frente
+1,F_F15_1,F,F15,Regrueso_Vis_Der,323,0,2165,285,2162,282,0,Crudo (cinta 36mm en obra)
+1,I_I21B_1,I,I21B,Placa_Fondo_Paraiso,323,285,1723,1003,1720,1000,0,Sin canto
+1,AB_AC4_1,AB,AC4,Tapa,2165,452,323,1358,1355,320,1,Sin canto
+1,F_F14_1,F,F14,Regrueso_Vis_Izq,0,1358,2165,285,2162,282,0,Crudo (cinta 36mm en obra)
+2,F_F1_1,F,F1,Lateral_Izq,0,0,2183,953,2180,950,0,Canto frente
+2,F_F20_1,F,F20,Regrueso_Sobre_F9,0,953,711,53,708,50,0,Crudo (cinta 36mm en obra)
+2,F_F13_1,F,F13,Puerta_Mod_Der,847,953,880,372,877,369,0,4 cantos
+2,R_R13_1,R,R13,Fondo_Paraiso,1727,953,1003,803,1000,800,0,Sin canto
+2,F_F16_1,F,F16,Regrueso_Front_Estante_Sup_1,0,1463,695,53,692,50,0,Crudo (cinta 36mm en obra)
+2,AB_AC5_1,AB,AC5,Fondo_18mm,0,1516,1322,294,1319,291,0,Sin canto
+3,F_F17_1,F,F17,Regrueso_Front_Estante_Sup_2,0,0,53,695,692,50,1,Crudo (cinta 36mm en obra)
+3,F_F26_1,F,F26,Techo_Modulo_Estantes,53,0,953,783,950,780,0,Canto frente
+3,F_F7_1,F,F7,Estante_Bajo_Reg,1006,0,711,285,708,282,0,Canto frente
+3,F_F9_1,F,F9,Estante_Fijo_Interior,1006,285,711,285,708,282,0,Canto frente
+3,F_F2_1,F,F2,Lateral_Der,0,783,2183,953,2180,950,0,Canto frente
+4,AB_AC1_1,AB,AC1,Lateral_Izq,0,0,323,294,320,291,0,Canto frente
+4,F_F11_1,F,F11,Estante_Sup_Reg_2,323,0,695,265,692,262,0,Canto frente
+4,F_F6_1,F,F6,Techo_Heladera_1800,1575,0,743,653,740,650,0,Sin canto
+4,F_F12_1,F,F12,Puerta_Mod_Izq,695,265,880,372,877,369,0,4 cantos
+4,AB_AC2_1,AB,AC2,Lateral_Der,0,294,323,294,320,291,0,Canto frente
+4,F_F10_1,F,F10,Estante_Sup_Reg_1,0,588,695,265,692,262,0,Canto frente
+4,F_F3_1,F,F3,Piso_Modular,695,637,747,303,744,300,0,Canto frente
+4,F_F5_1,F,F5,Panel_Divisor_Prof,0,940,2183,747,2180,744,0,Canto frente

@@ -1,5 +1,5 @@
 group,pieces,boards_used,board_usable_w_mm,board_usable_h_mm,kerf_mm,margin_mm,utilization_pct,waste_pct
-blanco_18mm,139,10,2800,1810,3,10,82.05,17.95
-fondo_3mm,6,2,2800,1810,3,10,60.98,39.02
-fondo_6mm,8,1,2800,1810,3,10,54.17,45.83
-paraiso_18mm,7,1,2800,1810,3,10,78.72,21.28
+blanco_18mm,122,8,2730,1810,3,10,79.84,20.16
+fondo_3mm,6,2,2730,1810,3,10,62.54,37.46
+fondo_6mm,8,1,2730,1810,3,10,55.56,44.44
+paraiso_18mm,24,4,2730,1810,3,10,70.89,29.11

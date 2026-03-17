@@ -1,9 +1,9 @@
 board_idx,uid,module,code,name,x_mm,y_mm,cut_w_mm,cut_h_mm,part_w_mm,part_h_mm,rotated,cantos
-1,BB_BB19_1,BB,BB19,Caja_Bot_Der_Trasera_Caja,0,0,503,628,625,500,1,Sin canto
-1,BA_BA14_1,BA,BA14,Caja_Mid_Trasera_Caja,2137,0,503,845,842,500,1,Sin canto
-1,BB_BB18_1,BB,BB18,Caja_Bot_Izq_Trasera_Caja,503,628,628,503,625,500,0,Sin canto
-1,BA_BA15_1,BA,BA15,Caja_Bot_Trasera_Caja,1131,628,845,503,842,500,0,Sin canto
-1,BB_BB14_1,BB,BB14,Caja_Top_Izq_Trasera_Caja,503,1131,503,628,625,500,1,Sin canto
-1,BB_BB17_1,BB,BB17,Caja_Mid_Der_Trasera_Caja,1131,1131,503,628,625,500,1,Sin canto
-1,BB_BB16_1,BB,BB16,Caja_Mid_Izq_Trasera_Caja,1634,1131,503,628,625,500,1,Sin canto
-1,BB_BB15_1,BB,BB15,Caja_Top_Der_Trasera_Caja,2137,1131,503,628,625,500,1,Sin canto
+1,BA_BA14_1,BA,BA14,Caja_Mid_Trasera_Caja,628,0,503,845,842,500,1,Sin canto
+1,BB_BB19_1,BB,BB19,Caja_Bot_Der_Trasera_Caja,1885,0,503,628,625,500,1,Sin canto
+1,BB_BB15_1,BB,BB15,Caja_Top_Der_Trasera_Caja,1885,628,503,628,625,500,1,Sin canto
+1,BB_BB16_1,BB,BB16,Caja_Mid_Izq_Trasera_Caja,0,754,628,503,625,500,0,Sin canto
+1,BB_BB17_1,BB,BB17,Caja_Mid_Der_Trasera_Caja,629,845,628,503,625,500,0,Sin canto
+1,BB_BB14_1,BB,BB14,Caja_Top_Izq_Trasera_Caja,1257,845,628,503,625,500,0,Sin canto
+1,BA_BA15_1,BA,BA15,Caja_Bot_Trasera_Caja,1885,1256,845,503,842,500,0,Sin canto
+1,BB_BB18_1,BB,BB18,Caja_Bot_Izq_Trasera_Caja,1,1257,628,503,625,500,0,Sin canto
