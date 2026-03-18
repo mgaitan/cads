@@ -126,6 +126,63 @@ def detect_module(doc) -> str:
     return "I" if stem == "ALT-02" else stem
 
 
+def panel_axes(obj) -> tuple[float, float]:
+    bb = obj.Shape.BoundBox
+    dims = sorted([float(bb.XLength), float(bb.YLength), float(bb.ZLength)])
+    # Descarta el espesor y devuelve las dos dimensiones de placa, mayor-menor.
+    return dims[2], dims[1]
+
+
+def pair_choice(obj) -> int:
+    # Primer lado del par (izq/sup) o segundo (der/inf).
+    if prop_is_true(read_prop(obj, "bom_canto_der", False)) or prop_is_true(
+        read_prop(obj, "bom_canto_inf", False)
+    ):
+        return 1
+    return 0
+
+
+def is_vertical_front_piece(name: str) -> bool:
+    vertical_keywords = (
+        "Lateral",
+        "Parante",
+        "Divisor",
+        "Division",
+        "Liston_Vert",
+    )
+    return any(keyword in name for keyword in vertical_keywords)
+
+
+def supplier_edge_flags(obj, name: str, export_largo: int, export_ancho: int):
+    raw = [
+        1 if prop_is_true(read_prop(obj, "bom_canto_izq", False)) else 0,
+        1 if prop_is_true(read_prop(obj, "bom_canto_der", False)) else 0,
+        1 if prop_is_true(read_prop(obj, "bom_canto_sup", False)) else 0,
+        1 if prop_is_true(read_prop(obj, "bom_canto_inf", False)) else 0,
+    ]
+    if sum(raw) in (0, 4):
+        return raw
+
+    canto = str(read_prop(obj, "bom_cantos", "")).strip().lower()
+    choice = pair_choice(obj)
+    panel_largo, panel_ancho = panel_axes(obj)
+
+    if canto == "canto frente":
+        edge_len = (
+            float(obj.Shape.BoundBox.ZLength)
+            if is_vertical_front_piece(name)
+            else float(obj.Shape.BoundBox.XLength)
+        )
+    elif canto in ("canto sup", "canto inf"):
+        edge_len = panel_largo
+    else:
+        return raw
+
+    if int(round(edge_len)) == int(round(export_largo)):
+        return [1, 0, 0, 0] if choice == 0 else [0, 1, 0, 0]
+    return [0, 0, 1, 0] if choice == 0 else [0, 0, 0, 1]
+
+
 def iter_rows(doc, module: str):
     prefixes = allowed_prefixes(module)
     for obj in doc.Objects:
@@ -154,16 +211,20 @@ def iter_rows(doc, module: str):
         if category in ("Herraje", "Mesada", "Resumen"):
             continue
 
+        export_largo = int(round(float(read_prop(obj, "bom_largo_mm", largo))))
+        export_ancho = int(round(float(read_prop(obj, "bom_ancho_mm", ancho))))
+        flags = supplier_edge_flags(obj, name, export_largo, export_ancho)
+
         yield [
             name,
             "1",
-            str(int(round(float(read_prop(obj, "bom_largo_mm", largo))))),
-            str(int(round(float(read_prop(obj, "bom_ancho_mm", ancho))))),
+            str(export_largo),
+            str(export_ancho),
             "SI",
-            "1" if prop_is_true(read_prop(obj, "bom_canto_izq", False)) else "0",
-            "1" if prop_is_true(read_prop(obj, "bom_canto_der", False)) else "0",
-            "1" if prop_is_true(read_prop(obj, "bom_canto_sup", False)) else "0",
-            "1" if prop_is_true(read_prop(obj, "bom_canto_inf", False)) else "0",
+            str(flags[0]),
+            str(flags[1]),
+            str(flags[2]),
+            str(flags[3]),
         ]
 
 

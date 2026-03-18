@@ -1,0 +1,16 @@
+L10_Puerta_Sup_Izq	1	666	442	SI	1	1	1	1
+L11_Puerta_Sup_Der	1	666	442	SI	1	1	1	1
+L13_Piso_Modulo_Superior	1	890	734	SI	0	0	0	1
+L15B_Parante_Rear_Izq_Sup	1	625	100	SI	0	1	0	0
+L15_Parante_Rear_Izq	1	1577	100	SI	0	1	0	0
+L16B_Parante_Rear_Der_Sup	1	625	100	SI	1	0	0	0
+L16_Parante_Rear_Der	1	1577	100	SI	1	0	0	0
+L1B_Parante_Front_Izq_Sup	1	625	100	SI	0	1	0	0
+L1_Parante_Front_Izq	1	1577	100	SI	0	1	0	0
+L2B_Parante_Front_Der_Sup	1	625	100	SI	1	0	0	0
+L2_Parante_Front_Der	1	1577	100	SI	1	0	0	0
+L3_Tapa_Casco	1	890	760	SI	0	0	0	1
+L5_Parante_Interior	1	1559	760	SI	1	0	0	0
+L6_Techo_Lavarropas_Der	1	760	648	SI	0	0	0	1
+L8_Puerta_Inf_Izq	1	1528	444	SI	1	1	1	1
+L9_Puerta_Inf_Der	1	1528	444	SI	1	1	1	1

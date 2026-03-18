@@ -1,3 +1,11 @@
+AA10_Liston_Fijo_90	1	313	90	SI	1	0	0	0
+AA11_Extractor_Ref	1	590	470	SI	0	0	0	0
+AA1_Lateral_Izq	1	674	300	SI	0	1	0	0
+AA2_Lateral_Der	1	674	300	SI	1	0	0	0
+AA3_Piso_Casco	1	903	300	SI	0	1	0	0
+AA4_Tapa_Casco	1	903	300	SI	0	1	0	0
+AA8_Frente_Izq	1	666	448	SI	1	1	1	1
+AA9_Frente_Der	1	666	448	SI	1	1	1	1
 AB10_Divisor_Der_Puerta_Central	1	407	300	SI	1	0	0	0
 AB1_Lateral_Izq	1	455	300	SI	0	1	0	0
 AB2_Lateral_Der	1	455	300	SI	1	0	0	0
@@ -77,3 +85,10 @@ H6_Piso_Micro	1	636	580	SI	0	1	0	0
 H7_Tapa_Micro	1	636	580	SI	0	1	0	0
 H8_Estante_Inferior	1	632	580	SI	0	1	0	0
 H9B_Regrueso_Horizontal_Sup_50	1	636	50	SI	1	0	0	0
+R1_Lateral_Izq	1	772	362	SI	0	1	0	0
+R2_Lateral_Der	1	772	332	SI	1	0	0	0
+R3_Piso	1	984	362	SI	0	0	0	0
+R5_Travesano_Sup_Trasero	1	948	100	SI	0	0	0	0
+R6_Estante_Regulable	1	946	352	SI	0	0	0	0
+R8_Puerta_Izq	1	768	490	SI	1	1	1	1
+R9_Puerta_Der	1	768	490	SI	1	1	1	1
