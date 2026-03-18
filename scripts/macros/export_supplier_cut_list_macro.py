@@ -145,6 +145,9 @@ def iter_rows(doc, module: str):
         largo, ancho, espesor = bbox_dims(obj)
         piece_name = str(read_prop(obj, "bom_pieza", piece_name))
         category = str(read_prop(obj, "bom_categoria", infer_category(name)))
+        material = str(read_prop(obj, "bom_material", "")).strip().lower()
+        if material in ("piedra gris mara", "piedra", "mesada", "granito"):
+            continue
         group = infer_material_group(category, piece_name, espesor)
         if group != MATERIAL_GROUP:
             continue
