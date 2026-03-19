@@ -122,8 +122,7 @@ def detect_module(doc) -> str:
         stem = Path(doc.FileName).stem
     except Exception:
         stem = doc.Name
-    stem = stem.upper()
-    return "I" if stem == "ALT-02" else stem
+    return stem.upper()
 
 
 def panel_axes(obj) -> tuple[float, float]:
@@ -165,7 +164,7 @@ def supplier_edge_flags(obj, name: str, export_largo: int, export_ancho: int):
 
     canto = str(read_prop(obj, "bom_cantos", "")).strip().lower()
     choice = pair_choice(obj)
-    panel_largo, panel_ancho = panel_axes(obj)
+    panel_largo, _panel_ancho = panel_axes(obj)
 
     if canto == "canto frente":
         edge_len = (

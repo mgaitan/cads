@@ -1,9 +1,13 @@
 # Bajo mesada BB
 
-- Ancho: 1355 mm
-- Profundidad: 600 mm
-- Alto casco: 870 mm
-- Zocalo: 80 mm
-- Fila superior: 130 mm
-- Soportes superiores de mesada: 100 mm de profundidad, por dentro del casco
-- Configuracion: 6 cajones (2 columnas x 3 filas)
+## Parametros vigentes
+- Ancho exterior: `1355 mm`
+- Profundidad exterior: `580 mm`
+- Alto casco: `870 mm`
+- Zocalo/patas: `80 mm`
+
+## Configuracion
+- Seis frentes: `BB8` a `BB13`
+- Soporte superior frontal `BB5`: `1319 x 100 mm`
+- Soporte superior fondo `BB6`: `1319 x 100 mm`
+- Los cajones mantienen `500 mm` de largo

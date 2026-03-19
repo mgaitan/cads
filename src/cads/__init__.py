@@ -1,1 +1,1 @@
-"""Shared helpers for CAD generation scripts."""
+"""Herramientas vigentes del flujo FCStd-first para cads."""

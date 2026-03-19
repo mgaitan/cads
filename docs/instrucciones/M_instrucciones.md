@@ -1,15 +1,12 @@
-# Mesada piedra gris mara
+# Mesada M
 
-## Parametros
-- Largo total: 2258 mm
-- Profundidad: 600 mm
-- Espesor: 30 mm
-- Cota inferior: 870 mm (cota superior final 900 mm)
-
-## Calado anafe
-- Calado: 600 x 555 mm
-- Centro del calado en X=783 mm (alineado con eje de ducto)
-- Centro del calado en Y=300 mm (centrado en profundidad)
+## Parametros vigentes
+- Largo total: `2258 mm`
+- Profundidad total: `648 mm`
+- Espesor: `30 mm`
+- Cota inferior: `870 mm`
+- Cota superior final: `900 mm`
 
 ## Nota
-- Verificar plantilla final in situ antes de corte definitivo de piedra.
+- La pieza vigente en el modelo es `M1_Mesada_Gris_Mara`
+- Verificar siempre plantilla final in situ antes del corte definitivo de piedra

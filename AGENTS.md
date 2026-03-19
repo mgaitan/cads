@@ -1,54 +1,84 @@
 # AGENTS.md
 
 ## Objetivo
-Desarrollar muebles de cocina parametrizados y producir:
-- modelo 3D,
-- BOM de corte,
-- instrucciones de armado.
+Desarrollar muebles de cocina en FreeCAD y producir:
+- modelo 3D en `FCStd`,
+- despiece unitario para proveedor en `TSV`,
+- optimización de corte a partir de esos `TSV`.
+
+## Source Of Truth
+- La fuente de verdad es el modelo `FCStd`.
+- Los cambios se hacen en FreeCAD, preferentemente vía MCP.
+- No se regeneran muebles desde `scripts/models/*.py`; ese flujo quedó obsoleto.
+- Cada pieza relevante vive como objeto individual dentro del documento.
 
 ## Convenciones
-- Prefijo por mueble: `H`, `AA`, `AB`, `AC`, `L`, `BA`, `BB`.
-- Piezas etiquetadas como `H1`, `AA1`, etc.
+- Prefijos de módulo: `AA`, `AB`, `AC`, `BA`, `BB`, `F`, `H`, `I`, `L`, `M`, `R`, `ENS`, `ENSI`, `FULL`.
+- Piezas etiquetadas como `AA1`, `BA14`, etc.
 - Unidades: milímetros.
 - Espesor melamina por defecto: `18 mm`.
-- Regla de corte: ninguna pieza de placa debe tener `largo` o `ancho` menor a `50 mm`.
-  El espesor no cuenta para esta restricción.
+- Ninguna pieza de placa debe tener `largo` o `ancho` menor a `50 mm`.
 
-## Estructura de trabajo
-- Scripts de modelado: `scripts/models/`
-- Macro de capturas: `scripts/macros/`
-- Modelos generados: `models/fcstd/` y `models/step/`
-- BOM generados: `bom/`
-- Instrucciones: `docs/instrucciones/`
-- Manuales: `manuals/`
+## Metadata En Piezas
+Cada pieza del `FCStd` debe llevar metadata BOM/proveedor embebida, al menos:
+- `bom_include`
+- `bom_codigo`
+- `bom_pieza`
+- `bom_categoria`
+- `bom_material`
+- `bom_largo_mm`
+- `bom_ancho_mm`
+- `bom_espesor_mm`
+- `bom_canto_izq`
+- `bom_canto_der`
+- `bom_canto_sup`
+- `bom_canto_inf`
 
-## Axiomas de diseño vigentes
-- Altura final de mesada: `900 mm`.
-- Cota base de alacena derecha (AB/AC): `1500 mm`.
-- Coronación superior de módulos altos: `2300 mm`.
-- La continuidad visual principal se alinea por líneas de gola.
-- Altura de `H10` alineada con grilla visual de `BB`.
-- Tope del hueco microondas alineado con nivel superior de `AC`.
-- `AA` con frentes verticales y listón fijo inferior de `90 mm`.
-- `BA` con dos frentes grandes inferiores de ancho completo + frente falso superior bajo anafe.
-- En bajo mesadas `BA`, `BB` e `I`, los soportes superiores de mesada van por dentro del casco y con profundidad `100 mm`.
-- Reparto de anchos:
-  - libre sin `H`: `2258 mm`
-  - `AA = BA = 903 mm`
-  - `AB/AC = BB = 1355 mm`
+Reglas actuales:
+- `Mesada`, `Alzada`, `Barra` y tapas laterales de piedra usan `bom_material = piedra gris mara`.
+- Herrajes, previews y referencias no salen al supplier.
+- El despiece para proveedor sale directo del `FCStd`, una fila por objeto real, sin agrupar.
 
-## BOM
-Cada BOM por módulo incluye:
-- `ml_gola` por pieza de gola.
-- `bisagras_cazoleta` por puerta.
-- fila `TOTAL` con acumulados.
+## Cantos Para Proveedor
+El sistema del proveedor interpreta las 4 columnas así:
+- primeras dos columnas: lados del `Largo` (`| |`)
+- últimas dos columnas: lados del `Ancho` (`— —`)
 
-Regla actual de bisagras:
-- 2 por puerta.
-- 3 por puerta si lado mayor `>= 900 mm`.
+Orden de columnas en el TSV:
+1. `canto_izq`
+2. `canto_der`
+3. `canto_sup`
+4. `canto_inf`
 
-## Flujo recomendado
-1. Ajustar parámetros en `scripts/models/*.py`.
-2. Regenerar con `make model`.
-3. Validar cotas y continuidad visual en `models/fcstd/ENS.FCStd` y/o `models/fcstd/ENSI.FCStd`.
-4. Revisar `bom/*.csv` y manuales.
+La macro no copia la orientación geométrica “tal cual está en el mueble”; traduce la metadata de canto visible al sistema del proveedor según el `Largo/Ancho` exportado.
+
+## Flujo Vigente
+1. Editar el `FCStd` en FreeCAD vía MCP.
+2. Guardar el modelo.
+3. Mantener/corregir metadata por pieza.
+4. Ejecutar macro de supplier:
+   - `src/cads/export_supplier_cut_list_macro.py`
+5. Revisar los `TSV` en `outputs/supplier/`.
+6. Ejecutar optimización desde esos `TSV`:
+   - `uv run python -m cads.optimize_cuts ...`
+
+## Estructura Actual
+- `models/fcstd/`: modelos fuente
+- `src/cads/`: herramientas vigentes
+- `outputs/supplier/`: despiece TSV
+- `outputs/cutting/`: optimización de corte
+- `screenshots/`: capturas desde FreeCAD GUI
+- `docs/instrucciones/`: notas constructivas por mueble
+
+## Axiomas De Diseño Vigentes
+- Altura final de mesada: `900 mm`
+- Cota base de alacena derecha `AB/AC`: `1500 mm`
+- Coronación superior de módulos altos: `2300 mm`
+- La continuidad visual principal se alinea por líneas de gola
+- En `BA`, `BB` e `I`, los soportes superiores de mesada van por dentro del casco y tienen `100 mm` de profundidad
+- `I.FCStd` es la variante vigente del mueble isla
+
+## No Hacer
+- No reconstruir muebles desde scripts Python viejos.
+- No usar BOM resumidos como fuente para proveedor.
+- No agrupar piezas distintas aunque compartan medidas.

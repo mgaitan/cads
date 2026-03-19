@@ -1,20 +1,21 @@
-# Conjunto derecho AB + AC
+# Conjunto AB + AC
 
-## Parametros
-- Ancho exterior total: 1355 mm
-- Profundidad: 320 mm
-- AC inferior en simil paraiso
-- AB superior en melamina blanca
+## Parametros vigentes
+- Ancho exterior total: `1355 mm`
+- Profundidad exterior: `300 mm`
+- `AC` inferior en paraiso
+- `AB` superior en blanco
 
-## Configuracion AC
-- Doble bastidor en 18 mm: uno exterior y otro interior
-- Fondo en 18 mm por dentro del bastidor interior
-- Cantos crudos en todas las piezas de AC para enchapar en obra
+## AC
+- Alto total de `AC`: `327 mm`
+- Laterales `AC1/AC2`: `291 mm` de alto
+- `AC4` hace de techo de `AC` y piso estructural de `AB`
+- `AC5` es fondo de `18 mm`
+- Ya no existen `AC6` a `AC9`
 
-## Configuracion AB
-- 3 puertas iguales
-- Gola J inferior continua
-- Fondo 3 mm
-
-## Nota
-- AC reemplaza la solucion anterior en 25.4 mm: ahora es doble 18 mm (36 mm visuales) + fondo de 18 mm.
+## AB
+- Alto total de `AB`: `473 mm` sobre `AC`
+- Tres puertas `AB6/AB7/AB8`
+- Piso `AB3` al nivel de la gola
+- Divisor `AB10` del lado derecho de la puerta central, arrancando sobre `AB3`
+- Profundidad ya corregida de `320` a `300`

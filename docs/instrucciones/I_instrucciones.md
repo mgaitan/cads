@@ -1,12 +1,22 @@
 # Bajo mesada isla I
 
-## Parametros
-- Ancho casco: 1660 mm
-- Profundidad casco/frentes: 650 mm
-- Mesada: 1700 x 688 x 30 mm
-- Alto casco: 870 mm
-- Zocalo/patas: 80 mm
-- Nicho lavavajillas libre: 605 mm
-- Sector bajo bacha: 1037 mm de ancho total
-- Dos puertas bajo bacha con divisor central
-- Piso falso removible en lavavajillas + estante removible al mismo nivel del estante bajo bacha
+## Parametros vigentes
+- Ancho casco: `1680 mm`
+- Profundidad casco: `650 mm`
+- Mesada: `1720 x 658 x 30 mm`
+- Alzada piedra: `1720 x 30 x 180 mm`
+- Fondo paraiso: desde `z=80` hasta `z=1080`
+- Barra: `1720 x 370 x 30 mm`
+- Alto casco: `870 mm`
+- Zocalo/patas: `80 mm`
+
+## Configuracion actual
+- Nicho lavavajillas libre a la izquierda
+- Dos puertas bajo bacha:
+  - `I18`
+  - `I18B`
+- Divisor central bajo bacha `I4`
+- Sin puerta en lavavajillas
+- `I8B` y `I8C` removibles en lavavajillas
+- `I8` estante regulable bajo bacha
+- Alzada y barra integradas en el propio modelo `I`
