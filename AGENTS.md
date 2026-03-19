@@ -19,6 +19,22 @@ Desarrollar muebles de cocina en FreeCAD y producir:
 - Espesor melamina por defecto: `18 mm`.
 - Ninguna pieza de placa debe tener `largo` o `ancho` menor a `50 mm`.
 
+Equivalencias actuales:
+- `AA`: alacena izquierda
+- `AB`: alacena derecha
+- `AC`: complemento inferior de `AB`
+- `BA`: bajo mesada izquierdo
+- `BB`: bajo mesada derecho
+- `F`: heladera + modular
+- `H`: columna horno + micro
+- `I`: bajo mesada isla
+- `L`: armario lavarropas
+- `M`: mesada principal
+- `R`: rinconera
+- `ENS`: ensamble cocina principal
+- `ENSI`: ensamble isla
+- `FULL`: ensamble completo
+
 ## Metadata En Piezas
 Cada pieza del `FCStd` debe llevar metadata BOM/proveedor embebida, al menos:
 - `bom_include`
@@ -57,10 +73,12 @@ La macro no copia la orientación geométrica “tal cual está en el mueble”;
 2. Guardar el modelo.
 3. Mantener/corregir metadata por pieza.
 4. Ejecutar macro de supplier:
-   - `src/cads/export_supplier_cut_list_macro.py`
+   - `src/cads/freecad/macros/export_supplier_cut_list_macro.py`
 5. Revisar los `TSV` en `outputs/supplier/`.
-6. Ejecutar optimización desde esos `TSV`:
-   - `uv run python -m cads.optimize_cuts ...`
+6. Ejecutar optimización desde un `TSV` por corrida:
+   - `uv run optimize-cuts ...`
+7. Refrescar sitio estático si hace falta:
+   - `uv run refresh-site`
 
 ## Estructura Actual
 - `models/`: modelos fuente `FCStd`
@@ -70,6 +88,7 @@ La macro no copia la orientación geométrica “tal cual está en el mueble”;
 - `outputs/cutting/`: optimización de corte
 - `outputs/screenshots/`: capturas desde FreeCAD GUI
 - `outputs/manuals/`: manual final en PDF
+- `outputs/site/`: sitio estático publicado en GitHub Pages
 
 ## Axiomas De Diseño Vigentes
 - Altura final de mesada: `900 mm`
@@ -77,7 +96,6 @@ La macro no copia la orientación geométrica “tal cual está en el mueble”;
 - Coronación superior de módulos altos: `2300 mm`
 - La continuidad visual principal se alinea por líneas de gola
 - En `BA`, `BB` e `I`, los soportes superiores de mesada van por dentro del casco y tienen `100 mm` de profundidad
-- `I.FCStd` es la variante vigente del mueble isla
 
 ## No Hacer
 - No reconstruir muebles desde scripts Python viejos.

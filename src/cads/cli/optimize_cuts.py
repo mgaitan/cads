@@ -1,10 +1,3 @@
-#!/usr/bin/env -S uv run
-# /// script
-# requires-python = ">=3.11"
-# dependencies = [
-#   "ortools>=9.10",
-# ]
-# ///
 from __future__ import annotations
 
 import argparse
@@ -16,8 +9,7 @@ from pathlib import Path
 
 from ortools.sat.python import cp_model
 
-ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SUPPLIER_DIR = ROOT / "outputs" / "supplier"
+ROOT = Path(__file__).resolve().parents[3]
 OUT_DIR = ROOT / "outputs" / "cutting"
 
 
@@ -39,9 +31,8 @@ class PieceInstance:
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Optimiza cortes desde TSV de proveedor.")
     p.add_argument(
-        "inputs",
-        nargs="*",
-        help="TSV de proveedor a incluir. Si se omite, usa todos los .tsv en outputs/supplier/.",
+        "input",
+        help="TSV de proveedor a optimizar.",
     )
     p.add_argument(
         "--board",
@@ -89,63 +80,59 @@ def infer_module_and_code(name: str) -> tuple[str, str]:
     return (module.group(0) if module else code, code)
 
 
-def input_paths(raw: list[str]) -> list[Path]:
-    if raw:
-        return [
-            Path(p).resolve() if not Path(p).is_absolute() else Path(p) for p in raw
-        ]
-    return sorted(DEFAULT_SUPPLIER_DIR.glob("*.tsv"))
+def input_path(raw: str) -> Path:
+    path = Path(raw)
+    return path.resolve() if not path.is_absolute() else path
 
 
 def load_instances(
-    paths: list[Path], board_w: int, board_h: int, kerf: int, margin: int
+    path: Path, board_w: int, board_h: int, kerf: int, margin: int
 ) -> list[PieceInstance]:
     usable_w = board_w - 2 * margin
     usable_h = board_h - 2 * margin
     items: list[PieceInstance] = []
-    for path in paths:
-        group = infer_group(path)
-        with path.open("r", encoding="utf-8", newline="") as f:
-            for row_num, row in enumerate(csv.reader(f, delimiter="\t"), start=1):
-                if len(row) < 5:
-                    continue
-                name, qty_s, largo_s, ancho_s, rot_s = row[:5]
-                qty = int(qty_s or "0")
-                largo = int(round(float(largo_s)))
-                ancho = int(round(float(ancho_s)))
-                rotate = rot_s.strip().upper() == "SI"
-                if qty <= 0:
-                    continue
-                if min(largo, ancho) < 50:
-                    raise RuntimeError(
-                        f"Pieza menor a 50 mm: {name} ({largo}x{ancho}) en {path.name}"
-                    )
-                w_eff = largo + kerf
-                h_eff = ancho + kerf
-                fits = (w_eff <= usable_w and h_eff <= usable_h) or (
-                    rotate and h_eff <= usable_w and w_eff <= usable_h
+    group = infer_group(path)
+    with path.open("r", encoding="utf-8", newline="") as f:
+        for row_num, row in enumerate(csv.reader(f, delimiter="\t"), start=1):
+            if len(row) < 5:
+                continue
+            name, qty_s, largo_s, ancho_s, rot_s = row[:5]
+            qty = int(qty_s or "0")
+            largo = int(round(float(largo_s)))
+            ancho = int(round(float(ancho_s)))
+            rotate = rot_s.strip().upper() == "SI"
+            if qty <= 0:
+                continue
+            if min(largo, ancho) < 50:
+                raise RuntimeError(
+                    f"Pieza menor a 50 mm: {name} ({largo}x{ancho}) en {path.name}"
                 )
-                if not fits:
-                    raise RuntimeError(
-                        f"Pieza no entra en placa {board_w}x{board_h}: {name} {largo}x{ancho} ({path.name})"
+            w_eff = largo + kerf
+            h_eff = ancho + kerf
+            fits = (w_eff <= usable_w and h_eff <= usable_h) or (
+                rotate and h_eff <= usable_w and w_eff <= usable_h
+            )
+            if not fits:
+                raise RuntimeError(
+                    f"Pieza no entra en placa {board_w}x{board_h}: {name} {largo}x{ancho} ({path.name})"
+                )
+            module, code = infer_module_and_code(name)
+            for i in range(qty):
+                items.append(
+                    PieceInstance(
+                        uid=f"{path.stem}_{row_num}_{i + 1}",
+                        source=path.name,
+                        module=module,
+                        code=code,
+                        name=name,
+                        w=largo,
+                        h=ancho,
+                        w_eff=w_eff,
+                        h_eff=h_eff,
+                        rotate=rotate,
+                        group=group,
                     )
-                module, code = infer_module_and_code(name)
-                for i in range(qty):
-                    items.append(
-                        PieceInstance(
-                            uid=f"{path.stem}_{row_num}_{i + 1}",
-                            source=path.name,
-                            module=module,
-                            code=code,
-                            name=name,
-                            w=largo,
-                            h=ancho,
-                            w_eff=w_eff,
-                            h_eff=h_eff,
-                            rotate=rotate,
-                            group=group,
-                        )
-                    )
+                )
     return items
 
 
@@ -349,38 +336,34 @@ def main() -> int:
     args = parse_args()
     board_w, board_h = parse_board_size(args.board)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    paths = input_paths(args.inputs)
-    if not paths:
-        raise SystemExit("No hay TSV de proveedor para optimizar.")
-
-    items = load_instances(paths, board_w, board_h, args.kerf, args.margin)
-    by_group: dict[str, list[PieceInstance]] = {}
-    for it in items:
-        by_group.setdefault(it.group, []).append(it)
+    path = input_path(args.input)
+    items = load_instances(path, board_w, board_h, args.kerf, args.margin)
+    if not items:
+        raise SystemExit(f"No hay piezas en {path}.")
 
     summary_rows: list[dict[str, object]] = []
     usable_w = board_w - 2 * args.margin
     usable_h = board_h - 2 * args.margin
     board_area = usable_w * usable_h
-    for group, group_items in sorted(by_group.items()):
-        boards_used, placements = solve_group(
-            group_items, usable_w, usable_h, args.time_limit, args.max_extra_boards
-        )
-        write_placements(group, placements)
-        if args.svg:
-            write_svg(group, placements, usable_w, usable_h)
-        total_piece_area = sum(it.w * it.h for it in group_items)
-        utilization = round(100 * total_piece_area / (boards_used * board_area), 2)
-        summary_rows.append(
-            {
-                "group": group,
-                "boards_used": boards_used,
-                "pieces": len(group_items),
-                "utilization_pct": utilization,
-                "board_usable_w_mm": usable_w,
-                "board_usable_h_mm": usable_h,
-            }
-        )
+    group = items[0].group
+    boards_used, placements = solve_group(
+        items, usable_w, usable_h, args.time_limit, args.max_extra_boards
+    )
+    write_placements(group, placements)
+    if args.svg:
+        write_svg(group, placements, usable_w, usable_h)
+    total_piece_area = sum(it.w * it.h for it in items)
+    utilization = round(100 * total_piece_area / (boards_used * board_area), 2)
+    summary_rows.append(
+        {
+            "group": group,
+            "boards_used": boards_used,
+            "pieces": len(items),
+            "utilization_pct": utilization,
+            "board_usable_w_mm": usable_w,
+            "board_usable_h_mm": usable_h,
+        }
+    )
     write_summary(summary_rows)
     return 0
 

@@ -25,7 +25,7 @@ from pathlib import Path
 
 import FreeCAD as App
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 OUT_DIR = ROOT / "outputs" / "supplier"
 
 # Configuracion rapida de la macro.

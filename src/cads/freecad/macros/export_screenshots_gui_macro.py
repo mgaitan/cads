@@ -31,7 +31,7 @@ from pathlib import Path
 import FreeCAD as App
 import FreeCADGui as Gui
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[4]
 OUT_ROOT = ROOT / "outputs" / "screenshots"
 WIDTH = 1920
 HEIGHT = 1080

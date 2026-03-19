@@ -3,7 +3,13 @@ name = "cads"
 version = "0.1.0"
 description = "Kitchen CAD generators and docs"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+  "ortools>=9.10",
+]
+
+[project.scripts]
+optimize-cuts = "cads.cli.optimize_cuts:main"
+refresh-site = "cads.cli.refresh_site:main"
 
 [build-system]
 requires = ["hatchling>=1.27.0"]

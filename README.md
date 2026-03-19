@@ -3,11 +3,39 @@
 Repositorio de mis diseños de muebles en FreeCAD.
 
 ## Flujo actual
-- Se edita el modelo directo en FreeCAD. 
+- Se edita el modelo directo en FreeCAD, idealmente via MCP.
 - La fuente de verdad es el `FCStd`.
 - Cada pieza guarda metadata embebida (`bom_*`).
 - El despiece para proveedor sale en `TSV`, una fila por objeto real.
 - La optimización de corte lee esos `TSV`, no BOM resumidos.
+
+## FreeCAD MCP
+Se usa [`freecad-mcp`](https://github.com/neka-nat/freecad-mcp) para editar los modelos desde una sesion de FreeCAD abierta.
+
+La mejor manera de saber donde hay que copiar el addon es preguntarselo a FreeCAD desde su consola Python:
+
+```python
+import FreeCAD as App
+print(App.getUserAppDataDir())
+```
+
+En este caso, usando AppImage `rc3`, el directorio fue:
+
+```text
+~/.local/share/FreeCAD/v1-1/
+```
+
+Configuracion MCP usada:
+
+```json
+{
+  "freecad-mcp": {
+    "command": "uvx",
+    "args": ["-p", "3.12", "freecad-mcp", "--only-text-feedback"],
+    "env": {}
+  }
+}
+```
 
 ## Estructura útil
 - `models/`: modelos fuente
@@ -18,15 +46,33 @@ Repositorio de mis diseños de muebles en FreeCAD.
 - `outputs/screenshots/`: capturas desde FreeCAD GUI
 - `outputs/manuals/COCINA.pdf`: manual final
 
+## Modulos
+- `AA`: alacena izquierda
+- `AB`: alacena derecha
+- `AC`: complemento inferior de `AB`
+- `BA`: bajo mesada izquierdo
+- `BB`: bajo mesada derecho
+- `F`: heladera + modular
+- `H`: columna horno + micro
+- `I`: bajo mesada isla
+- `L`: armario lavarropas
+- `M`: mesada principal
+- `R`: rinconera
+- `ENS`: ensamble cocina principal
+- `ENSI`: ensamble isla
+- `FULL`: ensamble completo
+
 ## Herramientas vigentes
-- `src/cads/export_supplier_cut_list_macro.py`
+- `src/cads/freecad/macros/export_supplier_cut_list_macro.py`
   - macro FreeCAD GUI
   - exporta una fila por pieza real
-- `src/cads/export_screenshots_gui_macro.py`
+- `src/cads/freecad/macros/export_screenshots_gui_macro.py`
   - macro FreeCAD GUI para vistas
-- `src/cads/optimize_cuts.py`
-  - optimiza cortes desde uno o más `TSV`
-- `src/cads/freecad_gola.py`
+- `src/cads/cli/optimize_cuts.py`
+  - optimiza cortes desde un solo `TSV` por corrida
+- `src/cads/cli/refresh_site.py`
+  - sincroniza `manual`, `screenshots`, `STL` y `cutting` dentro de `outputs/site/`
+- `src/cads/freecad/freecad_gola.py`
   - helpers geométricos de gola
 
 ## Cantos del proveedor
@@ -45,16 +91,35 @@ La macro traduce los cantos visibles del modelo a ese sistema.
 ## Uso
 Supplier desde FreeCAD GUI:
 - abrir los módulos
-- ejecutar `src/cads/export_supplier_cut_list_macro.py`
+- ejecutar `src/cads/freecad/macros/export_supplier_cut_list_macro.py`
 
 Optimización de corte:
 ```bash
-UV_CACHE_DIR=/tmp/uv-cache uv run --with ortools python -m cads.optimize_cuts \
+uv run optimize-cuts \
   outputs/supplier/AA_AB_BA_BB_H_R_blanco_18mm.tsv \
-  outputs/supplier/AA_AB_BA_BB_H_R_fondo_3mm.tsv \
-  outputs/supplier/AA_AB_BA_BB_H_R_fondo_6mm.tsv \
   --board 2750x1830 --svg
 ```
+
+Cada espesor o material se corre por separado, con el tamaño de placa que corresponda:
+
+```bash
+uv run optimize-cuts outputs/supplier/AA_AB_BA_BB_H_R_blanco_18mm.tsv --board 2750x1830 --svg
+uv run optimize-cuts outputs/supplier/AA_AB_BA_BB_H_R_fondo_3mm.tsv --board 2440x1830 --svg
+uv run optimize-cuts outputs/supplier/AA_AB_BA_BB_H_R_fondo_6mm.tsv --board 2440x1830 --svg
+```
+
+Actualización del sitio:
+```bash
+uv run refresh-site
+```
+
+Ese comando:
+- copia el manual desde `outputs/manuals/`
+- copia los STL desde `outputs/web_models/`
+- copia los cortes desde `outputs/cutting/`
+- aplana las capturas desde `outputs/screenshots/<MODULO>/` a `outputs/site/assets/screenshots/`
+
+GitHub Pages publica `outputs/site/` al hacer `push` a `master`.
 
 ## Estado actual
 - `I.FCStd` es la versión vigente de la isla.
