@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Macro para ejecutar dentro de FreeCAD GUI.
 
-Exporta:
-- vista isometrica estandar como `<prefijo>_iso.png`,
-- vistas estandar via comandos Std_View*: front/rear/left/right/top/bottom.
+Exporta en `outputs/screenshots/<modulo>/`:
+- `iso.png`
+- `front.png`
+- `rear.png`
+- `left.png`
+- `right.png`
+- `top.png`
+- `bottom.png`
 
 Prefijo:
 - Si `OUTPUT_PREFIX` esta definido, usa ese valor.
@@ -27,7 +32,7 @@ import FreeCAD as App
 import FreeCADGui as Gui
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT_DIR = str(ROOT / "screenshots")
+OUT_ROOT = ROOT / "outputs" / "screenshots"
 WIDTH = 1920
 HEIGHT = 1080
 BG = "White"
@@ -63,8 +68,8 @@ def detect_prefix(doc):
     return mapped.get(key, base.upper() if base else "MODEL")
 
 
-def save(view, name):
-    path = os.path.join(OUT_DIR, name)
+def save(view, out_dir, name):
+    path = os.path.join(out_dir, name)
     view.fitAll()
     view.saveImage(path, WIDTH, HEIGHT, BG)
     print("saved", path)
@@ -87,12 +92,18 @@ def prepare_visuals(doc, view):
             is_panel_back = (
                 name.startswith("H14_")
                 or name.startswith("AB5_")
-                or name.startswith("AA") and "Fondo" in name
-                or name.startswith("BA") and "Fondo" in name
-                or name.startswith("BB") and "Fondo" in name
-                or name.startswith("I") and "Fondo_6mm" in name
-                or name.startswith("L") and "Fondo" in name
-                or name.startswith("F") and "Fondo" in name
+                or name.startswith("AA")
+                and "Fondo" in name
+                or name.startswith("BA")
+                and "Fondo" in name
+                or name.startswith("BB")
+                and "Fondo" in name
+                or name.startswith("I")
+                and "Fondo_6mm" in name
+                or name.startswith("L")
+                and "Fondo" in name
+                or name.startswith("F")
+                and "Fondo" in name
             )
             if is_panel_back:
                 vo.Visibility = False
@@ -137,13 +148,15 @@ def export_doc(doc):
         return
     view = gdoc.ActiveView
     prefix = detect_prefix(doc)
+    out_dir = OUT_ROOT / prefix
+    out_dir.mkdir(parents=True, exist_ok=True)
 
     prepare_visuals(doc, view)
 
     # 1) iso
     if FORCE_STANDARD_ISO:
         set_std_view("Std_ViewIsometric")
-    save(view, f"{prefix}_iso.png")
+    save(view, str(out_dir), "iso.png")
 
     # 2) vistas estandar
     std_views = [
@@ -156,11 +169,11 @@ def export_doc(doc):
     ]
     for cmd, filename in std_views:
         set_std_view(cmd)
-        save(view, filename)
+        save(view, str(out_dir), filename.replace(f"{prefix}_", ""))
 
 
 def main():
-    os.makedirs(OUT_DIR, exist_ok=True)
+    OUT_ROOT.mkdir(parents=True, exist_ok=True)
 
     if App.ActiveDocument is None:
         raise RuntimeError(

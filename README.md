@@ -1,21 +1,22 @@
 # Diseños CAD - Cocina
 
-Repositorio `FCStd-first` para diseño de muebles de cocina en FreeCAD.
+Repositorio de mis diseños de muebles en FreeCAD.
 
 ## Flujo actual
-- Se edita el modelo directo en FreeCAD.
+- Se edita el modelo directo en FreeCAD. 
 - La fuente de verdad es el `FCStd`.
 - Cada pieza guarda metadata embebida (`bom_*`).
 - El despiece para proveedor sale en `TSV`, una fila por objeto real.
 - La optimización de corte lee esos `TSV`, no BOM resumidos.
 
 ## Estructura útil
-- `models/fcstd/`: modelos fuente
+- `models/`: modelos fuente
+- `models/*.md`: notas constructivas por mueble
 - `src/cads/`: herramientas vigentes
 - `outputs/supplier/`: TSV para proveedor
 - `outputs/cutting/`: placements, summary y SVG de corte
-- `screenshots/`: capturas desde FreeCAD GUI
-- `docs/instrucciones/`: notas constructivas por mueble
+- `outputs/screenshots/`: capturas desde FreeCAD GUI
+- `outputs/manuals/COCINA.pdf`: manual final
 
 ## Herramientas vigentes
 - `src/cads/export_supplier_cut_list_macro.py`

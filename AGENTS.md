@@ -63,12 +63,13 @@ La macro no copia la orientación geométrica “tal cual está en el mueble”;
    - `uv run python -m cads.optimize_cuts ...`
 
 ## Estructura Actual
-- `models/fcstd/`: modelos fuente
+- `models/`: modelos fuente `FCStd`
+- `models/*.md`: notas constructivas por mueble
 - `src/cads/`: herramientas vigentes
 - `outputs/supplier/`: despiece TSV
 - `outputs/cutting/`: optimización de corte
-- `screenshots/`: capturas desde FreeCAD GUI
-- `docs/instrucciones/`: notas constructivas por mueble
+- `outputs/screenshots/`: capturas desde FreeCAD GUI
+- `outputs/manuals/`: manual final en PDF
 
 ## Axiomas De Diseño Vigentes
 - Altura final de mesada: `900 mm`
