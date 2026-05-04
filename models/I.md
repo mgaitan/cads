@@ -15,8 +15,10 @@
 - Dos puertas bajo bacha:
   - `I18`
   - `I18B`
+- Gola `J` superior bajo mesada para las puertas de bacha: `I41`
 - Divisor central bajo bacha `I4`
 - Sin puerta en lavavajillas
 - `I8B` y `I8C` removibles en lavavajillas
 - `I8` estante regulable bajo bacha
 - Alzada y barra integradas en el propio modelo `I`
+- Interior del cajon superior `I29*` de `100 mm` de alto, con fondo `2 mm` sobre `I25`
