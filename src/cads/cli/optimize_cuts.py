@@ -67,11 +67,9 @@ def parse_board_size(text: str) -> tuple[int, int]:
 
 
 def infer_group(path: Path) -> str:
-    stem = path.stem
-    for suffix in ("blanco_18mm", "fondo_3mm", "fondo_6mm", "paraiso_18mm"):
-        if stem.endswith(suffix):
-            return suffix
-    raise ValueError(f"No pude inferir grupo de material desde {path.name}")
+    # El exportador separa cada material/espesor en un TSV y deja el grupo en
+    # el nombre del archivo. No restringir los materiales a una lista fija.
+    return path.stem
 
 
 def infer_module_and_code(name: str) -> tuple[str, str]:

@@ -1,47 +1,33 @@
 #!/usr/bin/env python3
-"""Macro para exportar lista unitaria de corte para proveedor.
+"""Exporta TSV de importacion para proveedor desde documentos FreeCAD abiertos.
 
-Uso dentro de FreeCAD GUI:
-- Abrir uno o mas documentos FCStd.
-- Ajustar MODULES / MATERIAL_GROUP si hace falta.
-- Ejecutar la macro.
+Cada fila, sin encabezado, usa exactamente este orden:
+pieza, cantidad, largo_mm, ancho_mm, girar, canto_izq, canto_der,
+canto_sup, canto_inf.
 
-Salida TSV:
-- Nombre de la pieza
-- Cantidad
-- Largo (mm)
-- Ancho (mm)
-- Rotacion
-- Canto izq
-- Canto der
-- Canto sup
-- Canto inf
+Se genera un archivo por combinacion de material y espesor. Ejecutar dentro de
+FreeCAD GUI con los FCStd que se quieran exportar abiertos.
 """
 
 from __future__ import annotations
 
 import csv
+import re
+import unicodedata
+from collections import defaultdict
 from pathlib import Path
 
 import FreeCAD as App
 
 ROOT = Path(__file__).resolve().parents[4]
-OUT_DIR = ROOT / "outputs" / "supplier"
+OUT_DIR = Path(globals().get("OUT_DIR", ROOT / "outputs" / "supplier"))
 
-# Configuracion rapida de la macro.
-MODULES = globals().get("MODULES", ["BA", "BB", "H"])
-MATERIAL_GROUP = globals().get("MATERIAL_GROUP", "blanco_18mm")
-OUTPUT_PATH = Path(
-    globals().get(
-        "OUTPUT_PATH",
-        str(OUT_DIR / f"{'_'.join(MODULES)}_{MATERIAL_GROUP}.tsv"),
-    )
-)
+# None exporta todos los documentos abiertos. Usar, por ejemplo,
+# MODULES = ["AA", "AB"] antes de ejecutar para limitar la exportacion.
+MODULES = globals().get("MODULES", None)
+OUTPUT_PREFIX = globals().get("OUTPUT_PREFIX", None)
 
 CATEGORY_RULES = [
-    ("AC_", "AC_Paraiso"),
-    ("F_", "F_Paraiso"),
-    ("R13_", "R_Paraiso"),
     ("Gola", "Herraje"),
     ("Pata", "Herraje"),
     ("Mesada", "Mesada"),
@@ -84,6 +70,28 @@ def prop_is_true(value) -> bool:
     return bool(value)
 
 
+def ascii_slug(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value)
+    normalized = "".join(char for char in normalized if not unicodedata.combining(char))
+    return re.sub(r"[^A-Z0-9]+", "_", normalized.upper()).strip("_")
+
+
+def compact_piece_slug(piece: str) -> str:
+    """Produce un identificador breve sin articulos ni preposiciones."""
+    ignored = {"A", "AL", "CON", "DE", "DEL", "EL", "EN", "LA", "LOS", "PARA", "SOBRE", "Y"}
+    words = [word for word in ascii_slug(piece).split("_") if word not in ignored]
+    return "_".join(words) or "PIEZA"
+
+
+def compact_code(value: str) -> str:
+    """Conserva el prefijo y correlativo, sin separadores internos."""
+    code = ascii_slug(value)
+    match = re.match(r"([A-Z]+)_?(\d+)([A-Z]?)(?:_|$)", code)
+    if match:
+        return "".join(match.groups(default=""))
+    return code.split("_", 1)[0]
+
+
 def infer_category(name: str) -> str:
     for needle, category in CATEGORY_RULES:
         if needle in name:
@@ -91,49 +99,25 @@ def infer_category(name: str) -> str:
     return "Casco"
 
 
-def infer_material_group(category: str, piece: str, espesor: float) -> str:
-    key = f"{category} {piece}"
-    if category in ("AC_Paraiso", "F_Paraiso", "R_Paraiso") or "Paraiso" in key:
-        return "paraiso_18mm"
-    if abs(espesor - 3.0) <= 0.6:
-        return "fondo_3mm"
-    if abs(espesor - 6.0) <= 0.6:
-        return "fondo_6mm"
-    return "blanco_18mm"
-
-
 def bbox_dims(obj) -> tuple[float, float, float]:
     bb = obj.Shape.BoundBox
-    dims = sorted(
-        [float(bb.XLength), float(bb.YLength), float(bb.ZLength)],
-        reverse=True,
-    )
-    return dims[0], dims[1], dims[2]
-
-
-def allowed_prefixes(module: str) -> tuple[str, ...]:
-    if module == "AB":
-        return ("AB", "AC")
-    return (module,)
+    return tuple(sorted([float(bb.XLength), float(bb.YLength), float(bb.ZLength)], reverse=True))
 
 
 def detect_module(doc) -> str:
     try:
-        stem = Path(doc.FileName).stem
+        return Path(doc.FileName).stem.upper()
     except Exception:
-        stem = doc.Name
-    return stem.upper()
+        return doc.Name.upper()
 
 
 def panel_axes(obj) -> tuple[float, float]:
     bb = obj.Shape.BoundBox
     dims = sorted([float(bb.XLength), float(bb.YLength), float(bb.ZLength)])
-    # Descarta el espesor y devuelve las dos dimensiones de placa, mayor-menor.
     return dims[2], dims[1]
 
 
 def pair_choice(obj) -> int:
-    # Primer lado del par (izq/sup) o segundo (der/inf).
     if prop_is_true(read_prop(obj, "bom_canto_der", False)) or prop_is_true(
         read_prop(obj, "bom_canto_inf", False)
     ):
@@ -142,22 +126,18 @@ def pair_choice(obj) -> int:
 
 
 def is_vertical_front_piece(name: str) -> bool:
-    vertical_keywords = (
-        "Lateral",
-        "Parante",
-        "Divisor",
-        "Division",
-        "Liston_Vert",
+    return any(
+        keyword in name
+        for keyword in ("Lateral", "Parante", "Divisor", "Division", "Liston_Vert")
     )
-    return any(keyword in name for keyword in vertical_keywords)
 
 
-def supplier_edge_flags(obj, name: str, export_largo: int, export_ancho: int):
+def supplier_edge_flags(obj, name: str, export_largo: int) -> list[int]:
     raw = [
-        1 if prop_is_true(read_prop(obj, "bom_canto_izq", False)) else 0,
-        1 if prop_is_true(read_prop(obj, "bom_canto_der", False)) else 0,
-        1 if prop_is_true(read_prop(obj, "bom_canto_sup", False)) else 0,
-        1 if prop_is_true(read_prop(obj, "bom_canto_inf", False)) else 0,
+        int(prop_is_true(read_prop(obj, "bom_canto_izq", False))),
+        int(prop_is_true(read_prop(obj, "bom_canto_der", False))),
+        int(prop_is_true(read_prop(obj, "bom_canto_sup", False))),
+        int(prop_is_true(read_prop(obj, "bom_canto_inf", False))),
     ]
     if sum(raw) in (0, 4):
         return raw
@@ -165,88 +145,92 @@ def supplier_edge_flags(obj, name: str, export_largo: int, export_ancho: int):
     canto = str(read_prop(obj, "bom_cantos", "")).strip().lower()
     choice = pair_choice(obj)
     panel_largo, _panel_ancho = panel_axes(obj)
-
     if canto == "canto frente":
-        edge_len = (
-            float(obj.Shape.BoundBox.ZLength)
-            if is_vertical_front_piece(name)
-            else float(obj.Shape.BoundBox.XLength)
-        )
+        edge_len = float(obj.Shape.BoundBox.ZLength) if is_vertical_front_piece(name) else float(obj.Shape.BoundBox.XLength)
     elif canto in ("canto sup", "canto inf"):
         edge_len = panel_largo
     else:
         return raw
 
-    if int(round(edge_len)) == int(round(export_largo)):
+    if int(round(edge_len)) == export_largo:
         return [1, 0, 0, 0] if choice == 0 else [0, 1, 0, 0]
     return [0, 0, 1, 0] if choice == 0 else [0, 0, 0, 1]
 
 
-def iter_rows(doc, module: str):
-    prefixes = allowed_prefixes(module)
+def material_key(material: str, espesor: int) -> str:
+    return f"{ascii_slug(material).lower() or 'sin_material'}_{espesor}mm"
+
+
+def iter_rows(doc):
     for obj in doc.Objects:
         if not hasattr(obj, "Shape") or obj.Shape.isNull():
-            continue
-        name = str(getattr(obj, "Name", ""))
-        if "_" not in name:
-            continue
-        code, piece_name = name.split("_", 1)
-        if not any(code.startswith(prefix) for prefix in prefixes):
-            continue
-        if piece_name.endswith("_Preview"):
             continue
         if not prop_is_true(read_prop(obj, "bom_include", True)):
             continue
 
+        object_name = str(getattr(obj, "Name", ""))
         largo, ancho, espesor = bbox_dims(obj)
-        piece_name = str(read_prop(obj, "bom_pieza", piece_name))
-        category = str(read_prop(obj, "bom_categoria", infer_category(name)))
-        material = str(read_prop(obj, "bom_material", "")).strip().lower()
-        if material in ("piedra gris mara", "piedra", "mesada", "granito"):
-            continue
-        group = infer_material_group(category, piece_name, espesor)
-        if group != MATERIAL_GROUP:
-            continue
-        if category in ("Herraje", "Mesada", "Resumen"):
+        piece = str(read_prop(obj, "bom_pieza", object_name))
+        category = str(read_prop(obj, "bom_categoria", infer_category(object_name)))
+        if category in ("Herraje", "Resumen"):
             continue
 
         export_largo = int(round(float(read_prop(obj, "bom_largo_mm", largo))))
         export_ancho = int(round(float(read_prop(obj, "bom_ancho_mm", ancho))))
-        flags = supplier_edge_flags(obj, name, export_largo, export_ancho)
+        export_espesor = int(round(float(read_prop(obj, "bom_espesor_mm", espesor))))
+        if min(export_largo, export_ancho) < 50:
+            raise RuntimeError(f"Pieza menor a 50 mm: {object_name}")
 
-        yield [
+        code = compact_code(str(read_prop(obj, "bom_codigo", object_name)))
+        if not code:
+            raise RuntimeError(f"Falta bom_codigo en {object_name}")
+        name = f"{code}_{compact_piece_slug(piece)}"
+        flags = supplier_edge_flags(obj, object_name, export_largo)
+        material = str(read_prop(obj, "bom_material", "sin material")).strip()
+
+        yield material_key(material, export_espesor), [
             name,
             "1",
             str(export_largo),
             str(export_ancho),
             "SI",
-            str(flags[0]),
-            str(flags[1]),
-            str(flags[2]),
-            str(flags[3]),
+            *(str(flag) for flag in flags),
         ]
+
+
+def output_prefix(documents) -> str:
+    if OUTPUT_PREFIX:
+        return ascii_slug(str(OUTPUT_PREFIX)).lower()
+    modules = sorted(detect_module(doc) for doc in documents)
+    return "_".join(modules).lower()
 
 
 def main():
     if App.ActiveDocument is None:
         raise RuntimeError("No hay documentos abiertos en FreeCAD.")
 
-    rows = []
-    for doc in App.listDocuments().values():
-        module = detect_module(doc)
-        if module not in MODULES:
-            continue
-        rows.extend(iter_rows(doc, module))
+    selected = {str(module).upper() for module in MODULES} if MODULES else None
+    documents = [
+        doc
+        for doc in App.listDocuments().values()
+        if selected is None or detect_module(doc) in selected
+    ]
+    if not documents:
+        raise RuntimeError("No hay documentos abiertos que coincidan con MODULES.")
 
-    rows.sort(key=lambda row: row[0])
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with OUTPUT_PATH.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f, delimiter="\t")
-        writer.writerows(rows)
+    groups = defaultdict(list)
+    for doc in documents:
+        for material, row in iter_rows(doc):
+            groups[material].append(row)
 
-    print(f"saved {OUTPUT_PATH}")
-    for row in rows:
-        print("\t".join(row))
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    prefix = output_prefix(documents)
+    for material, rows in sorted(groups.items()):
+        path = OUT_DIR / f"{prefix}_{material}.tsv"
+        rows.sort(key=lambda row: row[0])
+        with path.open("w", newline="", encoding="utf-8") as handle:
+            csv.writer(handle, delimiter="\t", lineterminator="\n").writerows(rows)
+        print(f"saved {path} ({len(rows)} piezas)")
 
 
 if globals().get("RUN_MACRO", True):

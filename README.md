@@ -41,7 +41,7 @@ Configuracion MCP usada:
 - `models/`: modelos fuente
 - `models/*.md`: notas constructivas por mueble
 - `src/cads/`: herramientas vigentes
-- `outputs/supplier/`: TSV para proveedor
+- `outputs/supplier/`: TSV para proveedor, un archivo por material y espesor
 - `outputs/cutting/`: placements, summary y SVG de corte
 - `outputs/screenshots/`: capturas desde FreeCAD GUI
 - `outputs/manuals/COCINA.pdf`: manual final
@@ -92,6 +92,15 @@ Es decir:
 - `Ancho` -> `— —`
 
 La macro traduce los cantos visibles del modelo a ese sistema.
+
+Cada TSV se importa sin encabezado y tiene este orden fijo:
+
+```text
+pieza  cantidad  largo_mm  ancho_mm  girar  canto_izq  canto_der  canto_sup  canto_inf
+```
+
+La pieza se forma como `bom_codigo` + `_` + el slug de `bom_pieza`; por ejemplo,
+`A1_PISO` o `A2_LAT_DERECHO`.
 
 ## Uso
 Supplier desde FreeCAD GUI:

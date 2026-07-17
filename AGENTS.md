@@ -38,8 +38,8 @@ Equivalencias actuales:
 ## Metadata En Piezas
 Cada pieza del `FCStd` debe llevar metadata BOM/proveedor embebida, al menos:
 - `bom_include`
-- `bom_codigo`
-- `bom_pieza`
+- `bom_codigo`: codigo breve y estable, por ejemplo `A1`
+- `bom_pieza`: nombre corto para el TSV, por ejemplo `PISO` o `LAT_DERECHO`
 - `bom_categoria`
 - `bom_material`
 - `bom_largo_mm`
@@ -56,7 +56,19 @@ Reglas actuales:
 - El despiece para proveedor sale directo del `FCStd`, una fila por objeto real, sin agrupar.
 
 ## Cantos Para Proveedor
-El sistema del proveedor interpreta las 4 columnas así:
+El TSV de importacion no lleva encabezado y tiene exactamente nueve columnas:
+
+1. pieza: `bom_codigo` + `_` + slug de `bom_pieza`, por ejemplo `A1_PISO`
+2. cantidad
+3. largo en mm
+4. ancho en mm
+5. girar (`SI`)
+6. canto izquierdo
+7. canto derecho
+8. canto superior
+9. canto inferior
+
+El sistema del proveedor interpreta las 4 columnas de canto así:
 - primeras dos columnas: lados del `Largo` (`| |`)
 - últimas dos columnas: lados del `Ancho` (`— —`)
 
@@ -74,7 +86,7 @@ La macro no copia la orientación geométrica “tal cual está en el mueble”;
 3. Mantener/corregir metadata por pieza.
 4. Ejecutar macro de supplier:
    - `src/cads/freecad/macros/export_supplier_cut_list_macro.py`
-5. Revisar los `TSV` en `outputs/supplier/`.
+5. Revisar los `TSV` en `outputs/supplier/`. La macro genera un archivo distinto por `bom_material` y espesor.
 6. Ejecutar optimización desde un `TSV` por corrida:
    - `uv run optimize-cuts ...`
 7. Refrescar sitio estático si hace falta:
