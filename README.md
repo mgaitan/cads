@@ -71,8 +71,8 @@ Configuracion MCP usada:
   - exporta una fila por pieza real
 - `src/cads/freecad/macros/export_screenshots_gui_macro.py`
   - macro FreeCAD GUI para vistas
-- `src/cads/freecad/macros/create_essential_dimensions_macro.py`
-  - agrega ancho, profundidad y altura total al grupo `Cotas esenciales`
+- `.agents/SKILLS/freecad-furnitures/macros/create_essential_dimensions_macro.py`
+  - recurso reutilizable de la skill para cotas opcionales
 - `src/cads/cli/optimize_cuts.py`
   - optimiza cortes desde un solo `TSV` por corrida
 - `src/cads/cli/refresh_site.py`
@@ -115,14 +115,16 @@ Cotas maestras en FreeCAD GUI:
 3. pegar y ejecutar:
 
 ```python
-exec(open("/home/tin/lab/cads/src/cads/freecad/macros/create_essential_dimensions_macro.py").read())
+DIMENSION_SCOPE = "casco"  # total | casco | seleccion
+DIMENSION_AXES = ("X", "Y", "Z")
+exec(open("/home/tin/lab/cads/.agents/SKILLS/freecad-furnitures/macros/create_essential_dimensions_macro.py").read())
 ```
 
 4. en el arbol, seleccionar `Cotas esenciales` y presionar `Espacio` para mostrarlas u ocultarlas
 
-La macro crea solo ancho, profundidad y altura total. Se ven tambien en vista
-perspectiva y se reemplazan al volver a ejecutar la macro despues de modificar
-el mueble.
+La macro crea solo las cotas elegidas. `casco` excluye frentes, cajones,
+herrajes y mesada; se ven tambien en perspectiva y se reemplazan al volver a
+ejecutar la macro despues de modificar el mueble.
 
 Optimización de corte:
 ```bash
