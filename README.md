@@ -111,8 +111,13 @@ Supplier desde FreeCAD GUI:
 
 Cotas maestras en FreeCAD GUI:
 1. abrir el `FCStd` y seleccionar el documento en el arbol
-2. abrir `Macro > Macros... > Ejecutar macro desde archivo`
-3. elegir `src/cads/freecad/macros/create_essential_dimensions_macro.py`
+2. abrir `Ver > Paneles > Consola Python`
+3. pegar y ejecutar:
+
+```python
+exec(open("/home/tin/lab/cads/src/cads/freecad/macros/create_essential_dimensions_macro.py").read())
+```
+
 4. en el arbol, seleccionar `Cotas esenciales` y presionar `Espacio` para mostrarlas u ocultarlas
 
 La macro crea solo ancho, profundidad y altura total. Se ven tambien en vista
