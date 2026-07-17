@@ -91,6 +91,9 @@ La macro no copia la orientación geométrica “tal cual está en el mueble”;
    - `uv run optimize-cuts ...`
 7. Refrescar sitio estático si hace falta:
    - `uv run refresh-site`
+8. Para documentar el modelo, ejecutar
+   `src/cads/freecad/macros/create_essential_dimensions_macro.py`; crea el grupo
+   opcional `Cotas esenciales` con ancho, profundidad y altura total.
 
 ## Estructura Actual
 - `models/`: modelos fuente `FCStd`

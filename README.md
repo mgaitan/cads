@@ -71,6 +71,8 @@ Configuracion MCP usada:
   - exporta una fila por pieza real
 - `src/cads/freecad/macros/export_screenshots_gui_macro.py`
   - macro FreeCAD GUI para vistas
+- `src/cads/freecad/macros/create_essential_dimensions_macro.py`
+  - agrega ancho, profundidad y altura total al grupo `Cotas esenciales`
 - `src/cads/cli/optimize_cuts.py`
   - optimiza cortes desde un solo `TSV` por corrida
 - `src/cads/cli/refresh_site.py`
@@ -106,6 +108,16 @@ La pieza se forma como `bom_codigo` + `_` + el slug de `bom_pieza`; por ejemplo,
 Supplier desde FreeCAD GUI:
 - abrir los módulos
 - ejecutar `src/cads/freecad/macros/export_supplier_cut_list_macro.py`
+
+Cotas maestras en FreeCAD GUI:
+1. abrir el `FCStd` y seleccionar el documento en el arbol
+2. abrir `Macro > Macros... > Ejecutar macro desde archivo`
+3. elegir `src/cads/freecad/macros/create_essential_dimensions_macro.py`
+4. en el arbol, seleccionar `Cotas esenciales` y presionar `Espacio` para mostrarlas u ocultarlas
+
+La macro crea solo ancho, profundidad y altura total. Se ven tambien en vista
+perspectiva y se reemplazan al volver a ejecutar la macro despues de modificar
+el mueble.
 
 Optimización de corte:
 ```bash
