@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 *.FCBak
+.agents/skills/
+.agents/SKILLS/freecad-furnitures

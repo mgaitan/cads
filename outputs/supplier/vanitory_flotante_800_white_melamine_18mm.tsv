@@ -1,0 +1,23 @@
+codigo	pieza	categoria	material	largo_mm	ancho_mm	espesor_mm	canto_izq	canto_der	canto_sup	canto_inf	cantos	bisagra_codo	luz_bisagra_mm	bisagra_lado	cazoleta_diametro_mm	cazoleta_cantidad	cazoleta_posiciones
+VF03	Base inferior pasante	Carcass	white melamine	800	370	18	1	0	0	0	front edge				0	0	
+VF01	Lateral izquierdo sobre base	Carcass	white melamine	432	370	18	1	0	0	0	front edge				0	0	
+VF02	Lateral derecho sobre base	Carcass	white melamine	432	370	18	1	0	0	0	front edge				0	0	
+VF04	Riel superior frontal soporte piedra	Carcass	white melamine	764	100	18	1	0	0	0	front edge				0	0	
+VF05	Riel superior trasero soporte piedra	Carcass	white melamine	764	100	18	0	0	0	0	oculto, sin canto visible				0	0	
+VF06	Divisor vertical interior puerta/cajones	Partition	white melamine	414	370	18	1	0	0	0	front edge				0	0	
+VF08	Frente puerta izquierda codo 0	Front	white melamine	444	395	18	1	1	1	1	todos los cantos visibles	0	3	left	35	2	left side; codo 0; 3mm reveal; centers 90mm from bottom/top; x center 22mm from hinge edge
+VF09	Frente cajon inferior medio canto	Front	white melamine	396	146	18	1	1	1	1	todos los cantos visibles				0	0	
+VF10	Frente cajon medio medio canto	Front	white melamine	396	146	18	1	1	1	1	todos los cantos visibles				0	0	
+VF11	Frente cajon superior medio canto	Front	white melamine	396	146	18	1	1	1	1	todos los cantos visibles				0	0	
+VF12_Cajon_InferiorA	Lateral izquierdo cajon inferior	Drawer	white melamine	327	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF12_Cajon_InferiorB	Lateral derecho cajon inferior	Drawer	white melamine	327	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF12_Cajon_InferiorC	Trasfrente cajon inferior	Drawer	white melamine	311	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF12_Cajon_InferiorD	Contrafrente cajon inferior	Drawer	white melamine	311	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF13_Cajon_MedioA	Lateral izquierdo cajon medio	Drawer	white melamine	327	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF13_Cajon_MedioB	Lateral derecho cajon medio	Drawer	white melamine	327	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF13_Cajon_MedioC	Trasfrente cajon medio	Drawer	white melamine	311	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF13_Cajon_MedioD	Contrafrente cajon medio	Drawer	white melamine	311	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF14_Cajon_SuperiorA	Lateral izquierdo cajon superior	Drawer	white melamine	327	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF14_Cajon_SuperiorB	Lateral derecho cajon superior	Drawer	white melamine	327	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF14_Cajon_SuperiorC	Trasfrente cajon superior	Drawer	white melamine	311	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VF14_Cajon_SuperiorD	Contrafrente cajon superior	Drawer	white melamine	311	110	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	

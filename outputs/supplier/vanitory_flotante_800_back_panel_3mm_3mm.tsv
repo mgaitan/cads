@@ -1,0 +1,2 @@
+codigo	pieza	categoria	material	largo_mm	ancho_mm	espesor_mm	canto_izq	canto_der	canto_sup	canto_inf	cantos	bisagra_codo	luz_bisagra_mm	bisagra_lado	cazoleta_diametro_mm	cazoleta_cantidad	cazoleta_posiciones
+VF07	Fondo trasero pasante 3mm	Back	back panel 3mm	800	450	3	0	0	0	0	sin canto de melamina				0	0	

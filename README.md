@@ -61,6 +61,9 @@ Configuracion MCP usada:
 - `ENS`: ensamble cocina principal
 - `ENSI`: ensamble isla
 - `FULL`: ensamble completo
+- `vanitory_flotante_800`: vanitory flotante anterior de 800 mm
+- `vanitory_reforma_770`: vanitory reforma de 770 mm
+- `vanitory_reforma_830`: vanitory reforma de 830 mm
 
 ## Herramientas vigentes
 - `src/cads/freecad/macros/export_supplier_cut_list_macro.py`
@@ -74,6 +77,8 @@ Configuracion MCP usada:
   - sincroniza `manual`, `screenshots`, `STL` y `cutting` dentro de `outputs/site/`
 - `src/cads/freecad/freecad_gola.py`
   - helpers geométricos de gola
+- `tools/build_vanitory_reforma_770.py` y `tools/build_vanitory_reforma_830.py`
+  - scripts auxiliares de los vanitories; los `FCStd` siguen siendo la fuente de verdad
 
 ## Cantos del proveedor
 El proveedor interpreta los 4 flags en este orden:

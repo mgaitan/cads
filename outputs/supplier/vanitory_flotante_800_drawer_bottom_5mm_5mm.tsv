@@ -1,0 +1,4 @@
+codigo	pieza	categoria	material	largo_mm	ancho_mm	espesor_mm	canto_izq	canto_der	canto_sup	canto_inf	cantos	bisagra_codo	luz_bisagra_mm	bisagra_lado	cazoleta_diametro_mm	cazoleta_cantidad	cazoleta_posiciones
+VF12_Cajon_InferiorE	Fondo 5mm pasante cajon inferior	Drawer	drawer bottom 5mm	347	327	5	0	0	0	0	fondo cajon 5mm pasante; sin canto de melamina				0	0	
+VF13_Cajon_MedioE	Fondo 5mm pasante cajon medio	Drawer	drawer bottom 5mm	347	327	5	0	0	0	0	fondo cajon 5mm pasante; sin canto de melamina				0	0	
+VF14_Cajon_SuperiorE	Fondo 5mm pasante cajon superior	Drawer	drawer bottom 5mm	347	327	5	0	0	0	0	fondo cajon 5mm pasante; sin canto de melamina				0	0	

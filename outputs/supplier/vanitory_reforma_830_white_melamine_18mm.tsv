@@ -1,0 +1,21 @@
+codigo	pieza	categoria	material	largo_mm	ancho_mm	espesor_mm	canto_izq	canto_der	canto_sup	canto_inf	cantos	bisagra_codo	luz_bisagra_mm	bisagra_lado	cazoleta_diametro_mm	cazoleta_cantidad	cazoleta_posiciones
+VC_01_base_inf_pas	Base inferior pasante	Carcass	white melamine	820	407	18	1	0	0	0	front edge				0	0	
+VC_02_lat_izq_base	Lateral izquierdo sobre base	Carcass	white melamine	702	407	18	1	0	0	0	front edge				0	0	
+VC_03_lat_der_base	Lateral derecho sobre base	Carcass	white melamine	702	407	18	1	0	0	0	front edge				0	0	
+VC_04_riel_sup_front_sop	Riel superior frontal soporte piedra	Carcass	white melamine	784	100	18	1	0	0	0	front edge				0	0	
+VC_05_riel_sup_tras_sop	Riel superior trasero soporte piedra	Carcass	white melamine	784	100	18	0	0	0	0	oculto, sin canto visible				0	0	
+VC_06_est_reg_comp	Estante regulable completo	Adjustable_Shelf	white melamine	784	377	18	1	0	0	0	front edge; estante regulable con soportes/perforaciones laterales				0	0	
+VC_17_faja_cent_izq_sop	Faja central izquierda soporte corredera	Carcass	white melamine	407	180	18	0	0	0	0	soporte interior de corredera, atornillable desde arriba				0	0	
+VC_18_faja_cent_der_sop	Faja central derecha soporte corredera	Carcass	white melamine	407	180	18	0	0	0	0	soporte interior de corredera, atornillable desde arriba				0	0	
+VC_07_fte_caj_izq	Frente cajon izquierdo	Front	white melamine	405	180	18	1	1	1	1	todos los cantos visibles				0	0	
+VC_08_fte_caj_der	Frente cajon derecho	Front	white melamine	405	180	18	1	1	1	1	todos los cantos visibles				0	0	
+VC_09_pta_inf_izq	Puerta inferior izquierda	Front	white melamine	510	405	18	1	1	1	1	todos los cantos visibles	0	3	left	35	2	left side; codo 0; 3mm reveal; centers 90mm from bottom/top; x center 22mm from hinge edge
+VC_10_pta_inf_der	Puerta inferior derecha	Front	white melamine	510	405	18	1	1	1	1	todos los cantos visibles	0	3	right	35	2	right side; codo 0; 3mm reveal; centers 90mm from bottom/top; x center 22mm from hinge edge
+VC_11a_lat_izq_caj_izq	Lateral izquierdo cajon izquierdo	Drawer	white melamine	300	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_11b_lat_der_caj_izq	Lateral derecho cajon izquierdo	Drawer	white melamine	300	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_11c_trasfte_caj_izq	Trasfrente cajon izquierdo	Drawer	white melamine	308	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_11d_ctrfte_caj_izq	Contrafrente cajon izquierdo	Drawer	white melamine	308	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_12a_lat_izq_caj_der	Lateral izquierdo cajon derecho	Drawer	white melamine	300	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_12b_lat_der_caj_der	Lateral derecho cajon derecho	Drawer	white melamine	300	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_12c_trasfte_caj_der	Trasfrente cajon derecho	Drawer	white melamine	308	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	
+VC_12d_ctrfte_caj_der	Contrafrente cajon derecho	Drawer	white melamine	308	140	18	0	0	1	0	canto superior visible al abrir el cajon				0	0	

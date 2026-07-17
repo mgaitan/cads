@@ -1,0 +1,3 @@
+uid,source,module,code,name,board,x,y,w,h,rotated
+vanitory_reforma_770_drawer_bottom_5mm_1_1,vanitory_reforma_770_drawer_bottom_5mm.tsv,VS,VS,VS_11e_fondo_caj_izq,1,0,0,300,283,False
+vanitory_reforma_770_drawer_bottom_5mm_2_1,vanitory_reforma_770_drawer_bottom_5mm.tsv,VS,VS,VS_12e_fondo_caj_der,1,303,0,300,283,False

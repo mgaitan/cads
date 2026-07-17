@@ -1,0 +1,3 @@
+codigo	pieza	categoria	material	largo_mm	ancho_mm	espesor_mm	canto_izq	canto_der	canto_sup	canto_inf	cantos	bisagra_codo	luz_bisagra_mm	bisagra_lado	cazoleta_diametro_mm	cazoleta_cantidad	cazoleta_posiciones
+VS_15_zoc_mes_piedra_tras	Zocalo mesada piedra trasero	Plinth	black stone	770	120	20	0	0	0	0	alzada trasera sobre mesada				0	0	
+VS_16_piedra_sup	Piedra superior	Countertop	black stone	770	533	20	0	0	0	0	vuela 15mm por delante de los frentes; verificar plantilla en obra				0	0	
